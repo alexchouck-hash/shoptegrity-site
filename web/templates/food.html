@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+
+{% block title %}Food Chain Integrity & Sourcing Hub — Shoptegrity{% endblock %}
+
+{% block content %}
+<section class="hero" style="background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);">
+  <div class="hero-inner">
+    <div class="hero-tag" style="background: #d1fae5; color: #047857; border-color: #6ee7b7;">🌾 Partner Site: Food Chain Integrity</div>
+    <h1>Healthy Food That Enriches the Right Hands</h1>
+    <p>A transparent guide to food sourcing: assure your nutrition is healthy and environmentally conscious, while maximizing the dollars reaching the farmers, regenerative growers, and food workers who actually produce it.</p>
+    
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="#ladder" class="btn btn-primary">Explore Sourcing Ladder &darr;</a>
+      <a href="#dollar-split" class="btn btn-secondary">USDA Food Dollar Breakdown &darr;</a>
+      <a href="#makers" class="btn btn-secondary">Direct Farm & Tea Directory &darr;</a>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <!-- Feature 1: The Food Sourcing Ladder -->
+  <section id="ladder" style="margin-bottom: 4rem;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+      <div>
+        <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy); letter-spacing: -0.02em;">The Universal Food Sourcing Ladder</h2>
+        <p style="color: var(--slate); font-size: 1rem; margin-top: 0.25rem;">Ranks every grocery and food channel by how much economic value enriches growers versus extractive conglomerates.</p>
+      </div>
+      <span style="font-size: 0.85rem; background: var(--primary-light); color: var(--primary-dark); font-weight: 700; padding: 0.35rem 0.75rem; border-radius: 9999px;">Tiers 1–9</span>
+    </div>
+
+    <div class="ladder-container">
+      {% for tier in sourcing_ladder %}
+      <div class="ladder-tier">
+        <div class="ladder-badge" {% if tier.tier > 6 %}style="background: #fee2e2; color: #b91c1c;"{% elif tier.tier > 4 %}style="background: #fef9c3; color: #a16207;"{% endif %}>
+          <span>Tier</span>
+          {{ tier.tier }}
+        </div>
+        <div class="ladder-content">
+          <h3>{{ tier.name }}</h3>
+          <p>{{ tier.description }}</p>
+          <div style="font-size: 0.82rem; color: var(--primary-dark); font-weight: 600; margin-top: 0.25rem;">
+            Tip: {{ tier.recommendation }}
+          </div>
+        </div>
+        <div class="ladder-pct">
+          <div class="pct-num" {% if tier.tier > 6 %}style="color: var(--danger);"{% elif tier.tier > 4 %}style="color: var(--warning);"{% endif %}>
+            ~{{ tier.producer_dollar_share_pct|int }}%
+          </div>
+          <div class="pct-label">Producer Dollar Share</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Feature 2: USDA ERS Food Dollar Split -->
+  <section id="dollar-split" style="margin-bottom: 4rem; background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="margin-bottom: 1.5rem;">
+      <div style="font-size: 0.82rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em;">Federal Economic Data</div>
+      <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy); margin-top: 0.2rem;">Where Does Your Food Dollar Land?</h2>
+      <p style="color: var(--slate); font-size: 1rem; margin-top: 0.25rem;">According to the USDA Economic Research Service (ERS) Food Dollar Series, the farmer receives only <strong>11.8¢</strong> of every food dollar spent nationally.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      {% for split in dollar_splits %}
+      <div class="split-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; flex-wrap: wrap;">
+          <h3 style="font-size: 1.25rem; font-weight: 750; color: var(--navy);">{{ split.product_category }}</h3>
+          <span style="font-size: 0.8rem; color: var(--muted);">{{ split.source_citation }}</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 0.4rem;">
+          <span style="color: var(--primary); font-weight: 700;">Farm Share: {{ split.farm_share_cents }}¢ / $1.00</span>
+          <span style="color: var(--slate); font-weight: 600;">Processing & Wholesale: {{ (split.food_processing_cents + split.wholesale_trade_cents)|round(1) }}¢</span>
+          <span style="color: var(--danger); font-weight: 600;">Retail & Marketing: {{ (split.retail_trade_cents + split.advertising_cents)|round(1) }}¢</span>
+        </div>
+
+        <!-- Proportional Progress Bar -->
+        <div class="split-bar">
+          <div class="split-segment" style="width: {{ split.farm_share_cents }}%; background: #16a34a;" title="Farm Share: {{ split.farm_share_cents }}¢">
+            {% if split.farm_share_cents > 8 %}{{ split.farm_share_cents }}¢{% endif %}
+          </div>
+          <div class="split-segment" style="width: {{ split.food_processing_cents }}%; background: #f59e0b;" title="Processing: {{ split.food_processing_cents }}¢">
+            {% if split.food_processing_cents > 8 %}{{ split.food_processing_cents }}¢{% endif %}
+          </div>
+          <div class="split-segment" style="width: {{ split.packaging_cents + split.transportation_cents }}%; background: #64748b;" title="Packaging & Transport"></div>
+          <div class="split-segment" style="width: {{ split.wholesale_trade_cents }}%; background: #0284c7;" title="Wholesale: {{ split.wholesale_trade_cents }}¢"></div>
+          <div class="split-segment" style="width: {{ split.retail_trade_cents }}%; background: #dc2626;" title="Retail Trade: {{ split.retail_trade_cents }}¢">
+            {% if split.retail_trade_cents > 10 %}{{ split.retail_trade_cents }}¢{% endif %}
+          </div>
+          <div class="split-segment" style="width: {{ split.advertising_cents }}%; background: #9333ea;" title="Advertising: {{ split.advertising_cents }}¢"></div>
+        </div>
+
+        <div style="background: var(--light-bg); border-radius: 0.375rem; padding: 0.6rem 0.8rem; font-size: 0.85rem; color: var(--slate);">
+          <strong>💡 Takeaway:</strong> {{ split.summary_insight }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Feature 3: Small Makers & Regenerative Growers Directory (including U.S. Tea Proof) -->
+  <section id="makers" style="margin-bottom: 4rem;">
+    <div style="margin-bottom: 1.5rem;">
+      <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy);">Small Maker & Grower Registry</h2>
+      <p style="color: var(--slate); font-size: 1rem; margin-top: 0.25rem;">Verified direct growers, CSAs, and artisans. Featuring the U.S. Tea Growers study: direct small farms vs national private aggregators.</p>
+    </div>
+
+    <div class="cards-grid">
+      {% for m in makers %}
+      <div class="card" style="display: flex; flex-direction: column;">
+        <div class="card-header">
+          <div>
+            <h3 style="font-size: 1.25rem; font-weight: 750; color: var(--navy);">{{ m.name }}</h3>
+            <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.15rem;">
+              {% if m.place %}📍 {{ m.place.city }}, {{ m.place.state }}{% endif %}
+            </div>
+          </div>
+          <span class="flag-chip flag-coop">Ladder Tier {{ m.sourcing_ladder_tier }}</span>
+        </div>
+
+        <div style="margin: 0.5rem 0;">
+          <div style="font-size: 0.82rem; font-weight: 700; color: var(--slate); margin-bottom: 0.25rem;">Crops & Products:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+            {% for prod in m.products %}
+              <span style="background: #f1f5f9; color: var(--slate); font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 4px;">{{ prod }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--slate); margin-bottom: 0.75rem; flex: 1;">
+          <strong>Makes Own:</strong> {{ m.makes_own_evidence }}
+        </p>
+
+        <div style="margin-bottom: 1rem;">
+          <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+            {% for cert in m.certifications %}
+              <span class="flag-chip flag-snap">{{ cert }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.8rem; color: var(--muted);">{{ m.where_to_buy }}</span>
+          {% if m.direct_order_url %}
+            <a href="{{ m.direct_order_url }}" target="_blank" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.35rem 0.75rem;">Direct Order &rarr;</a>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Local Twin Cities Food Hubs & Co-ops with SNAP/EBT -->
+  <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem;">
+    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">Local Food Co-ops & Farmers Markets (Pilot Metro)</h2>
+    <p style="color: var(--muted); margin-bottom: 1.5rem;">Verified democratic food co-ops and markets with SNAP/WIC/EBT equity acceptance.</p>
+
+    <div class="cards-grid">
+      {% for place in local_food_places %}
+      <div class="card">
+        <div class="card-header">
+          <h3 style="font-size: 1.15rem; font-weight: 750;">{{ place.name }}</h3>
+          <span class="flag-chip flag-coop">{{ place.category.replace('_', ' ').title() }}</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-bottom: 0.5rem;">📍 {{ place.address }}, {{ place.city }}</p>
+        {% if place.hours %}<p style="font-size: 0.82rem; color: var(--muted); margin-bottom: 0.5rem;">🕒 {{ place.hours }}</p>{% endif %}
+        
+        <div style="display: flex; gap: 0.4rem; margin-top: 0.5rem; flex-wrap: wrap;">
+          {% for f in place.flags %}
+            {% if f == 'snap_ebt' %}
+              <span class="flag-chip flag-snap">✓ SNAP / EBT Accepted</span>
+            {% elif f == 'coop' %}
+              <span class="flag-chip flag-coop">✓ Member-Owned Co-op</span>
+            {% elif f == 'organic' %}
+              <span class="flag-chip flag-coop">✓ Certified Organic Goods</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

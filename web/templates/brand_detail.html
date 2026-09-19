@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}{{ brand.name }} Scorecard & Ethical Alternatives — Shoptegrity{% endblock %}
+
+{% block content %}
+<main class="container" style="max-width: 1000px;">
+  <div style="margin-bottom: 1rem;">
+    <a href="/brands" style="color: var(--blue); text-decoration: none; font-size: 0.9rem;">&larr; Back to Brand Directory</a>
+  </div>
+
+  <!-- Brand Overview Header -->
+  <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+          <h1 style="font-size: 2.2rem; font-weight: 850; letter-spacing: -0.02em;">{{ brand.name }}</h1>
+          {% if brand.website %}
+            <a href="{{ brand.website }}" target="_blank" style="font-size: 0.85rem; color: var(--muted); text-decoration: none;">🔗 official site</a>
+          {% endif %}
+        </div>
+        <p style="font-size: 1.05rem; color: var(--slate); margin-bottom: 0.75rem;">{{ brand.description }}</p>
+        
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.75rem 1rem; display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.9rem;">
+          <span>Ultimate Parent Company:</span>
+          <strong style="color: var(--navy);">{{ brand.parent_entity.name }}</strong>
+          <span style="background: #e2e8f0; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">{{ brand.parent_entity.ownership_type }}</span>
+        </div>
+      </div>
+
+      <div style="text-align: right;">
+        <div style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.2rem;">Shoptegrity Composite Score</div>
+        {% if brand.composite_score %}
+          {% if brand.composite_score >= 70 %}
+            <span class="score-badge score-high" style="font-size: 1.6rem; padding: 0.5rem 1rem;">{{ brand.composite_score }} / 100</span>
+          {% elif brand.composite_score >= 45 %}
+            <span class="score-badge score-med" style="font-size: 1.6rem; padding: 0.5rem 1rem;">{{ brand.composite_score }} / 100</span>
+          {% else %}
+            <span class="score-badge score-low" style="font-size: 1.6rem; padding: 0.5rem 1rem;">{{ brand.composite_score }} / 100</span>
+          {% endif %}
+        {% else %}
+          <span class="score-badge" style="background: #f1f5f9; color: var(--muted); font-size: 1.4rem;">Unknown</span>
+        {% endif %}
+        <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.35rem;">Confidence: {{ (brand.confidence * 100)|int }}%</div>
+      </div>
+    </div>
+
+    <!-- 6-Dimension Score Breakdown -->
+    <div style="margin-top: 2.25rem;">
+      <h3 style="font-size: 1.15rem; font-weight: 750; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Six-Dimension Integrity Scorecard</h3>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        {% for k, dim in brand.scorecard.items() %}
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <span style="font-weight: 700; font-size: 0.92rem;">{{ dim.name }}</span>
+            <span style="font-weight: 800; font-size: 0.95rem;">
+              {% if dim.value is not none %}
+                {{ dim.value|int }} / 100
+              {% else %}
+                <span style="color: var(--muted); font-weight: 500;">Unknown</span>
+              {% endif %}
+            </span>
+          </div>
+
+          <div class="progress-track">
+            <div class="progress-fill" style="width: {{ dim.value or 0 }}%; {% if dim.value and dim.value < 40 %}background: var(--danger);{% elif dim.value and dim.value < 70 %}background: var(--warning);{% endif %}"></div>
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--slate); margin-top: 0.5rem; line-height: 1.4;">{{ dim.explanation }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Better Alternatives Rail -->
+  <section style="margin-bottom: 2.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--primary-dark);">✨ Recommended Higher-Integrity Alternatives</h2>
+      <span style="font-size: 0.85rem; color: var(--muted);">Editor-approved swaps</span>
+    </div>
+
+    {% if brand.alternatives %}
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        {% for alt in brand.alternatives %}
+        <div style="background: #ffffff; border: 2px solid #a7f3d0; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div style="flex: 1; min-width: 260px;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+              <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--navy);">{{ alt.brand_name }}</h3>
+              <span class="flag-chip flag-coop">{{ alt.ownership_type.replace('_', ' ').title() }}</span>
+              <span style="font-size: 0.8rem; color: var(--muted);">({{ alt.price_band }})</span>
+            </div>
+            <p style="font-size: 0.92rem; color: var(--slate); margin-bottom: 0.5rem;">{{ alt.rationale }}</p>
+            <div style="font-size: 0.82rem; color: var(--muted);">
+              <strong>Where to buy:</strong> {{ alt.where_to_buy }}
+              {% if alt.savings_estimate %} &bull; <span style="color: var(--primary); font-weight: 600;">{{ alt.savings_estimate }}</span>{% endif %}
+            </div>
+          </div>
+
+          <div style="text-align: right;">
+            {% if alt.composite_score %}
+              <div class="score-badge score-high" style="font-size: 1.25rem; padding: 0.4rem 0.8rem;">
+                Score: {{ alt.composite_score }}
+              </div>
+            {% endif %}
+            <div style="margin-top: 0.5rem;">
+              <a href="/brands/{{ alt.brand_slug }}" class="btn btn-primary" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">View Alternative &rarr;</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.5rem; text-align: center; color: var(--muted);">
+        No direct brand alternatives indexed for this specific product yet. Follow the universal ladder: borrow, buy used, or find a local maker.
+      </div>
+    {% endif %}
+  </section>
+
+  <!-- Evidence & Receipts Section -->
+  <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; margin-bottom: 3rem;">
+    <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem;">Cited Evidence & Regulatory Receipts</h2>
+    <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem;">Every fact is cited with direct links to official regulator actions, SEC filings, or independent audits.</p>
+
+    {% if brand.evidence %}
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        {% for ev in brand.evidence %}
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; font-size: 0.9rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+            <span style="font-weight: 700; text-transform: uppercase; font-size: 0.75rem; color: var(--slate);">{{ ev.dimension.replace('_', ' ') }}</span>
+            <span style="font-size: 0.75rem; color: var(--muted);">Source: {{ ev.source_name }}</span>
+          </div>
+          <p style="color: var(--navy); margin-bottom: 0.4rem;">{{ ev.fact_text }}</p>
+          <a href="{{ ev.source_url }}" target="_blank" style="color: var(--blue); text-decoration: none; font-size: 0.8rem; font-weight: 600;">Inspect Original Source Filing &rarr;</a>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="font-size: 0.9rem; color: var(--muted);">No external regulatory actions currently logged for this entity.</p>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

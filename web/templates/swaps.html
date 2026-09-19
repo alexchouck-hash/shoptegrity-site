@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Ethical Shopping Swap Guides — Shoptegrity{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🔄 High-Impact Swap Guides</div>
+    <h1>The Biggest Swaps Are Not What You Think</h1>
+    <p>Consumers often agonize over a T-shirt while ignoring checking accounts and insurance. Moving your banking and grocery staples reroutes thousands of dollars per year—and often <strong>saves money</strong>.</p>
+  </div>
+</section>
+
+<main class="container">
+  <div style="display: flex; flex-direction: column; gap: 2rem;">
+    {% for item in swap_guides %}
+    <div class="card" style="padding: 2.25rem;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+        <div>
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase;">Spend Category: {{ item.category.name }}</span>
+          <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-top: 0.2rem;">{{ item.guide.title }}</h2>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 0.82rem; color: var(--muted);">Est. Annual Dollars Rerouted</div>
+          <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary);">{{ item.guide.estimated_annual_dollars_rerouted }}</div>
+          <div style="font-size: 0.82rem; color: #16a34a; font-weight: 600;">{{ item.guide.average_savings }}</div>
+        </div>
+      </div>
+
+      <div style="background: var(--light-bg); border-radius: 0.5rem; padding: 1.25rem; margin: 1rem 0;">
+        <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--navy);">Step-by-Step Action Plan:</h3>
+        <ol style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem; color: var(--slate);">
+          {% for step in item.guide.steps %}
+            <li>{{ step }}</li>
+          {% endfor %}
+        </ol>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; font-size: 0.88rem; color: var(--muted);">
+        <div><strong>⚠️ Honest Limits:</strong> {{ item.guide.limits }}</div>
+        <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Browse Brand Alternatives &rarr;</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

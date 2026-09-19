@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Local Services & Ownership Directory — Shoptegrity{% endblock %}
+
+{% block content %}
+<section class="hero" style="background: linear-gradient(180deg, #fefce8 0%, #ffffff 100%);">
+  <div class="hero-inner">
+    <div class="hero-tag" style="background: #fef08a; color: #854d0e; border-color: #fde047;">📍 Local Proximity & Ownership Directory</div>
+    <h1>Who Really Owns What's Near You?</h1>
+    <p>Keep your money circulating in your community. We answer one question for local services, trades, and markets: <strong>who actually owns this business, and does the profit stay local?</strong></p>
+
+    <!-- Verification / Match Tool -->
+    <div style="display: flex; justify-content: center;">
+      <form id="matchForm" onsubmit="handleMatch(event)" class="search-box" style="width: 100%;">
+        <input type="text" id="businessNameInput" placeholder="Enter any local business name (e.g. Minneapolis Metro Plumbing)..." required>
+        <button type="submit" class="btn btn-primary">Check Ownership</button>
+      </form>
+    </div>
+    <div id="matchResult" style="max-width: 600px; margin: 0 auto; text-align: left;"></div>
+  </div>
+</section>
+
+<main class="container">
+  <!-- The Local Ownership Ladder -->
+  <section style="margin-bottom: 3.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">The Local Services Ownership Ladder</h2>
+    <p style="color: var(--slate); margin-bottom: 1.5rem;">Every service business is classified into exactly one tier based on public secretary of state records, franchise filings, and PE portfolio disclosures.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+      <div style="background: #ffffff; border: 2px solid #a7f3d0; border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong style="color: var(--primary); font-size: 1.1rem;">Tier 1: Owner-Operated Local</strong>
+          <span class="flag-chip flag-coop">Highest Retention</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.4rem;">Single location, owner lives and works in the metro. Maximum local economic recirculation.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong style="color: var(--navy); font-size: 1.1rem;">Tier 2: Local Multi-Location</strong>
+          <span style="font-size: 0.75rem; color: var(--muted);">High Retention</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.4rem;">2+ locations, all within one metro, privately owned by regional residents.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong style="color: var(--navy); font-size: 1.1rem;">Tier 3: Local Franchisee</strong>
+          <span style="font-size: 0.75rem; color: var(--muted);">Medium Retention</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.4rem;">Local operator, national franchise brand. Royalties and tech fees leave the state.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong style="color: var(--navy); font-size: 1.1rem;">Tier 4: Regional Chain</strong>
+          <span style="font-size: 0.75rem; color: var(--muted);">Medium-Low</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.4rem;">Headquarters in-state or adjacent state, not publicly traded, not private equity owned.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong style="color: var(--slate); font-size: 1.1rem;">Tier 5: National Private Chain</strong>
+          <span style="font-size: 0.75rem; color: var(--muted);">Low Retention</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.4rem;">National footprint, privately or family held. Corporate profit leaves the region.</p>
+      </div>
+
+      <div style="background: #ffffff; border: 2px solid #fca5a5; border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <strong style="color: var(--danger); font-size: 1.1rem;">Tier 6: Public / PE Rollup</strong>
+          <span class="flag-chip flag-rollup">Lowest Retention</span>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.4rem;">Publicly traded, or acquired by private equity—<strong>including rollups operating under legacy family names</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlight: Disguised PE Rollups vs Real Local Businesses -->
+  <section style="margin-bottom: 3.5rem;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">Disguised Rollup Detection in Action</h2>
+    <p style="color: var(--slate); margin-bottom: 1.5rem;">Private equity firms buy local HVAC, plumbing, and auto repair businesses and keep the old founder's name to disguise the acquisition. We surface the receipts.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+      {% for place in places %}
+      <div class="card" {% if 'rollup_disguised' in place.flags %}style="border-color: #fca5a5; background: #fffafb;"{% elif place.ownership_tier == 1 %}style="border-color: #a7f3d0;"{% endif %}>
+        <div class="card-header">
+          <div>
+            <h3 style="font-size: 1.2rem; font-weight: 750;">{{ place.name }}</h3>
+            <div style="font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem;">📍 {{ place.address }}, {{ place.city }}</div>
+          </div>
+          {% if 'rollup_disguised' in place.flags %}
+            <span class="flag-chip flag-rollup">⚠️ DISGUISED PE ROLLUP</span>
+          {% elif 'coop' in place.flags %}
+            <span class="flag-chip flag-coop">🌱 WORKER CO-OP</span>
+          {% else %}
+            <span class="score-badge score-high">Tier {{ place.ownership_tier }}</span>
+          {% endif %}
+        </div>
+
+        <p style="font-size: 0.88rem; color: var(--slate); margin: 0.75rem 0;">
+          <strong>Category:</strong> {{ place.category.replace('_', ' ').title() }}<br>
+          <strong>Verification Evidence:</strong> {{ place.verified_how }}
+        </p>
+
+        {% if 'rollup_disguised' in place.flags %}
+          <div style="background: var(--danger-light); border-radius: 0.375rem; padding: 0.6rem 0.8rem; font-size: 0.82rem; color: var(--danger); font-weight: 600;">
+            ⚠️ Consumer Notice: Acquired by Alpine Investors / Apex Service Partners. Profits extract to out-of-state private equity fund.
+          </div>
+        {% elif place.ownership_tier == 1 %}
+          <div style="background: var(--primary-light); border-radius: 0.375rem; padding: 0.6rem 0.8rem; font-size: 0.82rem; color: var(--primary-dark); font-weight: 600;">
+            ✓ Genuine Local Independent: 100% of profits stay within the metro economy.
+          </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+
+<script>
+async function handleMatch(e) {
+  e.preventDefault();
+  const input = document.getElementById("businessNameInput").value;
+  const resultDiv = document.getElementById("matchResult");
+  resultDiv.innerHTML = "<div style='background:#ffffff; padding:1rem; border-radius:0.5rem; border:1px solid var(--border);'>Searching business registries...</div>";
+
+  try {
+    const res = await fetch("/v1/local/match", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: input })
+    });
+    const data = await res.json();
+    if (data.matched) {
+      const isRollup = data.warning_flag === "DISGUISED_ROLLUP";
+      resultDiv.innerHTML = `
+        <div style="background:#ffffff; padding:1.25rem; border-radius:0.5rem; border:2px solid ${isRollup ? '#f87171' : '#34d399'}; box-shadow:0 4px 6px rgba(0,0,0,0.05); margin-top:1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:1.15rem;">${data.place.name}</strong>
+            <span class="flag-chip ${isRollup ? 'flag-rollup' : 'flag-coop'}">${isRollup ? 'DISGUISED PE ROLLUP' : 'TIER ' + data.place.ownership_tier}</span>
+          </div>
+          <p style="font-size:0.9rem; color:var(--slate); margin-top:0.5rem;">${data.ownership_explanation}</p>
+          <div style="font-size:0.8rem; color:var(--muted); margin-top:0.5rem;">Location: ${data.place.address}, ${data.place.city} &bull; Verification: ${data.place.verified_how}</div>
+        </div>
+      `;
+    } else {
+      resultDiv.innerHTML = `
+        <div style="background:#ffffff; padding:1rem; border-radius:0.5rem; border:1px solid var(--border); margin-top:1rem;">
+          <strong>Ownership Not Verified</strong>
+          <p style="font-size:0.85rem; color:var(--muted); margin-top:0.25rem;">${data.ownership_explanation}</p>
+        </div>
+      `;
+    }
+  } catch(err) {
+    resultDiv.innerHTML = "<div style='color:red; margin-top:0.5rem;'>Error checking business.</div>";
+  }
+}
+</script>
+{% endblock %}

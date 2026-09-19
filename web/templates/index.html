@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Shoptegrity — Brand & Food Chain Integrity Platform{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">✨ Open Data & Mathematical Scoring Rubrics</div>
+    <h1>Where Does Your Money Really End Up?</h1>
+    <p>Every purchase transfers capital: either to local growers, living-wage workers, and democratic cooperatives—or to extractive private equity and public share buybacks. We map the leak, cite the evidence, and give you the patch.</p>
+    
+    <div style="display: flex; justify-content: center;">
+      <form action="/brands" method="GET" class="search-box" style="width: 100%;">
+        <input type="text" name="q" placeholder="Look up any major brand (e.g. Annie's, Wells Fargo, Cheerios, Shein)..." required>
+        <button type="submit" class="btn btn-primary">Check Brand</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <h2 style="font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em;">Explore Our Two Integrity Partner Sites</h2>
+    <p style="color: var(--muted); max-width: 650px; margin: 0.5rem auto;">Choose an area to investigate and transform your everyday purchasing.</p>
+  </div>
+
+  <div class="gateway-grid">
+    <!-- Partner Site 1: Food Chain Integrity -->
+    <div class="gateway-card food">
+      <div class="gateway-badge">Partner Site 1: Sourcing & Agriculture</div>
+      <h2>Food Chain Integrity</h2>
+      <p>Assure your food chain is healthy, ecologically sound, and genuinely enriches farmers, harvesters, and food workers rather than corporate middlemen.</p>
+      
+      <ul class="feature-list">
+        <li><strong>🪜 Sourcing Ladder:</strong> Tiers 1–9 from home gardens and CSAs to multinational conglomerates.</li>
+        <li><strong>🌾 USDA Food Dollar Split:</strong> Trace the farm share (11.8¢) vs corporate marketing & packaging.</li>
+        <li><strong>🌱 Small Maker Registry:</strong> Direct-from-grower directory including U.S. tea, honey, and organic CSAs.</li>
+        <li><strong>📍 SNAP / WIC Equity:</strong> Verified access flags for community markets and food co-ops.</li>
+      </ul>
+
+      <a href="/food" class="btn btn-primary" style="margin-top: auto;">Explore Food Chain Partner Site &rarr;</a>
+    </div>
+
+    <!-- Partner Site 2: Brand Integrity & Ethical Shopping -->
+    <div class="gateway-card brands">
+      <div class="gateway-badge">Partner Site 2: Corporate Accountability</div>
+      <h2>Brand Integrity & Ethical Swaps</h2>
+      <p>Score major consumer brands on ownership, CEO pay ratios, labor records, and environmental penalties—with vetted data sources of better brands and local options.</p>
+      
+      <ul class="feature-list">
+        <li><strong>📊 6-Dimension Scorecards:</strong> Transparent scoring backed by filed SEC, OSHA, and EPA records.</li>
+        <li><strong>🔄 Actionable Swaps:</strong> Instant higher-integrity swaps that save money (Banking, Apparel, Groceries).</li>
+        <li><strong>🛡️ Disguised Rollup Alerts:</strong> Detects when private equity secretly buys a local trade and keeps the old name.</li>
+        <li><strong>💸 $100 Dollar Flow Maps:</strong> Side-by-side Sankey comparisons of where profits go.</li>
+      </ul>
+
+      <a href="/brands" class="btn btn-blue" style="margin-top: auto;">Explore Brand Integrity Partner Site &rarr;</a>
+    </div>
+  </div>
+
+  <!-- Key Metrics & Method Banner -->
+  <div style="margin-top: 3.5rem; background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: center;">
+      <div>
+        <div style="font-size: 2.5rem; font-weight: 900; color: var(--primary);">100%</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Cited Evidence</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Every penalty, pay ratio, and parent company links to public filings.</p>
+      </div>
+      <div>
+        <div style="font-size: 2.5rem; font-weight: 900; color: var(--blue);">$0</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Brand Advertising</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">No brand can pay to alter, improve, or sponsor their integrity score.</p>
+      </div>
+      <div>
+        <div style="font-size: 2.5rem; font-weight: 900; color: var(--purple);">6</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Core Dimensions</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Ownership, extraction, pay equity, labor, ecology, and locality.</p>
+      </div>
+      <div>
+        <div style="font-size: 2.5rem; font-weight: 900; color: var(--slate);">Open API</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">MCP Infrastructure</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Streamable HTTP MCP tools for AI assistants and shopping agents.</p>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Dollar Flow Maps — Shoptegrity{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">💸 Where Your $100 Goes</div>
+    <h1>The Dollar Flow Map</h1>
+    <p>Side-by-side spending breakdowns: see exactly what slice of your \$100 ends up with front-line workers, local farmers, and community operations—versus Wall Street buybacks and hedge fund dividends.</p>
+  </div>
+</section>
+
+<main class="container">
+  <!-- Comparison 1: Grocery -->
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">Grocery: Conventional Supermarket vs Food Cooperative</h2>
+    <p style="color: var(--muted); margin-bottom: 1.5rem;">Based on USDA ERS Food Dollar data and SEC Form 10-K filings.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
+      <!-- Conventional Supermarket -->
+      <div class="card" style="border-top: 4px solid var(--danger);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.3rem; font-weight: 800;">Conventional Supermarket Chain</h3>
+          <span class="flag-chip flag-rollup">Megacorp</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>🌾 Farm & Producer Share:</span>
+            <strong>$14.70</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>👷 Frontline Worker Wages:</span>
+            <strong>$12.50</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>📦 Packaging, Logistics & Processing:</span>
+            <strong>$28.30</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>📢 Corporate Marketing & Ads:</span>
+            <strong>$8.50</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>🏬 Store Rent & Power:</span>
+            <strong>$16.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--purple);">
+            <span>👔 Executive Compensation:</span>
+            <strong>$4.20</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--danger); font-weight: 800; background: var(--danger-light); padding: 0.4rem 0.6rem; border-radius: 4px;">
+            <span>📉 Shareholder Buybacks & Dividends:</span>
+            <span>$15.80</span>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--slate); margin-top: 1.25rem; line-height: 1.4;">
+          <strong>The Leak:</strong> Over $15.80 of every $100 directly leaves the community into stock buybacks, while the food grower gets under $15.
+        </p>
+      </div>
+
+      <!-- Food Co-op -->
+      <div class="card" style="border-top: 4px solid var(--primary);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.3rem; font-weight: 800;">Member-Owned Food Cooperative</h3>
+          <span class="flag-chip flag-coop">Democratically Owned</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--primary); font-weight: 800; background: var(--primary-light); padding: 0.4rem 0.6rem; border-radius: 4px;">
+            <span>🌱 Regional Farm & Producer Share:</span>
+            <span>$42.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>👷 Living Wage Store Staff:</span>
+            <strong>$28.50</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>🚚 Green Distribution & Operations:</span>
+            <strong>$18.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>💰 Member Patronage Dividends:</span>
+            <strong>$6.50</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>🎓 Community Education & Grants:</span>
+            <strong>$5.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted);">
+            <span>📉 Wall Street Shareholder Extraction:</span>
+            <strong>$0.00</strong>
+          </div>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--slate); margin-top: 1.25rem; line-height: 1.4;">
+          <strong>The Patch:</strong> 100% of profit stays within the member network and regional food system. Farmers receive roughly 3x higher revenue.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison 2: Banking -->
+  <section style="margin-bottom: 4rem;">
+    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">Banking: Megabank vs Not-for-Profit Credit Union</h2>
+    <p style="color: var(--muted); margin-bottom: 1.5rem;">Based on NCUA reports and bank annual disclosures.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
+      <div class="card" style="border-top: 4px solid var(--danger);">
+        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Commercial Megabank</h3>
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--danger); font-weight: 700;">
+            <span>Shareholder Profits & Buybacks:</span>
+            <strong>$38.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Executive Comp & Bonuses:</span>
+            <strong>$14.50</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Extractive & Fossil Lending:</span>
+            <strong>$25.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Branch Staff & Ops:</span>
+            <strong>$15.50</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Interest Returned to Depositors:</span>
+            <strong>$7.00</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-top: 4px solid var(--blue);">
+        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Community Credit Union</h3>
+        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--primary); font-weight: 700;">
+            <span>Lower Loan Rates & High Yields to Members:</span>
+            <strong>$42.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Local Mortgages & Small Biz Lending:</span>
+            <strong>$35.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Living Wages & Member Support:</span>
+            <strong>$16.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+            <span>Reserves & Tech Infrastructure:</span>
+            <strong>$7.00</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted);">
+            <span>Wall Street Shareholder Extraction:</span>
+            <strong>$0.00</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

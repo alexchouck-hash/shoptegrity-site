@@ -1,0 +1,110 @@
+version: "1.0.0"
+name: "Shoptegrity Core Rubric v1"
+description: "Six-dimension evidence-based scoring rubric for corporate and brand integrity."
+
+dimensions:
+  ownership:
+    name: "Ownership & Structure"
+    description: "Who receives the profits and holds governance rights."
+    default_weight: 0.25
+    tiers:
+      worker_coop: 100
+      esop_100: 95
+      consumer_coop: 92
+      credit_union: 90
+      producer_coop: 88
+      retailer_coop: 85
+      mutual: 85
+      nonprofit: 85
+      purpose_trust: 85
+      esop_partial: 75
+      local_private: 75
+      national_private: 50
+      public: 30
+      private_equity: 10
+      rollup_disguised: 5
+      unknown: null
+
+  capital_extraction:
+    name: "Capital Extraction"
+    description: "Share of profit extracted via dividends and buybacks versus reinvested or shared with workers."
+    default_weight: 0.15
+    thresholds:
+      - max_ratio: 0.20
+        points: 95
+      - max_ratio: 0.50
+        points: 75
+      - max_ratio: 0.80
+        points: 50
+      - max_ratio: 1.00
+        points: 30
+      - max_ratio: 999.0
+        points: 10
+    default_coop_points: 90
+
+  pay_equity:
+    name: "Pay Equity"
+    description: "CEO-to-median-worker pay ratio and living wage adherence."
+    default_weight: 0.15
+    ratio_thresholds:
+      - max_ratio: 10.0
+        points: 100
+      - max_ratio: 25.0
+        points: 90
+      - max_ratio: 50.0
+        points: 75
+      - max_ratio: 100.0
+        points: 55
+      - max_ratio: 300.0
+        points: 35
+      - max_ratio: 99999.0
+        points: 15
+
+  labor:
+    name: "Labor Practices"
+    description: "Working conditions, safety records (OSHA), wage theft, fair trade, and union rights."
+    default_weight: 0.15
+    baseline_points: 70
+    positive_signals:
+      fair_trade_certified: 15
+      living_wage_certified: 15
+      union_represented: 10
+      b_corp_certified: 10
+      worker_owned: 15
+    negative_signals:
+      osha_serious_violation: -15
+      nlrb_violation: -15
+      wage_theft_settlement: -20
+      child_labor_violation: -40
+
+  environment:
+    name: "Environmental Impact"
+    description: "Ecological footprint, EPA compliance, packaging sustainability, and regenerative agriculture."
+    default_weight: 0.15
+    baseline_points: 70
+    positive_signals:
+      usda_organic: 15
+      regenerative_organic: 20
+      b_corp_environment: 10
+      one_percent_planet: 10
+      zero_waste_packaging: 10
+      renewable_powered: 10
+    negative_signals:
+      epa_significant_violation: -20
+      toxic_release_high: -15
+      excessive_plastic_packaging: -10
+      deforestation_linked: -25
+
+  locality:
+    name: "Locality & Community Wealth"
+    description: "Geographic proximity of headquarters and degree of local economic recirculation."
+    default_weight: 0.15
+    tiers:
+      owner_operated_local: 95
+      local_multi_location: 85
+      local_franchisee: 70
+      regional_independent: 75
+      national_private: 45
+      national_public: 25
+      private_equity_rollup: 10
+      multinational: 20

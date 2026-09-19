@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Methodology & Integrity Firewall — Shoptegrity{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">🔬 Pure Mathematical Rubric & Open Data</div>
+    <h1>Public Methodology & Integrity Firewall</h1>
+    <p>Credibility is our only asset. We operate under a strict separation between scoring, citations, and funding. No brand can pay to alter, improve, or sponsor their score.</p>
+  </div>
+</section>
+
+<main class="container" style="max-width: 900px;">
+  <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; margin-bottom: 3rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem;">The Integrity Firewall Policy</h2>
+    
+    <div style="background: var(--light-bg); border-left: 4px solid var(--primary); padding: 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1.5rem;">
+      <strong style="color: var(--primary-dark); font-size: 1rem;">Core Principle:</strong>
+      <p style="font-size: 0.95rem; color: var(--slate); margin-top: 0.25rem;">Scores are pure mathematical functions derived strictly from documented, publicly verifiable regulatory actions and financial filings. The scoring engine has zero read access to commercial or affiliate data.</p>
+    </div>
+
+    <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; color: var(--slate); font-size: 0.95rem;">
+      <li><strong>No Paid Placements:</strong> We refuse sponsored brand listings, paid tier bumps, or brand consulting.</li>
+      <li><strong>Evidence-Backed or Explicitly "Unknown":</strong> Private companies that refuse public disclosure are given an explicit "Unknown" rating—opacity is never rewarded.</li>
+      <li><strong>Facts, Not Characters:</strong> Every claim quotes factual legal settlements, OSHA citations, or SEC line items rather than characterizations.</li>
+      <li><strong>Public Corrections Log:</strong> Any company or citizen can submit documented factual corrections via our public intake queue. Validated corrections are deployed within 5 business days.</li>
+    </ul>
+  </section>
+
+  <!-- 6 Dimensions Table -->
+  <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; margin-bottom: 3rem;">
+    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">The Six Scoring Dimensions</h2>
+    <p style="color: var(--muted); margin-bottom: 1.5rem;">Each dimension is scored 0–100 with its own confidence rating based on source density.</p>
+
+    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+      {% for key, dim in rubric.dimensions.items() %}
+      <div style="border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 1.15rem; font-weight: 750; color: var(--navy);">{{ dim.name }}</h3>
+          <span style="font-size: 0.8rem; background: var(--light-bg); padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 600;">Default Weight: {{ (dim.default_weight * 100)|int }}%</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--slate); margin-top: 0.4rem;">{{ dim.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Federal & Open Data Sources -->
+  <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem;">
+    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 1rem;">Primary Data Sources</h2>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      {% for src in data_sources %}
+      <div style="border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <a href="{{ src.url }}" target="_blank" style="font-weight: 700; color: var(--blue); text-decoration: none;">{{ src.name }} &rarr;</a>
+          <span style="font-size: 0.8rem; color: var(--muted);">{{ src.type }}</span>
+        </div>
+        <p style="font-size: 0.85rem; color: var(--slate); margin-top: 0.25rem;">Metrics: {{ src.metrics|join(', ') }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

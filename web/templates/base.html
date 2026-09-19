@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Shoptegrity — Rerouting Capital to Integrity{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%200%22%20100%22%20100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+</head>
+<body>
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand-logo">
+        <span>🌱</span>
+        <span>Shop<span class="accent">tegrity</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/brands" class="nav-link {% if active_page == 'brands' %}active{% endif %}">Brand Check</a></li>
+        <li><a href="/food" class="nav-link {% if active_page == 'food' %}active{% endif %}">Food Chain</a></li>
+        <li><a href="/local" class="nav-link {% if active_page == 'local' %}active{% endif %}">Local Directory</a></li>
+        <li><a href="/swaps" class="nav-link {% if active_page == 'swaps' %}active{% endif %}">Swap Guides</a></li>
+        <li><a href="/methodology" class="nav-link {% if active_page == 'methodology' %}active{% endif %}">Methodology</a></li>
+        <li><a href="/docs" target="_blank" class="nav-badge">REST API</a></li>
+      </ul>
+    </div>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer>
+    <div class="footer-inner">
+      <div style="font-weight: 700; color: var(--navy);">Shoptegrity Open Integrity Platform</div>
+      <p>Every claim links directly to official SEC filings, USDA records, OSHA citations, or state business registries. Zero brand advertising accepted.</p>
+      <ul class="footer-links">
+        <li><a href="/methodology">Rubric & Methodology</a></li>
+        <li><a href="/food">Food Sourcing Ladder</a></li>
+        <li><a href="/local">Local Services Spec</a></li>
+        <li><a href="/docs">FastAPI OpenAPI</a></li>
+      </ul>
+      <p style="font-size: 0.75rem; color: #94a3b8;">Informational & public policy research platform. Not investment or financial advice.</p>
+    </div>
+  </footer>
+</body>
+</html>
