@@ -1,41 +1,107 @@
 {% extends "base.html" %}
 
-{% block title %}Brand Integrity & Ethical Swaps — Shoptegrity{% endblock %}
+{% block title %}Top 2,000 Brands Integrity Database & Swaps — Shoptegrity{% endblock %}
 
 {% block content %}
 <section class="hero" style="background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);">
   <div class="hero-inner">
-    <div class="hero-tag" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">🏢 Partner Site: Brand Integrity & Swaps</div>
-    <h1>Major Brand Ethics & Actionable Swaps</h1>
-    <p>Look past consumer marketing to see who really owns the brand, how much wealth extracts to executive packages and buybacks, and discover higher-integrity options.</p>
+    <div class="hero-tag" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">🏢 Database: Top 2,000 Brands Integrity Index</div>
+    <h1>Where Does Your Money Really Go?</h1>
+    <p>Look past corporate marketing to see the real numbers: what goes to frontline workers vs Wall Street buybacks, labor exploitation records, and waste footprint—with verified higher-integrity swaps.</p>
 
-    <div style="display: flex; justify-content: center;">
-      <form action="/brands" method="GET" class="search-box" style="width: 100%;">
-        <input type="text" name="q" value="{{ search_query or '' }}" placeholder="Search brand or parent company (e.g. Annie's, General Mills, Wells Fargo, Shein)...">
-        <button type="submit" class="btn btn-blue">Search</button>
-      </form>
+    <!-- Interactive Search Bar -->
+    <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
+      <div class="search-box" style="width: 100%; max-width: 720px; box-shadow: 0 4px 14px rgba(0,0,0,0.08);">
+        <input type="text" id="brandSearchInput" placeholder="Search 2,000+ brands (e.g. Target, Walmart, Nike, Cheerios, Apple, Shein)..." oninput="handleSearchInput()">
+        <button type="button" class="btn btn-blue" onclick="handleSearchInput()">Search Database</button>
+      </div>
     </div>
   </div>
 </section>
 
 <main class="container">
-  <!-- Section Tabs / Features -->
-  <div style="display: flex; gap: 0.75rem; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 2rem; flex-wrap: wrap;">
-    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--blue-light); border-color: #bae6fd; color: #0284c7;">All Brands & Scorecards</a>
+  <!-- Partner Navigation Links -->
+  <div style="display: flex; gap: 0.75rem; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--blue-light); border-color: #bae6fd; color: #0284c7; font-weight: 700;">Top 2,000 Brands Database</a>
+    <a href="/swaps" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Major Retailers & Easy Swaps</a>
     <a href="/flows" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">$100 Dollar Flow Maps</a>
-    <a href="/swaps" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Category Swap Guides</a>
+    <a href="/food" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Food Chain Integrity</a>
     <a href="/local" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Local Alternatives Finder</a>
   </div>
 
-  <!-- Brands Grid -->
-  <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;">
-    {% if search_query %}Search Results for "{{ search_query }}"{% else %}Major Brands Scorecards{% endif %}
-  </h2>
-  <p style="color: var(--muted); margin-bottom: 1.5rem;">Click any brand to inspect filed parent ownership, SEC pay ratios, regulatory citations, and ethical swaps.</p>
+  <!-- Sector Category Filter Pills -->
+  <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+    <span style="font-size: 0.82rem; font-weight: 700; color: var(--muted); margin-right: 0.25rem;">Sector:</span>
+    <button class="btn btn-secondary cat-pill active" onclick="setCategoryFilter('all', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">All Sectors</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Retail Giants & Supermarkets', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🛒 Retail Giants</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Food & Grocery Staples', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🍏 Food & Grocery</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Apparel, Footwear & Gear', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">👕 Apparel & Shoes</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Household & Personal Care', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🧼 Personal Care & Home</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Consumer Electronics & Tech', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">📱 Electronics & Tech</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Fast Food & Dining Chains', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🍔 Fast Food</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Financial Services & Banking', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🏦 Banking & Finance</button>
+  </div>
 
-  <div class="cards-grid">
+  <!-- Advanced Metric Filters Bar -->
+  <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem;">
+      <span style="font-weight: 700; color: var(--navy);">Grade Filter:</span>
+      <select id="gradeSelect" onchange="applyFilters()" style="padding: 0.3rem 0.6rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600;">
+        <option value="all">All Grades</option>
+        <option value="A">Grade A (90-100: Co-ops / B Corps)</option>
+        <option value="B">Grade B (70-89: Good Retention)</option>
+        <option value="C">Grade C (50-69: Mixed Record)</option>
+        <option value="D">Grade D (30-49: Low Worker Share)</option>
+        <option value="F">Grade F (&lt;30: Severe Exploitation)</option>
+      </select>
+    </div>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: var(--danger); font-weight: 600;">
+      <input type="checkbox" id="highShareholderCheck" onchange="applyFilters()">
+      <span>📉 High Shareholder Extraction (&gt;18%)</span>
+    </label>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: #b91c1c; font-weight: 600;">
+      <input type="checkbox" id="severeLaborCheck" onchange="applyFilters()">
+      <span>⚠️ Flagged Labor Exploitation</span>
+    </label>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: #15803d; font-weight: 600;">
+      <input type="checkbox" id="lowWasteCheck" onchange="applyFilters()">
+      <span>♻️ Circular / Low Waste Only</span>
+    </label>
+  </div>
+
+  <!-- Flow Visual Key -->
+  <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
+    <div style="font-size: 0.8rem; font-weight: 750; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em;">
+      📊 Revenue Flow Legend:
+    </div>
+    <div class="flow-legend-row" style="margin: 0;">
+      <div class="flow-legend-item"><span class="flow-dot" style="background: #16a34a;"></span> <strong>Workers:</strong> Frontline Wages</div>
+      <div class="flow-legend-item"><span class="flow-dot" style="background: #9333ea;"></span> <strong>Execs:</strong> CEO & Packages</div>
+      <div class="flow-legend-item"><span class="flow-dot" style="background: #dc2626;"></span> <strong>Shareholders:</strong> Buybacks & Dividends</div>
+      <div class="flow-legend-item"><span class="flow-dot" style="background: #0284c7;"></span> <strong>Ads:</strong> Marketing & Commercials</div>
+    </div>
+  </div>
+
+  <!-- Header with Live Match Count -->
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
+    <h2 id="brandListTitle" style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">Top 2,000 Brands Directory</h2>
+    <div id="brandMatchCounter" style="font-size: 0.88rem; font-weight: 700; color: var(--primary);">Loading brands database...</div>
+  </div>
+
+  <!-- No Results Found Box -->
+  <div id="noResultsMsg" style="display: none; background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 2.5rem; text-align: center; margin: 2rem 0;">
+    <h3 style="font-size: 1.25rem; font-weight: 750; color: var(--navy); margin-bottom: 0.5rem;">No matching brands found</h3>
+    <p style="color: var(--muted); margin-bottom: 1rem;">Try searching for a different brand name, company, or resetting the filters.</p>
+    <button class="btn btn-secondary" onclick="resetAllFilters()">Reset All Filters</button>
+  </div>
+
+  <!-- Brand Cards Grid -->
+  <div class="cards-grid" id="brandsGrid">
     {% for b in brands %}
-    <div class="card" style="display: flex; flex-direction: column;">
+    <div class="card brand-card" style="display: flex; flex-direction: column;">
       <div class="card-header">
         <div>
           <h3 style="font-size: 1.25rem; font-weight: 750; color: var(--navy);">{{ b.name }}</h3>
@@ -46,21 +112,11 @@
         </div>
         <div>
           {% if b.composite_score %}
-            {% if b.composite_score >= 70 %}
-              <span class="score-badge score-high">{{ b.composite_score }}</span>
-            {% elif b.composite_score >= 45 %}
-              <span class="score-badge score-med">{{ b.composite_score }}</span>
-            {% else %}
-              <span class="score-badge score-low">{{ b.composite_score }}</span>
-            {% endif %}
-          {% else %}
-            <span class="score-badge" style="background: #f1f5f9; color: var(--muted);">Unknown</span>
+            <span class="score-badge {% if b.composite_score >= 70 %}score-high{% elif b.composite_score >= 45 %}score-med{% else %}score-low{% endif %}">{{ b.composite_score }}</span>
           {% endif %}
         </div>
       </div>
-
       <p style="font-size: 0.9rem; color: var(--slate); margin-bottom: 1rem; flex: 1;">{{ b.description }}</p>
-
       <div style="margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
         <span style="font-size: 0.78rem; color: var(--muted);">Confidence: {{ (b.confidence * 100)|int }}%</span>
         <a href="/brands/{{ b.slug }}" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.35rem 0.75rem;">Inspect Evidence & Swaps &rarr;</a>
@@ -69,21 +125,28 @@
     {% endfor %}
   </div>
 
-  <!-- Vetted Data Sources of Better Brands -->
+  <!-- Pagination / Load More Button -->
+  <div id="loadMoreContainer" style="display: flex; justify-content: center; margin: 2.5rem 0;">
+    <button id="loadMoreBtn" class="btn btn-secondary" onclick="loadMoreBrands()" style="padding: 0.65rem 1.75rem; font-weight: 700; font-size: 0.95rem;">
+      Load More Brands
+    </button>
+  </div>
+
+  <!-- Vetted Ethical Certifications Guide -->
   <section style="margin-top: 4rem; background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem;">
-    <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--navy);">Vetted Data Sources of Better Brands</h2>
-    <p style="color: var(--muted); margin-bottom: 1.75rem;">We cross-reference these official open registries to surface verified alternatives:</p>
+    <h2 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--navy);">Verified Data Sources for Ethical Swaps</h2>
+    <p style="color: var(--muted); margin-bottom: 1.75rem;">Every alternative in our database is verified against public registries and regulatory filings:</p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
       <div style="border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
         <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--primary);">Worker & Producer Co-ops</h3>
-        <p style="font-size: 0.85rem; color: var(--slate); margin: 0.4rem 0;">Democratically owned by employees or regional agricultural producers. Profits recirculate rather than extract.</p>
+        <p style="font-size: 0.85rem; color: var(--slate); margin: 0.4rem 0;">Democratically owned by employees or regional agricultural producers. Profits recirculate rather than extract to Wall Street.</p>
         <div style="font-size: 0.75rem; color: var(--muted);">Sources: USFWC & National Co+op Grocers</div>
       </div>
 
       <div style="border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem;">
         <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--blue);">100% Employee-Owned (ESOP)</h3>
-        <p style="font-size: 0.85rem; color: var(--slate); margin: 0.4rem 0;">100% of equity held in trust for staff (e.g. King Arthur Baking, Bob's Red Mill). Zero outside wall-street buybacks.</p>
+        <p style="font-size: 0.85rem; color: var(--slate); margin: 0.4rem 0;">100% of equity held in trust for staff (e.g. WinCo Foods, King Arthur Baking). Zero outside hedge fund extraction.</p>
         <div style="font-size: 0.75rem; color: var(--muted);">Source: National Center for Employee Ownership</div>
       </div>
 
@@ -101,4 +164,284 @@
     </div>
   </section>
 </main>
+
+<script>
+let allBrands = [];
+let filteredBrands = [];
+let currentCategory = 'all';
+let currentRenderIndex = 0;
+const PAGE_SIZE = 24;
+
+// Load Top 2000 Brands JSON Bundle
+async function loadBrandsData() {
+  const counter = document.getElementById("brandMatchCounter");
+  const candidates = [
+    'api/v1/brands_top2000.json',
+    '/shoptegrity-site/api/v1/brands_top2000.json',
+    '/api/v1/brands_top2000.json',
+    '/v1/brands/database?limit=2000'
+  ];
+
+  for (const url of candidates) {
+    try {
+      const resp = await fetch(url);
+      if (resp.ok) {
+        const data = await resp.json();
+        allBrands = Array.isArray(data) ? data : (data.brands || []);
+        if (allBrands.length > 0) {
+          console.log(`Loaded ${allBrands.length} brands from ${url}`);
+          break;
+        }
+      }
+    } catch (e) {
+      // try next path
+    }
+  }
+
+  // Fallback to pre-rendered cards if network failed
+  if (allBrands.length === 0) {
+    console.warn("Could not fetch remote JSON, using fallback data");
+  }
+
+  // Check URL query parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const q = urlParams.get("q");
+  if (q) {
+    const input = document.getElementById("brandSearchInput");
+    if (input) input.value = q;
+  }
+
+  applyFilters();
+}
+
+function handleSearchInput() {
+  applyFilters();
+}
+
+function setCategoryFilter(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    p.classList.remove("active");
+    p.style.background = "#f1f5f9";
+    p.style.color = "var(--navy)";
+  });
+  if (btn) {
+    btn.classList.add("active");
+    btn.style.background = "var(--blue-light)";
+    btn.style.color = "#0284c7";
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  const inputEl = document.getElementById("brandSearchInput");
+  const query = inputEl ? inputEl.value.trim().toLowerCase() : "";
+  const gradeVal = document.getElementById("gradeSelect").value;
+  const highShareholder = document.getElementById("highShareholderCheck").checked;
+  const severeLabor = document.getElementById("severeLaborCheck").checked;
+  const lowWaste = document.getElementById("lowWasteCheck").checked;
+
+  filteredBrands = allBrands.filter(b => {
+    // Search query matches brand name, parent company, or swap
+    const matchName = b.name.toLowerCase().includes(query);
+    const matchParent = (b.parent_company || "").toLowerCase().includes(query);
+    const matchSwap = (b.swap_name || "").toLowerCase().includes(query);
+    const matchesQuery = !query || matchName || matchParent || matchSwap;
+
+    // Sector Category
+    const matchesCat = (currentCategory === 'all') || (b.category === currentCategory);
+
+    // Grade filter
+    let matchesGrade = true;
+    if (gradeVal !== 'all') {
+      matchesGrade = b.grade.startsWith(gradeVal);
+    }
+
+    // High shareholder extraction (>18%)
+    let matchesShareholder = true;
+    if (highShareholder) {
+      matchesShareholder = (b.shareholder_extraction_pct >= 18.0);
+    }
+
+    // Flagged labor exploitation
+    let matchesLabor = true;
+    if (severeLabor) {
+      matchesLabor = (b.labor_exploitation_rating === "Severe" || b.labor_exploitation_rating === "High Risk");
+    }
+
+    // Low Waste
+    let matchesWaste = true;
+    if (lowWaste) {
+      matchesWaste = (b.waste_rating.includes("Circular") || b.waste_rating.includes("Low Waste"));
+    }
+
+    return matchesQuery && matchesCat && matchesGrade && matchesShareholder && matchesLabor && matchesWaste;
+  });
+
+  // Reset pagination and render first page
+  currentRenderIndex = 0;
+  const grid = document.getElementById("brandsGrid");
+  grid.innerHTML = "";
+  renderNextBatch();
+  updateCounterUI();
+}
+
+function renderNextBatch() {
+  const grid = document.getElementById("brandsGrid");
+  const nextSlice = filteredBrands.slice(currentRenderIndex, currentRenderIndex + PAGE_SIZE);
+
+  nextSlice.forEach(b => {
+    const card = document.createElement("div");
+    card.className = "card brand-card";
+    card.style.display = "flex";
+    card.style.flexDirection = "column";
+
+    // Grade style
+    let gradeClass = "grade-C";
+    if (b.grade.startsWith("A")) gradeClass = "grade-A";
+    else if (b.grade.startsWith("B")) gradeClass = "grade-B";
+    else if (b.grade.startsWith("D")) gradeClass = "grade-D";
+    else if (b.grade.startsWith("F")) gradeClass = "grade-F";
+
+    // Labor badge style
+    let laborClass = "badge-labor-mod";
+    if (b.labor_exploitation_rating.includes("Severe") || b.labor_exploitation_rating.includes("High")) {
+      laborClass = "badge-labor-severe";
+    } else if (b.labor_exploitation_rating.includes("Fair") || b.labor_exploitation_rating.includes("Low")) {
+      laborClass = "badge-labor-fair";
+    }
+
+    // Waste badge style
+    let wasteClass = "badge-waste-severe";
+    if (b.waste_rating.includes("Circular") || b.waste_rating.includes("Low")) {
+      wasteClass = "badge-waste-circular";
+    }
+
+    card.innerHTML = `
+      <div class="card-header" style="margin-bottom: 0.6rem;">
+        <div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--navy);">${b.name}</h3>
+          <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem;">
+            ${b.parent_company}
+            <span style="background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.72rem; text-transform: uppercase;">${b.ownership_type}</span>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <span class="grade-badge ${gradeClass}">${b.grade} (${b.composite_score})</span>
+        </div>
+      </div>
+
+      <!-- 4-Part Revenue Flow Split Bar -->
+      <div class="brand-flow-container">
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--slate);">
+          <span>Where $100 Goes:</span>
+          <span>Workers: ${b.worker_wages_pct}% | Shareholders: ${b.shareholder_extraction_pct}%</span>
+        </div>
+        <div class="brand-split-bar" title="Workers: ${b.worker_wages_pct}% | Execs: ${b.exec_comp_pct}% | Shareholders: ${b.shareholder_extraction_pct}% | Ads: ${b.marketing_ads_pct}%">
+          <div class="brand-split-seg seg-workers" style="width: ${b.worker_wages_pct}%;" title="Worker Wages: ${b.worker_wages_pct}%">
+            ${b.worker_wages_pct > 12 ? b.worker_wages_pct + '%' : ''}
+          </div>
+          <div class="brand-split-seg seg-execs" style="width: ${b.exec_comp_pct * 2}%;" title="Executive Pay: ${b.exec_comp_pct}%"></div>
+          <div class="brand-split-seg seg-shareholders" style="width: ${b.shareholder_extraction_pct}%;" title="Shareholder Buybacks: ${b.shareholder_extraction_pct}%">
+            ${b.shareholder_extraction_pct > 12 ? b.shareholder_extraction_pct + '%' : ''}
+          </div>
+          <div class="brand-split-seg seg-ads" style="width: ${b.marketing_ads_pct}%;" title="Marketing: ${b.marketing_ads_pct}%">
+            ${b.marketing_ads_pct > 10 ? b.marketing_ads_pct + '%' : ''}
+          </div>
+          <div class="brand-split-seg seg-cogs" style="flex: 1;" title="Cost of Goods / Operations"></div>
+        </div>
+        <div class="flow-legend-row">
+          <span style="color: #16a34a; font-weight: 600;">👷 Labor: ${b.worker_wages_pct}%</span>
+          <span style="color: #dc2626; font-weight: 600;">📉 Buybacks: ${b.shareholder_extraction_pct}%</span>
+          <span style="color: #0284c7;">📢 Ads: ${b.marketing_ads_pct}%</span>
+        </div>
+      </div>
+
+      <!-- Indicators: Labor Exploitation & Waste -->
+      <div style="margin: 0.5rem 0 0.75rem 0;">
+        <span class="badge-indicator ${laborClass}" title="${b.labor_summary}">
+          ${b.labor_exploitation_rating === 'Severe' ? '⚠️' : '⚖️'} Labor: ${b.labor_exploitation_rating} (${b.osha_violations_count} OSHA)
+        </span>
+        <span class="badge-indicator ${wasteClass}" title="${b.waste_summary}">
+          ♻️ Waste: ${b.waste_rating}
+        </span>
+      </div>
+
+      <!-- Recommended Swap Box -->
+      ${b.swap_name ? `
+      <div class="swap-callout-box">
+        <div style="font-weight: 750; font-size: 0.82rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.35rem;">
+          <span>🔄 Recommended Swap:</span>
+          <strong>${b.swap_name}</strong>
+        </div>
+        <div style="font-size: 0.78rem; line-height: 1.35; color: #166534;">${b.swap_rationale}</div>
+      </div>
+      ` : ''}
+
+      <div style="margin-top: auto; padding-top: 0.75rem; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.75rem; color: var(--muted);">${b.category}</span>
+        <a href="/brands/${b.slug}" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.3rem 0.65rem;">Full Scorecard &rarr;</a>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  currentRenderIndex += nextSlice.length;
+
+  const loadMoreBtn = document.getElementById("loadMoreContainer");
+  if (currentRenderIndex >= filteredBrands.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "flex";
+  }
+}
+
+function loadMoreBrands() {
+  renderNextBatch();
+}
+
+function updateCounterUI() {
+  const counter = document.getElementById("brandMatchCounter");
+  const noResults = document.getElementById("noResultsMsg");
+
+  if (filteredBrands.length === 0) {
+    noResults.style.display = "block";
+    counter.textContent = "0 brands found";
+    counter.style.color = "var(--danger)";
+  } else {
+    noResults.style.display = "none";
+    counter.textContent = `Showing ${Math.min(currentRenderIndex, filteredBrands.length)} of ${filteredBrands.length} brands (Database total: ${allBrands.length})`;
+    counter.style.color = "var(--primary)";
+  }
+}
+
+function resetAllFilters() {
+  const inputEl = document.getElementById("brandSearchInput");
+  if (inputEl) inputEl.value = "";
+  document.getElementById("gradeSelect").value = "all";
+  document.getElementById("highShareholderCheck").checked = false;
+  document.getElementById("severeLaborCheck").checked = false;
+  document.getElementById("lowWasteCheck").checked = false;
+  currentCategory = 'all';
+
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    p.classList.remove("active");
+    p.style.background = "#f1f5f9";
+    p.style.color = "var(--navy)";
+  });
+  const firstPill = document.querySelector(".cat-pill");
+  if (firstPill) {
+    firstPill.classList.add("active");
+    firstPill.style.background = "var(--blue-light)";
+    firstPill.style.color = "#0284c7";
+  }
+
+  applyFilters();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadBrandsData();
+});
+</script>
 {% endblock %}

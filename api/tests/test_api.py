@@ -82,6 +82,28 @@ def test_brands_api():
     assert "pay_equity" in detail["scorecard"]
     assert len(detail["alternatives"]) >= 1
 
+    # Top 2000 Brands Database Endpoint
+    res_db = client.get("/v1/brands/database?limit=10")
+    assert res_db.status_code == 200
+    db_data = res_db.json()
+    assert db_data["total"] >= 2000
+    assert len(db_data["brands"]) == 10
+    first_b = db_data["brands"][0]
+    assert "worker_wages_pct" in first_b
+    assert "shareholder_extraction_pct" in first_b
+    assert "labor_exploitation_rating" in first_b
+    assert "waste_rating" in first_b
+
+    # Major Retailers Endpoint
+    res_ret = client.get("/v1/brands/retailers")
+    assert res_ret.status_code == 200
+    ret_data = res_ret.json()
+    assert len(ret_data) >= 7
+    ret_names = [r["name"] for r in ret_data]
+    assert "Walmart" in ret_names
+    assert "Costco Wholesale" in ret_names
+    assert "Target" in ret_names
+
 
 def test_food_chain_api():
     res_ladder = client.get("/v1/food/sourcing-ladder")

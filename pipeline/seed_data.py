@@ -921,8 +921,13 @@ def run_seed():
         db.add(m)
     db.commit()
 
+    # Seed top 2,000 brands database and export JSON
+    from pipeline.top2000_brands import seed_top2000_db, export_top2000_json
+    seed_top2000_db(db)
+    export_top2000_json()
+
     db.close()
-    print("Database successfully seeded with Shoptegrity core data!")
+    print("Database successfully seeded with Shoptegrity core data & top 2,000 brands!")
 
 
 if __name__ == "__main__":

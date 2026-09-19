@@ -205,3 +205,50 @@ class Maker(Base):
     direct_order_url: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
 
     place: Mapped[Optional[Place]] = relationship("Place", back_populates="maker")
+
+
+class BrandIntegrity(Base):
+    """Top 2,000 brands database with measured financial splits, labor exploitation, and waste metrics."""
+
+    __tablename__ = "brand_integrity"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
+    name: Mapped[str] = mapped_column(String(255), index=True)
+    slug: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    category: Mapped[str] = mapped_column(String(100), index=True)
+    parent_company: Mapped[str] = mapped_column(String(255), index=True)
+    ownership_type: Mapped[str] = mapped_column(String(50), index=True)  # worker_coop, esop, public, private_equity, etc.
+    composite_score: Mapped[int] = mapped_column(Integer, index=True)  # 0 - 100
+    grade: Mapped[str] = mapped_column(String(5), index=True)  # A+, A, B, C, D, F
+
+    # Where the money goes ($100 breakdown)
+    worker_wages_pct: Mapped[float] = mapped_column(Float)
+    exec_comp_pct: Mapped[float] = mapped_column(Float)
+    shareholder_extraction_pct: Mapped[float] = mapped_column(Float)
+    marketing_ads_pct: Mapped[float] = mapped_column(Float)
+    cogs_supply_pct: Mapped[float] = mapped_column(Float)
+    retained_operations_pct: Mapped[float] = mapped_column(Float)
+
+    # Labor Exploitation
+    labor_exploitation_rating: Mapped[str] = mapped_column(String(50), index=True)  # Fair, Low, Moderate, High, Severe
+    sweatshop_risk: Mapped[str] = mapped_column(String(50))
+    osha_violations_count: Mapped[int] = mapped_column(Integer, default=0)
+    nlrb_complaints_count: Mapped[int] = mapped_column(Integer, default=0)
+    living_wage_certified: Mapped[bool] = mapped_column(Boolean, default=False)
+    labor_summary: Mapped[str] = mapped_column(Text)
+
+    # Waste & Packaging
+    waste_rating: Mapped[str] = mapped_column(String(50), index=True)  # Circular, Low Waste, Moderate, High Single-Use, Severe
+    packaging_type: Mapped[str] = mapped_column(String(100))
+    repairability_score: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)  # 1-10
+    landfill_diverted_pct: Mapped[float] = mapped_column(Float, default=0.0)
+    waste_summary: Mapped[str] = mapped_column(Text)
+
+    # Recommended Swap
+    swap_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    swap_slug: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    swap_rationale: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Retailer Specifics
+    is_major_retailer: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
+    retailer_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)

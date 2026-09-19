@@ -1,165 +1,408 @@
 {% extends "base.html" %}
 
-{% block title %}Dollar Flow Maps — Shoptegrity{% endblock %}
+{% block title %}Dollar Flow Map — Shoptegrity{% endblock %}
 
 {% block content %}
-<section class="hero">
+<section class="hero" style="padding-bottom: 2rem;">
   <div class="hero-inner">
-    <div class="hero-tag">💸 Where Your $100 Goes</div>
-    <h1>The Dollar Flow Map</h1>
-    <p>Side-by-side spending breakdowns: see exactly what slice of your \$100 ends up with front-line workers, local farmers, and community operations—versus Wall Street buybacks and hedge fund dividends.</p>
+    <div class="hero-tag">💸 Supply-Chain Geographic Trace</div>
+    <h1>The Zipcode Dollar Flow Map</h1>
+    <p>See where every single cent of your purchase physically travels from your hometown: what stays with frontline workers and independent family growers vs. what gets drained across state lines into Wall Street buybacks and corporate conglomerates.</p>
+
+    <!-- Interactive Filter Bar -->
+    <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); margin-top: 1.5rem; text-align: left;">
+      <form id="flowForm" method="GET" action="/flows" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+        <div style="flex: 1; min-width: 180px;">
+          <label for="zipInput" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.35rem;">
+            📍 Your Origin ZIP Code
+          </label>
+          <input 
+            type="text" 
+            id="zipInput" 
+            name="zip" 
+            value="{{ origin_zip }}" 
+            maxlength="5" 
+            pattern="[0-9]{5}" 
+            required 
+            style="width: 100%; padding: 0.65rem 0.9rem; font-size: 1.05rem; font-weight: 600; border: 1px solid var(--border); border-radius: 0.5rem; outline: none;"
+          />
+        </div>
+
+        <div style="flex: 1.5; min-width: 240px;">
+          <label for="scenarioSelect" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.35rem;">
+            🛒 What Are You Buying?
+          </label>
+          <select 
+            id="scenarioSelect" 
+            name="scenario" 
+            style="width: 100%; padding: 0.65rem 0.9rem; font-size: 0.95rem; font-weight: 600; border: 1px solid var(--border); border-radius: 0.5rem; outline: none; background: #fff;"
+          >
+            {% for s in scenarios %}
+              <option value="{{ s.id }}" {% if s.id == selected_scenario %}selected{% endif %}>
+                {{ s.name }} ({{ s.category }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div style="flex: 0.8; min-width: 130px;">
+          <label for="spendInput" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.35rem;">
+            💵 Purchase Amount
+          </label>
+          <div style="position: relative;">
+            <span style="position: absolute; left: 0.75rem; top: 0.65rem; font-weight: 700; color: var(--muted);">$</span>
+            <input 
+              type="number" 
+              id="spendInput" 
+              name="spend" 
+              value="{{ "%.0f"|format(spend_amount) }}" 
+              min="1" 
+              step="1" 
+              style="width: 100%; padding: 0.65rem 0.75rem 0.65rem 1.8rem; font-size: 1.05rem; font-weight: 600; border: 1px solid var(--border); border-radius: 0.5rem; outline: none;"
+            />
+          </div>
+        </div>
+
+        <div style="flex: 0.6; min-width: 110px;">
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.7rem 1.2rem; font-weight: 700;">
+            Trace Flow ➔
+          </button>
+        </div>
+      </form>
+
+      <!-- Quick Preset Locations -->
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; font-size: 0.82rem; color: var(--muted);">
+        <span style="font-weight: 600;">Try a metro:</span>
+        <button type="button" class="preset-pill" onclick="setZip('55401')">55401 (Minneapolis, MN)</button>
+        <button type="button" class="preset-pill" onclick="setZip('60601')">60601 (Chicago, IL)</button>
+        <button type="button" class="preset-pill" onclick="setZip('10001')">10001 (New York, NY)</button>
+        <button type="button" class="preset-pill" onclick="setZip('90012')">90012 (Los Angeles, CA)</button>
+        <button type="button" class="preset-pill" onclick="setZip('78701')">78701 (Austin, TX)</button>
+      </div>
+    </div>
   </div>
 </section>
 
-<main class="container">
-  <!-- Comparison 1: Grocery -->
-  <section style="margin-bottom: 4rem;">
-    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">Grocery: Conventional Supermarket vs Food Cooperative</h2>
-    <p style="color: var(--muted); margin-bottom: 1.5rem;">Based on USDA ERS Food Dollar data and SEC Form 10-K filings.</p>
+<main class="container" style="padding-top: 1.5rem;">
+  <!-- Geo Trace Header & Key Finding Banner -->
+  <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; border-radius: 1rem; padding: 1.75rem 2rem; margin-bottom: 2.5rem; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.15);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+      <div>
+        <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.78rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em;">
+          Active Route Analysis
+        </span>
+        <h2 style="font-size: 1.65rem; font-weight: 800; color: #f8fafc; margin-top: 0.4rem;">
+          {{ trace.scenario_title }}
+        </h2>
+      </div>
+      <div style="background: rgba(255, 255, 255, 0.08); padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem;">
+        📍 Origin: <strong>{{ trace.origin_city }}, {{ trace.origin_state }} ({{ trace.origin_zip }})</strong>
+      </div>
+    </div>
+    <p style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1; max-width: 950px; margin: 0;">
+      💡 {{ trace.comparison_insight }}
+    </p>
+  </div>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
-      <!-- Conventional Supermarket -->
-      <div class="card" style="border-top: 4px solid var(--danger);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.3rem; font-weight: 800;">Conventional Supermarket Chain</h3>
-          <span class="flag-chip flag-rollup">Megacorp</span>
-        </div>
+  <!-- Interactive Visual Map of the United States -->
+  <section style="margin-bottom: 3rem;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+      <div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--navy);">National Money Trajectory</h3>
+        <p style="font-size: 0.88rem; color: var(--muted);">Visualizing geographic leakage vs local retention from origin {{ trace.origin_zip }}.</p>
+      </div>
+      <div style="display: flex; gap: 1rem; font-size: 0.82rem; font-weight: 600;">
+        <span style="display: inline-flex; align-items: center; gap: 0.35rem;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #dc2626; display: inline-block;"></span>
+          Corporate Leakage (Wall St / Corporate HQs)
+        </span>
+        <span style="display: inline-flex; align-items: center; gap: 0.35rem;">
+          <span style="width: 12px; height: 12px; border-radius: 50%; background: #059669; display: inline-block;"></span>
+          Community Recirculation (Local Farms & Co-ops)
+        </span>
+      </div>
+    </div>
 
-        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>🌾 Farm & Producer Share:</span>
-            <strong>$14.70</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>👷 Frontline Worker Wages:</span>
-            <strong>$12.50</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>📦 Packaging, Logistics & Processing:</span>
-            <strong>$28.30</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>📢 Corporate Marketing & Ads:</span>
-            <strong>$8.50</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>🏬 Store Rent & Power:</span>
-            <strong>$16.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--purple);">
-            <span>👔 Executive Compensation:</span>
-            <strong>$4.20</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--danger); font-weight: 800; background: var(--danger-light); padding: 0.4rem 0.6rem; border-radius: 4px;">
-            <span>📉 Shareholder Buybacks & Dividends:</span>
-            <span>$15.80</span>
-          </div>
-        </div>
+    <!-- Map Canvas Container -->
+    <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.03); overflow: hidden; position: relative;">
+      <svg id="geoMapSvg" viewBox="0 0 960 550" style="width: 100%; height: auto; max-height: 480px; display: block;">
+        <!-- Base Map Canvas -->
+        <rect width="960" height="550" fill="#f8fafc" rx="8" />
+        
+        <!-- Simplified US Geography Boundaries (Stylized Landmass) -->
+        <path d="M 120 120 L 220 100 L 320 95 L 420 90 L 520 92 L 620 98 L 740 110 L 840 140 L 890 200 L 870 260 L 830 320 L 780 440 L 730 480 L 680 440 L 580 450 L 500 460 L 420 440 L 360 480 L 260 430 L 170 380 L 110 320 L 90 220 Z" 
+              fill="#e2e8f0" stroke="#cbd5e1" stroke-width="2" opacity="0.6" />
+        <path d="M 450 95 L 480 130 L 530 135 L 560 110 L 600 130 L 630 150 L 670 140 L 690 170 L 670 190 L 620 180 L 580 200 L 540 180 Z" 
+              fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5" />
 
-        <p style="font-size: 0.85rem; color: var(--slate); margin-top: 1.25rem; line-height: 1.4;">
-          <strong>The Leak:</strong> Over $15.80 of every $100 directly leaves the community into stock buybacks, while the food grower gets under $15.
-        </p>
+        <!-- Grid Lines for Coordinates -->
+        <line x1="100" y1="200" x2="860" y2="200" stroke="#cbd5e1" stroke-dasharray="4,4" opacity="0.4" />
+        <line x1="100" y1="350" x2="860" y2="350" stroke="#cbd5e1" stroke-dasharray="4,4" opacity="0.4" />
+        <line x1="300" y1="100" x2="300" y2="450" stroke="#cbd5e1" stroke-dasharray="4,4" opacity="0.4" />
+        <line x1="500" y1="100" x2="500" y2="450" stroke="#cbd5e1" stroke-dasharray="4,4" opacity="0.4" />
+        <line x1="700" y1="100" x2="700" y2="450" stroke="#cbd5e1" stroke-dasharray="4,4" opacity="0.4" />
+
+        <!-- Dynamic Flow Arcs will be rendered here by JS / Jinja -->
+        <g id="flowArcsGroup">
+          {% set map_w = 960 %}
+          {% set map_h = 550 %}
+          {# Simple Albers-like projection approximation: Lon -125 to -65 -> x 80 to 880, Lat 24 to 50 -> y 500 to 80 #}
+          {% macro proj_x(lon) %}{{ 80 + ((lon - (-125)) / 60.0) * 800 }}{% endmacro %}
+          {% macro proj_y(lat) %}{{ 500 - ((lat - 24) / 26.0) * 420 }}{% endmacro %}
+
+          {% set ox = proj_x(trace.origin_lon)|float %}
+          {% set oy = proj_y(trace.origin_lat)|float %}
+
+          <!-- Conventional Arcs (Red) -->
+          {% for node in trace.conventional.nodes %}
+            {% if not node.is_local %}
+              {% set dx = proj_x(node.lon)|float %}
+              {% set dy = proj_y(node.lat)|float %}
+              {% set mx = (ox + dx) / 2 %}
+              {% set my = (oy + dy) / 2 - 45 %}
+              <path d="M {{ ox }} {{ oy }} Q {{ mx }} {{ my }} {{ dx }} {{ dy }}" 
+                    fill="none" stroke="#dc2626" stroke-width="{{ 1.5 + (node.amount / spend_amount) * 6 }}" stroke-linecap="round" opacity="0.75" stroke-dasharray="6,4">
+                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="3s" repeatCount="indefinite" />
+              </path>
+              <!-- Destination Pin -->
+              <circle cx="{{ dx }}" cy="{{ dy }}" r="{{ 4 + (node.amount / spend_amount) * 8 }}" fill="#dc2626" opacity="0.85" />
+              <text x="{{ dx }}" y="{{ dy - 8 }}" font-size="11" font-weight="700" fill="#991b1b" text-anchor="middle">
+                ${{ "%.2f"|format(node.amount) }} ({{ node.city }})
+              </text>
+            {% endif %}
+          {% endfor %}
+
+          <!-- Alternative Arcs (Green) -->
+          {% for node in trace.alternative.nodes %}
+            {% set dx = proj_x(node.lon)|float %}
+            {% set dy = proj_y(node.lat)|float %}
+            {% set mx = (ox + dx) / 2 %}
+            {% set my = (oy + dy) / 2 - 25 %}
+            <path d="M {{ ox }} {{ oy }} Q {{ mx }} {{ my }} {{ dx }} {{ dy }}" 
+                  fill="none" stroke="#059669" stroke-width="{{ 2 + (node.amount / spend_amount) * 8 }}" stroke-linecap="round" opacity="0.85">
+            </path>
+            <circle cx="{{ dx }}" cy="{{ dy }}" r="{{ 5 + (node.amount / spend_amount) * 8 }}" fill="#059669" opacity="0.9" />
+            <text x="{{ dx }}" y="{{ dy + 16 }}" font-size="11" font-weight="700" fill="#065f46" text-anchor="middle">
+              🌱 ${{ "%.2f"|format(node.amount) }} ({{ node.city }})
+            </text>
+          {% endfor %}
+
+          <!-- Origin Pin (Pulsing Glow) -->
+          <circle cx="{{ ox }}" cy="{{ oy }}" r="18" fill="#0284c7" opacity="0.25">
+            <animate attributeName="r" values="12;24;12" dur="2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="2s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="{{ ox }}" cy="{{ oy }}" r="8" fill="#0284c7" stroke="#ffffff" stroke-width="2.5" />
+          <text x="{{ ox }}" y="{{ oy - 14 }}" font-size="12" font-weight="800" fill="#0369a1" text-anchor="middle">
+            📍 YOU ARE HERE ({{ trace.origin_zip }})
+          </text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Worker Disproportion & Economic Summary Cards -->
+  <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+    <!-- Conventional Summary Card -->
+    <div class="card" style="border-top: 5px solid var(--danger);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy);">Conventional Supply Chain</h3>
+        <span class="flag-chip flag-rollup">Wall St Extraction</span>
       </div>
 
-      <!-- Food Co-op -->
-      <div class="card" style="border-top: 4px solid var(--primary);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-          <h3 style="font-size: 1.3rem; font-weight: 800;">Member-Owned Food Cooperative</h3>
-          <span class="flag-chip flag-coop">Democratically Owned</span>
+      <!-- Key Disproportion Callout -->
+      <div style="background: var(--danger-light); border: 1px solid #fecaca; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.25rem;">
+        <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: #991b1b; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+          The Worker Disproportion
         </div>
-
-        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: var(--primary); font-weight: 800; background: var(--primary-light); padding: 0.4rem 0.6rem; border-radius: 4px;">
-            <span>🌱 Regional Farm & Producer Share:</span>
-            <span>$42.00</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>👷 Living Wage Store Staff:</span>
-            <strong>$28.50</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>🚚 Green Distribution & Operations:</span>
-            <strong>$18.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>💰 Member Patronage Dividends:</span>
-            <strong>$6.50</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>🎓 Community Education & Grants:</span>
-            <strong>$5.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted);">
-            <span>📉 Wall Street Shareholder Extraction:</span>
-            <strong>$0.00</strong>
-          </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-size: 0.92rem; color: #7f1d1d;">Wall St & Exec Share:</span>
+          <strong style="font-size: 1.25rem; color: var(--danger);">${{ "%.2f"|format(trace.conventional.executive_shareholder_amount) }} ({{ trace.conventional.executive_shareholder_pct }}%)</strong>
         </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed #fca5a5;">
+          <span style="font-size: 0.88rem; color: #7f1d1d;">Frontline Worker & Farm Gate:</span>
+          <span style="font-weight: 700; color: #991b1b;">${{ "%.2f"|format(trace.conventional.worker_farmer_amount) }} ({{ trace.conventional.worker_farmer_pct }}%)</span>
+        </div>
+      </div>
 
-        <p style="font-size: 0.85rem; color: var(--slate); margin-top: 1.25rem; line-height: 1.4;">
-          <strong>The Patch:</strong> 100% of profit stays within the member network and regional food system. Farmers receive roughly 3x higher revenue.
-        </p>
+      <!-- Distance & Capital Flight Metrics -->
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem;">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem;">
+          <span style="color: var(--muted);">Local Economic Retention:</span>
+          <strong style="color: var(--danger);">${{ "%.2f"|format(trace.conventional.local_retained_amount) }} ({{ trace.conventional.local_retained_pct }}%)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem;">
+          <span style="color: var(--muted);">Capital Drained Out-of-State:</span>
+          <strong style="color: var(--danger);">${{ "%.2f"|format(trace.conventional.capital_flight_amount) }} ({{ trace.conventional.capital_flight_pct }}%)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding-bottom: 0.4rem;">
+          <span style="color: var(--muted);">Avg. Supply Chain Distance:</span>
+          <strong>{{ trace.conventional.avg_miles_traveled }} miles</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alternative Summary Card -->
+    <div class="card" style="border-top: 5px solid var(--primary);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy);">Community Grower & Co-op</h3>
+        <span class="flag-chip flag-coop">100% Local Stewardship</span>
+      </div>
+
+      <!-- Key Disproportion Callout -->
+      <div style="background: var(--primary-light); border: 1px solid #a7f3d0; border-radius: 0.5rem; padding: 1rem; margin-bottom: 1.25rem;">
+        <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--primary-dark); letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+          The Community Enrichment
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-size: 0.92rem; color: #065f46;">Worker & Grower Share:</span>
+          <strong style="font-size: 1.25rem; color: var(--primary);">${{ "%.2f"|format(trace.alternative.worker_farmer_amount) }} ({{ trace.alternative.worker_farmer_pct }}%)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 0.35rem; padding-top: 0.35rem; border-top: 1px dashed #6ee7b7;">
+          <span style="font-size: 0.88rem; color: #065f46;">Wall St & PE Extraction:</span>
+          <span style="font-weight: 700; color: var(--primary);">${{ "%.2f"|format(trace.alternative.executive_shareholder_amount) }} (0.0%)</span>
+        </div>
+      </div>
+
+      <!-- Distance & Capital Flight Metrics -->
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.92rem;">
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem;">
+          <span style="color: var(--muted);">Local Economic Retention:</span>
+          <strong style="color: var(--primary);">${{ "%.2f"|format(trace.alternative.local_retained_amount) }} ({{ trace.alternative.local_retained_pct }}%)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem;">
+          <span style="color: var(--muted);">Capital Drained Out-of-State:</span>
+          <strong style="color: var(--primary);">${{ "%.2f"|format(trace.alternative.capital_flight_amount) }} ({{ trace.alternative.capital_flight_pct }}%)</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; padding-bottom: 0.4rem;">
+          <span style="color: var(--muted);">Avg. Supply Chain Distance:</span>
+          <strong>{{ trace.alternative.avg_miles_traveled }} miles</strong>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Comparison 2: Banking -->
+  <!-- Detailed Side-by-Side Geographic Routing Ledgers -->
   <section style="margin-bottom: 4rem;">
-    <h2 style="font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">Banking: Megabank vs Not-for-Profit Credit Union</h2>
-    <p style="color: var(--muted); margin-bottom: 1.5rem;">Based on NCUA reports and bank annual disclosures.</p>
+    <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 1.5rem;">
+      The Penny Ledger: ZIP-by-ZIP Breakdown
+    </h3>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
-      <div class="card" style="border-top: 4px solid var(--danger);">
-        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Commercial Megabank</h3>
-        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--danger); font-weight: 700;">
-            <span>Shareholder Profits & Buybacks:</span>
-            <strong>$38.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Executive Comp & Bonuses:</span>
-            <strong>$14.50</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Extractive & Fossil Lending:</span>
-            <strong>$25.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Branch Staff & Ops:</span>
-            <strong>$15.50</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Interest Returned to Depositors:</span>
-            <strong>$7.00</strong>
-          </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2rem;">
+      <!-- Conventional Node Breakdown -->
+      <div class="card">
+        <h4 style="font-size: 1.15rem; font-weight: 800; color: #991b1b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>🛑</span> {{ trace.conventional.display_title }}
+        </h4>
+
+        <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+          {% for node in trace.conventional.nodes %}
+            <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.85rem; position: relative;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
+                <strong style="font-size: 0.95rem; color: var(--navy);">{{ node.role }}</strong>
+                <span style="font-size: 1.05rem; font-weight: 800; color: {% if node.is_local %}var(--primary){% else %}#b91c1c{% endif %};">
+                  ${{ "%.2f"|format(node.amount) }}
+                </span>
+              </div>
+              <div style="font-size: 0.82rem; color: var(--slate); margin-bottom: 0.35rem;">
+                Payee: <em>{{ node.payee_name }}</em>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--muted);">
+                <span>📍 ZIP {{ node.destination_zip }} ({{ node.city }}, {{ node.state }})</span>
+                <span style="background: #e2e8f0; padding: 0.15rem 0.45rem; border-radius: 4px; font-weight: 600;">
+                  {{ node.distance_miles }} mi
+                </span>
+              </div>
+
+              <!-- Farm Ownership Unmasking Tag -->
+              {% if node.farm_ownership_tier %}
+                <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #e2e8f0; font-size: 0.78rem;">
+                  {% if node.farm_ownership_tier == 'contract_grower' %}
+                    <span style="background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 0.25rem;">
+                      ⚠️ Captive Contract Grower (Debt-Bound)
+                    </span>
+                  {% elif node.farm_ownership_tier == 'corporate_agribusiness' %}
+                    <span style="background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 0.25rem;">
+                      🏢 Multinational Agribusiness Subsidiary
+                    </span>
+                  {% endif %}
+                  {% if node.farm_ownership_notes %}
+                    <p style="margin: 0; color: var(--slate); line-height: 1.35;">{{ node.farm_ownership_notes }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
         </div>
       </div>
 
-      <div class="card" style="border-top: 4px solid var(--blue);">
-        <h3 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 1rem;">Community Credit Union</h3>
-        <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--primary); font-weight: 700;">
-            <span>Lower Loan Rates & High Yields to Members:</span>
-            <strong>$42.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Local Mortgages & Small Biz Lending:</span>
-            <strong>$35.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Living Wages & Member Support:</span>
-            <strong>$16.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-            <span>Reserves & Tech Infrastructure:</span>
-            <strong>$7.00</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--muted);">
-            <span>Wall Street Shareholder Extraction:</span>
-            <strong>$0.00</strong>
-          </div>
+      <!-- Alternative Node Breakdown -->
+      <div class="card">
+        <h4 style="font-size: 1.15rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span>🌱</span> {{ trace.alternative.display_title }}
+        </h4>
+
+        <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+          {% for node in trace.alternative.nodes %}
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 0.5rem; padding: 0.85rem; position: relative;">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
+                <strong style="font-size: 0.95rem; color: #166534;">{{ node.role }}</strong>
+                <span style="font-size: 1.05rem; font-weight: 800; color: var(--primary-dark);">
+                  ${{ "%.2f"|format(node.amount) }}
+                </span>
+              </div>
+              <div style="font-size: 0.82rem; color: #14532d; margin-bottom: 0.35rem;">
+                Payee: <em>{{ node.payee_name }}</em>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #15803d;">
+                <span>📍 ZIP {{ node.destination_zip }} ({{ node.city }}, {{ node.state }})</span>
+                <span style="background: #dcfce7; padding: 0.15rem 0.45rem; border-radius: 4px; font-weight: 600;">
+                  {{ node.distance_miles }} mi
+                </span>
+              </div>
+
+              <!-- Farm Ownership Unmasking Tag -->
+              {% if node.farm_ownership_tier == 'community_farmer' %}
+                <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed #bbf7d0; font-size: 0.78rem;">
+                  <span style="background: #dcfce7; color: #166534; border: 1px solid #86efac; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; display: inline-block; margin-bottom: 0.25rem;">
+                    ✅ Verified Independent Community Farmer
+                  </span>
+                  {% if node.farm_ownership_notes %}
+                    <p style="margin: 0; color: #14532d; line-height: 1.35;">{{ node.farm_ownership_notes }}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
         </div>
       </div>
     </div>
   </section>
 </main>
+
+<style>
+.preset-pill {
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  color: var(--slate);
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.preset-pill:hover {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+</style>
+
+<script>
+function setZip(zip) {
+  document.getElementById('zipInput').value = zip;
+  document.getElementById('flowForm').submit();
+}
+</script>
 {% endblock %}

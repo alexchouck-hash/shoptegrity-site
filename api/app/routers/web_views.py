@@ -10,6 +10,7 @@ from api.app.db.session import get_db
 from api.app.models.core import Brand, Entity, SpendCategory, Alternative, Place, Maker, FlowProfile
 from api.app.routers.food_chain import SOURCING_LADDER, fetch_food_dollar_splits
 from api.app.routers.swaps import get_swap_guide_detail
+from api.app.services.geo_flow_service import SCENARIOS_META, trace_dollar_flow
 from api.app.services.scoring_service import score_entity, get_cached_rubric
 
 templates_dir = Path(__file__).parent.parent.parent.parent / "web" / "templates"
@@ -189,16 +190,35 @@ def swaps_view(request: Request, db: Session = Depends(get_db)):
         },
     )
 
-
 @router.get("/flows", response_class=HTMLResponse)
-def flows_view(request: Request, db: Session = Depends(get_db)):
+def flows_view(
+    request: Request,
+    zip: str = Query("55401"),
+    scenario: str = Query("grocery_produce"),
+    spend: float = Query(100.0),
+    db: Session = Depends(get_db),
+):
+    clean_zip = zip.strip()[:5] if zip else "55401"
+    if len(clean_zip) < 5 or not clean_zip.isdigit():
+        clean_zip = "55401"
+    valid_scenario = scenario if scenario in [s.id for s in SCENARIOS_META] else "grocery_produce"
+    valid_spend = spend if spend > 0 else 100.0
+
+    trace_data = trace_dollar_flow(origin_zip=clean_zip, scenario_id=valid_scenario, spend_amount=valid_spend)
+
     return templates.TemplateResponse(
         request=request,
         name="flows.html",
         context={
             "active_page": "flows",
+            "trace": trace_data,
+            "scenarios": SCENARIOS_META,
+            "selected_scenario": valid_scenario,
+            "origin_zip": clean_zip,
+            "spend_amount": valid_spend,
         },
     )
+
 
 
 @router.get("/methodology", response_class=HTMLResponse)

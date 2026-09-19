@@ -165,3 +165,59 @@ class FoodDollarSplit(BaseModel):
     year: int
     source_citation: str
     summary_insight: str
+
+
+class GeoFlowNode(BaseModel):
+    role: str
+    payee_name: str
+    destination_zip: str
+    city: str
+    state: str
+    lat: float
+    lon: float
+    amount: float
+    percentage: float
+    distance_miles: float
+    is_local: bool
+    leak_category: str  # local_community, regional_steward, corporate_overhead, wall_street_leak
+    farm_ownership_tier: Optional[str] = None  # community_farmer, contract_grower, corporate_agribusiness, not_farm
+    farm_ownership_notes: Optional[str] = None
+
+
+class GeoFlowBranch(BaseModel):
+    option_type: str  # conventional vs alternative
+    display_title: str
+    nodes: List[GeoFlowNode]
+    total_spend: float
+    local_retained_amount: float
+    local_retained_pct: float
+    capital_flight_amount: float
+    capital_flight_pct: float
+    worker_farmer_amount: float
+    worker_farmer_pct: float
+    executive_shareholder_amount: float
+    executive_shareholder_pct: float
+    avg_miles_traveled: float
+    summary_text: str
+
+
+class GeoFlowScenarioSummary(BaseModel):
+    id: str
+    name: str
+    category: str
+    description: str
+
+
+class GeoFlowTraceResponse(BaseModel):
+    origin_zip: str
+    origin_city: str
+    origin_state: str
+    origin_lat: float
+    origin_lon: float
+    spend_amount: float
+    scenario_id: str
+    scenario_title: str
+    conventional: GeoFlowBranch
+    alternative: GeoFlowBranch
+    comparison_insight: str
+

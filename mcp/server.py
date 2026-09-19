@@ -6,7 +6,7 @@ dollar flow splits, food chain sourcing, and local alternatives.
 
 from typing import Optional, Dict, Any, List
 from api.app.db.session import SessionLocal, haversine_distance_km
-from api.app.models.core import Brand, Entity, Alternative, Place, Maker, FlowProfile
+from api.app.models.core import Brand, Entity, Alternative, Place, Maker, FlowProfile, BrandIntegrity
 from api.app.services.scoring_service import score_entity
 
 
@@ -125,6 +125,169 @@ def dollar_split_summary(category: str = "grocery") -> Dict[str, Any]:
                 }
                 for f in flow
             ]
+        }
+    finally:
+        db.close()
+
+
+def search_top_brands(
+    query: str = "",
+    category: Optional[str] = None,
+    min_grade: Optional[str] = None,
+    limit: int = 20,
+) -> Dict[str, Any]:
+    """Search the top 2,000 brands database by name, sector, and minimum integrity grade."""
+    db = SessionLocal()
+    try:
+        q = db.query(BrandIntegrity)
+        if query:
+            q = q.filter(BrandIntegrity.name.ilike(f"%{query}%"))
+        if category and category != "All":
+            q = q.filter(BrandIntegrity.category == category)
+        if min_grade:
+            grade_order = {"A+": 6, "A": 5, "B": 4, "C": 3, "D": 2, "F": 1}
+            min_val = grade_order.get(min_grade, 1)
+            valid_grades = [g for g, v in grade_order.items() if v >= min_val]
+            q = q.filter(BrandIntegrity.grade.in_(valid_grades))
+
+        total = q.count()
+        matches = q.limit(limit).all()
+
+        return {
+            "total_matches": total,
+            "returned_count": len(matches),
+            "brands": [
+                {
+                    "name": b.name,
+                    "category": b.category,
+                    "parent_company": b.parent_company,
+                    "grade": b.grade,
+                    "composite_score": b.composite_score,
+                    "worker_wages_pct": f"{b.worker_wages_pct}%",
+                    "shareholder_extraction_pct": f"{b.shareholder_extraction_pct}%",
+                    "labor_exploitation_rating": b.labor_exploitation_rating,
+                    "waste_rating": b.waste_rating,
+                    "swap_recommendation": b.swap_name,
+                }
+                for b in matches
+            ],
+        }
+    finally:
+        db.close()
+
+
+def lookup_brand_integrity(brand_name: str) -> Dict[str, Any]:
+    """Retrieve in-depth integrity metrics: worker vs executive vs shareholder splits, labor exploitation, and waste."""
+    db = SessionLocal()
+    try:
+        brand = (
+            db.query(BrandIntegrity)
+            .filter(BrandIntegrity.name.ilike(f"%{brand_name}%"))
+            .first()
+        )
+        if not brand:
+            return {"error": f"Brand '{brand_name}' not found in the 2,000-brand database."}
+
+        return {
+            "name": brand.name,
+            "category": brand.category,
+            "parent_company": brand.parent_company,
+            "ownership_type": brand.ownership_type,
+            "composite_score": brand.composite_score,
+            "grade": brand.grade,
+            "dollar_flow_split": {
+                "worker_wages_pct": brand.worker_wages_pct,
+                "executive_compensation_pct": brand.exec_comp_pct,
+                "shareholder_buybacks_dividends_pct": brand.shareholder_extraction_pct,
+                "advertising_marketing_pct": brand.marketing_ads_pct,
+                "cost_of_goods_supply_pct": brand.cogs_supply_pct,
+                "retained_operations_pct": brand.retained_operations_pct,
+                "key_takeaway": (
+                    f"At {brand.name}, {brand.shareholder_extraction_pct}% of revenue flows to shareholders "
+                    f"and {brand.marketing_ads_pct}% to ads, compared to {brand.worker_wages_pct}% for frontline workers."
+                ),
+            },
+            "labor_exploitation": {
+                "rating": brand.labor_exploitation_rating,
+                "sweatshop_risk": brand.sweatshop_risk,
+                "osha_violations_count": brand.osha_violations_count,
+                "nlrb_complaints_count": brand.nlrb_complaints_count,
+                "living_wage_certified": brand.living_wage_certified,
+                "summary": brand.labor_summary,
+            },
+            "waste_and_packaging": {
+                "waste_rating": brand.waste_rating,
+                "packaging_type": brand.packaging_type,
+                "repairability_score": brand.repairability_score,
+                "landfill_diverted_pct": brand.landfill_diverted_pct,
+                "summary": brand.waste_summary,
+            },
+            "recommended_swap": {
+                "swap_name": brand.swap_name,
+                "swap_slug": brand.swap_slug,
+                "swap_rationale": brand.swap_rationale,
+            },
+        }
+    finally:
+        db.close()
+
+
+def rate_major_retailers() -> Dict[str, Any]:
+    """Retrieve scorecards, shareholder extraction, worker wages, and swaps for major retailers (Target, Walmart, Costco, etc.)."""
+    db = SessionLocal()
+    try:
+        retailers = (
+            db.query(BrandIntegrity)
+            .filter(BrandIntegrity.is_major_retailer == True)
+            .order_by(BrandIntegrity.composite_score.desc())
+            .all()
+        )
+        return {
+            "title": "Major Retailers Integrity Scorecard & Swaps",
+            "count": len(retailers),
+            "retailers": [
+                {
+                    "name": r.name,
+                    "grade": r.grade,
+                    "score": r.composite_score,
+                    "parent_company": r.parent_company,
+                    "worker_wages": f"{r.worker_wages_pct}%",
+                    "shareholder_extraction": f"{r.shareholder_extraction_pct}%",
+                    "labor_rating": r.labor_exploitation_rating,
+                    "waste_rating": r.waste_rating,
+                    "packaging": r.packaging_type,
+                    "easy_swap": r.swap_name,
+                    "swap_rationale": r.swap_rationale,
+                    "details": r.retailer_details or {},
+                }
+                for r in retailers
+            ],
+        }
+    finally:
+        db.close()
+
+
+def get_retailer_swaps(retailer_name: str) -> Dict[str, Any]:
+    """Retrieve direct ethical swaps for a major shopping retailer (e.g. Walmart -> WinCo Foods, Home Depot -> Ace Hardware)."""
+    db = SessionLocal()
+    try:
+        ret = (
+            db.query(BrandIntegrity)
+            .filter(BrandIntegrity.name.ilike(f"%{retailer_name}%"), BrandIntegrity.is_major_retailer == True)
+            .first()
+        )
+        if not ret:
+            return {"error": f"Major retailer '{retailer_name}' not found. Available: Walmart, Target, Costco, Amazon, Kroger, Dollar General, The Home Depot."}
+
+        return {
+            "current_retailer": ret.name,
+            "grade": ret.grade,
+            "integrity_score": ret.composite_score,
+            "shareholder_extraction": f"{ret.shareholder_extraction_pct}% of revenue",
+            "worker_wages": f"{ret.worker_wages_pct}% of revenue",
+            "recommended_swap": ret.swap_name,
+            "swap_rationale": ret.swap_rationale,
+            "retailer_details": ret.retailer_details or {},
         }
     finally:
         db.close()

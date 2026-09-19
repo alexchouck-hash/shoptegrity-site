@@ -92,6 +92,8 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
     # 4. Export static API JSON endpoints for client-side queries
     api_routes = [
         ("/v1/brands", "api/v1/brands.json"),
+        ("/v1/brands/database?limit=2000", "api/v1/brands/database.json"),
+        ("/v1/brands/retailers", "api/v1/brands/retailers.json"),
         ("/v1/food/sourcing-ladder", "api/v1/food/sourcing-ladder.json"),
         ("/v1/food/dollar-split", "api/v1/food/dollar-split.json"),
         ("/v1/food/makers", "api/v1/food/makers.json"),
@@ -107,6 +109,15 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             dest_file.parent.mkdir(parents=True, exist_ok=True)
             dest_file.write_text(res.text, encoding="utf-8")
             print(f"Exported API JSON {api_route} -> {api_file}")
+
+    # Also ensure the raw static json bundles are copied
+    for raw_f in ["brands_top2000.json", "retailers.json"]:
+        raw_src = Path(f"api/v1/{raw_f}")
+        if raw_src.exists():
+            raw_dest = out_path / f"api/v1/{raw_f}"
+            raw_dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(raw_src, raw_dest)
+            print(f"Copied {raw_src} -> {raw_dest}")
 
     # Add .nojekyll for GitHub Pages
     (out_path / ".nojekyll").write_text("", encoding="utf-8")
