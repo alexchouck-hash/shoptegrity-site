@@ -84,6 +84,9 @@ def get_top_2000_brands_database(
                 "swap_rationale": r.swap_rationale,
                 "is_major_retailer": r.is_major_retailer,
                 "retailer_details": r.retailer_details,
+                "data_provenance": r.data_provenance,
+                "sec_url": r.sec_url,
+                "sec_receipt_details": r.sec_receipt_details,
             }
             for r in records
         ],
@@ -122,6 +125,9 @@ def get_major_retailers(db: Session = Depends(get_db)):
             "swap_slug": r.swap_slug,
             "swap_rationale": r.swap_rationale,
             "retailer_details": r.retailer_details,
+            "data_provenance": r.data_provenance,
+            "sec_url": r.sec_url,
+            "sec_receipt_details": r.sec_receipt_details,
         }
         for r in retailers
     ]

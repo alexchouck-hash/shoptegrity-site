@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block title %}Brand & Product Parent Feed — Who Owns What? | Shoptegrity{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem;">
+
+  <!-- Hero Header -->
+  <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary-light); color: var(--primary-dark); font-weight: 600; font-size: 0.85rem; padding: 0.25rem 0.75rem; border-radius: 9999px; margin-bottom: 0.75rem;">
+          <span>🔍</span> 1,000+ Verified Products & Brands Data Feed
+        </div>
+        <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; letter-spacing: -0.02em;">
+          Who Actually Owns Your Brand?
+        </h1>
+        <p style="color: var(--muted); font-size: 1.05rem; max-width: 800px; line-height: 1.6;">
+          Take any brand or product and identify its true corporate parent. Expose conglomerate camouflage, private equity rollups, and rustic front labels designed to deceive consumers.
+        </p>
+      </div>
+      <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="/v1/feed/parents/download/json" class="btn" style="background: var(--navy); color: white; padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+          <span>📥</span> Download JSON Feed
+        </a>
+        <a href="/v1/feed/parents/download/csv" class="btn" style="background: white; border: 1px solid var(--border); color: var(--navy); padding: 0.6rem 1.2rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.4rem;">
+          <span>📊</span> Download CSV
+        </a>
+      </div>
+    </div>
+
+    <!-- Quick Stats Strip -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+      <div>
+        <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">Total Tracked Items</div>
+        <div style="font-size: 1.7rem; font-weight: 800; color: var(--primary-dark);">{{ stats.total_items }}</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">Surprising Subterfuge</div>
+        <div style="font-size: 1.7rem; font-weight: 800; color: var(--danger);">{{ stats.surprising_subterfuge_pct }}%</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">Conglomerates Tracked</div>
+        <div style="font-size: 1.7rem; font-weight: 800; color: var(--navy);">{{ stats.top_parent_conglomerates|length }}+</div>
+      </div>
+      <div>
+        <div style="font-size: 0.85rem; color: var(--muted); font-weight: 600;">Wall Street Siphon</div>
+        <div style="font-size: 1.7rem; font-weight: 800; color: var(--warning);">88% – 96%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search & Filter Form -->
+  <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem;">
+    <form method="GET" action="/parents" style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+      <div style="flex: 1; min-width: 280px; position: relative;">
+        <input
+          type="text"
+          name="q"
+          value="{{ search_query or '' }}"
+          placeholder="Search any product or brand (e.g. Annie's, Burt's Bees, Goose Island, Banfield, Ray-Ban)..."
+          style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem;"
+        >
+      </div>
+
+      <div style="min-width: 180px;">
+        <select name="category" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; background: white;">
+          <option value="">All Categories</option>
+          {% for cat, count in stats.categories.items() %}
+            <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }} ({{ count }})</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.95rem; font-weight: 600; color: var(--slate);">
+        <input type="checkbox" id="subterfuge_only" name="subterfuge" value="true" {% if subterfuge_only %}checked{% endif %} style="width: 18px; height: 18px;">
+        <label for="subterfuge_only">Surprising Subterfuge Only</label>
+      </div>
+
+      <button type="submit" class="btn" style="background: var(--primary); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; cursor: pointer;">
+        Search Feed
+      </button>
+
+      {% if search_query or selected_category or subterfuge_only %}
+        <a href="/parents" style="color: var(--muted); text-decoration: none; font-size: 0.9rem; margin-left: 0.5rem;">Clear</a>
+      {% endif %}
+    </form>
+  </div>
+
+  <!-- Feed Cards Grid -->
+  <div style="margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+    <div style="font-weight: 700; color: var(--navy); font-size: 1.1rem;">
+      Showing {{ feed_results|length }} of {{ total_count }} records
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;">
+    {% for item in feed_results %}
+    <div style="background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 1px 3px rgba(0,0,0,0.02); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+      <div>
+        <!-- Top Badge Row -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); background: var(--light-bg); padding: 0.2rem 0.6rem; border-radius: 4px; border: 1px solid var(--border);">
+            {{ item.category }}
+          </span>
+          {% if item.is_surprising_or_subterfuge %}
+            <span style="font-size: 0.75rem; font-weight: 700; background: var(--danger-light); color: var(--danger); padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid #fecaca; display: inline-flex; align-items: center; gap: 0.3rem;">
+              <span>⚠️</span> Subterfuge
+            </span>
+          {% else %}
+            <span style="font-size: 0.75rem; font-weight: 600; background: var(--blue-light); color: var(--blue); padding: 0.2rem 0.6rem; border-radius: 9999px;">
+              {{ item.item_type|title }}
+            </span>
+          {% endif %}
+        </div>
+
+        <!-- Name -->
+        <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--navy); margin-bottom: 0.5rem; line-height: 1.3;">
+          {{ item.name }}
+        </h3>
+
+        <!-- True Parent Banner -->
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 1rem;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">Ultimate Corporate Parent</div>
+          <div style="font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-top: 0.15rem;">
+            {{ item.parent_company }}
+          </div>
+          <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem;">
+            {{ item.ultimate_parent }} &bull; <span style="color: var(--slate); font-weight: 600;">{{ item.ticker_or_jurisdiction }}</span>
+          </div>
+        </div>
+
+        <!-- Subterfuge Context -->
+        <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.5; margin-bottom: 1rem;">
+          {{ item.subterfuge_details }}
+        </p>
+      </div>
+
+      <!-- Ethical Swap Footer -->
+      <div style="background: var(--primary-light); border: 1px solid #a7f3d0; border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem;">
+        <div style="font-size: 0.75rem; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; display: flex; align-items: center; gap: 0.3rem;">
+          <span>🌱</span> High-Integrity Ethical Swap
+        </div>
+        <div style="font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-top: 0.2rem;">
+          {{ item.ethical_swap_recommendation }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- API Integration Banner -->
+  <div style="background: var(--navy); color: white; border-radius: 12px; padding: 2rem; margin-bottom: 3rem;">
+    <div style="max-width: 800px;">
+      <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">Programmatic Feed & MCP Integration</h2>
+      <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1rem;">
+        Are you building an AI shopping extension, browser add-on, or purchasing audit script? Connect directly to our parent feed via REST API or the Model Context Protocol (MCP) server.
+      </p>
+      <div style="background: #1e293b; padding: 0.75rem 1rem; border-radius: 6px; font-family: monospace; font-size: 0.85rem; color: #38bdf8; margin-bottom: 1rem; overflow-x: auto;">
+        curl "https://shoptegrity.com/v1/feed/parents/lookup?query=Annie%27s"
+      </div>
+      <div style="display: flex; gap: 1rem;">
+        <a href="/docs" target="_blank" style="color: #34d399; font-weight: 600; text-decoration: none; font-size: 0.9rem;">View Swagger API Docs &rarr;</a>
+        <a href="/methodology" style="color: #cbd5e1; font-weight: 600; text-decoration: none; font-size: 0.9rem;">Review Scoring Methodology &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

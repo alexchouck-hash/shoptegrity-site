@@ -6,6 +6,7 @@
   <title>{% block title %}Shoptegrity — Rerouting Capital to Integrity{% endblock %}</title>
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%200%22%20100%22%20100%22><text y=%22.9em%22 font-size=%2290%22>🌱</text></svg>">
+  {% block extra_head %}{% endblock %}
 </head>
 <body>
   <header>
@@ -16,6 +17,7 @@
       </a>
       <ul class="nav-links">
         <li><a href="/brands" class="nav-link {% if active_page == 'brands' %}active{% endif %}">Brand Check</a></li>
+        <li><a href="/parents" class="nav-link {% if active_page == 'parents' %}active{% endif %}">Who Owns What?</a></li>
         <li><a href="/flows" class="nav-link {% if active_page == 'flows' %}active{% endif %}">Dollar Flow Map</a></li>
         <li><a href="/food" class="nav-link {% if active_page == 'food' %}active{% endif %}">Food Chain</a></li>
         <li><a href="/local" class="nav-link {% if active_page == 'local' %}active{% endif %}">Local Directory</a></li>
@@ -33,6 +35,7 @@
       <div style="font-weight: 700; color: var(--navy);">Shoptegrity Open Integrity Platform</div>
       <p>Every claim links directly to official SEC filings, USDA records, OSHA citations, or state business registries. Zero brand advertising accepted.</p>
       <ul class="footer-links">
+        <li><a href="/parents">1,000+ Brand & Product Parent Feed</a></li>
         <li><a href="/methodology">Rubric & Methodology</a></li>
         <li><a href="/food">Food Sourcing Ladder</a></li>
         <li><a href="/local">Local Services Spec</a></li>

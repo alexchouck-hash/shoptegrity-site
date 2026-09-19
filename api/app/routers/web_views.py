@@ -241,3 +241,37 @@ def methodology_view(request: Request):
             "data_sources": data_sources,
         },
     )
+
+
+@router.get("/parents", response_class=HTMLResponse)
+def parents_view(
+    request: Request,
+    q: Optional[str] = Query(None),
+    category: Optional[str] = Query(None),
+    subterfuge: Optional[str] = Query(None),
+):
+    from api.app.services.parent_lookup_service import parent_service
+
+    is_subterfuge = True if subterfuge == "true" else None
+    feed_data = parent_service.get_feed(
+        q=q,
+        category=category,
+        is_surprising=is_subterfuge,
+        limit=60,
+    )
+    stats = parent_service.get_stats()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="parents.html",
+        context={
+            "active_page": "parents",
+            "feed_results": feed_data["results"],
+            "total_count": feed_data["total"],
+            "stats": stats,
+            "search_query": q,
+            "selected_category": category,
+            "subterfuge_only": is_subterfuge,
+        },
+    )
+

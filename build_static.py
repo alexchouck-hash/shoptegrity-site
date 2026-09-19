@@ -12,6 +12,7 @@ from fastapi.testclient import TestClient
 
 from api.app.main import app
 from pipeline.seed_data import run_seed
+from pipeline.top2000_brands import export_top2000_json, seed_top2000_db
 from api.app.db.session import SessionLocal
 from api.app.models.core import Brand
 
@@ -21,6 +22,9 @@ client = TestClient(app)
 def export_site(output_dir: str = "dist", base_url: str = ""):
     print(f"Ensuring database is seeded...")
     run_seed()
+    with SessionLocal() as db:
+        seed_top2000_db(db)
+    export_top2000_json()
 
     out_path = Path(output_dir)
     if out_path.exists():

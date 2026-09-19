@@ -5,6 +5,7 @@ dollar flow splits, food chain sourcing, and local alternatives.
 """
 
 from typing import Optional, Dict, Any, List
+from sqlalchemy import or_
 from api.app.db.session import SessionLocal, haversine_distance_km
 from api.app.models.core import Brand, Entity, Alternative, Place, Maker, FlowProfile, BrandIntegrity
 from api.app.services.scoring_service import score_entity
@@ -141,7 +142,12 @@ def search_top_brands(
     try:
         q = db.query(BrandIntegrity)
         if query:
-            q = q.filter(BrandIntegrity.name.ilike(f"%{query}%"))
+            q = q.filter(
+                or_(
+                    BrandIntegrity.name.ilike(f"%{query}%"),
+                    BrandIntegrity.parent_company.ilike(f"%{query}%"),
+                )
+            )
         if category and category != "All":
             q = q.filter(BrandIntegrity.category == category)
         if min_grade:
@@ -291,3 +297,50 @@ def get_retailer_swaps(retailer_name: str) -> Dict[str, Any]:
         }
     finally:
         db.close()
+
+
+def lookup_parent_company(query: str) -> Dict[str, Any]:
+    """Identify the corporate parent, ownership structure, subterfuge context, and ethical swap for any brand or product."""
+    from api.app.services.parent_lookup_service import parent_service
+
+    match = parent_service.lookup(query)
+    if not match:
+        return {"error": f"No parent company record found for query: '{query}'"}
+
+    return {
+        "query": query,
+        "matched_name": match["name"],
+        "item_type": match["item_type"],
+        "category": match["category"],
+        "parent_company": match["parent_company"],
+        "ultimate_parent": match["ultimate_parent"],
+        "ownership_type": match["ownership_type"],
+        "ticker_or_jurisdiction": match["ticker_or_jurisdiction"],
+        "is_surprising_or_subterfuge": match["is_surprising_or_subterfuge"],
+        "subterfuge_details": match["subterfuge_details"],
+        "top_10_percent_enrichment_pct": f"{match['top_10_percent_enrichment_pct']}%",
+        "ethical_swap_recommendation": match["ethical_swap_recommendation"],
+    }
+
+
+def get_brand_parent_feed(query: Optional[str] = None, limit: int = 20) -> Dict[str, Any]:
+    """Search or browse the 1,000+ brand and product parent company data feed."""
+    from api.app.services.parent_lookup_service import parent_service
+
+    res = parent_service.get_feed(q=query, limit=limit)
+    return {
+        "total_matches": res["total"],
+        "count": len(res["results"]),
+        "items": [
+            {
+                "name": item["name"],
+                "parent_company": item["parent_company"],
+                "ultimate_parent": item["ultimate_parent"],
+                "ownership_type": item["ownership_type"],
+                "is_surprising": item["is_surprising_or_subterfuge"],
+                "ethical_swap": item["ethical_swap_recommendation"],
+            }
+            for item in res["results"]
+        ],
+    }
+

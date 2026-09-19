@@ -105,7 +105,8 @@ def test_api_geo_trace_endpoint():
 def test_web_flows_view_html():
     response = client.get("/flows?zip=55401&scenario=grocery_produce&spend=100")
     assert response.status_code == 200
-    assert "The Zipcode Dollar Flow Map" in response.text
-    assert "National Money Trajectory" in response.text
-    assert "The Worker Disproportion" in response.text
-    assert "Verified Independent Community Farmer" in response.text
+    assert "The Dollar Flow Map" in response.text
+    assert "Interactive Geographic Map" in response.text
+    assert "Option A: Conventional Corporate Chain" in response.text
+    assert "VERIFIED INDEPENDENT COMMUNITY FARMER" in response.text
+

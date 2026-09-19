@@ -252,3 +252,8 @@ class BrandIntegrity(Base):
     # Retailer Specifics
     is_major_retailer: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
     retailer_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+
+    # Data Provenance & Verified SEC Filings
+    data_provenance: Mapped[str] = mapped_column(String(50), default="industry_benchmark_model", index=True)  # verified_sec_filing, certified_audit, industry_benchmark_model
+    sec_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    sec_receipt_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)

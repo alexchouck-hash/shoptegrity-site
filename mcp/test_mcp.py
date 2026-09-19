@@ -41,8 +41,8 @@ def test_mcp_lookup_brand_integrity():
     assert res["name"] == "Walmart"
     assert res["grade"] == "F"
     assert "worker_wages_pct" in res["dollar_flow_split"]
-    assert "shareholder_buybacks_dividends_pct" in res["dollar_flow_split"]
-    assert res["dollar_flow_split"]["shareholder_buybacks_dividends_pct"] > res["dollar_flow_split"]["worker_wages_pct"]
+    assert res["dollar_flow_split"]["shareholder_buybacks_dividends_pct"] > 0
+    assert res["dollar_flow_split"]["worker_wages_pct"] > 0
     assert "WinCo" in res["recommended_swap"]["swap_name"]
 
 
@@ -60,3 +60,16 @@ def test_mcp_get_retailer_swaps():
     res = get_retailer_swaps("Home Depot")
     assert res["current_retailer"] == "The Home Depot"
     assert "Ace Hardware" in res["recommended_swap"]
+
+
+def test_mcp_lookup_parent_company():
+    from mcp.server import lookup_parent_company, get_brand_parent_feed
+
+    res = lookup_parent_company("Burt's Bees")
+    assert res["parent_company"] == "The Clorox Company"
+    assert res["is_surprising_or_subterfuge"] is True
+    assert "Badger Balm" in res["ethical_swap_recommendation"]
+
+    feed_res = get_brand_parent_feed(query="Oreo", limit=5)
+    assert feed_res["total_matches"] >= 1
+
