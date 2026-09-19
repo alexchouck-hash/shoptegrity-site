@@ -122,18 +122,51 @@
 <script>
 async function handleMatch(e) {
   e.preventDefault();
-  const input = document.getElementById("businessNameInput").value;
+  const input = document.getElementById("businessNameInput").value.trim().toLowerCase();
   const resultDiv = document.getElementById("matchResult");
   resultDiv.innerHTML = "<div style='background:#ffffff; padding:1rem; border-radius:0.5rem; border:1px solid var(--border);'>Searching business registries...</div>";
 
   try {
-    const res = await fetch("/v1/local/match", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: input })
-    });
-    const data = await res.json();
-    if (data.matched) {
+    let data = null;
+    try {
+      const res = await fetch("/v1/local/match", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: input })
+      });
+      if (res.ok) {
+        data = await res.json();
+      }
+    } catch(fetchErr) {
+      // Backend not running (static GitHub Pages)
+    }
+
+    // Static fallback if API is not available
+    if (!data) {
+      const placesRes = await fetch("api/v1/local/places.json").catch(() => fetch("/shoptegrity-site/api/v1/local/places.json"));
+      if (placesRes && placesRes.ok) {
+        const places = await placesRes.json();
+        const found = places.find(p => p.name.toLowerCase().includes(input) || input.includes(p.name.toLowerCase().split(' ')[0]));
+        if (found) {
+          const isRollup = (found.flags || []).includes("rollup_disguised");
+          data = {
+            matched: true,
+            place: found,
+            warning_flag: isRollup ? "DISGUISED_ROLLUP" : null,
+            ownership_explanation: isRollup
+              ? "CAUTION: Operating under a legacy local name, but acquired by a private equity platform (Apex Service Partners / Alpine Investors)."
+              : (found.ownership_tier === 1 ? "Verified owner-operated local independent business. 100% of profits stay within the metro." : "Verified Tier " + found.ownership_tier)
+          };
+        } else {
+          data = {
+            matched: false,
+            ownership_explanation: "No verified ownership record found in registry for '" + input + "'. Defaulting to Tier 0 (Ownership Unverified)."
+          };
+        }
+      }
+    }
+
+    if (data && data.matched) {
       const isRollup = data.warning_flag === "DISGUISED_ROLLUP";
       resultDiv.innerHTML = `
         <div style="background:#ffffff; padding:1.25rem; border-radius:0.5rem; border:2px solid ${isRollup ? '#f87171' : '#34d399'}; box-shadow:0 4px 6px rgba(0,0,0,0.05); margin-top:1rem;">
@@ -149,12 +182,12 @@ async function handleMatch(e) {
       resultDiv.innerHTML = `
         <div style="background:#ffffff; padding:1rem; border-radius:0.5rem; border:1px solid var(--border); margin-top:1rem;">
           <strong>Ownership Not Verified</strong>
-          <p style="font-size:0.85rem; color:var(--muted); margin-top:0.25rem;">${data.ownership_explanation}</p>
+          <p style="font-size:0.85rem; color:var(--muted); margin-top:0.25rem;">${data ? data.ownership_explanation : 'No record found.'}</p>
         </div>
       `;
     }
   } catch(err) {
-    resultDiv.innerHTML = "<div style='color:red; margin-top:0.5rem;'>Error checking business.</div>";
+    resultDiv.innerHTML = "<div style='color:red; margin-top:0.5rem;'>Error checking business ownership.</div>";
   }
 }
 </script>
