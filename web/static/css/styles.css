@@ -803,3 +803,103 @@ footer {
   padding: 1.5rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.04);
 }
+
+/* Dual-Tier Swap Guide Classes */
+.swap-philosophy-banner {
+  background: linear-gradient(135deg, #f8fafc 0%, #f0fdf4 100%);
+  border: 1px solid #bbf7d0;
+  border-radius: 0.85rem;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.swap-dual-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.swap-card-better {
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-left: 4px solid #0284c7;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: #0c4a6e;
+}
+
+.swap-card-best {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-left: 4px solid #16a34a;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: #14532d;
+}
+
+.swap-tier-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.swap-badge-better {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #7dd3fc;
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+}
+
+.swap-badge-best {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+  padding: 0.18rem 0.55rem;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+}
+
+.swap-meta-pill {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.swap-meta-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.swap-meta-footer a {
+  text-decoration: none;
+  font-weight: 700;
+  color: inherit;
+}
+
+.category-dual-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+

@@ -1,0 +1,736 @@
+{% extends "base.html" %}
+
+{% block title %}Healthcare Integrity & Comparisons (2,000 Insurers, Hospitals & Clinics) — Shoptegrity{% endblock %}
+
+{% block content %}
+<section class="hero" style="background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);">
+  <div class="hero-inner">
+    <div class="hero-tag" style="background: #dcfce7; color: #166534; border-color: #bbf7d0;">🏥 Database & Comparison Engine: 2,000 Insurers, Hospitals & Clinics</div>
+    <h1>Who Actually Owns Your Healthcare?</h1>
+    <p>Compare 2,000 health insurance plans, hospital chains, private equity clinic rollups, and local independent doctors. See where every $100 goes: frontline patient care vs claims denial bureaucracy, executive bonuses, and Wall Street extraction.</p>
+
+    <!-- Interactive Search Bar -->
+    <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
+      <div class="search-box" style="width: 100%; max-width: 760px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+        <input type="text" id="healthSearchInput" placeholder="Search 2,000+ healthcare entities (e.g. UnitedHealthcare, HCA, Aspen Dental, Plum Health, CityMD)..." oninput="handleSearchInput()">
+        <button type="button" class="btn btn-blue" onclick="handleSearchInput()">Search Healthcare</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="container">
+  <!-- Partner Navigation Links -->
+  <div style="display: flex; gap: 0.75rem; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+    <a href="/healthcare" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--primary-light); border-color: #a7f3d0; color: #047857; font-weight: 750;">🏥 Healthcare Comparisons (2,000)</a>
+    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Top 2,000 Brands</a>
+    <a href="/parents" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Who Owns What?</a>
+    <a href="/swaps" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Swap Guides</a>
+    <a href="/flows" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">$100 Dollar Flow Maps</a>
+  </div>
+
+  <!-- 1-Click Comparison Presets -->
+  <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
+    <div style="font-size: 0.82rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.6rem;">
+      ⚡ 1-Click Side-by-Side Comparison Presets:
+    </div>
+    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+      <button class="btn btn-secondary" onclick="loadComparisonPreset('insurers')" style="font-size: 0.82rem; padding: 0.35rem 0.75rem; border-radius: 0.375rem; font-weight: 650; background: #ffffff;">
+        🛡️ Wall St Insurer vs Member Mutual vs Direct Primary Care
+      </button>
+      <button class="btn btn-secondary" onclick="loadComparisonPreset('hospitals')" style="font-size: 0.82rem; padding: 0.35rem 0.75rem; border-radius: 0.375rem; font-weight: 650; background: #ffffff;">
+        🏥 For-Profit Hospital vs Public Safety-Net Hospital
+      </button>
+      <button class="btn btn-secondary" onclick="loadComparisonPreset('dental')" style="font-size: 0.82rem; padding: 0.35rem 0.75rem; border-radius: 0.375rem; font-weight: 650; background: #ffffff;">
+        🦷 PE Dental Rollup (DSO) vs Independent Local Dentist
+      </button>
+      <button class="btn btn-secondary" onclick="loadComparisonPreset('clinics')" style="font-size: 0.82rem; padding: 0.35rem 0.75rem; border-radius: 0.375rem; font-weight: 650; background: #ffffff;">
+        🏢 Corporate Urgent Care vs Community Health Center (FQHC)
+      </button>
+    </div>
+  </div>
+
+  <!-- Sector Category Filter Pills -->
+  <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
+    <span style="font-size: 0.82rem; font-weight: 750; color: var(--muted); margin-right: 0.25rem;">Sector:</span>
+    <button class="btn btn-secondary cat-pill active" onclick="setSectorFilter('all', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">All Healthcare (2,000)</button>
+    <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('health_insurance', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🛡️ Health Insurance (350)</button>
+    <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('hospital_chain', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🏥 Hospital Chains & Systems (450)</button>
+    <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('corporate_clinic', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🏢 Corporate & PE Clinics (600)</button>
+    <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('local_clinic', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🩺 Local Clinics & Offices (600)</button>
+  </div>
+
+  <!-- Advanced Metric Filters Bar -->
+  <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: center;">
+    <div style="display: flex; align-items: center; gap: 0.45rem; font-size: 0.85rem;">
+      <span style="font-weight: 750; color: var(--navy);">Ownership Tier:</span>
+      <select id="tierSelect" onchange="applyFilters()" style="padding: 0.3rem 0.6rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600;">
+        <option value="all">All Tiers (1 to 6)</option>
+        <option value="1">Tier 1: Owner-Operated Local Doctor / Dentist</option>
+        <option value="2">Tier 2: Community FQHC / Non-Profit / Co-op</option>
+        <option value="3">Tier 3: Regional Mutual / Public District</option>
+        <option value="4">Tier 4: Regional Non-Profit Health System</option>
+        <option value="5">Tier 5: Private Equity Rollup (Disguised)</option>
+        <option value="6">Tier 6: Public Wall Street Conglomerate</option>
+      </select>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 0.45rem; font-size: 0.85rem;">
+      <span style="font-weight: 750; color: var(--navy);">Grade:</span>
+      <select id="gradeSelect" onchange="applyFilters()" style="padding: 0.3rem 0.6rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.85rem; font-weight: 600;">
+        <option value="all">All Grades</option>
+        <option value="A">Grade A (90-100: DPC / FQHC / Co-op)</option>
+        <option value="B">Grade B (70-89: Regional Mutual / Non-Profit)</option>
+        <option value="C">Grade C (50-69: Mixed System)</option>
+        <option value="D">Grade D (30-49: PE Rollup / Chain)</option>
+        <option value="F">Grade F (&lt;30: Severe Denial / Extraction)</option>
+      </select>
+    </div>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: #b91c1c; font-weight: 700;">
+      <input type="checkbox" id="peRollupCheck" onchange="applyFilters()">
+      <span>🕵️ Disguised PE Rollups Only</span>
+    </label>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: #c2410c; font-weight: 650;">
+      <input type="checkbox" id="highDenialCheck" onchange="applyFilters()">
+      <span>🚫 High Claims Denial (&gt;15%)</span>
+    </label>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: #047857; font-weight: 650;">
+      <input type="checkbox" id="highCareCheck" onchange="applyFilters()">
+      <span>🩺 High Direct Care (&gt;75%)</span>
+    </label>
+  </div>
+
+  <!-- Flow Visual Key -->
+  <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; align-items: center;">
+    <div style="font-size: 0.8rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em;">
+      📊 Healthcare Dollar Breakdown Legend:
+    </div>
+    <div class="flow-legend-row" style="margin: 0; display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.8rem;">
+      <div><span style="display: inline-block; width: 10px; height: 10px; background: #16a34a; border-radius: 50%; margin-right: 4px;"></span> <strong>Direct Clinical Care:</strong> Nurses & Doctors</div>
+      <div><span style="display: inline-block; width: 10px; height: 10px; background: #0284c7; border-radius: 50%; margin-right: 4px;"></span> <strong>Admin & Claims Denials:</strong> Bureaucracy</div>
+      <div><span style="display: inline-block; width: 10px; height: 10px; background: #9333ea; border-radius: 50%; margin-right: 4px;"></span> <strong>Exec Pay:</strong> CEO Packages</div>
+      <div><span style="display: inline-block; width: 10px; height: 10px; background: #dc2626; border-radius: 50%; margin-right: 4px;"></span> <strong>Wall St & PE:</strong> Buybacks & Profits</div>
+    </div>
+  </div>
+
+  <!-- Header with Live Counter -->
+  <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+    <h2 id="healthListTitle" style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">Healthcare Entities Directory (2,000 Analyzed)</h2>
+    <div id="healthMatchCounter" style="font-size: 0.88rem; font-weight: 700; color: var(--primary);">Loading healthcare database...</div>
+  </div>
+
+  <!-- No Results Found Box -->
+  <div id="noResultsMsg" style="display: none; background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 2.5rem; text-align: center; margin: 2rem 0;">
+    <h3 style="font-size: 1.25rem; font-weight: 750; color: var(--navy); margin-bottom: 0.5rem;">No matching healthcare entities found</h3>
+    <p style="color: var(--muted); margin-bottom: 1rem;">Try searching for a different health plan, hospital, clinic, or resetting the filters.</p>
+    <button class="btn btn-secondary" onclick="resetAllFilters()">Reset All Filters</button>
+  </div>
+
+  <!-- Healthcare Cards Grid -->
+  <div class="cards-grid" id="healthcareGrid">
+    <!-- Rendered dynamically by JavaScript -->
+  </div>
+
+  <!-- Pagination / Load More Button -->
+  <div id="loadMoreContainer" style="display: flex; justify-content: center; margin: 2.5rem 0;">
+    <button id="loadMoreBtn" class="btn btn-secondary" onclick="loadMoreEntities()" style="padding: 0.65rem 1.75rem; font-weight: 700; font-size: 0.95rem;">
+      Load More Healthcare Entities
+    </button>
+  </div>
+</main>
+
+<!-- Floating Sticky Side-by-Side Comparison Drawer / Tray -->
+<div id="compareTray" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: #ffffff; border-top: 3px solid var(--primary); box-shadow: 0 -4px 20px rgba(0,0,0,0.15); z-index: 1000; padding: 0.85rem 1.5rem;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+      <span style="font-weight: 800; font-size: 0.92rem; color: var(--navy);">⚖️ Compare Healthcare Entities:</span>
+      <div id="compareChips" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+    </div>
+    <div style="display: flex; gap: 0.5rem; align-items: center;">
+      <button class="btn btn-primary" onclick="openComparisonModal()" style="font-weight: 750; padding: 0.5rem 1.25rem;">
+        Open Side-by-Side Comparison (<span id="compareCount">0</span>) &rarr;
+      </button>
+      <button class="btn btn-secondary" onclick="clearComparison()" style="font-size: 0.85rem; padding: 0.5rem 0.75rem;">
+        Clear
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Full Screen / Modal Comparison View -->
+<div id="comparisonModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 2000; overflow-y: auto; padding: 2rem 1rem;">
+  <div style="background: #ffffff; border-radius: 1rem; max-width: 1140px; margin: 0 auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden;">
+    <!-- Modal Header -->
+    <div style="background: #f8fafc; padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 0.2rem;">Side-by-Side Healthcare Comparison</h2>
+        <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Detailed evaluation of ownership, financial splits, claims denials, and capital extraction.</p>
+      </div>
+      <button onclick="closeComparisonModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--slate);">&times;</button>
+    </div>
+
+    <!-- Modal Content Grid -->
+    <div id="modalCompareContent" style="padding: 1.5rem; overflow-x: auto;">
+      <!-- Populated dynamically by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<script>
+let allEntities = [];
+let filteredEntities = [];
+let currentSector = 'all';
+let currentRenderIndex = 0;
+const PAGE_SIZE = 24;
+let selectedSlugs = new Set();
+
+// Load Healthcare 2,000 JSON Bundle
+async function loadHealthcareData() {
+  const counter = document.getElementById("healthMatchCounter");
+  const candidates = [
+    'api/v1/healthcare_2000.json',
+    '/shoptegrity-site/api/v1/healthcare_2000.json',
+    '/api/v1/healthcare_2000.json',
+    '/v1/healthcare/database?limit=2000'
+  ];
+
+  for (const url of candidates) {
+    try {
+      const resp = await fetch(url);
+      if (resp.ok) {
+        const data = await resp.json();
+        allEntities = Array.isArray(data) ? data : (data.entities || []);
+        if (allEntities.length > 0) {
+          console.log(`Loaded ${allEntities.length} healthcare entities from ${url}`);
+          break;
+        }
+      }
+    } catch (e) {
+      // try next path
+    }
+  }
+
+  // Check URL query parameters
+  const urlParams = new URLSearchParams(window.location.search);
+  const q = urlParams.get("q");
+  if (q) {
+    const input = document.getElementById("healthSearchInput");
+    if (input) input.value = q;
+  }
+  const compareParam = urlParams.get("compare");
+  if (compareParam) {
+    compareParam.split(",").forEach(s => selectedSlugs.add(s.trim()));
+    updateCompareTrayUI();
+  }
+
+  applyFilters();
+}
+
+function handleSearchInput() {
+  applyFilters();
+}
+
+function setSectorFilter(sector, btn) {
+  currentSector = sector;
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    p.classList.remove("active");
+    p.style.background = "#f1f5f9";
+    p.style.color = "var(--navy)";
+  });
+  if (btn) {
+    btn.classList.add("active");
+    btn.style.background = "var(--primary-light)";
+    btn.style.color = "#047857";
+  }
+  applyFilters();
+}
+
+function applyFilters() {
+  const inputEl = document.getElementById("healthSearchInput");
+  const query = inputEl ? inputEl.value.trim().toLowerCase() : "";
+  const tierVal = document.getElementById("tierSelect").value;
+  const gradeVal = document.getElementById("gradeSelect").value;
+  const peOnly = document.getElementById("peRollupCheck").checked;
+  const highDenial = document.getElementById("highDenialCheck").checked;
+  const highCare = document.getElementById("highCareCheck").checked;
+
+  filteredEntities = allEntities.filter(e => {
+    const matchName = e.name.toLowerCase().includes(query);
+    const matchParent = (e.parent_organization || "").toLowerCase().includes(query);
+    const matchCity = (e.city || "").toLowerCase().includes(query);
+    const matchSwap = (e.swap_name || "").toLowerCase().includes(query);
+    const matchesQuery = !query || matchName || matchParent || matchCity || matchSwap;
+
+    // Sector Filter
+    const matchesSector = (currentSector === 'all') || (e.entity_type === currentSector);
+
+    // Tier Filter
+    let matchesTier = true;
+    if (tierVal !== 'all') {
+      matchesTier = (e.ownership_tier === parseInt(tierVal));
+    }
+
+    // Grade Filter
+    let matchesGrade = true;
+    if (gradeVal !== 'all') {
+      matchesGrade = e.grade.startsWith(gradeVal);
+    }
+
+    // PE Rollup Filter
+    let matchesPE = true;
+    if (peOnly) {
+      matchesPE = (e.is_pe_rollup === true);
+    }
+
+    // High Claims Denial (>15%)
+    let matchesDenial = true;
+    if (highDenial) {
+      matchesDenial = (e.claims_denial_rate_pct >= 15.0);
+    }
+
+    // High Direct Care (>75%)
+    let matchesCare = true;
+    if (highCare) {
+      matchesCare = (e.clinical_care_wages_pct >= 75.0);
+    }
+
+    return matchesQuery && matchesSector && matchesTier && matchesGrade && matchesPE && matchesDenial && matchesCare;
+  });
+
+  currentRenderIndex = 0;
+  const grid = document.getElementById("healthcareGrid");
+  grid.innerHTML = "";
+  renderNextBatch();
+  updateCounterUI();
+}
+
+function renderNextBatch() {
+  const grid = document.getElementById("healthcareGrid");
+  const nextSlice = filteredEntities.slice(currentRenderIndex, currentRenderIndex + PAGE_SIZE);
+
+  nextSlice.forEach(e => {
+    const card = document.createElement("div");
+    card.className = "card brand-card";
+    card.style.display = "flex";
+    card.style.flexDirection = "column";
+
+    // Grade style
+    let gradeClass = "grade-C";
+    if (e.grade.startsWith("A")) gradeClass = "grade-A";
+    else if (e.grade.startsWith("B")) gradeClass = "grade-B";
+    else if (e.grade.startsWith("D")) gradeClass = "grade-D";
+    else if (e.grade.startsWith("F")) gradeClass = "grade-F";
+
+    // Tier Badge color
+    let tierColor = "#047857";
+    let tierBg = "#ecfdf5";
+    if (e.ownership_tier >= 5) {
+      tierColor = "#b91c1c";
+      tierBg = "#fef2f2";
+    } else if (e.ownership_tier >= 3) {
+      tierColor = "#0369a1";
+      tierBg = "#f0f9ff";
+    }
+
+    const isSelected = selectedSlugs.has(e.slug);
+
+    card.innerHTML = `
+      <div class="card-header" style="margin-bottom: 0.5rem;">
+        <div>
+          <h3 style="font-size: 1.18rem; font-weight: 800; color: var(--navy); line-height: 1.25;">${e.name}</h3>
+          <div style="font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem;">
+            ${e.parent_organization}
+          </div>
+          <div style="display: flex; gap: 0.35rem; margin-top: 0.35rem; flex-wrap: wrap;">
+            <span style="background: ${tierBg}; color: ${tierColor}; border: 1px solid ${tierColor}40; padding: 0.1rem 0.45rem; border-radius: 9999px; font-size: 0.72rem; font-weight: 750;">
+              Tier ${e.ownership_tier}: ${e.ownership_type.replace('_', ' ').toUpperCase()}
+            </span>
+            <span style="background: #f1f5f9; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.72rem; color: #475569;">
+              ${e.city ? e.city + ', ' + e.state : e.location_scope}
+            </span>
+          </div>
+          ${e.is_pe_rollup ? `
+            <div style="margin-top: 0.35rem;">
+              <span style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 0.72rem; font-weight: 750; padding: 0.15rem 0.45rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.25rem;">
+                ⚠️ Disguised PE Rollup ${e.pe_firm_name ? `(${e.pe_firm_name})` : ''}
+              </span>
+            </div>
+          ` : ''}
+        </div>
+        <div style="text-align: right;">
+          <span class="grade-badge ${gradeClass}">${e.grade} (${e.composite_score})</span>
+        </div>
+      </div>
+
+      <!-- $100 Revenue Breakdown Bar -->
+      <div class="brand-flow-container" style="margin: 0.6rem 0;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--slate); margin-bottom: 0.25rem;">
+          <span>Where $100 Goes:</span>
+          <span>Care: ${e.clinical_care_wages_pct}% | Wall St/PE: ${e.shareholder_extraction_pct}%</span>
+        </div>
+        <div class="brand-split-bar" title="Clinical Care: ${e.clinical_care_wages_pct}% | Admin/Denials: ${e.admin_overhead_pct}% | Execs: ${e.exec_comp_pct}% | Wall St: ${e.shareholder_extraction_pct}%">
+          <div class="brand-split-seg" style="background: #16a34a; width: ${e.clinical_care_wages_pct}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            ${e.clinical_care_wages_pct > 20 ? e.clinical_care_wages_pct + '%' : ''}
+          </div>
+          <div class="brand-split-seg" style="background: #0284c7; width: ${e.admin_overhead_pct}%;" title="Admin Overhead: ${e.admin_overhead_pct}%"></div>
+          <div class="brand-split-seg" style="background: #9333ea; width: ${e.exec_comp_pct * 2}%;" title="Exec Comp: ${e.exec_comp_pct}%"></div>
+          <div class="brand-split-seg" style="background: #dc2626; width: ${e.shareholder_extraction_pct}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            ${e.shareholder_extraction_pct > 10 ? e.shareholder_extraction_pct + '%' : ''}
+          </div>
+          <div class="brand-split-seg" style="background: #cbd5e1; flex: 1;" title="Supplies & Facilities"></div>
+        </div>
+      </div>
+
+      <!-- Key Healthcare Metrics Badges -->
+      <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; font-size: 0.73rem;">
+        <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+          🩺 MLR: <strong>${e.medical_loss_ratio_pct}%</strong>
+        </span>
+        ${e.claims_denial_rate_pct > 0 ? `
+          <span style="background: ${e.claims_denial_rate_pct >= 20 ? '#fee2e2' : '#f8fafc'}; border: 1px solid ${e.claims_denial_rate_pct >= 20 ? '#fca5a5' : 'var(--border)'}; padding: 0.2rem 0.45rem; border-radius: 4px; color: ${e.claims_denial_rate_pct >= 20 ? '#991b1b' : 'inherit'}; font-weight: ${e.claims_denial_rate_pct >= 20 ? '700' : 'normal'};">
+            🚫 Denial Rate: <strong>${e.claims_denial_rate_pct}%</strong>
+          </span>
+        ` : ''}
+        ${e.charge_to_cost_ratio > 1 ? `
+          <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+            📈 Markup: <strong>${e.charge_to_cost_ratio}x cost</strong>
+          </span>
+        ` : ''}
+        <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+          🤝 Charity Care: <strong>${e.charity_care_pct}%</strong>
+        </span>
+      </div>
+
+      <!-- Verified Citations (if any) -->
+      ${(e.regulatory_citations && e.regulatory_citations.length > 0 && e.ownership_tier >= 4) ? `
+        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 0.375rem; padding: 0.45rem 0.65rem; margin-bottom: 0.6rem; font-size: 0.72rem; color: #9f1239;">
+          <strong>⚠️ Regulatory Citations:</strong> ${e.regulatory_citations[0]}
+        </div>
+      ` : ''}
+
+      <!-- Recommended Swap Box -->
+      ${e.swap_name ? `
+        <div class="swap-callout-box" style="margin-top: auto; margin-bottom: 0.75rem;">
+          <div style="font-weight: 750; font-size: 0.8rem; margin-bottom: 0.15rem; color: #166534; display: flex; align-items: center; gap: 0.35rem;">
+            <span>🔄 Recommended Swap:</span>
+            <strong>${e.swap_name}</strong>
+          </div>
+          <div style="font-size: 0.75rem; color: #15803d; line-height: 1.3;">${e.swap_rationale}</div>
+        </div>
+      ` : ''}
+
+      <!-- Card Action Footer -->
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid var(--border);">
+        <span style="font-size: 0.75rem; color: var(--muted);">${e.sub_category}</span>
+        <button class="btn ${isSelected ? 'btn-primary' : 'btn-secondary'}" onclick="toggleCompare('${e.slug}', this)" style="font-size: 0.78rem; padding: 0.25rem 0.65rem; font-weight: 700;">
+          ${isSelected ? '✓ In Compare' : '+ Add to Compare'}
+        </button>
+      </div>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  currentRenderIndex += nextSlice.length;
+
+  const loadMoreBtn = document.getElementById("loadMoreContainer");
+  if (currentRenderIndex >= filteredEntities.length) {
+    loadMoreBtn.style.display = "none";
+  } else {
+    loadMoreBtn.style.display = "flex";
+  }
+}
+
+function loadMoreEntities() {
+  renderNextBatch();
+}
+
+function updateCounterUI() {
+  const counter = document.getElementById("healthMatchCounter");
+  const noResults = document.getElementById("noResultsMsg");
+
+  if (filteredEntities.length === 0) {
+    noResults.style.display = "block";
+    counter.textContent = "0 healthcare entities found";
+    counter.style.color = "var(--danger)";
+  } else {
+    noResults.style.display = "none";
+    counter.textContent = `Showing ${Math.min(currentRenderIndex, filteredEntities.length)} of ${filteredEntities.length} entities (Database total: ${allEntities.length})`;
+    counter.style.color = "var(--primary)";
+  }
+}
+
+// Side-by-Side Comparison Logic
+function toggleCompare(slug, btn) {
+  if (selectedSlugs.has(slug)) {
+    selectedSlugs.delete(slug);
+    if (btn) {
+      btn.className = "btn btn-secondary";
+      btn.textContent = "+ Add to Compare";
+    }
+  } else {
+    if (selectedSlugs.size >= 4) {
+      alert("You can compare up to 4 healthcare entities at a time.");
+      return;
+    }
+    selectedSlugs.add(slug);
+    if (btn) {
+      btn.className = "btn btn-primary";
+      btn.textContent = "✓ In Compare";
+    }
+  }
+  updateCompareTrayUI();
+}
+
+function updateCompareTrayUI() {
+  const tray = document.getElementById("compareTray");
+  const chipsContainer = document.getElementById("compareChips");
+  const countSpan = document.getElementById("compareCount");
+
+  if (selectedSlugs.size === 0) {
+    tray.style.display = "none";
+    return;
+  }
+
+  tray.style.display = "block";
+  countSpan.textContent = selectedSlugs.size;
+  chipsContainer.innerHTML = "";
+
+  selectedSlugs.forEach(slug => {
+    const ent = allEntities.find(e => e.slug === slug);
+    const name = ent ? ent.name : slug;
+    const chip = document.createElement("span");
+    chip.style = "background: #f1f5f9; border: 1px solid var(--border); padding: 0.2rem 0.55rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.35rem; color: var(--navy);";
+    chip.innerHTML = `${name} <span onclick="removeSlugFromCompare('${slug}')" style="cursor: pointer; color: #dc2626; font-size: 0.9rem;">&times;</span>`;
+    chipsContainer.appendChild(chip);
+  });
+}
+
+function removeSlugFromCompare(slug) {
+  selectedSlugs.delete(slug);
+  updateCompareTrayUI();
+  applyFilters();
+}
+
+function clearComparison() {
+  selectedSlugs.clear();
+  updateCompareTrayUI();
+  applyFilters();
+}
+
+function loadComparisonPreset(preset) {
+  selectedSlugs.clear();
+  if (preset === 'insurers') {
+    selectedSlugs.add('unitedhealthcare-optum');
+    selectedSlugs.add('health-care-service-corporation-hcsc-mutual');
+    selectedSlugs.add('plum-health-direct-primary-care');
+  } else if (preset === 'hospitals') {
+    selectedSlugs.add('hca-healthcare');
+    selectedSlugs.add('tenet-healthcare');
+    selectedSlugs.add('nyc-health-hospitals');
+  } else if (preset === 'dental') {
+    selectedSlugs.add('heartland-dental-1700-rollup-offices');
+    selectedSlugs.add('aspen-dental-tag-the-aspen-group');
+    // Pick the first local dental clinic
+    const localDentist = allEntities.find(e => e.sub_category && e.sub_category.includes('Dental') && e.ownership_tier === 1);
+    if (localDentist) selectedSlugs.add(localDentist.slug);
+  } else if (preset === 'clinics') {
+    selectedSlugs.add('citymd-urgent-care');
+    selectedSlugs.add('medexpress-urgent-care');
+    selectedSlugs.add('altamed-health-services-fqhc-network');
+  }
+  updateCompareTrayUI();
+  openComparisonModal();
+}
+
+function openComparisonModal() {
+  if (selectedSlugs.size === 0) return;
+  const modal = document.getElementById("comparisonModal");
+  const content = document.getElementById("modalCompareContent");
+
+  const entities = Array.from(selectedSlugs).map(slug => allEntities.find(e => e.slug === slug)).filter(Boolean);
+  if (entities.length === 0) return;
+
+  const winner = entities.reduce((prev, cur) => (cur.composite_score > prev.composite_score) ? cur : prev, entities[0]);
+
+  let html = `
+    <!-- Top Winner Banner -->
+    <div style="background: #ecfdf5; border: 2px solid #a7f3d0; border-radius: 0.75rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+      <div>
+        <div style="font-size: 0.8rem; font-weight: 800; color: #047857; text-transform: uppercase;">🌱 Highest Integrity Option in Comparison:</div>
+        <div style="font-size: 1.25rem; font-weight: 800; color: #065f46;">${winner.name}</div>
+        <div style="font-size: 0.82rem; color: #047857; margin-top: 0.2rem;">
+          Retains <strong>${winner.clinical_care_wages_pct}%</strong> for frontline clinical care with <strong>${winner.shareholder_extraction_pct}%</strong> Wall Street shareholder extraction.
+        </div>
+      </div>
+      <div>
+        <span class="grade-badge grade-A" style="font-size: 1.15rem; padding: 0.4rem 0.85rem;">Grade ${winner.grade} (${winner.composite_score})</span>
+      </div>
+    </div>
+
+    <!-- Side-by-Side Comparison Table -->
+    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+      <thead>
+        <tr style="border-bottom: 2px solid var(--border); background: #f8fafc;">
+          <th style="padding: 0.75rem; width: 22%; color: var(--muted); font-size: 0.78rem; text-transform: uppercase;">Metric</th>
+          ${entities.map(e => `
+            <th style="padding: 0.75rem; width: ${78 / entities.length}%; color: var(--navy);">
+              <div style="font-size: 1.05rem; font-weight: 800;">${e.name}</div>
+              <div style="font-size: 0.72rem; color: var(--muted); font-weight: normal;">${e.parent_organization}</div>
+            </th>
+          `).join('')}
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Ownership Tier</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem;">
+              <span style="display: inline-block; background: ${e.ownership_tier <= 2 ? '#ecfdf5' : (e.ownership_tier >= 5 ? '#fef2f2' : '#f0f9ff')}; color: ${e.ownership_tier <= 2 ? '#047857' : (e.ownership_tier >= 5 ? '#991b1b' : '#0369a1')}; padding: 0.2rem 0.5rem; border-radius: 9999px; font-weight: 750; font-size: 0.78rem;">
+                Tier ${e.ownership_tier}: ${e.ownership_type.replace('_', ' ').toUpperCase()}
+              </span>
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border); background: #fafafa;">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Integrity Score & Grade</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; font-weight: 800; font-size: 0.95rem;">
+              <strong>${e.composite_score} / 100</strong> (Grade ${e.grade})
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Frontline Care Wages</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; color: #16a34a; font-weight: 750;">
+              ${e.clinical_care_wages_pct}% of revenue
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border); background: #fafafa;">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Wall St / PE Extraction</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; color: ${e.shareholder_extraction_pct > 0 ? '#dc2626' : '#16a34a'}; font-weight: 750;">
+              ${e.shareholder_extraction_pct}% (${e.shareholder_extraction_pct > 0 ? 'Buybacks & PE profit' : '0% Wall St extraction'})
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Admin & Bureaucracy</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; color: #0284c7; font-weight: 650;">
+              ${e.admin_overhead_pct}% of revenue
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border); background: #fafafa;">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Medical Loss Ratio (MLR)</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; font-weight: 700;">
+              ${e.medical_loss_ratio_pct}%
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Claims Denial Rate</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; color: ${e.claims_denial_rate_pct >= 15 ? '#b91c1c' : '#15803d'}; font-weight: 750;">
+              ${e.claims_denial_rate_pct > 0 ? e.claims_denial_rate_pct + '%' : 'N/A (Direct care provider)'}
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border); background: #fafafa;">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Price Markup Multiplier</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem;">
+              <strong>${e.charge_to_cost_ratio}x</strong> actual Medicare cost
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Charity Care Contribution</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem;">
+              ${e.charity_care_pct}% of operating expenses
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr style="border-bottom: 1px solid var(--border); background: #fafafa;">
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">PE Rollup Detection</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem;">
+              ${e.is_pe_rollup ? `
+                <span style="color: #991b1b; font-weight: 750; background: #fee2e2; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.75rem;">
+                  ⚠️ Disguised Rollup (${e.pe_firm_name || 'PE Sponsored'})
+                </span>
+              ` : `
+                <span style="color: #047857; font-weight: 700;">✓ Not a PE Rollup</span>
+              `}
+            </td>
+          `).join('')}
+        </tr>
+
+        <tr>
+          <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Recommended Swap</td>
+          ${entities.map(e => `
+            <td style="padding: 0.75rem; font-size: 0.8rem;">
+              <strong style="color: #166534;">${e.swap_name || 'N/A'}</strong>
+              <p style="margin: 0.25rem 0 0 0; color: var(--slate); font-size: 0.74rem;">${e.swap_rationale || ''}</p>
+            </td>
+          `).join('')}
+        </tr>
+      </tbody>
+    </table>
+  `;
+
+  content.innerHTML = html;
+  modal.style.display = "block";
+}
+
+function closeComparisonModal() {
+  document.getElementById("comparisonModal").style.display = "none";
+}
+
+function resetAllFilters() {
+  const inputEl = document.getElementById("healthSearchInput");
+  if (inputEl) inputEl.value = "";
+  document.getElementById("tierSelect").value = "all";
+  document.getElementById("gradeSelect").value = "all";
+  document.getElementById("peRollupCheck").checked = false;
+  document.getElementById("highDenialCheck").checked = false;
+  document.getElementById("highCareCheck").checked = false;
+  currentSector = 'all';
+
+  document.querySelectorAll(".cat-pill").forEach(p => {
+    p.classList.remove("active");
+    p.style.background = "#f1f5f9";
+    p.style.color = "var(--navy)";
+  });
+  const firstPill = document.querySelector(".cat-pill");
+  if (firstPill) {
+    firstPill.classList.add("active");
+    firstPill.style.background = "var(--primary-light)";
+    firstPill.style.color = "#047857";
+  }
+
+  applyFilters();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadHealthcareData();
+});
+</script>
+{% endblock %}

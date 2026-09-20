@@ -51,15 +51,18 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
         html = html.replace('href="/local', f'href="{clean_base}/local.html')
         html = html.replace('href="/swaps', f'href="{clean_base}/swaps.html')
         html = html.replace('href="/flows', f'href="{clean_base}/flows.html')
+        html = html.replace('href="/parents', f'href="{clean_base}/parents.html')
         html = html.replace('href="/methodology', f'href="{clean_base}/methodology.html')
         html = html.replace('href="/"', f'href="{clean_base}/index.html"')
         html = html.replace('action="/brands"', f'action="{clean_base}/brands.html"')
+        html = html.replace('action="/flows"', f'action="{clean_base}/flows.html"')
         return html
 
     # 2. Render primary pages
     pages = [
         ("/", "index.html"),
         ("/brands", "brands.html"),
+        ("/parents", "parents.html"),
         ("/food", "food.html"),
         ("/local", "local.html"),
         ("/swaps", "swaps.html"),

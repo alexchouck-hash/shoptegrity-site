@@ -230,6 +230,8 @@ def get_brand_by_slug(slug: str, db: Session = Depends(get_db)):
                 price_band=alt.price_band,
                 where_to_buy=alt.where_to_buy,
                 savings_estimate=alt.savings_estimate,
+                swap_tier=getattr(alt, "swap_tier", "best"),
+                similarity_notes=getattr(alt, "similarity_notes", None),
             )
         )
 

@@ -67,6 +67,8 @@ class AlternativeCard(BaseModel):
     price_band: str
     where_to_buy: str
     savings_estimate: Optional[str] = None
+    swap_tier: str = "best"
+    similarity_notes: Optional[str] = None
 
 
 class BrandDetail(BaseModel):
@@ -195,10 +197,15 @@ class GeoFlowBranch(BaseModel):
     capital_flight_pct: float
     worker_farmer_amount: float
     worker_farmer_pct: float
+    operations_logistics_amount: float
+    operations_logistics_pct: float
     executive_shareholder_amount: float
     executive_shareholder_pct: float
+    member_dividends_amount: float = 0.0
+    member_dividends_pct: float = 0.0
     avg_miles_traveled: float
     summary_text: str
+
 
 
 class GeoFlowScenarioSummary(BaseModel):

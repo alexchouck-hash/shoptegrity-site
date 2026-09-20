@@ -85,12 +85,22 @@
         {% for alt in brand.alternatives %}
         <div style="background: #ffffff; border: 2px solid #a7f3d0; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(5, 150, 105, 0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
           <div style="flex: 1; min-width: 260px;">
-            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; flex-wrap: wrap;">
+              {% if alt.swap_tier == 'better' %}
+                <span class="swap-badge-better">⚡ Better Swap</span>
+              {% else %}
+                <span class="swap-badge-best">🏆 Best Swap</span>
+              {% endif %}
               <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--navy);">{{ alt.brand_name }}</h3>
               <span class="flag-chip flag-coop">{{ alt.ownership_type.replace('_', ' ').title() }}</span>
               <span style="font-size: 0.8rem; color: var(--muted);">({{ alt.price_band }})</span>
             </div>
-            <p style="font-size: 0.92rem; color: var(--slate); margin-bottom: 0.5rem;">{{ alt.rationale }}</p>
+            <p style="font-size: 0.92rem; color: var(--slate); margin-bottom: 0.4rem;">{{ alt.rationale }}</p>
+            {% if alt.similarity_notes %}
+              <div style="font-size: 0.82rem; color: #0284c7; margin-bottom: 0.35rem;">
+                <strong>Experience Note:</strong> {{ alt.similarity_notes }}
+              </div>
+            {% endif %}
             <div style="font-size: 0.82rem; color: var(--muted);">
               <strong>Where to buy:</strong> {{ alt.where_to_buy }}
               {% if alt.savings_estimate %} &bull; <span style="color: var(--primary); font-weight: 600;">{{ alt.savings_estimate }}</span>{% endif %}

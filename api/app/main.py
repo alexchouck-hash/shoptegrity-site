@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 
 from api.app.db.session import init_db
-from api.app.routers import brands, food_chain, swaps, flows, local, methodology, web_views, parent_feed
+from api.app.routers import brands, food_chain, swaps, flows, local, methodology, web_views, parent_feed, healthcare
 
 
 @asynccontextmanager
@@ -44,6 +44,7 @@ app.include_router(flows.router)
 app.include_router(local.router)
 app.include_router(methodology.router)
 app.include_router(parent_feed.router)
+app.include_router(healthcare.router)
 
 # Mount interactive HTML web portal views
 app.include_router(web_views.router)

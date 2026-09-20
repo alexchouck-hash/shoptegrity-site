@@ -22,6 +22,10 @@ def run_seed():
     init_db()
     db = SessionLocal()
 
+    # Recreate alternatives table to ensure schema matches latest model
+    Alternative.__table__.drop(db.bind, checkfirst=True)
+    Alternative.__table__.create(db.bind, checkfirst=True)
+
     # Clear existing data
     db.query(Alternative).delete()
     db.query(Maker).delete()
@@ -311,6 +315,51 @@ def run_seed():
             locality_tier="national_private",
             notes="100% of voting stock transferred to Patagonia Purpose Trust; 100% of nonvoting stock to Holdfast Collective.",
         ),
+        Entity(
+            id="ent-aldi",
+            name="ALDI US",
+            slug="aldi-us",
+            kind="company",
+            ownership_type="national_private",
+            hq_city="Batavia",
+            hq_state="IL",
+            is_public=False,
+            website="https://www.aldi.us",
+            ceo_pay_ratio=25.0,
+            capital_extraction_ratio=0.25,
+            locality_tier="national_private",
+            notes="Private discount grocer paying industry-leading wage floors and running low-waste stores.",
+        ),
+        Entity(
+            id="ent-pact",
+            name="Pact Organic",
+            slug="pact-apparel",
+            kind="company",
+            ownership_type="b_corp",
+            hq_city="Boulder",
+            hq_state="CO",
+            is_public=False,
+            website="https://wearpact.com",
+            ceo_pay_ratio=8.0,
+            capital_extraction_ratio=0.20,
+            locality_tier="national_private",
+            notes="Certified B Corp producing GOTS-certified organic cotton basics with Fair Trade certified factories.",
+        ),
+        Entity(
+            id="ent-alliant",
+            name="Alliant Credit Union",
+            slug="alliant-credit-union",
+            kind="credit_union",
+            ownership_type="consumer_coop",
+            hq_city="Chicago",
+            hq_state="IL",
+            is_public=False,
+            website="https://www.alliantcreditunion.org",
+            ceo_pay_ratio=14.0,
+            capital_extraction_ratio=0.0,
+            locality_tier="national_private",
+            notes="Not-for-profit financial cooperative with 80,000+ fee-free ATMs, zero monthly fees, and top-tier digital app.",
+        ),
     ]
 
     for ent in entities:
@@ -430,6 +479,33 @@ def run_seed():
             website="https://www.patagonia.com",
             category_tags=["clothing"],
         ),
+        Brand(
+            id="br-aldi",
+            name="ALDI Simply Nature & Staples",
+            slug="aldi-groceries",
+            entity_id="ent-aldi",
+            description="Deep-discount staple groceries and certified organic pantry items matching Walmart prices with living wages.",
+            website="https://www.aldi.us",
+            category_tags=["grocery"],
+        ),
+        Brand(
+            id="br-pact",
+            name="Pact Organic Everyday Basics",
+            slug="pact-basics",
+            entity_id="ent-pact",
+            description="Affordable Fair Trade certified organic cotton tees, socks, and loungewear.",
+            website="https://wearpact.com",
+            category_tags=["clothing"],
+        ),
+        Brand(
+            id="br-alliant",
+            name="Alliant High-Yield Checking & Mobile Banking",
+            slug="alliant-banking",
+            entity_id="ent-alliant",
+            description="Fee-free digital checking and high-yield savings backed by a member-owned cooperative with 80k+ ATMs.",
+            website="https://www.alliantcreditunion.org",
+            category_tags=["banking"],
+        ),
     ]
 
     for b in brands:
@@ -536,14 +612,41 @@ def run_seed():
 
     print("Populating Alternatives...")
     alts = [
+        # Annie's Homegrown -> Better & Best
+        Alternative(
+            from_brand_id="br-annies",
+            to_brand_id="br-aldi",
+            spend_category_id="cat-grocery",
+            rationale="Matches or beats conventional $1.50-$2.00 box price on organic mac & cheese while supporting living wages and low-waste retail.",
+            price_band="$",
+            where_to_buy="ALDI stores nationwide and Instacart delivery.",
+            savings_estimate="Matches price; saves up to $30/year over General Mills brand-name markup.",
+            swap_tier="better",
+            similarity_notes="Similar price & identical 8-minute preparation; familiar supermarket box format.",
+        ),
         Alternative(
             from_brand_id="br-annies",
             to_brand_id="br-organicvalley",
             spend_category_id="cat-grocery",
-            rationale="Swaps General Mills packaged mac & cheese for farmer-owned cooperative organic cheese and whole food ingredients.",
+            rationale="Swaps General Mills packaged processed food for 100% farmer-owned cooperative organic cheese and pasture-raised ingredients.",
             price_band="$$",
             where_to_buy="Local Food Co-ops, natural grocery stores, and major supermarkets.",
             savings_estimate="Comparable cost; 65% of dollar reaches farmers vs 14% at General Mills.",
+            swap_tier="best",
+            similarity_notes="May differ: artisan cheese preparation; premium organic cost reflects living farmer wages.",
+        ),
+
+        # Cheerios -> Better & Best
+        Alternative(
+            from_brand_id="br-cheerios",
+            to_brand_id="br-kingarthur",
+            spend_category_id="cat-grocery",
+            rationale="100% employee-owned ESOP pantry mixes and whole grain staples keep 100% of dividends with workers.",
+            price_band="$$",
+            where_to_buy="Conventional supermarkets, co-ops, and online.",
+            savings_estimate="Price competitive per pound.",
+            swap_tier="better",
+            similarity_notes="Similar boxed format and convenience on standard supermarket shelves.",
         ),
         Alternative(
             from_brand_id="br-cheerios",
@@ -552,16 +655,46 @@ def run_seed():
             rationale="100% employee-owned whole grain rolled oats swap out multinational processed boxed cereals.",
             price_band="$$",
             where_to_buy="Co-ops, bulk food bins, and regional grocers.",
-            savings_estimate="Saves up to $120/year when purchased in bulk.",
+            savings_estimate="Saves up to $120/year when purchased in bulk bins.",
+            swap_tier="best",
+            similarity_notes="Different format: whole rolled oats from bulk bins; requires cooking but maximizes nutrition and slashes packaging.",
+        ),
+
+        # Wells Fargo -> Better & Best
+        Alternative(
+            from_brand_id="br-wellsfargo",
+            to_brand_id="br-alliant",
+            spend_category_id="cat-banking",
+            rationale="National digital credit union eliminating megabank predatory overdraft fees with 80,000+ fee-free ATMs.",
+            price_band="$",
+            where_to_buy="Online, iOS/Android mobile app, nationwide CO-OP ATMs.",
+            savings_estimate="Saves $120/year in account fees + higher savings interest.",
+            swap_tier="better",
+            similarity_notes="Identical modern mobile app, instant deposits, and nationwide ATM network.",
         ),
         Alternative(
             from_brand_id="br-wellsfargo",
             to_brand_id="br-affinityplus",
             spend_category_id="cat-banking",
-            rationale="Moving deposits from a repeat-violator megabank to a member-owned Minnesota credit union stops predatory extraction.",
+            rationale="Moving deposits from a repeat-violator megabank to a member-owned community credit union stops predatory extraction and funds hometown loans.",
             price_band="$",
-            where_to_buy="Online, statewide branches, and 30,000+ fee-free CO-OP ATMs.",
-            savings_estimate="Saves ~$120/year in account maintenance fees + lower loan interest rates.",
+            where_to_buy="Online, regional branches, and 30,000+ fee-free CO-OP ATMs.",
+            savings_estimate="Saves ~$120/year in maintenance fees + lower loan interest rates.",
+            swap_tier="best",
+            similarity_notes="May differ: fewer private storefronts; capital directly underwrites local community mortgages.",
+        ),
+
+        # SHEIN -> Better & Best
+        Alternative(
+            from_brand_id="br-shein",
+            to_brand_id="br-pact",
+            spend_category_id="cat-clothing",
+            rationale="Affordable GOTS-certified organic cotton basics from Fair Trade factories that pay verified living wages.",
+            price_band="$$",
+            where_to_buy="Online direct at wearpact.com.",
+            savings_estimate="Affordable basics ($18-$35) that outlast ultra-fast-fashion synthetics.",
+            swap_tier="better",
+            similarity_notes="Similar accessible online ordering and doorstep delivery; everyday casual basics.",
         ),
         Alternative(
             from_brand_id="br-shein",
@@ -571,7 +704,11 @@ def run_seed():
             price_band="$$$",
             where_to_buy="Patagonia stores, Worn Wear (used), or verified retailers.",
             savings_estimate="Higher upfront cost, but saves hundreds over 5-10 years due to free lifetime repair.",
+            swap_tier="best",
+            similarity_notes="May differ: higher upfront investment ($$$) and intentional heirloom wardrobe care.",
         ),
+
+        # Bigelow Tea -> Best
         Alternative(
             from_brand_id="br-bigelow",
             to_brand_id="br-equalexchange",
@@ -580,6 +717,8 @@ def run_seed():
             price_band="$$",
             where_to_buy="Natural food co-ops and Equal Exchange online store.",
             savings_estimate="Price competitive per cup.",
+            swap_tier="best",
+            similarity_notes="Worker-owned cooperative with direct small farmer democratic trade.",
         ),
     ]
 

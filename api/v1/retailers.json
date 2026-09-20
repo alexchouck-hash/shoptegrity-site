@@ -36,10 +36,24 @@
       "worker_wage_floor": "$14.00/hr",
       "ceo_pay": "$26.9 Million",
       "ceo_pay_ratio": 992,
-      "swap_highlight": "Swap to WinCo Foods (100% ESOP) or local independent grocery cooperatives to keep 100% of profit in worker pockets."
+      "swap_highlight": "Swap to WinCo Foods (100% ESOP) or local independent grocery cooperatives to keep 100% of profit in worker pockets.",
+      "better_swap": {
+        "name": "WinCo Foods / Aldi",
+        "tier": "better",
+        "score": "84/100 (Grade B+)",
+        "price_level": "Matches or beats Walmart pricing",
+        "experience": "Standard supermarket aisles & checkout; 100% ESOP or living wages."
+      },
+      "best_swap": {
+        "name": "Local Independent Food Co-ops & Direct CSAs",
+        "tier": "best",
+        "score": "96/100 (Grade A+)",
+        "price_level": "Cost may be higher on specialty goods",
+        "experience": "May differ: weekly produce box or bulk bin refills; 100% regional wealth retention."
+      }
     },
     "slug": "walmart",
-    "id": "fead5f60-d2c5-46c2-95c4-6720613ad5dc"
+    "id": "ebad6545-3ae8-421a-bf9b-1e6e050307a5"
   },
   {
     "name": "Target",
@@ -78,10 +92,24 @@
       "worker_wage_floor": "$15.00/hr",
       "ceo_pay": "$19.2 Million",
       "ceo_pay_ratio": 738,
-      "swap_highlight": "Reroute household shopping to community co-ops, Public Goods, and Grove Collaborative for refillable non-toxic essentials."
+      "swap_highlight": "Reroute household shopping to community co-ops, Public Goods, and Grove Collaborative for refillable non-toxic essentials.",
+      "better_swap": {
+        "name": "Public Goods / Grove Collaborative",
+        "tier": "better",
+        "score": "82/100 (Grade B+)",
+        "price_level": "Accessible everyday refill prices",
+        "experience": "Doorstep delivery of clean personal care & paper goods; Certified B Corps."
+      },
+      "best_swap": {
+        "name": "Zero-Waste Refill Shops & Mission-Locked B-Corps",
+        "tier": "best",
+        "score": "94/100 (Grade A)",
+        "price_level": "Upfront container cost is higher",
+        "experience": "May differ: bringing own containers to neighborhood dispensaries; 100% circular."
+      }
     },
     "slug": "target",
-    "id": "156172c9-453a-4b0b-8a9f-f46f4bb8e21a"
+    "id": "26673573-e7dc-4a23-848a-d936e392a953"
   },
   {
     "name": "Costco Wholesale",
@@ -120,10 +148,24 @@
       "worker_wage_floor": "$19.50/hr",
       "ceo_pay": "$16.8 Million",
       "ceo_pay_ratio": 335,
-      "swap_highlight": "While Costco treats workers significantly better than Walmart, bulk buying clubs like Azure Standard and local co-op bulk bins keep 100% of wealth regional."
+      "swap_highlight": "While Costco treats workers significantly better than Walmart, bulk buying clubs like Azure Standard and local co-op bulk bins keep 100% of wealth regional.",
+      "better_swap": {
+        "name": "WinCo Bulk Sections / Regional Wholesale",
+        "tier": "better",
+        "score": "80/100 (Grade B+)",
+        "price_level": "No $65/yr membership fee; equal bulk savings",
+        "experience": "Similar large-format bulk staples and snacks in quantity."
+      },
+      "best_swap": {
+        "name": "Azure Standard & Co-op Bulk Aisles",
+        "tier": "best",
+        "score": "95/100 (Grade A)",
+        "price_level": "Comparable bulk pricing on organic grains",
+        "experience": "May differ: neighborhood truck drops or scoop-your-own co-op bins; zero plastic packaging."
+      }
     },
     "slug": "costco-wholesale",
-    "id": "589ba5ed-5371-477c-ae7f-69e8098ecdc7"
+    "id": "c689aba7-0cd7-47c1-9a4a-875553b8b903"
   },
   {
     "name": "Amazon / Whole Foods",
@@ -161,10 +203,24 @@
       "shareholder_payouts_annual": "$22.0 Billion concentrated in executive wealth & capital markets",
       "worker_wage_floor": "$17.00/hr",
       "ceo_pay_ratio": 900,
-      "swap_highlight": "Break the Amazon default: buy books on Bookshop.org, ethical home goods on DoneGood, and farm produce direct from local CSAs."
+      "swap_highlight": "Break the Amazon default: buy books on Bookshop.org, ethical home goods on DoneGood, and farm produce direct from local CSAs.",
+      "better_swap": {
+        "name": "Direct Merchant Sites / Chewy / eBay",
+        "tier": "better",
+        "score": "72/100 (Grade B)",
+        "price_level": "Direct checkout price match",
+        "experience": "Similar 1-click ordering and fast doorstep delivery; avoids Amazon 50% seller fee take rate."
+      },
+      "best_swap": {
+        "name": "Bookshop.org / DoneGood / CSAs",
+        "tier": "best",
+        "score": "98/100 (Grade A+)",
+        "price_level": "Standard retail pricing; shipping 2-4 days",
+        "experience": "May differ: purpose-built platforms routing 80%+ of profit to local bookstores & ethical makers."
+      }
     },
     "slug": "amazon-whole-foods",
-    "id": "0d51bcb8-327e-47a5-b8f6-2df84df23e34"
+    "id": "0adbd9ac-5e52-4440-9668-40339268bbba"
   },
   {
     "name": "The Kroger Co.",
@@ -202,10 +258,24 @@
       "shareholder_payouts_annual": "$2.1 Billion in stock buybacks and dividends",
       "worker_wage_floor": "$14.50/hr",
       "ceo_pay_ratio": 670,
-      "swap_highlight": "Shop at independent unionized or co-op grocery stores to ensure your food dollars stay in local farms rather than share repurchases."
+      "swap_highlight": "Shop at independent unionized or co-op grocery stores to ensure your food dollars stay in local farms rather than share repurchases.",
+      "better_swap": {
+        "name": "Aldi & Unionized Regional Grocers",
+        "tier": "better",
+        "score": "76/100 (Grade B)",
+        "price_level": "Equal grocery prices",
+        "experience": "Identical full-service grocery aisles and price points; UFCW contracts guarantee wage & health floors."
+      },
+      "best_swap": {
+        "name": "Regional Cooperative Supermarkets",
+        "tier": "best",
+        "score": "95/100 (Grade A)",
+        "price_level": "Patronage dividend returns surplus cash",
+        "experience": "May differ: shopper-owned democratic control; sources 8x more food from local farms."
+      }
     },
     "slug": "the-kroger-co",
-    "id": "4c6588d4-b0cf-4c78-95c2-91f81856be5f"
+    "id": "407b4ee9-935b-49f9-9d69-f2a1b74f36d9"
   },
   {
     "name": "Dollar General",
@@ -243,10 +313,24 @@
       "shareholder_payouts_annual": "$2.7 Billion (Dividends & Buybacks)",
       "worker_wage_floor": "$11.00/hr",
       "ceo_pay_ratio": 980,
-      "swap_highlight": "Dollar General extracts capital from food deserts while cutting staffing to hazardous minimums. Support local independent markets or bulk buying clubs."
+      "swap_highlight": "Dollar General extracts capital from food deserts while cutting staffing to hazardous minimums. Support local independent markets or bulk buying clubs.",
+      "better_swap": {
+        "name": "Aldi / Regional Independent Discounters",
+        "tier": "better",
+        "score": "74/100 (Grade B)",
+        "price_level": "Deep discount parity ($1-$5)",
+        "experience": "Similar low grocery prices without severe solo-clerk OSHA safety violations."
+      },
+      "best_swap": {
+        "name": "Community Mutual Aid & Bulk Co-ops",
+        "tier": "best",
+        "score": "96/100 (Grade A)",
+        "price_level": "Community-governed affordable access",
+        "experience": "May differ: cooperative buying clubs or neighborhood food hubs relieving food desert extraction."
+      }
     },
     "slug": "dollar-general",
-    "id": "8be960af-4234-47ff-83e3-17c05568010a"
+    "id": "2cd87735-4bf8-4bae-96bb-01b076b24fb3"
   },
   {
     "name": "The Home Depot",
@@ -284,10 +368,24 @@
       "shareholder_payouts_annual": "$14.2 Billion (94% of net profits)",
       "worker_wage_floor": "$15.00/hr",
       "ceo_pay_ratio": 520,
-      "swap_highlight": "Swap to Ace Hardware or True Value\u2014local independent cooperatives where store profits recirculate directly in your hometown."
+      "swap_highlight": "Swap to Ace Hardware or True Value\u2014local independent cooperatives where store profits recirculate directly in your hometown.",
+      "better_swap": {
+        "name": "True Value & Independent Lumberyards",
+        "tier": "better",
+        "score": "80/100 (Grade B+)",
+        "price_level": "Price parity on DIY tools & hardware",
+        "experience": "Similar wide hardware aisles and lumber drive-through without corporate buyback extraction."
+      },
+      "best_swap": {
+        "name": "Ace Hardware (Co-op) & Tool Libraries",
+        "tier": "best",
+        "score": "94/100 (Grade A)",
+        "price_level": "Free tool borrowing / competitive hardware",
+        "experience": "May differ: 5,000+ retailer-owned co-op stores & free community tool borrowing for DIY jobs."
+      }
     },
     "slug": "the-home-depot",
-    "id": "03acfb62-ec50-473d-8721-82b613176250"
+    "id": "3c82a879-9f96-43c6-8646-d96c2b7217bc"
   },
   {
     "name": "WinCo Foods",
@@ -326,7 +424,7 @@
       "swap_highlight": "The premier ethical alternative to Walmart and Kroger in the Western & Central US."
     },
     "slug": "winco-foods",
-    "id": "28e94e81-7520-425f-ac96-28a08da83949"
+    "id": "458033ed-adb5-4117-b552-dd0a5ccdeb2a"
   },
   {
     "name": "Ace Hardware",
@@ -365,6 +463,6 @@
       "swap_highlight": "The direct cooperative swap for Home Depot and Lowe's."
     },
     "slug": "ace-hardware",
-    "id": "236509d4-a279-48b9-a3d7-36bbabb01f88"
+    "id": "a5d19580-2e7d-468d-89f8-412d9d40ae23"
   }
 ]

@@ -142,42 +142,57 @@ def build_scenario_data(
                 "zip": "72764",
                 "share": 0.112,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "worker_farmer",
                 "farm_tier": "contract_grower",
                 "farm_notes": "Nominal family farm, but company owns the birds, feed, and pricing contract; grower carries $1M+ mortgage.",
             },
             {
-                "role": "Industrial Meatpacking Labor",
+                "role": "Frontline Supermarket Meat Counter & Cashiers",
+                "payee_name": "Supermarket Meat Department Hourly Staff",
+                "zip": oz,
+                "share": 0.120,
+                "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
+                "farm_tier": None,
+                "farm_notes": None,
+            },
+            {
+                "role": "Industrial Meatpacking Line Workers",
                 "payee_name": "Processing Plant Line Workers",
                 "zip": "68102",
-                "share": 0.148,
-                "leak_cat": "regional_steward",
+                "share": 0.128,
+                "leak_cat": "corporate_overhead",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
             {
-                "role": "Cold Chain Transport & Packaging",
+                "role": "Cold Chain Transport & Specialized Packaging",
                 "payee_name": "Multinational Logistics Conglomerate",
                 "zip": "60601",
-                "share": 0.240,
+                "share": 0.180,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
             {
-                "role": "Corporate Integrator Margin",
+                "role": "Corporate Integrator Processing Margin",
                 "payee_name": "Tyson Foods Corporate Agribusiness",
                 "zip": "72764",
-                "share": 0.180,
+                "share": 0.160,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "executive_shareholder",
                 "farm_tier": "corporate_agribusiness",
-                "farm_notes": "Integrator captures dominant margin on processing and brand markup.",
+                "farm_notes": "Integrator captures dominant margin on feed milling, processing, and brand markup.",
             },
             {
-                "role": "Retail Supermarket Chain Margin",
+                "role": "Supermarket Retail Corporate HQ Margin",
                 "payee_name": "Supermarket Corporate Headquarters",
                 "zip": "72716",
-                "share": 0.170,
+                "share": 0.150,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -187,6 +202,7 @@ def build_scenario_data(
                 "zip": "19801",
                 "share": 0.150,
                 "leak_cat": "wall_street_leak",
+                "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -198,6 +214,7 @@ def build_scenario_data(
                 "zip": "55370" if ostate == "MN" else oz,
                 "share": 0.720,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": "community_farmer",
                 "farm_notes": "100% Independent owner-operator. Rotational pasture grazing, sets own direct-to-consumer prices.",
             },
@@ -207,6 +224,7 @@ def build_scenario_data(
                 "zip": "55350" if ostate == "MN" else oz,
                 "share": 0.160,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -216,6 +234,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.080,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -225,13 +244,14 @@ def build_scenario_data(
                 "zip": "55370" if ostate == "MN" else oz,
                 "share": 0.040,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": "community_farmer",
                 "farm_notes": "Reinvested directly into multi-species pasture and soil biology.",
             },
         ]
         insight = (
             f"Under the conventional poultry model, only 11.2¢ of each dollar goes to a debt-bound contract grower in Springdale, AR, "
-            f"while 64¢ leaks out to corporate integrators and Delaware holding entities. "
+            f"while 50¢ leaks to corporate integrators, supermarket HQs, and Wall Street. "
             f"Buying direct from an independent community farmer keeps 72¢ directly with the soil steward."
         )
 
@@ -244,33 +264,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.140,
                 "leak_cat": "local_community",
-                "farm_tier": None,
-                "farm_notes": None,
-            },
-            {
-                "role": "Executive Compensation & Golden Parachutes",
-                "payee_name": "Megabank Executive Committee",
-                "zip": "94104",
-                "share": 0.125,
-                "leak_cat": "corporate_overhead",
-                "farm_tier": None,
-                "farm_notes": None,
-            },
-            {
-                "role": "Wall Street Stock Buybacks & Dividends",
-                "payee_name": "Institutional Hedge Funds & Asset Managers",
-                "zip": "10005",
-                "share": 0.415,
-                "leak_cat": "wall_street_leak",
-                "farm_tier": None,
-                "farm_notes": None,
-            },
-            {
-                "role": "Financial Derivatives & Trading Speculation",
-                "payee_name": "Delaware Capital Markets Holding Co",
-                "zip": "19801",
-                "share": 0.220,
-                "leak_cat": "wall_street_leak",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -280,6 +274,37 @@ def build_scenario_data(
                 "zip": "28202",
                 "share": 0.100,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
+                "farm_tier": None,
+                "farm_notes": None,
+            },
+            {
+                "role": "Financial Derivatives & Trading Speculation",
+                "payee_name": "Delaware Capital Markets Holding Co",
+                "zip": "19801",
+                "share": 0.220,
+                "leak_cat": "wall_street_leak",
+                "func_cat": "executive_shareholder",
+                "farm_tier": None,
+                "farm_notes": None,
+            },
+            {
+                "role": "Executive Compensation & Golden Parachutes",
+                "payee_name": "Megabank Executive Committee",
+                "zip": "94104",
+                "share": 0.125,
+                "leak_cat": "corporate_overhead",
+                "func_cat": "executive_shareholder",
+                "farm_tier": None,
+                "farm_notes": None,
+            },
+            {
+                "role": "Wall Street Stock Buybacks & Dividends",
+                "payee_name": "Institutional Hedge Funds & Asset Managers",
+                "zip": "10005",
+                "share": 0.415,
+                "leak_cat": "wall_street_leak",
+                "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -287,10 +312,11 @@ def build_scenario_data(
         alt_nodes = [
             {
                 "role": "Member High-Yield Dividend & APY",
-                "payee_name": "Member Depositor Account (Returned to Shopper)",
+                "payee_name": "Member Depositor Account (Returned to You)",
                 "zip": oz,
                 "share": 0.380,
                 "leak_cat": "local_community",
+                "func_cat": "member_dividends",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -300,6 +326,7 @@ def build_scenario_data(
                 "zip": "55107" if ostate == "MN" else oz,
                 "share": 0.340,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -309,6 +336,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.200,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -318,12 +346,13 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.080,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
         ]
         insight = (
-            f"Megabanks bleed $63.50 of every $100 spent directly into Wall Street buybacks and Delaware derivatives holding entities. "
+            f"Megabanks bleed $76.00 of every $100 spent directly into Wall Street buybacks, golden parachutes, and Delaware derivatives entities. "
             f"A community credit union keeps 100% of capital within the local member ecosystem and regional lending pools."
         )
 
@@ -336,15 +365,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.220,
                 "leak_cat": "local_community",
-                "farm_tier": None,
-                "farm_notes": None,
-            },
-            {
-                "role": "Private Equity Management Fees & LBO Debt",
-                "payee_name": "Wall Street PE Rollup Platform",
-                "zip": "19801",
-                "share": 0.380,
-                "leak_cat": "wall_street_leak",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -354,15 +375,27 @@ def build_scenario_data(
                 "zip": "90012",
                 "share": 0.220,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
             {
-                "role": "Software & Proprietary Fleet Lease",
+                "role": "Proprietary Software & Fleet Lease",
                 "payee_name": "Corporate Tech Vendor",
                 "zip": "78701",
                 "share": 0.180,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
+                "farm_tier": None,
+                "farm_notes": None,
+            },
+            {
+                "role": "Private Equity Management Fees & LBO Debt",
+                "payee_name": "Wall Street PE Rollup Platform",
+                "zip": "19801",
+                "share": 0.380,
+                "leak_cat": "wall_street_leak",
+                "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -374,6 +407,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.580,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -383,6 +417,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.240,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -392,6 +427,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.140,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -401,13 +437,14 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.040,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
         ]
         insight = (
-            f"A private equity rollup operating under a legacy local name drains 60¢ of every dollar to Delaware holding LLCs and national management overhead. "
-            f"Hiring an independent owner-operator keeps 96¢ recirculating in your town."
+            f"A private equity rollup operating under a legacy local name drains 38¢ of every dollar to PE management fees and 40¢ to national overhead. "
+            f"Hiring an independent owner-operator keeps 100% recirculating in your town."
         )
 
     else:  # default: grocery_produce
@@ -419,6 +456,7 @@ def build_scenario_data(
                 "zip": "72764",
                 "share": 0.147,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "worker_farmer",
                 "farm_tier": "contract_grower",
                 "farm_notes": "Contracted to agribusiness distributor. Subject to commodity spot pricing; land often leased from farmland REITs.",
             },
@@ -428,6 +466,7 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.125,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -437,6 +476,7 @@ def build_scenario_data(
                 "zip": "55426",
                 "share": 0.283,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -446,15 +486,17 @@ def build_scenario_data(
                 "zip": "10001",
                 "share": 0.085,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
             {
-                "role": "Store Rent, Real Estate & Energy",
-                "payee_name": "Commercial Real Estate & Utility",
-                "zip": oz,
+                "role": "Supermarket Store Real Estate Triple-Net REIT",
+                "payee_name": "Commercial Net Lease REIT (Realty Income Corp)",
+                "zip": "92078",
                 "share": 0.160,
-                "leak_cat": "local_community",
+                "leak_cat": "corporate_overhead",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -464,6 +506,7 @@ def build_scenario_data(
                 "zip": "72716",
                 "share": 0.042,
                 "leak_cat": "corporate_overhead",
+                "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -473,6 +516,7 @@ def build_scenario_data(
                 "zip": "10005",
                 "share": 0.158,
                 "leak_cat": "wall_street_leak",
+                "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -484,8 +528,9 @@ def build_scenario_data(
                 "zip": "55370" if ostate == "MN" else oz,
                 "share": 0.420,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": "community_farmer",
-                "farm_notes": "100% Independent community grower. 140-acre regenerative family farm, direct delivery, no agribusiness middlemen.",
+                "farm_notes": "100% Independent community grower. 140-acre regenerative family farm, direct harvest, no agribusiness middlemen.",
             },
             {
                 "role": "Living Wage Food Co-op Staff",
@@ -493,6 +538,7 @@ def build_scenario_data(
                 "zip": "55407" if ostate == "MN" else oz,
                 "share": 0.285,
                 "leak_cat": "local_community",
+                "func_cat": "worker_farmer",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -502,15 +548,17 @@ def build_scenario_data(
                 "zip": "55415" if ostate == "MN" else oz,
                 "share": 0.180,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
             {
-                "role": "Member Patronage Dividends",
+                "role": "Member Patronage Dividends (Returned to You)",
                 "payee_name": "Member Shopper Rebates (Returned to Consumer)",
                 "zip": oz,
                 "share": 0.065,
                 "leak_cat": "local_community",
+                "func_cat": "member_dividends",
                 "farm_tier": None,
                 "farm_notes": None,
             },
@@ -520,14 +568,15 @@ def build_scenario_data(
                 "zip": oz,
                 "share": 0.050,
                 "leak_cat": "local_community",
+                "func_cat": "operations",
                 "farm_tier": None,
                 "farm_notes": None,
             },
         ]
         insight = (
-            f"At a conventional supermarket, over $15.80 of every $100 leaves directly into Wall Street buybacks, "
-            f"and only $14.70 reaches an agribusiness grower. "
-            f"At a food co-op, $42.00 reaches independent community farmers and $28.50 goes to living-wage local workers."
+            f"At a conventional supermarket, over $20.00 of every $100 is extracted by Wall Street buybacks and executive comp, "
+            f"while only $12.50 stays with local frontline store clerks and $14.70 goes to an agribusiness grower. "
+            f"At a food co-op, $70.50 goes directly to local family farmers and living-wage staff, with zero Wall Street leakage."
         )
 
     return title, scenario_id, conv_nodes, alt_nodes, insight
@@ -541,7 +590,7 @@ def compute_branch(
     spend_amount: float,
     summary_text: str,
 ) -> GeoFlowBranch:
-    """Computes calculated nodes, distances, worker share, and capital flight."""
+    """Computes calculated nodes, distances, worker share, operations, and capital flight."""
     olat = origin_info["lat"]
     olon = origin_info["lon"]
 
@@ -549,7 +598,9 @@ def compute_branch(
     total_local = 0.0
     total_flight = 0.0
     total_worker_farmer = 0.0
+    total_operations = 0.0
     total_exec_shareholder = 0.0
+    total_member_dividends = 0.0
     weighted_distance = 0.0
 
     for nd in node_defs:
@@ -558,18 +609,24 @@ def compute_branch(
         dist = haversine_miles(olat, olon, dest_info["lat"], dest_info["lon"])
         pct = nd["share"] * 100.0
         node_amount = round(nd["share"] * spend_amount, 2)
-        is_local = dist <= 60.0 or dest_zip == origin_info["zip"]
+
+        # A node is ONLY local if within regional distance AND categorized as local_community
+        is_local = (dist <= 60.0 or dest_zip == origin_info["zip"]) and nd.get("leak_cat") == "local_community"
 
         if is_local:
             total_local += node_amount
         else:
             total_flight += node_amount
 
-        # Categorize worker/farmer vs executive/shareholder
-        role_lower = nd["role"].lower()
-        if any(w in role_lower for w in ["farm", "grower", "worker", "staff", "labor", "apprentice", "journeyman", "butcher", "member"]):
+        # Functional classification
+        fcat = nd.get("func_cat", "operations")
+        if fcat == "worker_farmer":
             total_worker_farmer += node_amount
-        if any(w in role_lower for w in ["shareholder", "buyback", "dividend", "executive", "private equity", "derivatives"]):
+        elif fcat == "operations":
+            total_operations += node_amount
+        elif fcat == "member_dividends":
+            total_member_dividends += node_amount
+        elif fcat == "executive_shareholder":
             total_exec_shareholder += node_amount
 
         weighted_distance += dist * (nd["share"])
@@ -593,10 +650,37 @@ def compute_branch(
             )
         )
 
+    # Ensure node amounts sum exactly to spend_amount
+    nodes_amount_sum = round(sum(n.amount for n in nodes), 2)
+    if spend_amount > 0 and nodes_amount_sum != round(spend_amount, 2) and len(nodes) > 0:
+        node_diff = round(spend_amount - nodes_amount_sum, 2)
+        nodes[-1].amount = round(nodes[-1].amount + node_diff, 2)
+
+    # Ensure total amounts balance exactly to spend_amount
+    functional_sum = total_worker_farmer + total_operations + total_exec_shareholder + total_member_dividends
+    if spend_amount > 0 and round(functional_sum, 2) != round(spend_amount, 2):
+        diff = round(spend_amount - functional_sum, 2)
+        total_operations = round(total_operations + diff, 2)
+
+    geo_sum = total_local + total_flight
+    if spend_amount > 0 and round(geo_sum, 2) != round(spend_amount, 2):
+        diff_geo = round(spend_amount - geo_sum, 2)
+        total_flight = round(total_flight + diff_geo, 2)
+
     local_pct = round((total_local / spend_amount) * 100.0, 1) if spend_amount > 0 else 0.0
-    flight_pct = round((total_flight / spend_amount) * 100.0, 1) if spend_amount > 0 else 0.0
+    flight_pct = round(100.0 - local_pct, 1) if spend_amount > 0 else 0.0
+
     wf_pct = round((total_worker_farmer / spend_amount) * 100.0, 1) if spend_amount > 0 else 0.0
+    ops_pct = round((total_operations / spend_amount) * 100.0, 1) if spend_amount > 0 else 0.0
     es_pct = round((total_exec_shareholder / spend_amount) * 100.0, 1) if spend_amount > 0 else 0.0
+    mem_pct = round((total_member_dividends / spend_amount) * 100.0, 1) if spend_amount > 0 else 0.0
+
+    # Ensure functional percentages add up to exactly 100.0%
+    if spend_amount > 0:
+        pct_sum = round(wf_pct + ops_pct + es_pct + mem_pct, 1)
+        if pct_sum != 100.0:
+            diff_pct = round(100.0 - pct_sum, 1)
+            ops_pct = round(ops_pct + diff_pct, 1)
 
     return GeoFlowBranch(
         option_type=option_type,
@@ -609,11 +693,16 @@ def compute_branch(
         capital_flight_pct=flight_pct,
         worker_farmer_amount=round(total_worker_farmer, 2),
         worker_farmer_pct=wf_pct,
+        operations_logistics_amount=round(total_operations, 2),
+        operations_logistics_pct=ops_pct,
         executive_shareholder_amount=round(total_exec_shareholder, 2),
         executive_shareholder_pct=es_pct,
+        member_dividends_amount=round(total_member_dividends, 2),
+        member_dividends_pct=mem_pct,
         avg_miles_traveled=round(weighted_distance, 1),
         summary_text=summary_text,
     )
+
 
 
 def trace_dollar_flow(

@@ -50,6 +50,9 @@ def test_web_portal_views():
     res_swaps = client.get("/swaps")
     assert res_swaps.status_code == 200
     assert "Credit Unions" in res_swaps.text
+    assert "BETTER SWAP" in res_swaps.text
+    assert "BEST SWAP" in res_swaps.text
+    assert "How Shoptegrity Tiers Swaps: Best vs. Better" in res_swaps.text
 
     # Flows View
     res_flows = client.get("/flows")
@@ -149,3 +152,56 @@ def test_methodology_api():
     assert data["rubric_version"] == "1.0.0"
     assert len(data["data_sources"]) >= 5
     assert "integrity_firewall_policy" in data
+
+
+def test_swaps_api_dual_tiers():
+    # 1. Swaps categories index
+    res_cats = client.get("/v1/swaps")
+    assert res_cats.status_code == 200
+    categories = res_cats.json()
+    assert len(categories) >= 5
+
+    # 2. Banking category swap guide detail with Best vs Better
+    res_banking = client.get("/v1/swaps/banking")
+    assert res_banking.status_code == 200
+    banking_data = res_banking.json()
+    assert "guide" in banking_data
+    guide = banking_data["guide"]
+    assert "best_swap" in guide
+    assert "better_swap" in guide
+
+    # Check Best Swap attributes
+    best = guide["best_swap"]
+    assert "Credit Union" in best["name"]
+    assert "98" in best["score"]
+    assert "High Ethical Standard" in best["tier_label"]
+
+    # Check Better Swap attributes
+    better = guide["better_swap"]
+    assert "Similar Price & Experience" in better["tier_label"]
+    assert "82" in better["score"]
+    assert "Zero maintenance fees" in better["price_level"]
+
+    # Check tiered recommended alternatives
+    assert "best_alternatives" in banking_data
+    assert "better_alternatives" in banking_data
+    assert len(banking_data["best_alternatives"]) >= 1
+    assert len(banking_data["better_alternatives"]) >= 1
+
+    # Check Grocery category detail
+    res_grocery = client.get("/v1/swaps/grocery")
+    assert res_grocery.status_code == 200
+    grocery_data = res_grocery.json()
+    assert "WinCo Foods" in grocery_data["guide"]["better_swap"]["name"]
+    assert "Member-Owned" in grocery_data["guide"]["best_swap"]["name"]
+
+    # Check Retailer dual swap details
+    res_ret = client.get("/v1/brands/retailers")
+    assert res_ret.status_code == 200
+    ret_list = res_ret.json()
+    walmart = next(r for r in ret_list if r["name"] == "Walmart")
+    assert "better_swap" in walmart["retailer_details"]
+    assert "best_swap" in walmart["retailer_details"]
+    assert "WinCo" in walmart["retailer_details"]["better_swap"]["name"]
+    assert "Co-ops" in walmart["retailer_details"]["best_swap"]["name"]
+

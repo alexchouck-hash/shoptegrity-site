@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_
 
 from api.app.db.session import get_db
-from api.app.models.core import Brand, Entity, SpendCategory, Alternative, Place, Maker, FlowProfile
+from api.app.models.core import Brand, Entity, SpendCategory, Alternative, Place, Maker, FlowProfile, HealthcareIntegrity
 from api.app.routers.food_chain import SOURCING_LADDER, fetch_food_dollar_splits
 from api.app.routers.swaps import get_swap_guide_detail
 from api.app.services.geo_flow_service import SCENARIOS_META, trace_dollar_flow
@@ -104,6 +104,8 @@ def brand_detail_view(request: Request, slug: str, db: Session = Depends(get_db)
             "price_band": alt.price_band,
             "where_to_buy": alt.where_to_buy,
             "savings_estimate": alt.savings_estimate,
+            "swap_tier": getattr(alt, "swap_tier", "best"),
+            "similarity_notes": getattr(alt, "similarity_notes", None),
         })
 
     evidence_list = [
@@ -274,4 +276,41 @@ def parents_view(
             "subterfuge_only": is_subterfuge,
         },
     )
+
+
+@router.get("/healthcare", response_class=HTMLResponse)
+def healthcare_view(
+    request: Request,
+    q: Optional[str] = Query(None),
+    sector: Optional[str] = Query(None),
+    db: Session = Depends(get_db),
+):
+    query = db.query(HealthcareIntegrity)
+    if q:
+        search_pat = f"%{q.lower()}%"
+        query = query.filter(
+            or_(
+                HealthcareIntegrity.name.ilike(search_pat),
+                HealthcareIntegrity.parent_organization.ilike(search_pat),
+                HealthcareIntegrity.city.ilike(search_pat),
+            )
+        )
+    if sector and sector != "all":
+        query = query.filter(HealthcareIntegrity.entity_type == sector)
+
+    initial_entities = query.order_by(HealthcareIntegrity.composite_score.desc()).limit(24).all()
+    total_count = query.count()
+
+    return templates.TemplateResponse(
+        request=request,
+        name="healthcare.html",
+        context={
+            "active_page": "healthcare",
+            "initial_entities": initial_entities,
+            "total_count": total_count,
+            "search_query": q,
+            "selected_sector": sector,
+        },
+    )
+
 

@@ -134,6 +134,8 @@ class Alternative(Base):
     price_band: Mapped[str] = mapped_column(String(10), default="$$")  # $, $$, $$$
     where_to_buy: Mapped[str] = mapped_column(String(255))
     savings_estimate: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    swap_tier: Mapped[str] = mapped_column(String(20), default="best")  # "best" or "better"
+    similarity_notes: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     editor_approved: Mapped[bool] = mapped_column(Boolean, default=True)
 
     from_brand: Mapped[Brand] = relationship("Brand", foreign_keys=[from_brand_id])
@@ -257,3 +259,52 @@ class BrandIntegrity(Base):
     data_provenance: Mapped[str] = mapped_column(String(50), default="industry_benchmark_model", index=True)  # verified_sec_filing, certified_audit, industry_benchmark_model
     sec_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     sec_receipt_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+
+
+class HealthcareIntegrity(Base):
+    """Authoritative database of 2,000 healthcare entities: insurers, hospital chains, corporate/PE clinics, and local clinics."""
+
+    __tablename__ = "healthcare_integrity"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=generate_uuid)
+    name: Mapped[str] = mapped_column(String(255), index=True)
+    slug: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    entity_type: Mapped[str] = mapped_column(String(50), index=True)  # health_insurance, hospital_chain, corporate_clinic, local_clinic
+    sub_category: Mapped[str] = mapped_column(String(100), index=True)  # Commercial Insurer, Non-Profit Mutual, Public Hospital, Urgent Care Rollup, DSO Dental, Dermatology Rollup, Direct Primary Care, FQHC, etc.
+    parent_organization: Mapped[str] = mapped_column(String(255), index=True)
+    ownership_type: Mapped[str] = mapped_column(String(50), index=True)  # public, private_equity, nonprofit, mutual, government_public, physician_owned, worker_coop
+    ownership_tier: Mapped[int] = mapped_column(Integer, index=True)  # 1 (Local owner-operated), 2 (Local non-profit/FQHC/co-op), 3 (Regional mutual/public), 4 (Regional non-profit), 5 (PE rollup), 6 (Publicly traded conglomerate)
+    composite_score: Mapped[int] = mapped_column(Integer, index=True)  # 0 - 100
+    grade: Mapped[str] = mapped_column(String(5), index=True)  # A+, A, B, C, D, F
+
+    # Financial Flows ($100 Breakdown)
+    clinical_care_wages_pct: Mapped[float] = mapped_column(Float)  # Frontline nurse & doctor clinical care
+    admin_overhead_pct: Mapped[float] = mapped_column(Float)  # Bureaucracy, billing, claims denial, prior auth
+    exec_comp_pct: Mapped[float] = mapped_column(Float)  # CEO and executive compensation
+    shareholder_extraction_pct: Mapped[float] = mapped_column(Float)  # Wall Street buybacks, dividends, PE profit extraction
+    supplies_operations_pct: Mapped[float] = mapped_column(Float)  # Facilities, pharmaceuticals, medical supplies
+
+    # Healthcare Specific Integrity Metrics
+    medical_loss_ratio_pct: Mapped[float] = mapped_column(Float)  # MLR / care spending percentage
+    claims_denial_rate_pct: Mapped[float] = mapped_column(Float)  # Denial rate of submitted claims
+    charge_to_cost_ratio: Mapped[float] = mapped_column(Float)  # Hospital/clinic markup multiplier (e.g. 2.1x vs 9.5x)
+    charity_care_pct: Mapped[float] = mapped_column(Float)  # Uncompensated charity care as % of operating expenses
+    is_pe_rollup: Mapped[bool] = mapped_column(Boolean, default=False, index=True)  # Private equity disguised acquisition
+    pe_firm_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)  # Name of PE sponsor if applicable
+    regulatory_citations: Mapped[Optional[List[str]]] = mapped_column(JSON, default=list)  # Penalties, settlements, violations
+
+    # High-Integrity Swap Recommendation
+    swap_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    swap_slug: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    swap_type: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    swap_rationale: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+
+    # Geographic Scope & Data Provenance
+    location_scope: Mapped[str] = mapped_column(String(50), default="National")  # National, Regional, State, Local
+    city: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    state: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
+    data_provenance: Mapped[str] = mapped_column(String(50), default="industry_benchmark_model", index=True)  # verified_sec_filing, cms_cost_report, naic_filing, hrsa_report, industry_benchmark_model
+    source_citation: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    filing_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
+    summary_notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+

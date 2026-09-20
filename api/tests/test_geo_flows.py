@@ -109,4 +109,45 @@ def test_web_flows_view_html():
     assert "Interactive Geographic Map" in response.text
     assert "Option A: Conventional Corporate Chain" in response.text
     assert "VERIFIED INDEPENDENT COMMUNITY FARMER" in response.text
+    assert "Total Financial Allocation" in response.text
+    assert "Methodology & Data Integrity" in response.text
+    assert "USDA Economic Research Service (ERS)" in response.text
+    assert "SEC Form 10-K Filings" in response.text
+    assert "National Co+op Grocers (NCG)" in response.text
+
+
+@pytest.mark.parametrize("scenario_id", [s.id for s in SCENARIOS_META])
+@pytest.mark.parametrize("spend", [50.0, 100.0, 245.50])
+def test_all_scenarios_strictly_balance(scenario_id, spend):
+    trace = trace_dollar_flow(origin_zip="55401", scenario_id=scenario_id, spend_amount=spend)
+    assert trace.spend_amount == spend
+
+    for branch in [trace.conventional, trace.alternative]:
+        # 1. Geographic balance: local + flight == spend
+        geo_sum = branch.local_retained_amount + branch.capital_flight_amount
+        assert pytest.approx(geo_sum, 0.01) == spend
+        assert pytest.approx(branch.local_retained_pct + branch.capital_flight_pct, 0.1) == 100.0
+
+        # 2. Functional balance: worker + ops + exec + member == spend
+        func_sum = (
+            branch.worker_farmer_amount
+            + branch.operations_logistics_amount
+            + branch.executive_shareholder_amount
+            + branch.member_dividends_amount
+        )
+        assert pytest.approx(func_sum, 0.01) == spend
+
+        # 3. Functional percentage sum == 100.0%
+        pct_sum = (
+            branch.worker_farmer_pct
+            + branch.operations_logistics_pct
+            + branch.executive_shareholder_pct
+            + branch.member_dividends_pct
+        )
+        assert pytest.approx(pct_sum, 0.1) == 100.0
+
+        # 4. Sum of all step nodes == spend to the penny
+        node_sum = sum(n.amount for n in branch.nodes)
+        assert pytest.approx(node_sum, 0.01) == spend
+
 
