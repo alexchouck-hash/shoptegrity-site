@@ -131,8 +131,88 @@
 
   <!-- Healthcare Cards Grid -->
   <div class="cards-grid" id="healthcareGrid">
-    <!-- Rendered dynamically by JavaScript -->
+    {% for e in initial_entities %}
+    <div class="card brand-card" style="display: flex; flex-direction: column;">
+      <div class="card-header" style="margin-bottom: 0.5rem;">
+        <div>
+          <h3 style="font-size: 1.18rem; font-weight: 800; color: var(--navy); line-height: 1.25;">{{ e.name }}</h3>
+          <div style="font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem;">{{ e.parent_organization }}</div>
+          <div style="display: flex; gap: 0.35rem; margin-top: 0.35rem; flex-wrap: wrap;">
+            <span style="background: {% if e.ownership_tier <= 2 %}#ecfdf5{% elif e.ownership_tier >= 5 %}#fef2f2{% else %}#f0f9ff{% endif %}; color: {% if e.ownership_tier <= 2 %}#047857{% elif e.ownership_tier >= 5 %}#b91c1c{% else %}#0369a1{% endif %}; border: 1px solid rgba(0,0,0,0.1); padding: 0.1rem 0.45rem; border-radius: 9999px; font-size: 0.72rem; font-weight: 750;">
+              Tier {{ e.ownership_tier }}: {{ e.ownership_type.replace('_', ' ').upper() }}
+            </span>
+            <span style="background: #f1f5f9; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.72rem; color: #475569;">
+              {% if e.city %}{{ e.city }}, {{ e.state }}{% else %}{{ e.location_scope }}{% endif %}
+            </span>
+          </div>
+          {% if e.is_pe_rollup %}
+          <div style="margin-top: 0.35rem;">
+            <span style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 0.72rem; font-weight: 750; padding: 0.15rem 0.45rem; border-radius: 9999px;">
+              ⚠️ Disguised PE Rollup {% if e.pe_firm_name %}({{ e.pe_firm_name }}){% endif %}
+            </span>
+          </div>
+          {% endif %}
+        </div>
+        <div style="text-align: right;">
+          <span class="grade-badge {% if e.grade.startswith('A') %}grade-A{% elif e.grade.startswith('B') %}grade-B{% elif e.grade.startswith('D') %}grade-D{% else %}grade-F{% endif %}">{{ e.grade }} ({{ e.composite_score }})</span>
+        </div>
+      </div>
+
+      <div class="brand-flow-container" style="margin: 0.6rem 0;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--slate); margin-bottom: 0.25rem;">
+          <span>Where $100 Goes:</span>
+          <span>Care: {{ e.clinical_care_wages_pct }}% | Wall St/PE: {{ e.shareholder_extraction_pct }}%</span>
+        </div>
+        <div class="brand-split-bar">
+          <div class="brand-split-seg" style="background: #16a34a; width: {{ e.clinical_care_wages_pct }}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            {% if e.clinical_care_wages_pct > 20 %}{{ e.clinical_care_wages_pct }}%{% endif %}
+          </div>
+          <div class="brand-split-seg" style="background: #0284c7; width: {{ e.admin_overhead_pct }}%;"></div>
+          <div class="brand-split-seg" style="background: #9333ea; width: {{ e.exec_comp_pct * 2 }}%;"></div>
+          <div class="brand-split-seg" style="background: #dc2626; width: {{ e.shareholder_extraction_pct }}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            {% if e.shareholder_extraction_pct > 10 %}{{ e.shareholder_extraction_pct }}%{% endif %}
+          </div>
+          <div class="brand-split-seg" style="background: #cbd5e1; flex: 1;"></div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; font-size: 0.73rem;">
+        <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+          🩺 MLR: <strong>{{ e.medical_loss_ratio_pct }}%</strong>
+        </span>
+        {% if e.claims_denial_rate_pct > 0 %}
+        <span style="background: {% if e.claims_denial_rate_pct >= 20 %}#fee2e2{% else %}#f8fafc{% endif %}; border: 1px solid {% if e.claims_denial_rate_pct >= 20 %}#fca5a5{% else %}var(--border){% endif %}; padding: 0.2rem 0.45rem; border-radius: 4px; color: {% if e.claims_denial_rate_pct >= 20 %}#991b1b{% else %}inherit{% endif %};">
+          🚫 Denial Rate: <strong>{{ e.claims_denial_rate_pct }}%</strong>
+        </span>
+        {% endif %}
+        <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+          📈 Markup: <strong>{{ e.charge_to_cost_ratio }}x</strong>
+        </span>
+        <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+          🤝 Charity Care: <strong>{{ e.charity_care_pct }}%</strong>
+        </span>
+      </div>
+
+      {% if e.swap_name %}
+      <div class="swap-callout-box" style="margin-top: auto; margin-bottom: 0.75rem;">
+        <div style="font-weight: 750; font-size: 0.8rem; margin-bottom: 0.15rem; color: #166534; display: flex; align-items: center; gap: 0.35rem;">
+          <span>🔄 Recommended Swap:</span>
+          <strong>{{ e.swap_name }}</strong>
+        </div>
+        <div style="font-size: 0.75rem; color: #15803d; line-height: 1.3;">{{ e.swap_rationale }}</div>
+      </div>
+      {% endif %}
+
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid var(--border);">
+        <span style="font-size: 0.75rem; color: var(--muted);">{{ e.sub_category }}</span>
+        <button class="btn btn-secondary" onclick="toggleCompare('{{ e.slug }}', this)" style="font-size: 0.78rem; padding: 0.25rem 0.65rem; font-weight: 700;">
+          + Add to Compare
+        </button>
+      </div>
+    </div>
+    {% endfor %}
   </div>
+
 
   <!-- Pagination / Load More Button -->
   <div id="loadMoreContainer" style="display: flex; justify-content: center; margin: 2.5rem 0;">
@@ -258,11 +338,17 @@ function applyFilters() {
   const highCare = document.getElementById("highCareCheck").checked;
 
   filteredEntities = allEntities.filter(e => {
-    const matchName = e.name.toLowerCase().includes(query);
-    const matchParent = (e.parent_organization || "").toLowerCase().includes(query);
-    const matchCity = (e.city || "").toLowerCase().includes(query);
-    const matchSwap = (e.swap_name || "").toLowerCase().includes(query);
-    const matchesQuery = !query || matchName || matchParent || matchCity || matchSwap;
+    const cleanQuery = query.toLowerCase();
+    const queryNoSpace = cleanQuery.replace(/[\s\-_&]/g, "");
+    const queryWords = cleanQuery.split(/\s+/).filter(Boolean);
+
+    const targetFull = (e.name + " " + (e.parent_organization || "") + " " + (e.city || "") + " " + (e.swap_name || "")).toLowerCase();
+    const targetNoSpace = targetFull.replace(/[\s\-_&]/g, "");
+
+    const matchesQuery = !cleanQuery ||
+      targetFull.includes(cleanQuery) ||
+      targetNoSpace.includes(queryNoSpace) ||
+      (queryWords.length > 0 && queryWords.every(w => targetFull.includes(w)));
 
     // Sector Filter
     const matchesSector = (currentSector === 'all') || (e.entity_type === currentSector);

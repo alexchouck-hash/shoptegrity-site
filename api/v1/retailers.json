@@ -53,7 +53,7 @@
       }
     },
     "slug": "walmart",
-    "id": "ebad6545-3ae8-421a-bf9b-1e6e050307a5"
+    "id": "1d578375-651e-4c44-b217-2f49f5a667a2"
   },
   {
     "name": "Target",
@@ -109,7 +109,7 @@
       }
     },
     "slug": "target",
-    "id": "26673573-e7dc-4a23-848a-d936e392a953"
+    "id": "c30cb2fd-6697-40fb-97a2-ff516df8cf78"
   },
   {
     "name": "Costco Wholesale",
@@ -165,7 +165,7 @@
       }
     },
     "slug": "costco-wholesale",
-    "id": "c689aba7-0cd7-47c1-9a4a-875553b8b903"
+    "id": "a5c046a0-2065-4edf-b300-5a7d2f58c80b"
   },
   {
     "name": "Amazon / Whole Foods",
@@ -220,7 +220,7 @@
       }
     },
     "slug": "amazon-whole-foods",
-    "id": "0adbd9ac-5e52-4440-9668-40339268bbba"
+    "id": "786f62fb-0af8-4460-a0b0-9c8eed757b1b"
   },
   {
     "name": "The Kroger Co.",
@@ -275,7 +275,7 @@
       }
     },
     "slug": "the-kroger-co",
-    "id": "407b4ee9-935b-49f9-9d69-f2a1b74f36d9"
+    "id": "4cc40f42-dc3d-46fc-9ed0-dbf3b0dff443"
   },
   {
     "name": "Dollar General",
@@ -330,7 +330,7 @@
       }
     },
     "slug": "dollar-general",
-    "id": "2cd87735-4bf8-4bae-96bb-01b076b24fb3"
+    "id": "cb65f7c1-383c-4ca2-b8a0-294a4e586640"
   },
   {
     "name": "The Home Depot",
@@ -385,7 +385,7 @@
       }
     },
     "slug": "the-home-depot",
-    "id": "3c82a879-9f96-43c6-8646-d96c2b7217bc"
+    "id": "7841f5e6-2a35-4b26-ae86-8d122479784a"
   },
   {
     "name": "WinCo Foods",
@@ -424,7 +424,7 @@
       "swap_highlight": "The premier ethical alternative to Walmart and Kroger in the Western & Central US."
     },
     "slug": "winco-foods",
-    "id": "458033ed-adb5-4117-b552-dd0a5ccdeb2a"
+    "id": "21d425ec-8c85-4ecb-82f4-cef0014e883d"
   },
   {
     "name": "Ace Hardware",
@@ -463,6 +463,6 @@
       "swap_highlight": "The direct cooperative swap for Home Depot and Lowe's."
     },
     "slug": "ace-hardware",
-    "id": "a5d19580-2e7d-468d-89f8-412d9d40ae23"
+    "id": "c8ebbbc3-d5cc-4f84-b45f-15a9dd1b86f5"
   }
 ]

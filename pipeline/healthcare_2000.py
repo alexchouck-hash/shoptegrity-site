@@ -224,10 +224,10 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
     # NON-PROFIT & MUTUAL HEALTH INSURERS (Tiers 2-4)
     # --------------------------------------------------------------------------
     {
-        "name": "HealthPartners Plan & Clinics",
+        "name": "HealthPartners / Health Partners Plan & Clinics",
         "entity_type": "health_insurance",
         "sub_category": "Consumer-Governed Health Cooperative",
-        "parent_organization": "HealthPartners Inc.",
+        "parent_organization": "HealthPartners Inc. / Health Partners (Consumer-Governed Co-op)",
         "ownership_type": "cooperative",
         "ownership_tier": 2,
         "composite_score": 91,

@@ -287,14 +287,21 @@ def healthcare_view(
 ):
     query = db.query(HealthcareIntegrity)
     if q:
-        search_pat = f"%{q.lower()}%"
-        query = query.filter(
-            or_(
-                HealthcareIntegrity.name.ilike(search_pat),
-                HealthcareIntegrity.parent_organization.ilike(search_pat),
-                HealthcareIntegrity.city.ilike(search_pat),
-            )
-        )
+        from sqlalchemy import and_
+        q_clean = q.strip().lower()
+        search_pat = f"%{q_clean}%"
+        search_no_space = f"%{q_clean.replace(' ', '')}%"
+        tokens = [f"%{t}%" for t in q_clean.split() if t]
+        conditions = [
+            HealthcareIntegrity.name.ilike(search_pat),
+            HealthcareIntegrity.name.ilike(search_no_space),
+            HealthcareIntegrity.parent_organization.ilike(search_pat),
+            HealthcareIntegrity.parent_organization.ilike(search_no_space),
+            HealthcareIntegrity.city.ilike(search_pat),
+        ]
+        if len(tokens) > 1:
+            conditions.append(and_(*[HealthcareIntegrity.name.ilike(t) for t in tokens]))
+        query = query.filter(or_(*conditions))
     if sector and sector != "all":
         query = query.filter(HealthcareIntegrity.entity_type == sector)
 
