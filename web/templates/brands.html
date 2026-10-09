@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Top 2,000 Brands Integrity Database & Swaps — Shoptegrity{% endblock %}
+{% block title %}Brand Integrity Database & Swaps — Shoptegrity{% endblock %}
 
 {% block content %}
 <section class="hero" style="background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);">
   <div class="hero-inner">
-    <div class="hero-tag" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">🏢 Database: Top 2,000 Brands Integrity Index</div>
+    <div class="hero-tag" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd;">🏢 Database: Brand Integrity Index</div>
     <h1>Where Does Your Money Really Go?</h1>
-    <p>Look past corporate marketing to see the real numbers: what goes to frontline workers vs Wall Street buybacks, labor exploitation records, and waste footprint—with verified higher-integrity swaps.</p>
+    <p>Look past corporate marketing: dividends and buybacks straight from SEC filings, our ratings on labor and waste, and higher-integrity swaps. Every reported figure links to its source.</p>
 
     <!-- Interactive Search Bar -->
     <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
       <div class="search-box" style="width: 100%; max-width: 720px; box-shadow: 0 4px 14px rgba(0,0,0,0.08);">
-        <input type="text" id="brandSearchInput" placeholder="Search 2,000+ brands (e.g. Target, Walmart, Nike, Cheerios, Apple, Shein)..." oninput="handleSearchInput()">
+        <input type="text" id="brandSearchInput" placeholder="Search brands & healthcare providers (e.g. Target, UnitedHealthcare, Nike, Aetna, Apple, Kaiser)..." oninput="handleSearchInput()">
         <button type="button" class="btn btn-blue" onclick="handleSearchInput()">Search Database</button>
       </div>
     </div>
@@ -22,11 +22,43 @@
 <main class="container">
   <!-- Partner Navigation Links -->
   <div style="display: flex; gap: 0.75rem; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--blue-light); border-color: #bae6fd; color: #0284c7; font-weight: 700;">Top 2,000 Brands Database</a>
+    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--blue-light); border-color: #bae6fd; color: #0284c7; font-weight: 700;">Brands Database</a>
     <a href="/swaps" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Major Retailers & Easy Swaps</a>
     <a href="/flows" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">$100 Dollar Flow Maps</a>
     <a href="/food" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Food Chain Integrity</a>
     <a href="/local" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Local Alternatives Finder</a>
+  </div>
+
+  <!-- Best vs. Better Philosophy Banner -->
+  <div class="swap-philosophy-banner" style="margin-bottom: 1.5rem;">
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+      <span style="font-size: 1.25rem;">⚖️</span>
+      <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--navy); margin: 0;">How Shoptegrity Tiers Swaps: Best vs. Better</h3>
+    </div>
+    <p style="font-size: 0.92rem; color: var(--slate); margin-bottom: 1rem; line-height: 1.5;">
+      Changing shopping habits shouldn't be all-or-nothing. Every brand scorecard in our database offers two vetted options: an accessible drop-in replacement that matches conventional price points, and a gold-standard ethical alternative for maximum community impact.
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+      <div style="background: #ffffff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; border-radius: 0.5rem; padding: 0.85rem 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+          <span class="swap-badge-better">⚡ BETTER SWAP</span>
+          <span style="font-size: 0.8rem; font-weight: 750; color: #0369a1;">Easy: Similar Price &amp; Format</span>
+        </div>
+        <p style="font-size: 0.84rem; color: #334155; margin: 0; line-height: 1.45;">
+          <strong>The pragmatic drop-in:</strong> An accessible option (Grade B / B+) matching conventional pricing and familiar supermarket shelves or 1-click checkout. Low friction; cuts out the worst corporate abuses (anti-union retaliation, predatory debt, Wall Street buyback extraction).
+        </p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid #bbf7d0; border-left: 4px solid #16a34a; border-radius: 0.5rem; padding: 0.85rem 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.35rem;">
+          <span class="swap-badge-best">🏆 BEST SWAP</span>
+          <span style="font-size: 0.8rem; font-weight: 750; color: #15803d;">Deep Impact: Gold Standard</span>
+        </div>
+        <p style="font-size: 0.84rem; color: #334155; margin: 0; line-height: 1.45;">
+          <strong>The gold standard:</strong> A high-scoring ethical brand, worker/member cooperative, or purpose trust (Grade A / A+). The format or experience may differ and upfront effort might be higher (bulk bins, farm CSAs, refill bottles), but keeps maximum wealth in the community.
+        </p>
+      </div>
+    </div>
   </div>
 
   <!-- Sector Category Filter Pills -->
@@ -40,6 +72,7 @@
     <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Consumer Electronics & Tech', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">📱 Electronics & Tech</button>
     <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Fast Food & Dining Chains', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🍔 Fast Food</button>
     <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Financial Services & Banking', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🏦 Banking & Finance</button>
+    <button class="btn btn-secondary cat-pill" onclick="setCategoryFilter('Healthcare & Health Insurance', this)" style="font-size: 0.8rem; padding: 0.25rem 0.65rem; border-radius: 9999px;">🏥 Healthcare & Insurance</button>
   </div>
 
   <!-- Advanced Metric Filters Bar -->
@@ -70,6 +103,26 @@
       <input type="checkbox" id="lowWasteCheck" onchange="applyFilters()">
       <span>♻️ Circular / Low Waste Only</span>
     </label>
+
+    <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; cursor: pointer; color: #047857; font-weight: 700;">
+      <input type="checkbox" id="zeroSiphonCheck" onchange="applyFilters()">
+      <span>🛡️ Zero Elite Siphon (Co-ops / ESOPs)</span>
+    </label>
+  </div>
+
+  <!-- The Wealth Siphon Context Callout -->
+  <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #be123c; border-radius: 0.5rem; padding: 0.85rem 1.25rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+    <div>
+      <div style="font-weight: 800; font-size: 0.9rem; color: #0f172a; display: flex; align-items: center; gap: 0.4rem;">
+        <span>⚠️</span> The Top 10% Wealth Siphon Reality
+      </div>
+      <div style="font-size: 0.82rem; color: #475569; margin-top: 0.2rem; max-width: 900px; line-height: 1.45;">
+        Federal Reserve data confirms that the richest 10% of Americans own ~90% of corporate equities. When brands pay out dividends or buy back shares, that cash is captured by custodial giants (BlackRock, Vanguard, State Street) and handed to the top 10%. Check the <strong>Top 10% Siphon Index</strong> below to see each brand's capital leakage.
+      </div>
+    </div>
+    <a href="/flows" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.35rem 0.75rem; white-space: nowrap; color: #be123c; border-color: #fecdd3; background: #fff1f2; font-weight: 700;">
+      View Macro Timeline &rarr;
+    </a>
   </div>
 
   <!-- Flow Visual Key -->
@@ -79,7 +132,7 @@
     </div>
     <div class="flow-legend-row" style="margin: 0;">
       <div class="flow-legend-item"><span class="flow-dot" style="background: #16a34a;"></span> <strong>Workers:</strong> Frontline Wages</div>
-      <div class="flow-legend-item"><span class="flow-dot" style="background: #9333ea;"></span> <strong>Execs:</strong> CEO & Packages</div>
+      <div class="flow-legend-item"><span class="flow-dot" style="background: #9333ea;"></span> <strong>CEO pay:</strong> Proxy statement</div>
       <div class="flow-legend-item"><span class="flow-dot" style="background: #dc2626;"></span> <strong>Shareholders:</strong> Buybacks & Dividends</div>
       <div class="flow-legend-item"><span class="flow-dot" style="background: #0284c7;"></span> <strong>Ads:</strong> Marketing & Commercials</div>
     </div>
@@ -87,7 +140,7 @@
 
   <!-- Header with Live Match Count -->
   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.5rem;">
-    <h2 id="brandListTitle" style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">Top 2,000 Brands Directory</h2>
+    <h2 id="brandListTitle" style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">Brands Directory</h2>
     <div id="brandMatchCounter" style="font-size: 0.88rem; font-weight: 700; color: var(--primary);">Loading brands database...</div>
   </div>
 
@@ -172,14 +225,16 @@ let currentCategory = 'all';
 let currentRenderIndex = 0;
 const PAGE_SIZE = 24;
 
-// Load Top 2000 Brands JSON Bundle
+// Load brands JSON bundle
 async function loadBrandsData() {
   const counter = document.getElementById("brandMatchCounter");
   const candidates = [
     'api/v1/brands_top2000.json',
+    'api/v1/brands/database.json',
     '/shoptegrity-site/api/v1/brands_top2000.json',
+    '/shoptegrity-site/api/v1/brands/database.json',
     '/api/v1/brands_top2000.json',
-    '/v1/brands/database?limit=2000'
+    '/v1/brands/database?limit=1000'
   ];
 
   for (const url of candidates) {
@@ -242,11 +297,19 @@ function applyFilters() {
   const lowWaste = document.getElementById("lowWasteCheck").checked;
 
   filteredBrands = allBrands.filter(b => {
-    // Search query matches brand name, parent company, or swap
-    const matchName = b.name.toLowerCase().includes(query);
-    const matchParent = (b.parent_company || "").toLowerCase().includes(query);
-    const matchSwap = (b.swap_name || "").toLowerCase().includes(query);
-    const matchesQuery = !query || matchName || matchParent || matchSwap;
+    const cleanQuery = query.toLowerCase();
+    const queryNoSpace = cleanQuery.replace(/[\s\-_&]/g, "");
+    const queryWords = cleanQuery.split(/\s+/).filter(Boolean);
+
+    const bSwap = b.better_swap ? b.better_swap.name : "";
+    const gSwap = b.best_swap ? b.best_swap.name : "";
+    const targetFull = (b.name + " " + (b.parent_company || "") + " " + (b.swap_name || "") + " " + bSwap + " " + gSwap).toLowerCase();
+    const targetNoSpace = targetFull.replace(/[\s\-_&]/g, "");
+
+    const matchesQuery = !cleanQuery ||
+      targetFull.includes(cleanQuery) ||
+      targetNoSpace.includes(queryNoSpace) ||
+      (queryWords.length > 0 && queryWords.every(w => targetFull.includes(w)));
 
     // Sector Category
     const matchesCat = (currentCategory === 'all') || (b.category === currentCategory);
@@ -275,7 +338,14 @@ function applyFilters() {
       matchesWaste = (b.waste_rating.includes("Circular") || b.waste_rating.includes("Low Waste"));
     }
 
-    return matchesQuery && matchesCat && matchesGrade && matchesShareholder && matchesLabor && matchesWaste;
+    // Zero Siphon (Worker-Owned / Co-op)
+    const zeroSiphon = document.getElementById("zeroSiphonCheck")?.checked;
+    let matchesZeroSiphon = true;
+    if (zeroSiphon) {
+      matchesZeroSiphon = (b.ownership_type === 'worker_esop' || b.ownership_type === 'cooperative' || b.ownership_type === 'purpose_trust');
+    }
+
+    return matchesQuery && matchesCat && matchesGrade && matchesShareholder && matchesLabor && matchesWaste && matchesZeroSiphon;
   });
 
   // Reset pagination and render first page
@@ -317,6 +387,22 @@ function renderNextBatch() {
       wasteClass = "badge-waste-circular";
     }
 
+    // Values may be null: the publication gate withholds anything without a source.
+    const pct = (v, digits = 1) => (v === null || v === undefined) ? 'n/a' : `${Number(v).toFixed(digits)}%`;
+    const w = (v, scale = 1) => (v === null || v === undefined) ? 0 : v * scale;
+    const basis = b.split_basis || {};
+    const estTag = (field) => basis[field] === 'estimate' ? ' <span title="Shoptegrity estimate, not a reported figure" style="font-size:0.65rem;color:#64748b;">(est.)</span>' : '';
+    const hasSplit = b.worker_wages_pct !== null && b.worker_wages_pct !== undefined;
+    const receipt = b.sec_receipt_details;
+    const withheldCount = (b.withheld_claims || []).length;
+    const src = b.claim_sources || {};
+    const srcLink = (field) => src[field] ? ` <a href="${src[field].url}" target="_blank" rel="noopener noreferrer" title="${src[field].citation}" style="color:#0284c7;">[source]</a>` : '';
+
+    // Ownership index (Shoptegrity estimate) only when shareholder payout comes from a filing or ownership structure.
+    const siphonPct = (b.shareholder_extraction_pct === null || b.shareholder_extraction_pct === undefined) ? null
+      : Math.min(96, Math.max(78, Math.round(85 + (b.shareholder_extraction_pct * 0.4))));
+    const isCoopOrEsop = (b.ownership_type === 'worker_esop' || b.ownership_type === 'cooperative' || b.ownership_type === 'purpose_trust');
+
     card.innerHTML = `
       <div class="card-header" style="margin-bottom: 0.5rem;">
         <div>
@@ -325,97 +411,174 @@ function renderNextBatch() {
             ${b.parent_company}
             <span style="background: #f1f5f9; padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.72rem; text-transform: uppercase;">${b.ownership_type}</span>
           </div>
-          ${b.data_provenance === 'verified_sec_filing' ? `
+          ${receipt ? `
             <div style="margin-top: 0.35rem; display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
               <span style="background: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; font-size: 0.72rem; font-weight: 750; padding: 0.12rem 0.45rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.25rem;">
-                🏛️ Audited SEC Form 10-K & DEF 14A
+                🏛️ Financials from SEC Form 10-K (FY ended ${receipt.fiscal_year_end})
               </span>
-              ${b.sec_url ? `<a href="${b.sec_url}" target="_blank" rel="noopener noreferrer" style="font-size: 0.72rem; color: #0284c7; text-decoration: underline; font-weight: 600;">SEC EDGAR &rarr;</a>` : ''}
+              <a href="${receipt.filing_url}" target="_blank" rel="noopener noreferrer" style="font-size: 0.72rem; color: #0284c7; text-decoration: underline; font-weight: 600;">View filing &rarr;</a>
             </div>
           ` : `
             <div style="margin-top: 0.35rem;">
               <span style="background: #f8fafc; border: 1px solid #e2e8f0; color: #64748b; font-size: 0.68rem; font-weight: 600; padding: 0.1rem 0.4rem; border-radius: 9999px;">
-                📊 Sector Benchmark Model
+                ${hasSplit ? '📊 Curated profile · dollar split is a Shoptegrity estimate' : '📋 Ownership profile · no verified financials yet'}
               </span>
             </div>
           `}
         </div>
         <div style="text-align: right;">
-          <span class="grade-badge ${gradeClass}">${b.grade} (${b.composite_score})</span>
+          <span class="grade-badge ${gradeClass}" title="${b.rating_type || 'Shoptegrity opinion rating'}">${b.grade} (${b.composite_score})</span>
+          <div style="font-size: 0.62rem; color: var(--muted); margin-top: 0.2rem;"><a href="/methodology" style="color: inherit;">Our rating &middot; how we grade</a></div>
         </div>
       </div>
 
-      <!-- 4-Part Revenue Flow Split Bar -->
+      <!-- Revenue Flow Split Bar -->
+      ${hasSplit ? `
       <div class="brand-flow-container">
         <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--slate);">
           <span>Where $100 Goes:</span>
-          <span>Workers: ${b.worker_wages_pct}% | Shareholders: ${b.shareholder_extraction_pct}%</span>
+          <span>Workers: ${pct(b.worker_wages_pct)}${estTag('worker_wages_pct')} | Shareholders: ${pct(b.shareholder_extraction_pct)}</span>
         </div>
-        <div class="brand-split-bar" title="Workers: ${b.worker_wages_pct}% | Execs: ${b.exec_comp_pct}% | Shareholders: ${b.shareholder_extraction_pct}% | Ads: ${b.marketing_ads_pct}%">
-          <div class="brand-split-seg seg-workers" style="width: ${b.worker_wages_pct}%;" title="Worker Wages: ${b.worker_wages_pct}%">
+        <div class="brand-split-bar" title="Workers: ${pct(b.worker_wages_pct)} | CEO pay: ${pct(b.exec_comp_pct, 3)} | Shareholders: ${pct(b.shareholder_extraction_pct)} | Ads: ${pct(b.marketing_ads_pct)}">
+          <div class="brand-split-seg seg-workers" style="width: ${w(b.worker_wages_pct)}%;" title="Worker Wages (estimate): ${pct(b.worker_wages_pct)}">
             ${b.worker_wages_pct > 12 ? b.worker_wages_pct + '%' : ''}
           </div>
-          <div class="brand-split-seg seg-execs" style="width: ${b.exec_comp_pct * 2}%;" title="Executive Pay: ${b.exec_comp_pct}%"></div>
-          <div class="brand-split-seg seg-shareholders" style="width: ${b.shareholder_extraction_pct}%;" title="Shareholder Buybacks: ${b.shareholder_extraction_pct}%">
+          <div class="brand-split-seg seg-execs" style="width: ${Math.max(w(b.exec_comp_pct), b.exec_comp_pct ? 0.4 : 0)}%;" title="CEO pay (proxy statement): ${pct(b.exec_comp_pct, 3)}"></div>
+          <div class="brand-split-seg seg-shareholders" style="width: ${w(b.shareholder_extraction_pct)}%;" title="Dividends + Buybacks: ${pct(b.shareholder_extraction_pct)}">
             ${b.shareholder_extraction_pct > 12 ? b.shareholder_extraction_pct + '%' : ''}
           </div>
-          <div class="brand-split-seg seg-ads" style="width: ${b.marketing_ads_pct}%;" title="Marketing: ${b.marketing_ads_pct}%">
+          <div class="brand-split-seg seg-ads" style="width: ${w(b.marketing_ads_pct)}%;" title="Marketing (estimate): ${pct(b.marketing_ads_pct)}">
             ${b.marketing_ads_pct > 10 ? b.marketing_ads_pct + '%' : ''}
           </div>
-          <div class="brand-split-seg seg-cogs" style="flex: 1;" title="Cost of Goods / Operations"></div>
+          <div class="brand-split-seg seg-cogs" style="flex: 1;" title="Cost of Goods / Operations / Other"></div>
         </div>
         <div class="flow-legend-row">
-          <span style="color: #16a34a; font-weight: 600;">👷 Labor: ${b.worker_wages_pct}%</span>
-          <span style="color: #dc2626; font-weight: 600;">📉 Buybacks: ${b.shareholder_extraction_pct}%</span>
-          <span style="color: #0284c7;">📢 Ads: ${b.marketing_ads_pct}%</span>
+          <span style="color: #16a34a; font-weight: 600;">👷 Labor: ${pct(b.worker_wages_pct)}${estTag('worker_wages_pct')}</span>
+          <span style="color: #dc2626; font-weight: 600;">📉 Dividends + buybacks: ${pct(b.shareholder_extraction_pct)}</span>
+          <span style="color: #0284c7;">📢 Ads: ${pct(b.marketing_ads_pct)}${estTag('marketing_ads_pct')}</span>
         </div>
       </div>
+      ` : `
+      <div style="font-size: 0.76rem; color: var(--muted); background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 0.5rem 0.65rem; margin: 0.5rem 0;">
+        No verified financial breakdown published for this company yet.
+      </div>
+      `}
 
-      <!-- Audited SEC Receipt Box (if verified 10-K) -->
-      ${b.sec_receipt_details ? `
+      <!-- Top 10% Ownership Index (Shoptegrity estimate) -->
+      ${isCoopOrEsop ? `
+        <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 0.45rem 0.65rem; margin: 0.5rem 0; font-size: 0.76rem; display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: #047857; font-weight: 800; display: flex; align-items: center; gap: 0.35rem;">
+            <span>🛡️</span> No outside shareholders
+          </span>
+          <span style="color: #065f46; font-size: 0.72rem; font-weight: 600;">Member / employee owned</span>
+        </div>
+      ` : siphonPct !== null ? `
+        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 6px; padding: 0.45rem 0.65rem; margin: 0.5rem 0; font-size: 0.76rem;" title="Shoptegrity estimate based on Federal Reserve data on stock ownership by wealth percentile. See methodology.">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+            <span style="color: #9f1239; font-weight: 800; display: flex; align-items: center; gap: 0.35rem;">
+              <span>⚠️</span> Top 10% Ownership Index (est.): <strong>${siphonPct}%</strong>
+            </span>
+            <span style="color: #881337; font-size: 0.7rem; font-weight: 600;">share of payouts to top-10% households</span>
+          </div>
+          <div style="background: #fecdd3; height: 5px; border-radius: 9999px; overflow: hidden;">
+            <div style="background: linear-gradient(90deg, #f43f5e, #be123c); width: ${siphonPct}%; height: 100%;"></div>
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- SEC Filing Receipt Box (values extracted from SEC XBRL data) -->
+      ${receipt ? `
       <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.6rem 0.8rem; margin: 0.6rem 0; font-size: 0.75rem;">
         <div style="font-weight: 800; color: #0f172a; margin-bottom: 0.35rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.25rem;">
-          <span>🏛️ SEC Audited Receipts (FY${b.sec_receipt_details.filing_year || 2023})</span>
-          <span style="color: #64748b; font-size: 0.7rem; font-weight: 600;">Form 10-K & Proxy</span>
+          <span>🏛️ From SEC Filings (FY ended ${receipt.fiscal_year_end})</span>
+          <a href="${receipt.filing_url}" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-size: 0.7rem; font-weight: 600;">Form 10-K &rarr;</a>
         </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.3rem; line-height: 1.35;">
-          <div><strong>Total Revenue:</strong> ${b.sec_receipt_details.total_revenue_usd}</div>
-          <div><strong>Net Income:</strong> ${b.sec_receipt_details.net_income_usd}</div>
+          <div><strong>Total Revenue:</strong> ${receipt.total_revenue_usd}</div>
+          <div><strong>Net Income:</strong> ${receipt.net_income_usd ?? 'n/a'}</div>
+          ${receipt.total_shareholder_payout_usd ? `
           <div style="grid-column: span 2; color: #b91c1c; font-weight: 700;">
-            📉 Total Shareholder Payout: ${b.sec_receipt_details.total_shareholder_payout_usd} (${b.sec_receipt_details.shareholder_payout_pct_of_net_income}% of net profits)
+            📉 Dividends + Buybacks: ${receipt.total_shareholder_payout_usd}${receipt.shareholder_payout_pct_of_net_income !== null ? ` (${receipt.shareholder_payout_pct_of_net_income}% of net income)` : ''}
           </div>
-          <div style="color: #475569; font-size: 0.72rem;">&bull; Dividends: ${b.sec_receipt_details.shareholder_dividends_usd}</div>
-          <div style="color: #475569; font-size: 0.72rem;">&bull; Buybacks: ${b.sec_receipt_details.shareholder_buybacks_usd}</div>
-          <div style="grid-column: span 2; color: #15803d; font-weight: 650;">
-            👷 Personnel & Wages: ${b.sec_receipt_details.personnel_salaries_benefits_usd}
-          </div>
+          <div style="color: #475569; font-size: 0.72rem;">&bull; Dividends: ${receipt.shareholder_dividends_usd ?? 'not reported'}</div>
+          <div style="color: #475569; font-size: 0.72rem;">&bull; Buybacks: ${receipt.shareholder_buybacks_usd ?? 'not reported'}</div>
+          ` : ''}
+          ${receipt.ceo_compensation_usd ? `
           <div style="grid-column: span 2; color: #334155;">
-            👔 CEO: ${b.sec_receipt_details.ceo_name} (${b.sec_receipt_details.ceo_compensation_usd}) vs Median Worker ${b.sec_receipt_details.median_worker_pay_usd} &rarr; <strong>${b.sec_receipt_details.ceo_pay_ratio}:1 Ratio</strong>
-          </div>
+            👔 CEO total compensation: ${receipt.ceo_compensation_usd} (FY ended ${receipt.ceo_comp_fiscal_year_end}, <a href="${receipt.ceo_comp_filing_url}" target="_blank" rel="noopener noreferrer" style="color:#0284c7;">proxy statement</a>)
+          </div>` : ''}
         </div>
-        ${(b.sec_receipt_details.regulatory_citations && b.sec_receipt_details.regulatory_citations.length > 0) ? `
-          <div style="margin-top: 0.35rem; padding-top: 0.3rem; border-top: 1px dashed #cbd5e1; font-size: 0.7rem; color: #991b1b;">
-            <strong>⚠️ Regulatory Enforcement:</strong>
-            <ul style="margin: 0.15rem 0 0 1rem; padding: 0;">
-              ${b.sec_receipt_details.regulatory_citations.map(c => `<li>${c}</li>`).join('')}
-            </ul>
-          </div>
-        ` : ''}
       </div>
       ` : ''}
 
-      <!-- Indicators: Labor Exploitation & Waste -->
+      <!-- Ratings (opinion) & sourced facts -->
       <div style="margin: 0.4rem 0 0.6rem 0;">
-        <span class="badge-indicator ${laborClass}" title="${b.labor_summary}">
-          ${b.labor_exploitation_rating === 'Severe' ? '⚠️' : '⚖️'} Labor: ${b.labor_exploitation_rating} (${b.osha_violations_count} OSHA)
+        <span class="badge-indicator ${laborClass}" title="${b.labor_summary || 'Shoptegrity labor rating (opinion). See methodology.'}">
+          ${b.labor_exploitation_rating === 'Severe' ? '⚠️' : '⚖️'} Labor rating: ${b.labor_exploitation_rating}
         </span>
-        <span class="badge-indicator ${wasteClass}" title="${b.waste_summary}">
-          ♻️ Waste: ${b.waste_rating}
+        <span class="badge-indicator ${wasteClass}" title="${b.waste_summary || 'Shoptegrity waste rating (opinion). See methodology.'}">
+          ♻️ Waste rating: ${b.waste_rating}
         </span>
+        ${b.osha_enforcement ? `
+        <div style="font-size: 0.72rem; color: #334155; margin-top: 0.35rem; line-height: 1.35;" title="${(src.osha_violations_count || {}).citation || ''}">
+          🦺 <strong>OSHA ${b.osha_enforcement.window_start.slice(0, 4)}&ndash;${b.osha_enforcement.window_end.slice(0, 4)}:</strong>
+          ${b.osha_enforcement.violations.toLocaleString()} violations cited in ${b.osha_enforcement.inspections.toLocaleString()} inspections
+          (${b.osha_enforcement.violations_by_type.serious.toLocaleString()} serious, ${b.osha_enforcement.violations_by_type.willful} willful, ${b.osha_enforcement.violations_by_type.repeat} repeat;
+          $${Math.round(b.osha_enforcement.current_penalties_usd).toLocaleString()} in current penalties)
+          <a href="${b.osha_enforcement.search_url}" target="_blank" rel="noopener noreferrer" style="color:#0284c7;">[OSHA records]</a>
+        </div>` : (b.osha_violations_count !== null && b.osha_violations_count !== undefined ? `
+        <div style="font-size: 0.72rem; color: #334155; margin-top: 0.35rem;">🦺 ${b.osha_violations_count} OSHA violations${srcLink('osha_violations_count')}</div>` : '')}
+        ${withheldCount ? `<div style="font-size: 0.66rem; color: var(--muted); margin-top: 0.3rem;">${withheldCount} claim${withheldCount === 1 ? '' : 's'} pending source verification &middot; <a href="/corrections" style="color: inherit;">report an error</a></div>` : ''}
       </div>
 
-      <!-- Recommended Swap Box -->
-      ${b.swap_name ? `
+      <!-- Recommended Swaps: Dual Options (Better vs. Best) -->
+      ${(b.is_champion || b.composite_score >= 90 || (isCoopOrEsop && !b.better_swap)) ? `
+      <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #16a34a; border-radius: 0.5rem; padding: 0.75rem 0.85rem; margin: 0.5rem 0;">
+        <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;">
+          <span class="swap-badge-best" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">🌟 Exemplary Model</span>
+          <span class="swap-meta-pill" style="font-size: 0.72rem; color: #15803d; font-weight: 700;">Top-Tier Ethical Benchmark</span>
+        </div>
+        <p style="font-size: 0.79rem; color: #166534; margin: 0; line-height: 1.35;">
+          ${b.swap_rationale || "You are already supporting a gold-standard ethical alternative with worker/community governance and zero Wall Street extraction."}
+        </p>
+      </div>
+      ` : (b.better_swap || b.best_swap) ? `
+      <div class="swap-dual-container" style="margin: 0.5rem 0; gap: 0.6rem;">
+        ${b.better_swap ? `
+        <div class="swap-card-better" style="padding: 0.7rem 0.85rem;">
+          <div class="swap-tier-header" style="margin-bottom: 0.25rem;">
+            <span class="swap-badge-better">⚡ Better Swap</span>
+            <span class="swap-meta-pill" style="font-size: 0.7rem;">${b.better_swap.price_level || 'Price & Format Parity'}</span>
+          </div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #0369a1; margin: 0 0 0.2rem 0;">${b.better_swap.name}</h4>
+          <p style="font-size: 0.78rem; color: #334155; margin: 0 0 0.35rem 0; line-height: 1.35;">
+            <strong>Drop-in Ease:</strong> ${b.better_swap.experience || b.better_swap.rationale}
+          </p>
+          <div class="swap-meta-footer" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; border-top: 1px dashed #bae6fd; padding-top: 0.25rem; margin-top: 0.25rem;">
+            <span style="color: #0369a1; font-weight: 750;">${b.better_swap.score || 'Grade B+'} &bull; Accessible</span>
+            <span style="color: #0284c7; font-weight: 600;">Low Friction &rarr;</span>
+          </div>
+        </div>
+        ` : ''}
+
+        ${b.best_swap ? `
+        <div class="swap-card-best" style="padding: 0.7rem 0.85rem;">
+          <div class="swap-tier-header" style="margin-bottom: 0.25rem;">
+            <span class="swap-badge-best">🏆 Best Swap</span>
+            <span class="swap-meta-pill" style="font-size: 0.7rem;">${b.best_swap.price_level || 'Highest Community Impact'}</span>
+          </div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #15803d; margin: 0 0 0.2rem 0;">${b.best_swap.name}</h4>
+          <p style="font-size: 0.78rem; color: #334155; margin: 0 0 0.35rem 0; line-height: 1.35;">
+            <strong>Deep Impact:</strong> ${b.best_swap.experience || b.best_swap.rationale}
+          </p>
+          <div class="swap-meta-footer" style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; border-top: 1px dashed #bbf7d0; padding-top: 0.25rem; margin-top: 0.25rem;">
+            <span style="color: #15803d; font-weight: 750;">${b.best_swap.score || 'Grade A+'} &bull; 0% Wall St</span>
+            <span style="color: #16a34a; font-weight: 600;">Maximum Retention &rarr;</span>
+          </div>
+        </div>
+        ` : ''}
+      </div>
+      ` : b.swap_name ? `
       <div class="swap-callout-box">
         <div style="font-weight: 750; font-size: 0.82rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.35rem;">
           <span>🔄 Recommended Swap:</span>
@@ -425,9 +588,10 @@ function renderNextBatch() {
       </div>
       ` : ''}
 
-      <div style="margin-top: auto; padding-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem;">
+      <div style="margin-top: auto; padding-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
         <span style="font-size: 0.75rem; color: var(--muted);">${b.category}</span>
-        <div style="display: flex; gap: 0.4rem;">
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
+          ${b.category === 'Healthcare & Health Insurance' ? `<a href="/healthcare?q=${encodeURIComponent(b.name)}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.55rem; color: #047857; border-color: #a7f3d0; background: #ecfdf5; font-weight: 700;">🏥 Healthcare Compare &rarr;</a>` : ''}
           ${b.sec_url ? `<a href="${b.sec_url}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.55rem; color: #0369a1; border-color: #bae6fd;">🏛️ SEC EDGAR &rarr;</a>` : ''}
           ${b.is_major_retailer ? `<a href="/swaps#retailer-${b.slug}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.55rem;">Retailer Swaps &rarr;</a>` : ''}
         </div>

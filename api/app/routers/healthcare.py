@@ -19,11 +19,11 @@ def get_healthcare_database(
     state: Optional[str] = Query(None, description="Filter by two-letter state code"),
     min_claims_denial: Optional[float] = Query(None, description="Filter entities with claims denial rate >= pct"),
     min_markup: Optional[float] = Query(None, description="Filter entities with charge-to-cost markup >= x"),
-    limit: int = Query(50, le=2000),
+    limit: int = Query(50, le=1000),
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
-    """Query the 2,000 healthcare entities integrity database with full financial splits and clinical metrics."""
+    """Query the healthcare integrity database. Unsourced claims are withheld (null) and listed in withheld_claims."""
     query = db.query(HealthcareIntegrity)
 
     if q:
@@ -127,14 +127,14 @@ def compare_healthcare_entities(
             "tier": winner.ownership_tier,
             "score": winner.composite_score,
             "grade": winner.grade,
-            "rationale": f"{winner.name} retains {winner.clinical_care_wages_pct}% of revenue for frontline clinical care with 0% Wall Street shareholder extraction."
+            "rationale": f"{winner.name} has the highest Shoptegrity rating ({winner.composite_score}/100) among the entities compared.",
         }
     }
 
 
 @router.get("/stats")
 def get_healthcare_stats(db: Session = Depends(get_db)):
-    """Summary statistics across the 2,000 healthcare entities database."""
+    """Summary statistics across the healthcare database (averages skip withheld values)."""
     total = db.query(HealthcareIntegrity).count()
 
     type_counts = dict(
@@ -226,4 +226,9 @@ def serialize_entity(r: HealthcareIntegrity) -> Dict[str, Any]:
         "source_citation": r.source_citation,
         "filing_url": r.filing_url,
         "summary_notes": r.summary_notes,
+        "sec_receipt_details": r.sec_receipt_details,
+        "claim_sources": r.claim_sources or {},
+        "withheld_claims": r.withheld_claims or [],
+        "split_basis": r.split_basis or {},
+        "rating_type": r.rating_type,
     }

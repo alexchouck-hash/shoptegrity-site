@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 
 from api.app.db.session import init_db
-from api.app.routers import brands, food_chain, swaps, flows, local, methodology, web_views, parent_feed, healthcare
+from api.app.routers import brands, food_chain, swaps, flows, local, methodology, web_views, parent_feed, healthcare, housing, community
 
 
 @asynccontextmanager
@@ -36,6 +36,10 @@ static_dir = Path(__file__).parent.parent.parent / "web" / "static"
 if static_dir.exists():
     app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
 
+api_v1_dir = Path(__file__).parent.parent.parent / "api" / "v1"
+if api_v1_dir.exists():
+    app.mount("/api/v1", StaticFiles(directory=str(api_v1_dir)), name="api_v1")
+
 # Mount REST API routers
 app.include_router(brands.router)
 app.include_router(food_chain.router)
@@ -45,6 +49,8 @@ app.include_router(local.router)
 app.include_router(methodology.router)
 app.include_router(parent_feed.router)
 app.include_router(healthcare.router)
+app.include_router(housing.router)
+app.include_router(community.router)
 
 # Mount interactive HTML web portal views
 app.include_router(web_views.router)

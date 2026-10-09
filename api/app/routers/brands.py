@@ -12,18 +12,18 @@ router = APIRouter(prefix="/v1/brands", tags=["Brands & Scorecards"])
 
 
 @router.get("/database")
-def get_top_2000_brands_database(
+def get_brands_database(
     q: Optional[str] = Query(None, description="Search by brand name or parent company"),
     category: Optional[str] = Query(None, description="Filter by sector category"),
     grade: Optional[str] = Query(None, description="Filter by grade: A+, A, B, C, D, F"),
     labor_risk: Optional[str] = Query(None, description="Filter by labor risk: Fair, Low, Moderate, High, Severe"),
     waste_rating: Optional[str] = Query(None, description="Filter by waste rating"),
     min_shareholder_extraction: Optional[float] = Query(None, description="Filter brands with shareholder extraction >= pct"),
-    limit: int = Query(50, le=2000),
+    limit: int = Query(50, le=1000),
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
-    """Query the 2,000-brand integrity database with full financial splits and environmental metrics."""
+    """Query the brand integrity database. Unsourced claims are withheld (null) and listed in withheld_claims."""
     query = db.query(BrandIntegrity)
 
     if q:
@@ -82,11 +82,18 @@ def get_top_2000_brands_database(
                 "swap_name": r.swap_name,
                 "swap_slug": r.swap_slug,
                 "swap_rationale": r.swap_rationale,
+                "better_swap": r.better_swap,
+                "best_swap": r.best_swap,
                 "is_major_retailer": r.is_major_retailer,
                 "retailer_details": r.retailer_details,
                 "data_provenance": r.data_provenance,
                 "sec_url": r.sec_url,
                 "sec_receipt_details": r.sec_receipt_details,
+                "claim_sources": r.claim_sources or {},
+                "withheld_claims": r.withheld_claims or [],
+                "split_basis": r.split_basis or {},
+                "rating_type": r.rating_type,
+                "osha_enforcement": r.osha_enforcement,
             }
             for r in records
         ],
@@ -124,10 +131,17 @@ def get_major_retailers(db: Session = Depends(get_db)):
             "swap_name": r.swap_name,
             "swap_slug": r.swap_slug,
             "swap_rationale": r.swap_rationale,
+            "better_swap": r.better_swap,
+            "best_swap": r.best_swap,
             "retailer_details": r.retailer_details,
             "data_provenance": r.data_provenance,
             "sec_url": r.sec_url,
             "sec_receipt_details": r.sec_receipt_details,
+            "claim_sources": r.claim_sources or {},
+            "withheld_claims": r.withheld_claims or [],
+            "split_basis": r.split_basis or {},
+            "rating_type": r.rating_type,
+            "osha_enforcement": r.osha_enforcement,
         }
         for r in retailers
     ]

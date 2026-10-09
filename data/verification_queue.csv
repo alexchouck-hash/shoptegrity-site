@@ -1,0 +1,635 @@
+dataset,record,owner,field,withheld_value,reason
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",osha_violations_count,312,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",nlrb_complaints_count,89,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",living_wage_certified,False,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",labor_summary,"Extensive history of wage suppression, aggressive anti-union retaliation, and heavy reliance on public assistance (SNAP/Medicaid) for staff survival.",no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",packaging_type,Excess Virgin Single-Use Plastic,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",repairability_score,2,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",landfill_diverted_pct,28.0,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",waste_summary,Massive global supply chain footprint; heavy distribution of non-repairable disposable consumer goods wrapped in virgin plastic films.,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",retailer_details.worker_wage_floor,$14.00/hr,no per-claim source
+brands,Walmart,"Walmart Inc. (Public: WMT, CIK: 0000104169)",retailer_details.ceo_pay_ratio,992,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",osha_violations_count,142,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",nlrb_complaints_count,38,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",living_wage_certified,False,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",labor_summary,"Base pay raised to $15/hr, but widely criticized for involuntary part-time scheduling (under 30 hrs/week) to restrict health benefits eligibility.",no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",packaging_type,Excess Virgin Plastic & Fast Fashion Packaging,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",repairability_score,3,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",landfill_diverted_pct,39.0,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",waste_summary,Heavy reliance on fast-fashion private label lines and seasonal home decor with rapid turnover and landfill disposal.,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",retailer_details.worker_wage_floor,$15.00/hr,no per-claim source
+brands,Target,"Target Corporation (Public: TGT, CIK: 0000027419)",retailer_details.ceo_pay_ratio,738,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",osha_violations_count,48,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",nlrb_complaints_count,6,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",living_wage_certified,True,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",labor_summary,"Industry benchmark for retail wages ($26/hr avg), comprehensive health benefits for 90%+ of staff, and strong employee retention.",no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",packaging_type,Bulk Multi-Packs (Moderate Plastic Film),no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",repairability_score,5,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",landfill_diverted_pct,54.0,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",waste_summary,"Bulk packaging reduces unit packaging waste relative to convenience stores, though heavy shrink wrap and large plastic containers persist.",no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",retailer_details.worker_wage_floor,$19.50/hr,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",retailer_details.ceo_pay_ratio,335,no per-claim source
+brands,Costco Wholesale,"Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",exec_comp_pct,1.1,no filing
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",osha_violations_count,480,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",nlrb_complaints_count,142,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",living_wage_certified,False,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",labor_summary,"Extreme warehouse injury rates twice the retail average, automated firings, aggressive union-busting consultancy contracts, and delivery driver surveillance.",no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",packaging_type,Billions of Single-Use Plastic Mailers & Cartons,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",repairability_score,2,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",landfill_diverted_pct,21.0,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",waste_summary,"Generates over 700 million pounds of plastic packaging waste annually, alongside widespread destruction of unsold returns.",no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",retailer_details.worker_wage_floor,$17.00/hr,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",retailer_details.ceo_pay_ratio,900,no per-claim source
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",shareholder_extraction_pct,3.8,no filing
+brands,Amazon / Whole Foods,"Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",exec_comp_pct,3.1,no filing
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",osha_violations_count,215,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",nlrb_complaints_count,62,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",living_wage_certified,False,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",labor_summary,Frequent worker strikes over stagnant wages and health benefit cuts; Economic Roundtable report found 14% of Kroger grocery workers experienced homelessness.,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",packaging_type,Single-Use Plastic Produce Bags & Clamshells,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",repairability_score,3,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",landfill_diverted_pct,34.0,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",waste_summary,Extensive perishable food waste and excessive reliance on non-recyclable clamshell packaging.,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",retailer_details.worker_wage_floor,$14.50/hr,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",retailer_details.ceo_pay_ratio,670,no per-claim source
+brands,The Kroger Co.,"The Kroger Co. (Public: KR, CIK: 0000056873)",exec_comp_pct,2.5,no filing
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",osha_violations_count,420,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",nlrb_complaints_count,55,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",living_wage_certified,False,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",labor_summary,"Designated as an OSHA 'Severe Violator' after racking up over $21 million in safety fines for blocked exits, fire hazards, and solo-clerk staffing vulnerabilities.",no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",packaging_type,Miniaturized Single-Use Plastic Wraps,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",repairability_score,1,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",landfill_diverted_pct,14.0,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",waste_summary,Miniaturized portion packaging leads to the highest plastic packaging-to-product ratio in the retail sector.,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",retailer_details.worker_wage_floor,$11.00/hr,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",retailer_details.ceo_pay_ratio,980,no per-claim source
+brands,Dollar General,"Dollar General Corporation (Public: DG, CIK: 0000029534)",exec_comp_pct,3.4,no filing
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",osha_violations_count,110,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",nlrb_complaints_count,29,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",living_wage_certified,False,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",labor_summary,Consistently aggressive anti-union messaging for store workers; massive multi-billion-dollar stock repurchases prioritize hedge funds over floor wages.,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",packaging_type,Heavy Plastic Blister Packs & Pallet Shrink Wrap,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",repairability_score,4,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",landfill_diverted_pct,42.0,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",waste_summary,Extensive single-use plastic packaging on consumer hardware and reliance on chemically treated non-recyclable lumber.,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",retailer_details.worker_wage_floor,$15.00/hr,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",retailer_details.ceo_pay_ratio,520,no per-claim source
+brands,The Home Depot,"The Home Depot Inc. (Public: HD, CIK: 0000354950)",exec_comp_pct,2.2,no filing
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),osha_violations_count,6,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),nlrb_complaints_count,0,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),living_wage_certified,True,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),labor_summary,"100% employee-owned through an ESOP. Workers earn robust retirement pensions (often exceeding $500,000 to $1M upon retirement) with transparent, democratic oversight.",no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),packaging_type,Extensive Bulk Bins (Bring Your Own Bags),no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),repairability_score,8,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),landfill_diverted_pct,82.0,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),waste_summary,"Famous for expansive bulk food bin aisles that drastically cut single-use plastic packaging, combined with no credit-card transaction fee savings passed to shoppers.",no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),retailer_details.annual_revenue,$8.5 Billion,no filing or citation
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),retailer_details.shareholder_payouts_annual,$0.00 (100% distributed into employee retirement accounts),no filing or citation
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),retailer_details.worker_wage_floor,$18.50/hr,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),retailer_details.ceo_pay_ratio,18,no per-claim source
+brands,WinCo Foods,WinCo Foods Holdings (100% Employee-Owned ESOP),exec_comp_pct,0.4,no filing
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),osha_violations_count,12,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),nlrb_complaints_count,1,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),living_wage_certified,True,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),labor_summary,Stores are owned by independent local community merchants rather than Wall Street conglomerates; profits stay within local municipal tax bases.,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),packaging_type,Hardware Bin Sourcing & Tool Repair Stations,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),repairability_score,9,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),landfill_diverted_pct,74.0,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),waste_summary,"Stores emphasize tool repair, blade sharpening, and loose hardware bin purchasing rather than disposable plastic blister packs.",no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),retailer_details.annual_revenue,$9.1 Billion,no filing or citation
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),retailer_details.shareholder_payouts_annual,$0.00 Wall Street extraction (patronage dividends returned to local store owners),no filing or citation
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),retailer_details.worker_wage_floor,$17.00/hr,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),retailer_details.ceo_pay_ratio,24,no per-claim source
+brands,Ace Hardware,Ace Hardware Corporation (Retailer-Owned Cooperative),exec_comp_pct,0.8,no filing
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",osha_violations_count,0,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",nlrb_complaints_count,0,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",living_wage_certified,True,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",labor_summary,Executive pay legally capped at 5:1 relative to lowest-paid full-time worker; 100% fair trade certified ingredients across global smallholder farms.,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",packaging_type,100% Post-Consumer Recycled (PCR) Plastic & Refill Gallons,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",repairability_score,9,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",landfill_diverted_pct,95.0,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",waste_summary,Pioneer of 100% PCR plastic bottles and bar soap wrapped in 100% recycled paper packaging printed with soy inks.,no per-claim source
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",shareholder_extraction_pct,0.0,no filing
+brands,Dr. Bronner's,"All-One God Faith, Inc. (Certified B Corp)",exec_comp_pct,0.6,no filing
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),osha_violations_count,0,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),nlrb_complaints_count,0,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),living_wage_certified,True,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),labor_summary,100% employee-owned certified B Corp with an audited living wage floor and transparent governance.,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),packaging_type,100% Unbleached Compostable Paper Bags,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),repairability_score,9,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),landfill_diverted_pct,91.0,no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),waste_summary,"Flour and mixes packaged in 100% recyclable, plastic-free paper packaging with regenerative wheat sourcing.",no per-claim source
+brands,King Arthur Baking,King Arthur Baking Company (100% Employee-Owned ESOP & B Corp),exec_comp_pct,0.5,no filing
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),osha_violations_count,1,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),nlrb_complaints_count,0,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),living_wage_certified,True,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),labor_summary,"Founder Bob Moore gifted 100% of the enterprise to workers in an ESOP trust, rejecting multi-hundred-million buyout offers from conglomerates.",no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),packaging_type,Recyclable Polymer Bags & Bulk Sacks,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),repairability_score,8,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),landfill_diverted_pct,86.0,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),waste_summary,Minimal secondary packaging and zero food waste sent to municipal landfills through livestock feed repurposing.,no per-claim source
+brands,Bob's Red Mill,Bob's Red Mill Natural Foods (100% Employee-Owned ESOP),exec_comp_pct,0.4,no filing
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),osha_violations_count,0,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),nlrb_complaints_count,0,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),living_wage_certified,True,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),labor_summary,Democratic worker cooperative where every worker has one equal vote; long-term contracts and pre-harvest financing with smallholder farmer co-ops.,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),packaging_type,Compostable & Recyclable Packaging,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),repairability_score,9,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),landfill_diverted_pct,89.0,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),waste_summary,Regenerative organic shade-grown coffee and cacao with zero synthetic agricultural chemicals.,no per-claim source
+brands,Equal Exchange,Equal Exchange (Worker-Owned Cooperative),exec_comp_pct,0.5,no filing
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),osha_violations_count,0,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),nlrb_complaints_count,0,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),living_wage_certified,True,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),labor_summary,100% of voting stock transferred to Holdfast Collective; fair trade certified factories and audited living wages across the tier-1 supply chain.,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),packaging_type,Recycled & Recyclable Garment Bags,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),repairability_score,10,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),landfill_diverted_pct,94.0,no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),waste_summary,"Worn Wear program repairs over 100,000 garments annually; ironclad lifetime guarantee designed to end fast fashion landfill dumping.",no per-claim source
+brands,Patagonia,Holdfast Collective (Purpose Trust / Nonprofit),exec_comp_pct,1.1,no filing
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),osha_violations_count,1,no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),nlrb_complaints_count,0,no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),living_wage_certified,True,no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),labor_summary,"Owned by over 1,600 small family farmers who set their own stable pay price, insulating family dairies from corporate commodity speculation.",no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),packaging_type,Recyclable Paper Cartons & Jugs,no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),repairability_score,8,no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),landfill_diverted_pct,84.0,no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),waste_summary,"100% pasture-raised organic standards, zero synthetic hormones, and dedicated carbon reduction programs.",no per-claim source
+brands,Organic Valley,CROPP Cooperative (Farmer-Owned Cooperative),exec_comp_pct,0.7,no filing
+brands,Fairphone,Fairphone B.V. (Certified B Corp),osha_violations_count,0,no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),nlrb_complaints_count,0,no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),living_wage_certified,True,no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),labor_summary,"Pays living wage bonuses to electronics assembly workers and sources fair-trade certified gold, conflict-free tungsten, and recycled rare earths.",no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),packaging_type,100% Plastic-Free Minimal Paper Packaging,no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),repairability_score,10,no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),landfill_diverted_pct,96.0,no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),waste_summary,"iFixit 10/10 repairability rating with easily replaceable modular parts (battery, screen, camera) and guaranteed 8-year software support.",no per-claim source
+brands,Fairphone,Fairphone B.V. (Certified B Corp),shareholder_extraction_pct,0.0,no filing
+brands,Fairphone,Fairphone B.V. (Certified B Corp),exec_comp_pct,1.2,no filing
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",osha_violations_count,14,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",nlrb_complaints_count,18,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",living_wage_certified,False,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",labor_summary,DOJ antitrust action for vertical consolidation of doctors via Optum; AI algorithm claims denials for post-acute patient care.,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",packaging_type,Digital Health Portal & Cards,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",repairability_score,8,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",landfill_diverted_pct,72.0,no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",waste_summary,"Low packaging waste, but massive bureaucratic billing denial paperwork and clinical resource diversion.",no per-claim source
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",sec_receipt_details.personnel_salaries_benefits_usd,$217.4 Billion (Care & personnel),not in SEC XBRL data; needs citation
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",sec_receipt_details.ceo_name,Andrew Witty,not in SEC XBRL data; needs citation
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",sec_receipt_details.median_worker_pay_usd,"$62,350",not in SEC XBRL data; needs citation
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",sec_receipt_details.ceo_pay_ratio,377,not in SEC XBRL data; needs citation
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",sec_receipt_details.regulatory_citations,DOJ Antitrust Lawsuit (2024) challenging physician market dominance via Optum | Senate PSI Report (2024) on automated prior authorization algorithm denials,not in SEC XBRL data; needs citation
+brands,UnitedHealthcare,"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",exec_comp_pct,2.4,no filing
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),osha_violations_count,0,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),nlrb_complaints_count,0,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),living_wage_certified,True,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),labor_summary,100% consumer-governed cooperative with patient-elected board; no private equity or Wall Street extraction.,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),packaging_type,Digital Health Records,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),repairability_score,9,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),landfill_diverted_pct,82.0,no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),waste_summary,"High environmental sustainability across clinics, hospitals, and outpatient facilities.",no per-claim source
+brands,HealthPartners,HealthPartners Inc. (Consumer-Governed Co-op),exec_comp_pct,0.8,no filing
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),osha_violations_count,4,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),nlrb_complaints_count,6,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),living_wage_certified,True,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),labor_summary,Non-profit integrated system with unionized nurse workforce; closed-loop care model without fee-for-service friction.,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),packaging_type,Digital Health Records & Facility Solar,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),repairability_score,8,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),landfill_diverted_pct,78.0,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),waste_summary,Carbon-neutral certified operations across medical centers and regional offices.,no per-claim source
+brands,Kaiser Permanente,Kaiser Permanente (Kaiser Foundation Health Plan),exec_comp_pct,1.5,no filing
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",osha_violations_count,22,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",nlrb_complaints_count,16,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",living_wage_certified,False,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",labor_summary,Staffing ratio complaints from National Nurses United; emergency admission quotas and aggressive debt collection.,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",packaging_type,Hospital Medical Single-Use Supplies,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",repairability_score,4,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",landfill_diverted_pct,45.0,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",waste_summary,High single-use clinical supplies with low hospital recycling compliance.,no per-claim source
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",sec_receipt_details.personnel_salaries_benefits_usd,$29.2 Billion (44.9% of revenue),not in SEC XBRL data; needs citation
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",sec_receipt_details.ceo_name,Sam Hazen,not in SEC XBRL data; needs citation
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",sec_receipt_details.median_worker_pay_usd,"$59,480",not in SEC XBRL data; needs citation
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",sec_receipt_details.ceo_pay_ratio,358,not in SEC XBRL data; needs citation
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",sec_receipt_details.regulatory_citations,National Nurses United staffing ratio violation reports | DOJ investigations into trauma activation fee charges,not in SEC XBRL data; needs citation
+brands,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",exec_comp_pct,2.8,no filing
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),osha_violations_count,0,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),nlrb_complaints_count,0,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),living_wage_certified,True,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),labor_summary,100% doctor-owned local practice; flat monthly membership with 0% insurance denial bureaucracy.,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),packaging_type,Digital Health Records & Wholesale Meds,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),repairability_score,9,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),landfill_diverted_pct,85.0,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),waste_summary,Community-rooted practice with direct dispensing and minimized packaging.,no per-claim source
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),shareholder_extraction_pct,0.0,no filing
+brands,Plum Health DPC,Plum Health Direct Primary Care (Physician-Owned),exec_comp_pct,0.0,no filing
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",osha_violations_count,18,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",nlrb_complaints_count,22,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",living_wage_certified,False,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",labor_summary,FTC inquiry into CVS Caremark PBM steerage and pharmacy reimbursement cuts; pharmacy worker walkouts over understaffed retail shifts.,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",packaging_type,Pharmaceutical Bottles & Digital Cards,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",repairability_score,6,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",landfill_diverted_pct,52.0,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",waste_summary,High single-use amber prescription vials and retail receipt paper waste; digital prescription initiatives.,no per-claim source
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",sec_receipt_details.personnel_salaries_benefits_usd,$142.5 Billion (Total care & staff),not in SEC XBRL data; needs citation
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",sec_receipt_details.ceo_name,Karen S. Lynch,not in SEC XBRL data; needs citation
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",sec_receipt_details.median_worker_pay_usd,"$55,248",not in SEC XBRL data; needs citation
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",sec_receipt_details.ceo_pay_ratio,391,not in SEC XBRL data; needs citation
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",sec_receipt_details.regulatory_citations,FTC 6(b) Inquiry into Pharmacy Benefit Managers (PBMs) steering to affiliated pharmacies | State Board of Pharmacy fines across multiple states for understaffed retail quotas,not in SEC XBRL data; needs citation
+brands,Aetna,"CVS Health Corporation (Public: CVS, CIK: 0000064803)",exec_comp_pct,1.9,no filing
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",osha_violations_count,8,no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",nlrb_complaints_count,14,no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",living_wage_certified,False,no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",labor_summary,"ProPublica investigation into PXDX automated algorithm rejecting 300,000 claims with avg 1.2s per review; DOJ False Claims Act settlement.",no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",packaging_type,Digital Health Portals & Claims Records,no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",repairability_score,7,no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",landfill_diverted_pct,71.0,no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",waste_summary,"Low physical footprint, but massive systemic prior-authorization denial bureaucracy.",no per-claim source
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",sec_receipt_details.personnel_salaries_benefits_usd,$118.0 Billion (Benefits & Operations),not in SEC XBRL data; needs citation
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",sec_receipt_details.ceo_name,David Cordani,not in SEC XBRL data; needs citation
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",sec_receipt_details.median_worker_pay_usd,"$67,200",not in SEC XBRL data; needs citation
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",sec_receipt_details.ceo_pay_ratio,313,not in SEC XBRL data; needs citation
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",sec_receipt_details.regulatory_citations,DOJ $172M False Claims Act settlement (2023) for Medicare Advantage diagnosis upcoding | Senate Investigations Subcommittee probe into PBM rebate clawbacks,not in SEC XBRL data; needs citation
+brands,Cigna Healthcare,"The Cigna Group (Public: CI, CIK: 0001739940)",exec_comp_pct,2.2,no filing
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",osha_violations_count,6,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",nlrb_complaints_count,12,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",living_wage_certified,False,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",labor_summary,State insurance department penalties for systematic claims delays and inaccurate provider directories.,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",packaging_type,Digital Health Portals & Member Cards,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",repairability_score,7,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",landfill_diverted_pct,74.0,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",waste_summary,Digital claims workflow with minimal direct packaging footprint.,no per-claim source
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",sec_receipt_details.personnel_salaries_benefits_usd,$106.4 Billion (Benefit expense & care staff),not in SEC XBRL data; needs citation
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",sec_receipt_details.ceo_name,Gail K. Boudreaux,not in SEC XBRL data; needs citation
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",sec_receipt_details.median_worker_pay_usd,"$62,800",not in SEC XBRL data; needs citation
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",sec_receipt_details.ceo_pay_ratio,349,not in SEC XBRL data; needs citation
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",sec_receipt_details.regulatory_citations,Georgia Insurance Commissioner $5M fine for illegal claim delays | California DMHC penalty for systematic grievance handling violations,not in SEC XBRL data; needs citation
+brands,Anthem Blue Cross,"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",exec_comp_pct,2.1,no filing
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",osha_violations_count,5,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",nlrb_complaints_count,9,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",living_wage_certified,False,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",labor_summary,DOJ Medicare Advantage False Claims Act investigation; lawsuit over AI algorithms systematically terminating post-acute patient care.,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",packaging_type,Digital Health Cards & Portals,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",repairability_score,7,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",landfill_diverted_pct,73.0,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",waste_summary,Digital health operations with minimal physical packaging.,no per-claim source
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",sec_receipt_details.personnel_salaries_benefits_usd,$69.3 Billion (Benefits & clinical personnel),not in SEC XBRL data; needs citation
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",sec_receipt_details.ceo_name,Bruce Broussard,not in SEC XBRL data; needs citation
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",sec_receipt_details.median_worker_pay_usd,"$58,400",not in SEC XBRL data; needs citation
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",sec_receipt_details.ceo_pay_ratio,279,not in SEC XBRL data; needs citation
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",sec_receipt_details.regulatory_citations,DOJ False Claims Act investigations regarding Medicare Advantage risk adjustment upcoding | Federal class action on nH Predict automated algorithm denials,not in SEC XBRL data; needs citation
+brands,Humana,"Humana Inc. (Public: HUM, CIK: 0000049071)",exec_comp_pct,2.0,no filing
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",osha_violations_count,4,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",nlrb_complaints_count,7,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",living_wage_certified,False,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",labor_summary,Multiple state AG settlements totaling over $800M for overcharging state Medicaid programs on pharmacy benefit services.,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",packaging_type,Digital Health Portals & Member IDs,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",repairability_score,7,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",landfill_diverted_pct,70.0,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",waste_summary,Digital health operations with minimal physical waste.,no per-claim source
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",sec_receipt_details.personnel_salaries_benefits_usd,$98.5 Billion (Medical costs & administration),not in SEC XBRL data; needs citation
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",sec_receipt_details.ceo_name,Sarah London,not in SEC XBRL data; needs citation
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",sec_receipt_details.median_worker_pay_usd,"$61,500",not in SEC XBRL data; needs citation
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",sec_receipt_details.ceo_pay_ratio,302,not in SEC XBRL data; needs citation
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",sec_receipt_details.regulatory_citations,Over $800M in cumulative multistate settlements resolving Medicaid PBM overcharging allegations | CMS sanctions for marketplace plan compliance issues,not in SEC XBRL data; needs citation
+brands,Ambetter,"Centene Corporation (Public: CNC, CIK: 0001071739)",exec_comp_pct,1.9,no filing
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",osha_violations_count,19,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",nlrb_complaints_count,15,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",living_wage_certified,False,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",labor_summary,Nurse union strikes over unsafe staffing ratios; major ambulatory surgery center rollups via USPI prioritizing high-margin elective procedures.,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",packaging_type,Surgical Single-Use Packaging,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",repairability_score,4,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",landfill_diverted_pct,44.0,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",waste_summary,Extensive single-use surgical packs and medical plastics.,no per-claim source
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",sec_receipt_details.personnel_salaries_benefits_usd,"$9.29 Billion (Salaries, wages and benefits)",not in SEC XBRL data; needs citation
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",sec_receipt_details.ceo_name,Saum Sutaria,not in SEC XBRL data; needs citation
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",sec_receipt_details.median_worker_pay_usd,"$56,200",not in SEC XBRL data; needs citation
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",sec_receipt_details.ceo_pay_ratio,329,not in SEC XBRL data; needs citation
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",sec_receipt_details.regulatory_citations,Massachusetts Nurses Association 300-day strike over dangerous nurse-to-patient ratios | DOJ False Claims Act historical settlements for improper financial relationships,not in SEC XBRL data; needs citation
+brands,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",exec_comp_pct,2.5,no filing
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",osha_violations_count,8,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",nlrb_complaints_count,11,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",living_wage_certified,False,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",labor_summary,Commercial clinical laboratory duopoly with high out-of-pocket list price markups for uninsured patients.,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",packaging_type,Single-Use Specimen Tubes & Biohazard Packaging,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",repairability_score,4,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",landfill_diverted_pct,48.0,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",waste_summary,High single-use diagnostic plastics and specimen transport containers.,no per-claim source
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",sec_receipt_details.personnel_salaries_benefits_usd,$4.44 Billion (Personnel costs),not in SEC XBRL data; needs citation
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",sec_receipt_details.ceo_name,Jim Davis,not in SEC XBRL data; needs citation
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",sec_receipt_details.median_worker_pay_usd,"$51,300",not in SEC XBRL data; needs citation
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",sec_receipt_details.ceo_pay_ratio,223,not in SEC XBRL data; needs citation
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",sec_receipt_details.regulatory_citations,DOJ False Claims Act settlements for clinical laboratory testing billing disputes | CFPB complaints regarding out-of-network lab specimen collection billing,not in SEC XBRL data; needs citation
+brands,Quest Diagnostics,"Quest Diagnostics Incorporated (Public: DGX, CIK: 0001022079)",exec_comp_pct,2.2,no filing
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),osha_violations_count,14,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),nlrb_complaints_count,8,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),living_wage_certified,False,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),labor_summary,"Over 1,000 corporate dental offices; state AG settlements for deceptive denture pricing and aggressive high-interest medical credit financing.",no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),packaging_type,Single-Use Dental Supplies & Plastics,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),repairability_score,4,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),landfill_diverted_pct,42.0,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),waste_summary,Extensive single-use dental plastics and non-recyclable clinical barriers.,no per-claim source
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),shareholder_extraction_pct,20.2,no filing
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),exec_comp_pct,3.8,no filing
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),worker_wages_pct,35.0,"modeled, not from a filing"
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),marketing_ads_pct,6.5,"modeled, not from a filing"
+brands,Aspen Dental,TAG - The Aspen Group (Private Equity: Ares & Leonard Green),cogs_supply_pct,19.0,"modeled, not from a filing"
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),osha_violations_count,2,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),nlrb_complaints_count,3,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),living_wage_certified,True,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),labor_summary,World-renowned non-profit integrated group practices; salaried physicians with 0% volume-based incentive kickbacks.,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),packaging_type,Digital Health Records & Solar Facilities,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),repairability_score,8,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),landfill_diverted_pct,79.0,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),waste_summary,Robust medical waste diversion and hospital energy efficiency programs.,no per-claim source
+brands,Mayo Clinic,Mayo Clinic & Cleveland Clinic (Integrated Non-Profit Health Systems),exec_comp_pct,1.2,no filing
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",osha_violations_count,8,no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",nlrb_complaints_count,24,no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",living_wage_certified,False,no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",labor_summary,"Extensive CFPB enforcement for illegal account creation quotas, wrongful foreclosures, vehicle repossessions, and anti-union actions against bank organizing.",no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",packaging_type,Digital Financial Statements & Recycled Plastic Cards,no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",repairability_score,7,no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",landfill_diverted_pct,68.0,no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",waste_summary,"Low physical packaging footprint, but financed emissions in fossil fuel extraction exceed 100 million metric tons CO2e annually.",no per-claim source
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",sec_receipt_details.personnel_salaries_benefits_usd,$34.54 Billion (41.8% of revenue),not in SEC XBRL data; needs citation
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",sec_receipt_details.ceo_name,Charlie Scharf,not in SEC XBRL data; needs citation
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",sec_receipt_details.median_worker_pay_usd,"$76,013",not in SEC XBRL data; needs citation
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",sec_receipt_details.ceo_pay_ratio,382,not in SEC XBRL data; needs citation
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",sec_receipt_details.regulatory_citations,CFPB $3.7B Consent Order (2022/2023) for auto-loan and mortgage illegal fees | Federal Reserve Asset Cap ($1.95T Limit) active since 2018 for systemic governance failures | Good Jobs First Violation Tracker: $27.1B cumulative penalties across 255+ enforcement actions,not in SEC XBRL data; needs citation
+brands,Wells Fargo Consumer Banking,"Wells Fargo & Company (Public: WFC, CIK: 0000072971)",exec_comp_pct,2.5,no filing
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",osha_violations_count,6,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",nlrb_complaints_count,12,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",living_wage_certified,False,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",labor_summary,World's #1 fossil fuel financier ($430+ billion since Paris Accord); aggressive overdraft fees on low-balance consumers.,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",packaging_type,Digital Banking & Plastic Cards,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",repairability_score,7,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",landfill_diverted_pct,70.0,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",waste_summary,Massive direct mail solicitations and financed emissions in arctic oil and coal exploration.,no per-claim source
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",sec_receipt_details.personnel_salaries_benefits_usd,$42.20 Billion,not in SEC XBRL data; needs citation
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",sec_receipt_details.ceo_name,Jamie Dimon,not in SEC XBRL data; needs citation
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",sec_receipt_details.median_worker_pay_usd,"$90,300",not in SEC XBRL data; needs citation
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",sec_receipt_details.ceo_pay_ratio,399,not in SEC XBRL data; needs citation
+brands,JPMorgan Chase,"JPMorgan Chase & Co. (Public: JPM, CIK: 0000019617)",sec_receipt_details.regulatory_citations,Banking on Climate Chaos 2024: #1 global financier of fossil fuels ($430B+) | Good Jobs First: $39.5B cumulative penalties across 270+ enforcement records,not in SEC XBRL data; needs citation
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",osha_violations_count,5,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",nlrb_complaints_count,14,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",living_wage_certified,False,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",labor_summary,"CFPB $250M penalty in 2023 for illegally charging junk overdraft fees, withholding credit card reward points, and opening fake accounts.",no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",packaging_type,Digital Banking Statements,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",repairability_score,7,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",landfill_diverted_pct,72.0,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",waste_summary,Financed emissions in offshore oil exploration and plastic card waste.,no per-claim source
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",sec_receipt_details.personnel_salaries_benefits_usd,$38.40 Billion,not in SEC XBRL data; needs citation
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",sec_receipt_details.ceo_name,Brian Moynihan,not in SEC XBRL data; needs citation
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",sec_receipt_details.median_worker_pay_usd,"$115,000",not in SEC XBRL data; needs citation
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",sec_receipt_details.ceo_pay_ratio,252,not in SEC XBRL data; needs citation
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",sec_receipt_details.regulatory_citations,CFPB $250M Enforcement Action (July 2023) for junk fees and fake accounts | Good Jobs First: $87.5B cumulative penalties since 2000,not in SEC XBRL data; needs citation
+brands,Bank of America,"Bank of America Corp. (Public: BAC, CIK: 0000070858)",exec_comp_pct,2.1,no filing
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",osha_violations_count,14,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",nlrb_complaints_count,22,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",living_wage_certified,False,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",labor_summary,Foxconn supply chain working condition investigations in Asia; federal right-to-repair opposition and retail store union resistance.,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",packaging_type,"Minimal Plastic Packaging, High E-Waste Footprint",no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",repairability_score,4,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",landfill_diverted_pct,45.0,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",waste_summary,Serialized parts pairing and glued batteries create persistent independent repair barriers and e-waste.,no per-claim source
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",sec_receipt_details.ceo_name,Tim Cook,not in SEC XBRL data; needs citation
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",sec_receipt_details.median_worker_pay_usd,"$68,000",not in SEC XBRL data; needs citation
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",sec_receipt_details.ceo_pay_ratio,930,not in SEC XBRL data; needs citation
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",sec_receipt_details.regulatory_citations,DOJ Antitrust Lawsuit (March 2024) regarding smartphone monopoly practices | French Competition Authority €1.1B antitrust penalty,not in SEC XBRL data; needs citation
+brands,Apple iPhone,"Apple Inc. (Public: AAPL, CIK: 0000320193)",exec_comp_pct,1.6,no filing
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",osha_violations_count,82,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",nlrb_complaints_count,18,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",living_wage_certified,False,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",labor_summary,Extensive corporate marketing ($8.1B/yr) and buybacks funded by price increases; supply chain sourcing linked to Canadian boreal forest pulp clearcutting.,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",packaging_type,Virgin High-Density Polyethylene & Blister Packs,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",repairability_score,2,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",landfill_diverted_pct,27.0,no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",waste_summary,"Generates over 700,000 metric tons of single-use virgin plastic packaging annually.",no per-claim source
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",sec_receipt_details.ceo_name,Jon Moeller,not in SEC XBRL data; needs citation
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",sec_receipt_details.median_worker_pay_usd,"$72,500",not in SEC XBRL data; needs citation
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",sec_receipt_details.ceo_pay_ratio,301,not in SEC XBRL data; needs citation
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",sec_receipt_details.regulatory_citations,NRDC The Issue With Tissue Report: F-grade for boreal forest pulp clearcutting | Break Free From Plastic Audit: Top 10 corporate plastic polluter,not in SEC XBRL data; needs citation
+brands,Tide Detergent,"Procter & Gamble (Public: PG, CIK: 0000080424)",exec_comp_pct,2.1,no filing
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",osha_violations_count,65,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",nlrb_complaints_count,16,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",living_wage_certified,False,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",labor_summary,"Acquired independent organic brands (Annie's, Cascadian Farm) into conventional monoculture cereal supply chains while repurchasing $1.4B in stock.",no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",packaging_type,Plastic Cereal Liners & Poly Film Boxes,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",repairability_score,3,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",landfill_diverted_pct,38.0,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",waste_summary,Heavy reliance on unrecyclable multi-laminate cereal box liners and single-use snack pouches.,no per-claim source
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",sec_receipt_details.ceo_name,Jeff Harmening,not in SEC XBRL data; needs citation
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",sec_receipt_details.median_worker_pay_usd,"$58,000",not in SEC XBRL data; needs citation
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",sec_receipt_details.ceo_pay_ratio,284,not in SEC XBRL data; needs citation
+brands,Cheerios,"General Mills (Public: GIS, CIK: 0000040704)",sec_receipt_details.regulatory_citations,SEC Form 10-K: Shareholder distributions exceeded 110% of annual net income | OSHA inspection citations across food processing plants,not in SEC XBRL data; needs citation
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",osha_violations_count,65,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",nlrb_complaints_count,14,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",living_wage_certified,False,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",labor_summary,Extensive reliance on contract overseas apparel assembly lines; high executive compensation ($32.8M) relative to contract factory wage levels.,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",packaging_type,Shoe Boxes & Single-Use Synthetic Polybags,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",repairability_score,3,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",landfill_diverted_pct,35.0,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",waste_summary,Synthetic microfiber emissions from polyester footwear and rapid seasonal turnover of fashion sneaker drops.,no per-claim source
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",sec_receipt_details.ceo_name,John Donahoe,not in SEC XBRL data; needs citation
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",sec_receipt_details.median_worker_pay_usd,"$37,418",not in SEC XBRL data; needs citation
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",sec_receipt_details.ceo_pay_ratio,878,not in SEC XBRL data; needs citation
+brands,Nike,"NIKE, Inc. (Public: NKE, CIK: 0000320187)",sec_receipt_details.regulatory_citations,SEC Form 10-K: Shareholder distributions exceeded 117% of total net profits | Uyghur Forced Labor Prevention Act (UFLPA) supply chain monitoring,not in SEC XBRL data; needs citation
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",medical_loss_ratio_pct,83.2,no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",claims_denial_rate_pct,28.4,no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",charge_to_cost_ratio,4.2,no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",charity_care_pct,0.4,no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",regulatory_citations,DOJ Antitrust Lawsuit (2024) challenging vertical consolidation of physician practices via Optum | U.S. Senate Permanent Subcommittee on Investigations (2024) report on AI algorithm denial of post-acute care | DOL & CMS Mental Health Parity Act multiple violation citations,no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",summary_notes,"Nation's largest health insurer. Owns Optum, the largest employer of physicians in the US (>90,000 doctors), enabling extensive internal margin shifting.",no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",is_pe_rollup,False,no per-claim source
+healthcare,UnitedHealthcare (Optum),"UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",exec_comp_pct,2.4,no filing
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",medical_loss_ratio_pct,84.1,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",claims_denial_rate_pct,24.6,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",charge_to_cost_ratio,3.8,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",charity_care_pct,0.5,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",regulatory_citations,Georgia Insurance Commissioner $5M fine for illegal claim delays and provider directory inaccuracies | California Department of Managed Health Care $1.2M penalty for systematic grievance mishandling,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",summary_notes,Formerly WellPoint/Anthem. Operates for-profit commercial Blue Cross plans across 14 states with significant shareholder extraction.,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",is_pe_rollup,False,no per-claim source
+healthcare,Elevance Health (Anthem Blue Cross),"Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",exec_comp_pct,2.1,no filing
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",medical_loss_ratio_pct,83.7,no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",claims_denial_rate_pct,26.8,no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",charge_to_cost_ratio,3.9,no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",charity_care_pct,0.3,no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",regulatory_citations,"ProPublica investigation into PXDX automated algorithm rejecting 300,000 claims with avg 1.2s per review | DOJ $172M False Claims Act settlement for submitting inaccurate Medicare Advantage diagnostic codes",no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",summary_notes,Large commercial health insurer and owner of Evernorth Pharmacy Benefit Manager (Express Scripts).,no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",is_pe_rollup,False,no per-claim source
+healthcare,The Cigna Group (Cigna Healthcare),"The Cigna Group (Public: CI, CIK: 0001739940)",exec_comp_pct,2.2,no filing
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",medical_loss_ratio_pct,86.2,no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",claims_denial_rate_pct,23.1,no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",charge_to_cost_ratio,3.5,no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",charity_care_pct,0.6,no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",regulatory_citations,FTC PBM Inquiry into CVS Caremark / Aetna rebate steerage and pharmacy reimbursement suppression | State of California investigation into prior authorization delays for critical specialty medications,no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",summary_notes,"Vertically integrated healthcare conglomerate combining Aetna insurance, CVS pharmacy retail, Oak Street Health, and Caremark PBM.",no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",is_pe_rollup,False,no per-claim source
+healthcare,Aetna (CVS Health),"CVS Health Corporation (Public: CVS, CIK: 0000064803)",exec_comp_pct,1.9,no filing
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",medical_loss_ratio_pct,87.1,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",claims_denial_rate_pct,21.8,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",charge_to_cost_ratio,3.4,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",charity_care_pct,0.4,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",regulatory_citations,DOJ Medicare Advantage False Claims Act investigation into upcoding risk scores for capitation payments | Class action lawsuit regarding nH Predict algorithm used to systematically cut off post-acute rehabilitation,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",summary_notes,Primary player in privatized Medicare Advantage plans with CenterWell primary care clinic rollup platform.,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",is_pe_rollup,False,no per-claim source
+healthcare,Humana Inc.,"Humana Inc. (Public: HUM, CIK: 0000049071)",exec_comp_pct,2.0,no filing
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),medical_loss_ratio_pct,92.4,no per-claim source
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),claims_denial_rate_pct,5.2,no per-claim source
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),charge_to_cost_ratio,1.9,no per-claim source
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),charity_care_pct,4.8,no per-claim source
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),summary_notes,"Consumer-owned healthcare organization integrating dental, medical clinics, hospitals, and non-profit health plans.",no per-claim source
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),is_pe_rollup,False,no per-claim source
+healthcare,HealthPartners / Health Partners Plan & Clinics,HealthPartners Inc. / Health Partners (Consumer-Governed Co-op),exec_comp_pct,0.8,no filing
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,medical_loss_ratio_pct,91.0,no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,claims_denial_rate_pct,7.8,no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,charge_to_cost_ratio,2.2,no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,charity_care_pct,4.2,no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,regulatory_citations,"California DMHC settlement (2023) for behavioral health appointment accessibility delays and fines of $50M | Historic 75,000-worker Coalition of Kaiser Permanente Unions strike (October 2023) resolving staffing ratios",no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,summary_notes,Large integrated non-profit managed care consortium. Closed-loop system eliminates insurance fee-for-service friction.,no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,is_pe_rollup,False,no per-claim source
+healthcare,Kaiser Permanente (Kaiser Foundation Health Plan),Kaiser Foundation Hospitals & Health Plan,exec_comp_pct,1.5,no filing
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",medical_loss_ratio_pct,89.4,no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",claims_denial_rate_pct,11.8,no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",charge_to_cost_ratio,2.5,no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",charity_care_pct,2.1,no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",regulatory_citations,Illinois Department of Insurance examination penalty for timely claims payment compliance,no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",summary_notes,"Largest customer-owned health insurance company in the United States, operating as Blue Cross Blue Shield in 5 states.",no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",is_pe_rollup,False,no per-claim source
+healthcare,Health Care Service Corporation (HCSC Mutual),"Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",exec_comp_pct,1.4,no filing
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",medical_loss_ratio_pct,68.0,no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",claims_denial_rate_pct,0.0,no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",charge_to_cost_ratio,9.4,no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",charity_care_pct,1.2,no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",regulatory_citations,SEIU & National Nurses United staff report (2023) documenting systematic nurse understaffing inflating margins | DOJ Investigation into emergency room admission quotas and trauma center fee upcoding | $3.9B in share repurchases and dividends in FY2023 while cutting charity care thresholds,no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",summary_notes,"Largest for-profit healthcare provider in the United States, operating 186 hospitals and over 2,400 ambulatory sites.",no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",is_pe_rollup,False,no per-claim source
+healthcare,HCA Healthcare,"HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",exec_comp_pct,2.8,no filing
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",medical_loss_ratio_pct,69.5,no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",charge_to_cost_ratio,8.7,no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",charity_care_pct,1.4,no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",regulatory_citations,Massachusetts Nurses Association 300-day strike at St. Vincent Hospital over dangerous nurse-to-patient ratios | DOJ False Claims Act settlements totaling over $500M historically for illegal physician kickbacks,no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",summary_notes,"Major for-profit hospital operator and parent of United Surgical Partners International (USPI), the largest ambulatory surgery operator.",no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",is_pe_rollup,False,no per-claim source
+healthcare,Tenet Healthcare,"Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",exec_comp_pct,2.5,no filing
+healthcare,Ascension Health,Ascension Health Alliance,medical_loss_ratio_pct,78.5,no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,charge_to_cost_ratio,4.6,no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,charity_care_pct,3.8,no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,regulatory_citations,New York Times investigation (2022) exposing systematic hospital nurse cuts to bolster $18B investment fund | Major ransomware attack (2024) revealing critical medical record infrastructure vulnerabilities,no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,summary_notes,"One of the largest non-profit and Catholic health systems in the US, with 140+ hospitals and multi-billion-dollar private equity/venture investment arms.",no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,is_pe_rollup,False,no per-claim source
+healthcare,Ascension Health,Ascension Health Alliance,exec_comp_pct,1.8,no filing
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,medical_loss_ratio_pct,88.5,no per-claim source
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,claims_denial_rate_pct,0.0,no per-claim source
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,charge_to_cost_ratio,1.7,no per-claim source
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,charity_care_pct,14.8,no per-claim source
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,summary_notes,"Public benefit corporation operating 11 acute care hospitals, trauma centers, long-term care facilities, and Gotham Health community clinics.",no per-claim source
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,is_pe_rollup,False,no per-claim source
+healthcare,NYC Health + Hospitals,New York City Health and Hospitals Corporation,exec_comp_pct,0.6,no filing
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),medical_loss_ratio_pct,52.0,no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),claims_denial_rate_pct,0.0,no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),charge_to_cost_ratio,5.8,no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),charity_care_pct,0.2,no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),regulatory_citations,Corporate practice of medicine regulatory scrutiny regarding non-dentist management fee extractions | Extensive private equity debt loading following KKR recapitalizations ($1.5B+ leveraged loans),no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),summary_notes,"Largest Dental Support Organization (DSO) in the U.S. Supported practices retain original local dentist names, masking KKR private equity ownership.",no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),is_pe_rollup,True,no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),pe_firm_name,KKR & Co. Inc.,no per-claim source
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),clinical_care_wages_pct,36.5,"modeled, not from a filing"
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),admin_overhead_pct,21.5,"modeled, not from a filing"
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),exec_comp_pct,3.5,"modeled, not from a filing"
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),shareholder_extraction_pct,19.5,"modeled, not from a filing"
+healthcare,"Heartland Dental (1,700+ Rollup Offices)",KKR & Co. Inc. (Private Equity Platform),supplies_operations_pct,19.0,"modeled, not from a filing"
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,medical_loss_ratio_pct,50.5,no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,charge_to_cost_ratio,6.2,no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,charity_care_pct,0.3,no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,regulatory_citations,"New York Attorney General $450,000 settlement over deceptive advertising and high-interest medical credit cards | Massachusetts AG settlement for misrepresenting dentures pricing and non-refundable treatment plans",no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,summary_notes,"Over 1,000 branded locations heavily targeting low-income and uninsured patients with private equity debt-financed dental credit.",no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,is_pe_rollup,True,no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,pe_firm_name,Ares Management & Leonard Green,no per-claim source
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,clinical_care_wages_pct,35.0,"modeled, not from a filing"
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,admin_overhead_pct,22.0,"modeled, not from a filing"
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,exec_comp_pct,3.8,"modeled, not from a filing"
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,shareholder_extraction_pct,20.2,"modeled, not from a filing"
+healthcare,Aspen Dental (TAG - The Aspen Group),Ares Management & Leonard Green & Partners,supplies_operations_pct,19.0,"modeled, not from a filing"
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,medical_loss_ratio_pct,62.0,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,claims_denial_rate_pct,0.0,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,charge_to_cost_ratio,5.4,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,charity_care_pct,0.5,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,regulatory_citations,DOJ $12M False Claims Act settlement (2024) for billing Medicare for complex medical exams not performed during COVID testing,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,summary_notes,"Dominant urgent care chain in the NY metro area (150+ clinics), part of Summit Health acquisition.",no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,is_pe_rollup,True,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,pe_firm_name,Warburg Pincus,no per-claim source
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,shareholder_extraction_pct,15.5,no filing
+healthcare,CityMD Urgent Care,Warburg Pincus / VillageMD / Walgreens Boots Alliance,exec_comp_pct,2.8,no filing
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),medical_loss_ratio_pct,61.5,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),claims_denial_rate_pct,0.0,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),charge_to_cost_ratio,5.1,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),charity_care_pct,0.4,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),regulatory_citations,Layoff of all registered nurses at clinics nationwide (2023) replacing with lower-cost medical assistants to widen corporate margins,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),summary_notes,Acquired by UnitedHealth Group's Optum division in 2015. Over 250 urgent care centers across 14 states.,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),is_pe_rollup,True,no per-claim source
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),shareholder_extraction_pct,16.5,no filing
+healthcare,MedExpress Urgent Care,Optum / UnitedHealth Group (Public: UNH),exec_comp_pct,2.5,no filing
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),medical_loss_ratio_pct,58.0,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),charge_to_cost_ratio,6.8,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),charity_care_pct,0.2,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),regulatory_citations,Trade investigations into PE dermatology rollups pushing non-physician provider biopsy volume quotas,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),summary_notes,"100+ dermatology locations across NY, NJ, and PA acquired through aggressive physician practice rollup financing.",no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),is_pe_rollup,True,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),pe_firm_name,L Catterton,no per-claim source
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),clinical_care_wages_pct,42.0,"modeled, not from a filing"
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),admin_overhead_pct,19.5,"modeled, not from a filing"
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),exec_comp_pct,3.5,"modeled, not from a filing"
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),shareholder_extraction_pct,18.0,"modeled, not from a filing"
+healthcare,Schweiger Dermatology Group,L Catterton (Private Equity),supplies_operations_pct,17.0,"modeled, not from a filing"
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,medical_loss_ratio_pct,60.5,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,charge_to_cost_ratio,5.2,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,charity_care_pct,0.3,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,regulatory_citations,Acquisition of Pivot Health Solutions creating a 900-clinic mega-chain loaded with private debt,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,summary_notes,Over 900 therapy locations across 24 states acquired through successive private equity buyouts.,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,is_pe_rollup,True,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,pe_firm_name,BDT Capital Partners,no per-claim source
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,clinical_care_wages_pct,46.0,"modeled, not from a filing"
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,admin_overhead_pct,18.5,"modeled, not from a filing"
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,exec_comp_pct,3.0,"modeled, not from a filing"
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,shareholder_extraction_pct,16.5,"modeled, not from a filing"
+healthcare,Athletico Physical Therapy,BDT & MSD Partners / Silver Lake,supplies_operations_pct,16.0,"modeled, not from a filing"
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),medical_loss_ratio_pct,95.5,no per-claim source
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),charge_to_cost_ratio,1.1,no per-claim source
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),charity_care_pct,8.5,no per-claim source
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),summary_notes,Community-rooted DPC practice in Detroit founded by Dr. Paul Thomas. Provides affordable direct medicine with 30-60 minute visits.,no per-claim source
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),is_pe_rollup,False,no per-claim source
+healthcare,Plum Health Direct Primary Care,Plum Health DPC (Doctor-Owned),exec_comp_pct,0.0,no filing
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,medical_loss_ratio_pct,92.2,no per-claim source
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,claims_denial_rate_pct,0.0,no per-claim source
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,charge_to_cost_ratio,1.3,no per-claim source
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,charity_care_pct,12.4,no per-claim source
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,summary_notes,"One of the nation's largest community health centers, serving over 300,000 Southern California residents with comprehensive primary care, dental, and pharmacy.",no per-claim source
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,is_pe_rollup,False,no per-claim source
+healthcare,AltaMed Health Services (FQHC Network),AltaMed Health Services Corporation,exec_comp_pct,0.7,no filing
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),medical_loss_ratio_pct,95.2,no per-claim source
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),charge_to_cost_ratio,1.15,no per-claim source
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),charity_care_pct,7.2,no per-claim source
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),summary_notes,Physician-operated local clinic bypassing insurance code billing entirely to focus on preventative family health.,no per-claim source
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),is_pe_rollup,False,no per-claim source
+healthcare,Pioneer Direct Primary Care,Pioneer DPC (Physician-Owned),exec_comp_pct,0.0,no filing
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",medical_loss_ratio_pct,91.5,no per-claim source
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",charge_to_cost_ratio,1.4,no per-claim source
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",charity_care_pct,11.2,no per-claim source
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",summary_notes,"Community clinic network providing integrated pediatric, adult primary care, dental, and behavioral health across Chicago.",no per-claim source
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",is_pe_rollup,False,no per-claim source
+healthcare,Erie Family Health Centers,"Erie Family Health Center, Inc.",exec_comp_pct,0.8,no filing
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),medical_loss_ratio_pct,92.8,no per-claim source
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),claims_denial_rate_pct,0.0,no per-claim source
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),charge_to_cost_ratio,1.2,no per-claim source
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),charity_care_pct,14.0,no per-claim source
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),summary_notes,"Urban clinic providing culturally responsive healthcare, dental, and addiction recovery in the Phillips neighborhood of Minneapolis.",no per-claim source
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),is_pe_rollup,False,no per-claim source
+healthcare,Native American Community Clinic,Native American Community Clinic (NACC),exec_comp_pct,0.6,no filing

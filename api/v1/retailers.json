@@ -7,35 +7,35 @@
     "composite_score": 22,
     "grade": "F",
     "worker_wages_pct": 11.1,
-    "exec_comp_pct": 2.8,
-    "shareholder_extraction_pct": 2.5,
+    "exec_comp_pct": 0.004,
+    "shareholder_extraction_pct": 2.2,
     "marketing_ads_pct": 5.4,
     "cogs_supply_pct": 66.2,
-    "retained_operations_pct": 12.0,
+    "retained_operations_pct": 15.1,
     "labor_exploitation_rating": "Severe",
     "sweatshop_risk": "High",
-    "osha_violations_count": 312,
-    "nlrb_complaints_count": 89,
-    "living_wage_certified": false,
-    "labor_summary": "Extensive history of wage suppression, aggressive anti-union retaliation, and heavy reliance on public assistance (SNAP/Medicaid) for staff survival.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Severe",
-    "packaging_type": "Excess Virgin Single-Use Plastic",
-    "repairability_score": 2,
-    "landfill_diverted_pct": 28.0,
-    "waste_summary": "Massive global supply chain footprint; heavy distribution of non-repairable disposable consumer goods wrapped in virgin plastic films.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "WinCo Foods / Local Food Co-ops",
     "swap_slug": "winco-foods",
     "swap_rationale": "WinCo Foods is 100% Employee-Owned (ESOP) with matching or lower prices and retirement pensions worth $500k+ for long-term workers.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0000104169",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
     "retailer_details": {
-      "annual_revenue": "$648.1 Billion",
-      "net_income": "$15.5 Billion",
-      "shareholder_payouts_annual": "$16.0 Billion (103.2% of net profits)",
-      "worker_wage_floor": "$14.00/hr",
-      "ceo_pay": "$26.9 Million",
-      "ceo_pay_ratio": 992,
+      "annual_revenue": "$713.16 Billion",
+      "net_income": "$21.89 Billion",
+      "shareholder_payouts_annual": "$15.60 Billion",
+      "worker_wage_floor": null,
+      "ceo_pay": "$29.24 Million",
+      "ceo_pay_ratio": null,
       "swap_highlight": "Swap to WinCo Foods (100% ESOP) or local independent grocery cooperatives to keep 100% of profit in worker pockets.",
       "better_swap": {
         "name": "WinCo Foods / Aldi",
@@ -50,10 +50,99 @@
         "score": "96/100 (Grade A+)",
         "price_level": "Cost may be higher on specialty goods",
         "experience": "May differ: weekly produce box or bulk bin refills; 100% regional wealth retention."
-      }
+      },
+      "fiscal_year_end": "2026-01-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/"
     },
+    "better_swap": {
+      "name": "WinCo Foods / Aldi",
+      "tier": "better",
+      "score": "84/100 (Grade B+)",
+      "price_level": "Matches or beats Walmart pricing",
+      "experience": "Standard supermarket aisles & checkout; 100% ESOP or living wages."
+    },
+    "best_swap": {
+      "name": "Local Independent Food Co-ops & Direct CSAs",
+      "tier": "best",
+      "score": "96/100 (Grade A+)",
+      "price_level": "Cost may be higher on specialty goods",
+      "experience": "May differ: weekly produce box or bulk bin refills; 100% regional wealth retention."
+    },
+    "is_champion": false,
     "slug": "walmart",
-    "id": "1d578375-651e-4c44-b217-2f49f5a667a2"
+    "id": "ac013f59-3793-4b6e-add7-9d59afb8d68b",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0000104169",
+      "entity_name": "WALMART INC.",
+      "fiscal_year_end": "2026-01-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
+      "accession": "0000104169-26-000055",
+      "total_revenue_usd": "$713.16 Billion",
+      "net_income_usd": "$21.89 Billion",
+      "shareholder_dividends_usd": "$7.51 Billion",
+      "shareholder_buybacks_usd": "$8.09 Billion",
+      "total_shareholder_payout_usd": "$15.60 Billion",
+      "shareholder_payout_pct_of_revenue": 2.19,
+      "shareholder_payout_pct_of_net_income": 71.2,
+      "ceo_compensation_usd": "$29.24 Million",
+      "ceo_comp_fiscal_year_end": "2026-01-31",
+      "ceo_comp_filing_url": "https://www.sec.gov/Archives/edgar/data/104169/000119312526173673/",
+      "ceo_pay_pct_of_revenue": 0.0041,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "shareholder_extraction_pct": "sec_filing",
+      "exec_comp_pct": "sec_filing_ceo_only",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "Target",
@@ -63,35 +152,35 @@
     "composite_score": 44,
     "grade": "D",
     "worker_wages_pct": 14.5,
-    "exec_comp_pct": 2.4,
-    "shareholder_extraction_pct": 3.6,
+    "exec_comp_pct": 0.021,
+    "shareholder_extraction_pct": 2.4,
     "marketing_ads_pct": 7.2,
     "cogs_supply_pct": 59.8,
-    "retained_operations_pct": 12.5,
+    "retained_operations_pct": 16.1,
     "labor_exploitation_rating": "Moderate",
     "sweatshop_risk": "Moderate",
-    "osha_violations_count": 142,
-    "nlrb_complaints_count": 38,
-    "living_wage_certified": false,
-    "labor_summary": "Base pay raised to $15/hr, but widely criticized for involuntary part-time scheduling (under 30 hrs/week) to restrict health benefits eligibility.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "High Single-Use",
-    "packaging_type": "Excess Virgin Plastic & Fast Fashion Packaging",
-    "repairability_score": 3,
-    "landfill_diverted_pct": 39.0,
-    "waste_summary": "Heavy reliance on fast-fashion private label lines and seasonal home decor with rapid turnover and landfill disposal.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "Co-op Marketplaces & Public Goods",
     "swap_slug": "public-goods",
     "swap_rationale": "Member-owned cooperatives and Certified B Corps provide clean staples and refillable household goods without extractive corporate overhead.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0000027419",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
     "retailer_details": {
-      "annual_revenue": "$107.4 Billion",
-      "net_income": "$4.14 Billion",
-      "shareholder_payouts_annual": "$3.83 Billion (92.5% of net profits)",
-      "worker_wage_floor": "$15.00/hr",
-      "ceo_pay": "$19.2 Million",
-      "ceo_pay_ratio": 738,
+      "annual_revenue": "$104.78 Billion",
+      "net_income": "$3.71 Billion",
+      "shareholder_payouts_annual": "$2.46 Billion",
+      "worker_wage_floor": null,
+      "ceo_pay": "$21.83 Million",
+      "ceo_pay_ratio": null,
       "swap_highlight": "Reroute household shopping to community co-ops, Public Goods, and Grove Collaborative for refillable non-toxic essentials.",
       "better_swap": {
         "name": "Public Goods / Grove Collaborative",
@@ -106,10 +195,99 @@
         "score": "94/100 (Grade A)",
         "price_level": "Upfront container cost is higher",
         "experience": "May differ: bringing own containers to neighborhood dispensaries; 100% circular."
-      }
+      },
+      "fiscal_year_end": "2026-01-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/"
     },
+    "better_swap": {
+      "name": "Public Goods / Grove Collaborative",
+      "tier": "better",
+      "score": "82/100 (Grade B+)",
+      "price_level": "Accessible everyday refill prices",
+      "experience": "Doorstep delivery of clean personal care & paper goods; Certified B Corps."
+    },
+    "best_swap": {
+      "name": "Zero-Waste Refill Shops & Mission-Locked B-Corps",
+      "tier": "best",
+      "score": "94/100 (Grade A)",
+      "price_level": "Upfront container cost is higher",
+      "experience": "May differ: bringing own containers to neighborhood dispensaries; 100% circular."
+    },
+    "is_champion": false,
     "slug": "target",
-    "id": "c30cb2fd-6697-40fb-97a2-ff516df8cf78"
+    "id": "8c4bd4ff-779d-4840-b1ad-6bda7d3b605b",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0000027419",
+      "entity_name": "Target Corporation",
+      "fiscal_year_end": "2026-01-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
+      "accession": "0000027419-26-000016",
+      "total_revenue_usd": "$104.78 Billion",
+      "net_income_usd": "$3.71 Billion",
+      "shareholder_dividends_usd": "$2.05 Billion",
+      "shareholder_buybacks_usd": "$408.00 Million",
+      "total_shareholder_payout_usd": "$2.46 Billion",
+      "shareholder_payout_pct_of_revenue": 2.35,
+      "shareholder_payout_pct_of_net_income": 66.4,
+      "ceo_compensation_usd": "$21.83 Million",
+      "ceo_comp_fiscal_year_end": "2026-01-31",
+      "ceo_comp_filing_url": "https://www.sec.gov/Archives/edgar/data/27419/000162828026027508/",
+      "ceo_pay_pct_of_revenue": 0.0208,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "shareholder_extraction_pct": "sec_filing",
+      "exec_comp_pct": "sec_filing_ceo_only",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "Costco Wholesale",
@@ -119,35 +297,35 @@
     "composite_score": 62,
     "grade": "B-",
     "worker_wages_pct": 19.8,
-    "exec_comp_pct": 1.1,
-    "shareholder_extraction_pct": 1.9,
+    "exec_comp_pct": null,
+    "shareholder_extraction_pct": 1.1,
     "marketing_ads_pct": 1.2,
     "cogs_supply_pct": 67.8,
-    "retained_operations_pct": 8.2,
+    "retained_operations_pct": 10.1,
     "labor_exploitation_rating": "Low Risk",
     "sweatshop_risk": "Low",
-    "osha_violations_count": 48,
-    "nlrb_complaints_count": 6,
-    "living_wage_certified": true,
-    "labor_summary": "Industry benchmark for retail wages ($26/hr avg), comprehensive health benefits for 90%+ of staff, and strong employee retention.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Moderate",
-    "packaging_type": "Bulk Multi-Packs (Moderate Plastic Film)",
-    "repairability_score": 5,
-    "landfill_diverted_pct": 54.0,
-    "waste_summary": "Bulk packaging reduces unit packaging waste relative to convenience stores, though heavy shrink wrap and large plastic containers persist.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "Azure Standard & Co-op Bulk Aisles",
     "swap_slug": "azure-standard",
     "swap_rationale": "Azure Standard and independent food co-op bulk aisles deliver non-GMO bulk grains and staples direct to community drops without membership fees or Wall Street extraction.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0000909832",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
     "retailer_details": {
-      "annual_revenue": "$242.3 Billion",
-      "net_income": "$6.29 Billion",
-      "shareholder_payouts_annual": "$4.5 Billion (71.5% of net profits)",
-      "worker_wage_floor": "$19.50/hr",
-      "ceo_pay": "$16.8 Million",
-      "ceo_pay_ratio": 335,
+      "annual_revenue": "$303.15 Billion",
+      "net_income": "$9.23 Billion",
+      "shareholder_payouts_annual": "$3.31 Billion",
+      "worker_wage_floor": null,
+      "ceo_pay": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "While Costco treats workers significantly better than Walmart, bulk buying clubs like Azure Standard and local co-op bulk bins keep 100% of wealth regional.",
       "better_swap": {
         "name": "WinCo Bulk Sections / Regional Wholesale",
@@ -162,10 +340,102 @@
         "score": "95/100 (Grade A)",
         "price_level": "Comparable bulk pricing on organic grains",
         "experience": "May differ: neighborhood truck drops or scoop-your-own co-op bins; zero plastic packaging."
-      }
+      },
+      "fiscal_year_end": "2026-08-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/"
     },
+    "better_swap": {
+      "name": "WinCo Bulk Sections / Regional Wholesale",
+      "tier": "better",
+      "score": "80/100 (Grade B+)",
+      "price_level": "No $65/yr membership fee; equal bulk savings",
+      "experience": "Similar large-format bulk staples and snacks in quantity."
+    },
+    "best_swap": {
+      "name": "Azure Standard & Co-op Bulk Aisles",
+      "tier": "best",
+      "score": "95/100 (Grade A)",
+      "price_level": "Comparable bulk pricing on organic grains",
+      "experience": "May differ: neighborhood truck drops or scoop-your-own co-op bins; zero plastic packaging."
+    },
+    "is_champion": false,
     "slug": "costco-wholesale",
-    "id": "a5c046a0-2065-4edf-b300-5a7d2f58c80b"
+    "id": "53685920-ff3e-4d4f-b950-a0da1f10352a",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0000909832",
+      "entity_name": "COSTCO WHOLESALE CORP /NEW",
+      "fiscal_year_end": "2026-08-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
+      "accession": "0000909832-26-000093",
+      "total_revenue_usd": "$303.15 Billion",
+      "net_income_usd": "$9.23 Billion",
+      "shareholder_dividends_usd": "$2.46 Billion",
+      "shareholder_buybacks_usd": "$848.00 Million",
+      "total_shareholder_payout_usd": "$3.31 Billion",
+      "shareholder_payout_pct_of_revenue": 1.09,
+      "shareholder_payout_pct_of_net_income": 35.8,
+      "ceo_compensation_usd": null,
+      "ceo_comp_fiscal_year_end": null,
+      "ceo_comp_filing_url": null,
+      "ceo_pay_pct_of_revenue": null,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "shareholder_extraction_pct": "sec_filing",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "Amazon / Whole Foods",
@@ -175,34 +445,34 @@
     "composite_score": 19,
     "grade": "F",
     "worker_wages_pct": 10.5,
-    "exec_comp_pct": 3.1,
-    "shareholder_extraction_pct": 3.8,
+    "exec_comp_pct": null,
+    "shareholder_extraction_pct": null,
     "marketing_ads_pct": 8.5,
     "cogs_supply_pct": 61.1,
-    "retained_operations_pct": 13.0,
+    "retained_operations_pct": 19.9,
     "labor_exploitation_rating": "Severe",
     "sweatshop_risk": "High",
-    "osha_violations_count": 480,
-    "nlrb_complaints_count": 142,
-    "living_wage_certified": false,
-    "labor_summary": "Extreme warehouse injury rates twice the retail average, automated firings, aggressive union-busting consultancy contracts, and delivery driver surveillance.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Severe",
-    "packaging_type": "Billions of Single-Use Plastic Mailers & Cartons",
-    "repairability_score": 2,
-    "landfill_diverted_pct": 21.0,
-    "waste_summary": "Generates over 700 million pounds of plastic packaging waste annually, alongside widespread destruction of unsold returns.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "Bookshop.org / DoneGood / Direct Makers",
     "swap_slug": "bookshop-org",
     "swap_rationale": "Bookshop.org routes 80%+ of profit to local independent bookstores; DoneGood indexes vetted ethical artisans and B Corps.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0001018724",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
     "retailer_details": {
-      "annual_revenue": "$574.8 Billion",
-      "net_income": "$30.4 Billion",
-      "shareholder_payouts_annual": "$22.0 Billion concentrated in executive wealth & capital markets",
-      "worker_wage_floor": "$17.00/hr",
-      "ceo_pay_ratio": 900,
+      "annual_revenue": "$716.92 Billion",
+      "net_income": "$77.67 Billion",
+      "shareholder_payouts_annual": null,
+      "worker_wage_floor": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "Break the Amazon default: buy books on Bookshop.org, ethical home goods on DoneGood, and farm produce direct from local CSAs.",
       "better_swap": {
         "name": "Direct Merchant Sites / Chewy / eBay",
@@ -217,10 +487,105 @@
         "score": "98/100 (Grade A+)",
         "price_level": "Standard retail pricing; shipping 2-4 days",
         "experience": "May differ: purpose-built platforms routing 80%+ of profit to local bookstores & ethical makers."
-      }
+      },
+      "fiscal_year_end": "2025-12-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/"
     },
+    "better_swap": {
+      "name": "Direct Merchant Sites / Chewy / eBay",
+      "tier": "better",
+      "score": "72/100 (Grade B)",
+      "price_level": "Direct checkout price match",
+      "experience": "Similar 1-click ordering and fast doorstep delivery; avoids Amazon 50% seller fee take rate."
+    },
+    "best_swap": {
+      "name": "Bookshop.org / DoneGood / CSAs",
+      "tier": "best",
+      "score": "98/100 (Grade A+)",
+      "price_level": "Standard retail pricing; shipping 2-4 days",
+      "experience": "May differ: purpose-built platforms routing 80%+ of profit to local bookstores & ethical makers."
+    },
+    "is_champion": false,
     "slug": "amazon-whole-foods",
-    "id": "786f62fb-0af8-4460-a0b0-9c8eed757b1b"
+    "id": "02fd92ab-aaaf-487a-934f-7536426b28fe",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0001018724",
+      "entity_name": "AMAZON COM INC",
+      "fiscal_year_end": "2025-12-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
+      "accession": "0001018724-26-000004",
+      "total_revenue_usd": "$716.92 Billion",
+      "net_income_usd": "$77.67 Billion",
+      "shareholder_dividends_usd": null,
+      "shareholder_buybacks_usd": null,
+      "total_shareholder_payout_usd": null,
+      "shareholder_payout_pct_of_revenue": null,
+      "shareholder_payout_pct_of_net_income": null,
+      "ceo_compensation_usd": null,
+      "ceo_comp_fiscal_year_end": null,
+      "ceo_comp_filing_url": null,
+      "ceo_pay_pct_of_revenue": null,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "The Kroger Co.",
@@ -230,34 +595,34 @@
     "composite_score": 28,
     "grade": "F",
     "worker_wages_pct": 12.0,
-    "exec_comp_pct": 2.5,
-    "shareholder_extraction_pct": 1.4,
+    "exec_comp_pct": null,
+    "shareholder_extraction_pct": 2.4,
     "marketing_ads_pct": 6.8,
     "cogs_supply_pct": 67.3,
-    "retained_operations_pct": 10.0,
+    "retained_operations_pct": 11.5,
     "labor_exploitation_rating": "High Risk",
     "sweatshop_risk": "Moderate",
-    "osha_violations_count": 215,
-    "nlrb_complaints_count": 62,
-    "living_wage_certified": false,
-    "labor_summary": "Frequent worker strikes over stagnant wages and health benefit cuts; Economic Roundtable report found 14% of Kroger grocery workers experienced homelessness.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "High Single-Use",
-    "packaging_type": "Single-Use Plastic Produce Bags & Clamshells",
-    "repairability_score": 3,
-    "landfill_diverted_pct": 34.0,
-    "waste_summary": "Extensive perishable food waste and excessive reliance on non-recyclable clamshell packaging.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "Regional Cooperative Supermarkets",
     "swap_slug": "food-coops",
     "swap_rationale": "Community-owned food co-ops return surplus as patronage dividends, pay living wages, and source over 40% of shelf items from local regional growers.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0000056873",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
     "retailer_details": {
-      "annual_revenue": "$150.0 Billion",
-      "net_income": "$2.24 Billion",
-      "shareholder_payouts_annual": "$2.1 Billion in stock buybacks and dividends",
-      "worker_wage_floor": "$14.50/hr",
-      "ceo_pay_ratio": 670,
+      "annual_revenue": "$147.64 Billion",
+      "net_income": "$1.02 Billion",
+      "shareholder_payouts_annual": "$3.58 Billion",
+      "worker_wage_floor": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "Shop at independent unionized or co-op grocery stores to ensure your food dollars stay in local farms rather than share repurchases.",
       "better_swap": {
         "name": "Aldi & Unionized Regional Grocers",
@@ -272,10 +637,102 @@
         "score": "95/100 (Grade A)",
         "price_level": "Patronage dividend returns surplus cash",
         "experience": "May differ: shopper-owned democratic control; sources 8x more food from local farms."
-      }
+      },
+      "fiscal_year_end": "2026-01-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/"
     },
+    "better_swap": {
+      "name": "Aldi & Unionized Regional Grocers",
+      "tier": "better",
+      "score": "76/100 (Grade B)",
+      "price_level": "Equal grocery prices",
+      "experience": "Identical full-service grocery aisles and price points; UFCW contracts guarantee wage & health floors."
+    },
+    "best_swap": {
+      "name": "Regional Cooperative Supermarkets",
+      "tier": "best",
+      "score": "95/100 (Grade A)",
+      "price_level": "Patronage dividend returns surplus cash",
+      "experience": "May differ: shopper-owned democratic control; sources 8x more food from local farms."
+    },
+    "is_champion": false,
     "slug": "the-kroger-co",
-    "id": "4cc40f42-dc3d-46fc-9ed0-dbf3b0dff443"
+    "id": "a67f7a77-ebb9-4d65-9661-db764242eacf",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0000056873",
+      "entity_name": "KROGER CO",
+      "fiscal_year_end": "2026-01-31",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
+      "accession": "0001104659-26-037723",
+      "total_revenue_usd": "$147.64 Billion",
+      "net_income_usd": "$1.02 Billion",
+      "shareholder_dividends_usd": "$885.00 Million",
+      "shareholder_buybacks_usd": "$2.70 Billion",
+      "total_shareholder_payout_usd": "$3.58 Billion",
+      "shareholder_payout_pct_of_revenue": 2.43,
+      "shareholder_payout_pct_of_net_income": 352.8,
+      "ceo_compensation_usd": null,
+      "ceo_comp_fiscal_year_end": null,
+      "ceo_comp_filing_url": null,
+      "ceo_pay_pct_of_revenue": null,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "shareholder_extraction_pct": "sec_filing",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "Dollar General",
@@ -285,34 +742,34 @@
     "composite_score": 14,
     "grade": "F",
     "worker_wages_pct": 8.5,
-    "exec_comp_pct": 3.4,
-    "shareholder_extraction_pct": 7.1,
+    "exec_comp_pct": null,
+    "shareholder_extraction_pct": 1.2,
     "marketing_ads_pct": 4.1,
     "cogs_supply_pct": 66.9,
-    "retained_operations_pct": 10.0,
+    "retained_operations_pct": 19.3,
     "labor_exploitation_rating": "Severe",
     "sweatshop_risk": "High",
-    "osha_violations_count": 420,
-    "nlrb_complaints_count": 55,
-    "living_wage_certified": false,
-    "labor_summary": "Designated as an OSHA 'Severe Violator' after racking up over $21 million in safety fines for blocked exits, fire hazards, and solo-clerk staffing vulnerabilities.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Severe",
-    "packaging_type": "Miniaturized Single-Use Plastic Wraps",
-    "repairability_score": 1,
-    "landfill_diverted_pct": 14.0,
-    "waste_summary": "Miniaturized portion packaging leads to the highest plastic packaging-to-product ratio in the retail sector.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "Local Independent Grocers / Aldi / Co-ops",
     "swap_slug": "local-independent-grocers",
     "swap_rationale": "Independent discount grocers and community mutual aid programs provide affordable staples without subjecting solo workers to hazardous retail conditions.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0000029534",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/",
     "retailer_details": {
-      "annual_revenue": "$38.7 Billion",
-      "net_income": "$1.66 Billion",
-      "shareholder_payouts_annual": "$2.7 Billion (Dividends & Buybacks)",
-      "worker_wage_floor": "$11.00/hr",
-      "ceo_pay_ratio": 980,
+      "annual_revenue": "$42.72 Billion",
+      "net_income": "$1.51 Billion",
+      "shareholder_payouts_annual": "$519.51 Million",
+      "worker_wage_floor": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "Dollar General extracts capital from food deserts while cutting staffing to hazardous minimums. Support local independent markets or bulk buying clubs.",
       "better_swap": {
         "name": "Aldi / Regional Independent Discounters",
@@ -327,10 +784,102 @@
         "score": "96/100 (Grade A)",
         "price_level": "Community-governed affordable access",
         "experience": "May differ: cooperative buying clubs or neighborhood food hubs relieving food desert extraction."
-      }
+      },
+      "fiscal_year_end": "2026-01-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/"
     },
+    "better_swap": {
+      "name": "Aldi / Regional Independent Discounters",
+      "tier": "better",
+      "score": "74/100 (Grade B)",
+      "price_level": "Deep discount parity ($1-$5)",
+      "experience": "Similar low grocery prices without severe solo-clerk OSHA safety violations."
+    },
+    "best_swap": {
+      "name": "Community Mutual Aid & Bulk Co-ops",
+      "tier": "best",
+      "score": "96/100 (Grade A)",
+      "price_level": "Community-governed affordable access",
+      "experience": "May differ: cooperative buying clubs or neighborhood food hubs relieving food desert extraction."
+    },
+    "is_champion": false,
     "slug": "dollar-general",
-    "id": "cb65f7c1-383c-4ca2-b8a0-294a4e586640"
+    "id": "023166c3-e9c8-4980-83d1-ceec4e2695ca",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0000029534",
+      "entity_name": "DOLLAR GENERAL CORP",
+      "fiscal_year_end": "2026-01-30",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/",
+      "accession": "0001104659-26-032325",
+      "total_revenue_usd": "$42.72 Billion",
+      "net_income_usd": "$1.51 Billion",
+      "shareholder_dividends_usd": "$519.51 Million",
+      "shareholder_buybacks_usd": null,
+      "total_shareholder_payout_usd": "$519.51 Million",
+      "shareholder_payout_pct_of_revenue": 1.22,
+      "shareholder_payout_pct_of_net_income": 34.4,
+      "ceo_compensation_usd": null,
+      "ceo_comp_fiscal_year_end": null,
+      "ceo_comp_filing_url": null,
+      "ceo_pay_pct_of_revenue": null,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "shareholder_extraction_pct": "sec_filing",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "The Home Depot",
@@ -340,34 +889,34 @@
     "composite_score": 38,
     "grade": "D",
     "worker_wages_pct": 13.0,
-    "exec_comp_pct": 2.2,
-    "shareholder_extraction_pct": 9.3,
+    "exec_comp_pct": null,
+    "shareholder_extraction_pct": 5.6,
     "marketing_ads_pct": 5.8,
     "cogs_supply_pct": 59.7,
-    "retained_operations_pct": 10.0,
+    "retained_operations_pct": 15.9,
     "labor_exploitation_rating": "Moderate",
     "sweatshop_risk": "Moderate",
-    "osha_violations_count": 110,
-    "nlrb_complaints_count": 29,
-    "living_wage_certified": false,
-    "labor_summary": "Consistently aggressive anti-union messaging for store workers; massive multi-billion-dollar stock repurchases prioritize hedge funds over floor wages.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Moderate",
-    "packaging_type": "Heavy Plastic Blister Packs & Pallet Shrink Wrap",
-    "repairability_score": 4,
-    "landfill_diverted_pct": 42.0,
-    "waste_summary": "Extensive single-use plastic packaging on consumer hardware and reliance on chemically treated non-recyclable lumber.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": "Ace Hardware (Retailer-Owned Cooperative)",
     "swap_slug": "ace-hardware",
     "swap_rationale": "Ace Hardware is a retailer-owned cooperative of 5,000+ local independent hardware stores. Profits recirculate in your local hometown community.",
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/edgar/browse/?CIK=0000354950",
+    "sec_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
     "retailer_details": {
-      "annual_revenue": "$152.7 Billion",
-      "net_income": "$15.14 Billion",
-      "shareholder_payouts_annual": "$14.2 Billion (94% of net profits)",
-      "worker_wage_floor": "$15.00/hr",
-      "ceo_pay_ratio": 520,
+      "annual_revenue": "$164.68 Billion",
+      "net_income": "$14.16 Billion",
+      "shareholder_payouts_annual": "$9.15 Billion",
+      "worker_wage_floor": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "Swap to Ace Hardware or True Value\u2014local independent cooperatives where store profits recirculate directly in your hometown.",
       "better_swap": {
         "name": "True Value & Independent Lumberyards",
@@ -382,10 +931,102 @@
         "score": "94/100 (Grade A)",
         "price_level": "Free tool borrowing / competitive hardware",
         "experience": "May differ: 5,000+ retailer-owned co-op stores & free community tool borrowing for DIY jobs."
-      }
+      },
+      "fiscal_year_end": "2026-02-01",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/"
     },
+    "better_swap": {
+      "name": "True Value & Independent Lumberyards",
+      "tier": "better",
+      "score": "80/100 (Grade B+)",
+      "price_level": "Price parity on DIY tools & hardware",
+      "experience": "Similar wide hardware aisles and lumber drive-through without corporate buyback extraction."
+    },
+    "best_swap": {
+      "name": "Ace Hardware (Co-op) & Tool Libraries",
+      "tier": "best",
+      "score": "94/100 (Grade A)",
+      "price_level": "Free tool borrowing / competitive hardware",
+      "experience": "May differ: 5,000+ retailer-owned co-op stores & free community tool borrowing for DIY jobs."
+    },
+    "is_champion": false,
     "slug": "the-home-depot",
-    "id": "7841f5e6-2a35-4b26-ae86-8d122479784a"
+    "id": "db8942eb-2a2d-4e4f-80f4-96d1c28f5c45",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": {
+      "cik": "0000354950",
+      "entity_name": "The Home Depot, Inc.",
+      "fiscal_year_end": "2026-02-01",
+      "filing_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
+      "accession": "0001628280-26-019436",
+      "total_revenue_usd": "$164.68 Billion",
+      "net_income_usd": "$14.16 Billion",
+      "shareholder_dividends_usd": "$9.15 Billion",
+      "shareholder_buybacks_usd": "$0",
+      "total_shareholder_payout_usd": "$9.15 Billion",
+      "shareholder_payout_pct_of_revenue": 5.56,
+      "shareholder_payout_pct_of_net_income": 64.7,
+      "ceo_compensation_usd": null,
+      "ceo_comp_fiscal_year_end": null,
+      "ceo_comp_filing_url": null,
+      "ceo_pay_pct_of_revenue": null,
+      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
+    },
+    "split_basis": {
+      "shareholder_extraction_pct": "sec_filing",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "WinCo Foods",
@@ -395,36 +1036,104 @@
     "composite_score": 96,
     "grade": "A+",
     "worker_wages_pct": 34.5,
-    "exec_comp_pct": 0.4,
+    "exec_comp_pct": null,
     "shareholder_extraction_pct": 0.0,
     "marketing_ads_pct": 1.1,
     "cogs_supply_pct": 52.0,
-    "retained_operations_pct": 12.0,
+    "retained_operations_pct": 12.4,
     "labor_exploitation_rating": "Fair / Verified",
     "sweatshop_risk": "None",
-    "osha_violations_count": 6,
-    "nlrb_complaints_count": 0,
-    "living_wage_certified": true,
-    "labor_summary": "100% employee-owned through an ESOP. Workers earn robust retirement pensions (often exceeding $500,000 to $1M upon retirement) with transparent, democratic oversight.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Circular / Low Waste",
-    "packaging_type": "Extensive Bulk Bins (Bring Your Own Bags)",
-    "repairability_score": 8,
-    "landfill_diverted_pct": 82.0,
-    "waste_summary": "Famous for expansive bulk food bin aisles that drastically cut single-use plastic packaging, combined with no credit-card transaction fee savings passed to shoppers.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": null,
     "swap_slug": null,
     "swap_rationale": "High-integrity destination! Already the gold standard for employee-owned grocery shopping.",
     "is_major_retailer": true,
     "data_provenance": "certified_audit",
     "retailer_details": {
-      "annual_revenue": "$8.5 Billion",
-      "shareholder_payouts_annual": "$0.00 (100% distributed into employee retirement accounts)",
-      "worker_wage_floor": "$18.50/hr",
-      "ceo_pay_ratio": 18,
+      "annual_revenue": null,
+      "shareholder_payouts_annual": null,
+      "worker_wage_floor": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "The premier ethical alternative to Walmart and Kroger in the Western & Central US."
     },
+    "is_champion": true,
+    "better_swap": null,
+    "best_swap": null,
     "slug": "winco-foods",
-    "id": "21d425ec-8c85-4ecb-82f4-cef0014e883d"
+    "id": "9c487157-ae9b-4f74-8c02-94bba854eb6a",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": null,
+    "split_basis": {
+      "shareholder_extraction_pct": "ownership_structure",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.annual_revenue",
+        "reason": "no filing or citation"
+      },
+      {
+        "field": "retailer_details.shareholder_payouts_annual",
+        "reason": "no filing or citation"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   },
   {
     "name": "Ace Hardware",
@@ -434,35 +1143,103 @@
     "composite_score": 91,
     "grade": "A",
     "worker_wages_pct": 28.0,
-    "exec_comp_pct": 0.8,
+    "exec_comp_pct": null,
     "shareholder_extraction_pct": 0.0,
     "marketing_ads_pct": 3.2,
     "cogs_supply_pct": 54.0,
-    "retained_operations_pct": 14.0,
+    "retained_operations_pct": 14.8,
     "labor_exploitation_rating": "Fair / Verified",
     "sweatshop_risk": "None",
-    "osha_violations_count": 12,
-    "nlrb_complaints_count": 1,
-    "living_wage_certified": true,
-    "labor_summary": "Stores are owned by independent local community merchants rather than Wall Street conglomerates; profits stay within local municipal tax bases.",
+    "osha_violations_count": null,
+    "nlrb_complaints_count": null,
+    "living_wage_certified": null,
+    "labor_summary": null,
     "waste_rating": "Circular / Low Waste",
-    "packaging_type": "Hardware Bin Sourcing & Tool Repair Stations",
-    "repairability_score": 9,
-    "landfill_diverted_pct": 74.0,
-    "waste_summary": "Stores emphasize tool repair, blade sharpening, and loose hardware bin purchasing rather than disposable plastic blister packs.",
+    "packaging_type": null,
+    "repairability_score": null,
+    "landfill_diverted_pct": null,
+    "waste_summary": null,
     "swap_name": null,
     "swap_slug": null,
     "swap_rationale": "Gold-standard local cooperative swap for Home Depot and Lowe's.",
     "is_major_retailer": true,
     "data_provenance": "certified_audit",
     "retailer_details": {
-      "annual_revenue": "$9.1 Billion",
-      "shareholder_payouts_annual": "$0.00 Wall Street extraction (patronage dividends returned to local store owners)",
-      "worker_wage_floor": "$17.00/hr",
-      "ceo_pay_ratio": 24,
+      "annual_revenue": null,
+      "shareholder_payouts_annual": null,
+      "worker_wage_floor": null,
+      "ceo_pay_ratio": null,
       "swap_highlight": "The direct cooperative swap for Home Depot and Lowe's."
     },
+    "is_champion": true,
+    "better_swap": null,
+    "best_swap": null,
     "slug": "ace-hardware",
-    "id": "c8ebbbc3-d5cc-4f84-b45f-15a9dd1b86f5"
+    "id": "b4d3ae20-8dc0-4fd0-b739-42c1444ab4d3",
+    "claim_sources": {},
+    "osha_enforcement": null,
+    "sec_receipt_details": null,
+    "split_basis": {
+      "shareholder_extraction_pct": "ownership_structure",
+      "worker_wages_pct": "estimate",
+      "marketing_ads_pct": "estimate",
+      "cogs_supply_pct": "estimate",
+      "retained_operations_pct": "residual"
+    },
+    "withheld_claims": [
+      {
+        "field": "osha_violations_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "nlrb_complaints_count",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "living_wage_certified",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "labor_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "packaging_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "repairability_score",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "landfill_diverted_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "waste_summary",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.annual_revenue",
+        "reason": "no filing or citation"
+      },
+      {
+        "field": "retailer_details.shareholder_payouts_annual",
+        "reason": "no filing or citation"
+      },
+      {
+        "field": "retailer_details.worker_wage_floor",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.ceo_pay_ratio",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing"
+      }
+    ],
+    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
   }
 ]

@@ -284,11 +284,61 @@ CORPORATE_PARENTS = {
         "top_10_pct_enrichment": 95.0,
         "default_swap": "Local Mutual Insurance / Amica Mutual / Local Independent Ice Cream Creameries",
     },
+    "UnitedHealth Group": {
+        "ultimate_parent": "UnitedHealth Group Inc.",
+        "ownership_type": "Public Mega-Conglomerate",
+        "ticker": "NYSE: UNH",
+        "top_10_pct_enrichment": 92.0,
+        "default_swap": "HealthPartners (Consumer Co-op) / Direct Primary Care / Non-Profit Mutual Health Plans",
+    },
+    "HealthPartners": {
+        "ultimate_parent": "HealthPartners Inc.",
+        "ownership_type": "Consumer-Governed Healthcare Cooperative",
+        "ticker": "Non-Profit Cooperative",
+        "top_10_pct_enrichment": 5.0,
+        "default_swap": "High-Integrity Co-op (Current Model)",
+    },
 }
+
 
 
 # Deep catalogue of handcrafted brand & product entries with authentic subterfuge context
 CORE_BRAND_ENTRIES = [
+    # Healthcare & Insurance
+    {
+        "name": "UnitedHealthcare",
+        "type": "brand",
+        "category": "Healthcare & Insurance",
+        "parent": "UnitedHealth Group",
+        "surprising": True,
+        "subterfuge": "Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+        "swap": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+        "aliases": ["united healthcare", "unitedhealthcare", "uhc", "united health care", "optum", "medexpress", "optumrx"],
+        "products": [
+            "UnitedHealthcare Choice Plus",
+            "UnitedHealthcare Medicare Advantage",
+            "UnitedHealthcare Community Plan",
+            "Optum Health Clinic Network",
+            "OptumRx Pharmacy Benefit Manager",
+            "MedExpress Urgent Care",
+        ]
+    },
+    {
+        "name": "HealthPartners",
+        "type": "brand",
+        "category": "Healthcare & Insurance",
+        "parent": "HealthPartners",
+        "surprising": False,
+        "subterfuge": "100% consumer-governed healthcare cooperative with patient-elected board; no private equity or Wall Street extraction.",
+        "swap": "Exemplary Co-op (Current Model)",
+        "aliases": ["healthpartners", "health partners", "park nicollet", "healthpartners clinics"],
+        "products": [
+            "HealthPartners Consumer Health Plan",
+            "HealthPartners Primary Care Clinics",
+            "Park Nicollet Medical Clinics",
+            "HealthPartners Dental Clinics",
+        ]
+    },
     # General Mills Subterfuge & Natural Fronts
     {
         "name": "Annie's Homegrown",
@@ -1630,50 +1680,12 @@ def generate_and_export_feed(
     json_path: str = "data/brand_parent_feed.json",
     csv_path: str = "data/brand_parent_feed.csv",
 ) -> List[Dict[str, Any]]:
-    """Builds the 1,000+ item feed and saves both JSON and CSV formats."""
+    """Builds the brand & product parent feed and saves both JSON and CSV formats."""
     feed = expand_conglomerate_catalogs()
     print(f"Generated initial catalog with {len(feed)} entries.")
 
-    # If count is below 1,000, expand systematically with detailed SKU variations across real brands
-    target_count = 1000
-    if len(feed) < target_count:
-        print(f"Expanding catalog from {len(feed)} to target {target_count}...")
-        # Create indexed SKU variations based on existing brands
-        existing_items = list(feed)
-        idx = 0
-        while len(feed) < target_count:
-            base = existing_items[idx % len(existing_items)]
-            idx += 1
-            if base["item_type"] == "brand":
-                variation_types = [
-                    "Value Pack / Multi-Pack",
-                    "Eco-Refill Size (Bulk)",
-                    "Family Size Carton",
-                    "Single Serve On-The-Go",
-                    "Zero Sugar / Unsweetened Edition",
-                    "Organic Certified Variant",
-                    "Travel Size Pack",
-                    "Seasonal Limited Edition",
-                ]
-                var_suffix = variation_types[idx % len(variation_types)]
-                sku_name = f"{base['name']} ({var_suffix})"
-                sku_id = f"{base['id']}-{slugify(var_suffix)}"
-                
-                feed.append({
-                    "id": sku_id,
-                    "name": sku_name,
-                    "item_type": "product",
-                    "category": base["category"],
-                    "parent_company": base["parent_company"],
-                    "ultimate_parent": base["ultimate_parent"],
-                    "ownership_type": base["ownership_type"],
-                    "ticker_or_jurisdiction": base["ticker_or_jurisdiction"],
-                    "is_surprising_or_subterfuge": base["is_surprising_or_subterfuge"],
-                    "subterfuge_details": f"Product SKU of {base['name']}, owned by {base['parent_company']}. {base['subterfuge_details']}",
-                    "top_10_percent_enrichment_pct": base["top_10_percent_enrichment_pct"],
-                    "ethical_swap_recommendation": base["ethical_swap_recommendation"],
-                    "search_aliases": [sku_name.lower(), base["name"].lower()],
-                })
+    # No filler: every row must be a real brand or product. (A previous version padded the
+    # feed to 1,000 rows with invented SKU variants; that is intentionally gone.)
 
     # Save to JSON
     json_file = Path(json_path)

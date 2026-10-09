@@ -913,21 +913,19 @@ def run_seed():
         # Disguised Rollup (PE) vs Real Local Trade
         Place(
             id="plc-pe-plumbing",
-            name="Minneapolis Metro Plumbing & Heating",
-            slug="minneapolis-metro-plumbing",
+            name="Example Rollup Plumbing (Illustrative Demo Listing)",
+            slug="example-rollup-plumbing-demo",
             category="plumber",
-            address="1420 University Ave W",
+            address="Illustrative example - not a real business",
             city="St. Paul",
             state="MN",
             postal_code="55104",
             lat=44.9556,
             lon=-93.1612,
-            phone="(651) 555-0199",
-            entity_id="ent-apex-pe",
             ownership_tier=6,
-            flags=["rollup_disguised", "recently_acquired"],
-            verified_locally=True,
-            verified_how="Acquired by Apex Service Partners (Private Equity). Legacy local name retained.",
+            flags=["rollup_disguised", "demo_listing"],
+            verified_locally=False,
+            verified_how="Illustrative demo showing how a private-equity rollup listing is displayed. Not a real business.",
         ),
         Place(
             id="plc-local-electric",
@@ -1066,7 +1064,7 @@ def run_seed():
     export_top2000_json()
 
     db.close()
-    print("Database successfully seeded with Shoptegrity core data & top 2,000 brands!")
+    print("Database successfully seeded with Shoptegrity core data & brand database!")
 
 
 if __name__ == "__main__":

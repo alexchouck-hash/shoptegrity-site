@@ -43,7 +43,7 @@ def test_web_portal_views():
     res_local = client.get("/local")
     assert res_local.status_code == 200
     assert "Local Services Ownership Ladder" in res_local.text
-    assert "Minneapolis Metro Plumbing" in res_local.text
+    assert "Example Rollup Plumbing" in res_local.text
     assert "DISGUISED PE ROLLUP" in res_local.text
 
     # Swaps View
@@ -85,11 +85,11 @@ def test_brands_api():
     assert "pay_equity" in detail["scorecard"]
     assert len(detail["alternatives"]) >= 1
 
-    # Top 2000 Brands Database Endpoint
+    # Brands Database Endpoint
     res_db = client.get("/v1/brands/database?limit=10")
     assert res_db.status_code == 200
     db_data = res_db.json()
-    assert db_data["total"] >= 2000
+    assert 50 <= db_data["total"] < 1000  # curated records only, no generated filler
     assert len(db_data["brands"]) == 10
     first_b = db_data["brands"][0]
     assert "worker_wages_pct" in first_b
@@ -136,13 +136,13 @@ def test_local_places_api_and_pe_match():
 
     res_pe = client.post(
         "/v1/local/match",
-        json={"name": "Minneapolis Metro Plumbing & Heating"},
+        json={"name": "Example Rollup Plumbing"},
     )
     assert res_pe.status_code == 200
     match_data = res_pe.json()
     assert match_data["matched"] is True
     assert match_data["warning_flag"] == "DISGUISED_ROLLUP"
-    assert "Apex Service Partners" in match_data["ownership_explanation"]
+    assert "private equity" in match_data["ownership_explanation"].lower()
 
 
 def test_methodology_api():
@@ -205,3 +205,17 @@ def test_swaps_api_dual_tiers():
     assert "WinCo" in walmart["retailer_details"]["better_swap"]["name"]
     assert "Co-ops" in walmart["retailer_details"]["best_swap"]["name"]
 
+
+
+def test_sell_direct_and_disclosure_pages():
+    page = client.get("/sell-direct")
+    assert page.status_code == 200
+    assert "shopify.pxf.io/c/7862632/" in page.text
+    assert 'rel="sponsored' in page.text
+    assert "Affiliate disclosure" in page.text
+    disc = client.get("/disclosures")
+    assert disc.status_code == 200
+    assert "Shopify" in disc.text
+    # Affiliate links never appear on rating pages.
+    for path in ["/brands", "/healthcare", "/swaps"]:
+        assert "pxf.io" not in client.get(path).text

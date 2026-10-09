@@ -137,7 +137,7 @@ def search_top_brands(
     min_grade: Optional[str] = None,
     limit: int = 20,
 ) -> Dict[str, Any]:
-    """Search the top 2,000 brands database by name, sector, and minimum integrity grade."""
+    """Search the brand integrity database by name, sector, and minimum integrity grade."""
     db = SessionLocal()
     try:
         q = db.query(BrandIntegrity)
@@ -192,7 +192,7 @@ def lookup_brand_integrity(brand_name: str) -> Dict[str, Any]:
             .first()
         )
         if not brand:
-            return {"error": f"Brand '{brand_name}' not found in the 2,000-brand database."}
+            return {"error": f"Brand '{brand_name}' not found in the brand database."}
 
         return {
             "name": brand.name,
@@ -208,15 +208,17 @@ def lookup_brand_integrity(brand_name: str) -> Dict[str, Any]:
                 "advertising_marketing_pct": brand.marketing_ads_pct,
                 "cost_of_goods_supply_pct": brand.cogs_supply_pct,
                 "retained_operations_pct": brand.retained_operations_pct,
-                "key_takeaway": (
-                    f"At {brand.name}, {brand.shareholder_extraction_pct}% of revenue flows to shareholders "
-                    f"and {brand.marketing_ads_pct}% to ads, compared to {brand.worker_wages_pct}% for frontline workers."
-                ),
+                "basis": brand.split_basis or {},
+                "note": "Segments marked 'estimate' are Shoptegrity estimates; 'sec_filing' segments are derived from SEC XBRL data.",
             },
+            "sec_receipt": brand.sec_receipt_details,
+            "rating_type": brand.rating_type,
+            "withheld_claims": brand.withheld_claims or [],
             "labor_exploitation": {
                 "rating": brand.labor_exploitation_rating,
                 "sweatshop_risk": brand.sweatshop_risk,
                 "osha_violations_count": brand.osha_violations_count,
+                "osha_enforcement": brand.osha_enforcement,
                 "nlrb_complaints_count": brand.nlrb_complaints_count,
                 "living_wage_certified": brand.living_wage_certified,
                 "summary": brand.labor_summary,
@@ -324,7 +326,7 @@ def lookup_parent_company(query: str) -> Dict[str, Any]:
 
 
 def get_brand_parent_feed(query: Optional[str] = None, limit: int = 20) -> Dict[str, Any]:
-    """Search or browse the 1,000+ brand and product parent company data feed."""
+    """Search or browse the brand and product parent company data feed."""
     from api.app.services.parent_lookup_service import parent_service
 
     res = parent_service.get_feed(q=query, limit=limit)

@@ -169,6 +169,49 @@ class FoodDollarSplit(BaseModel):
     summary_insight: str
 
 
+class FarmGateCostItem(BaseModel):
+    name: str
+    amount: float
+    percentage_of_farm_gate: float
+    corporate_beneficiaries: List[str]
+    is_farmer_take_home: bool = False
+    color_code: Optional[str] = None
+
+
+class FarmGateAudit(BaseModel):
+    farm_type: str  # contract_grower, conventional_commodity, community_farmer
+    title: str
+    gross_farm_gate_amount: float
+    input_expenses: List[FarmGateCostItem]
+    net_farmer_take_home_amount: float
+    net_farmer_take_home_pct: float
+    notes: str
+
+
+class EliteLandownerProfile(BaseModel):
+    name: str
+    rank: int
+    acreage: int
+    acreage_display: str
+    primary_holdings: str
+    water_and_resource_notes: str
+
+
+class FarmlandOwnershipStats(BaseModel):
+    total_us_farmland_acres: str
+    rented_percentage: float
+    rented_acres: str
+    non_operator_landlord_pct: float
+    non_operators_never_farmed_pct: float
+    corn_belt_rented_pct_range: str
+    owner_operator_pct: float
+    institutional_investor_pct: float
+    foreign_investor_pct: float
+    top_100_landowners_pct: float
+    top_elite_landowners: List[EliteLandownerProfile]
+    sources: List[str]
+
+
 class GeoFlowNode(BaseModel):
     role: str
     payee_name: str
@@ -184,6 +227,7 @@ class GeoFlowNode(BaseModel):
     leak_category: str  # local_community, regional_steward, corporate_overhead, wall_street_leak
     farm_ownership_tier: Optional[str] = None  # community_farmer, contract_grower, corporate_agribusiness, not_farm
     farm_ownership_notes: Optional[str] = None
+    farm_gate_audit: Optional[FarmGateAudit] = None
 
 
 class GeoFlowBranch(BaseModel):

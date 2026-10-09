@@ -8,7 +8,12 @@ from sqlalchemy import or_
 
 from api.app.db.session import get_db
 from api.app.models.core import Brand, Entity, SpendCategory, Alternative, Place, Maker, FlowProfile, HealthcareIntegrity
-from api.app.routers.food_chain import SOURCING_LADDER, fetch_food_dollar_splits
+from api.app.routers.food_chain import (
+    SOURCING_LADDER,
+    fetch_food_dollar_splits,
+    FARMLAND_OWNERSHIP_DATA,
+    FARM_BUDGET_COMPARISONS,
+)
 from api.app.routers.swaps import get_swap_guide_detail
 from api.app.services.geo_flow_service import SCENARIOS_META, trace_dollar_flow
 from api.app.services.scoring_service import score_entity, get_cached_rubric
@@ -161,6 +166,8 @@ def food_view(request: Request, db: Session = Depends(get_db)):
             "dollar_splits": splits,
             "makers": makers,
             "local_food_places": local_places,
+            "farmland_ownership": FARMLAND_OWNERSHIP_DATA,
+            "farm_budgets": FARM_BUDGET_COMPARISONS,
         },
     )
 
@@ -245,6 +252,33 @@ def methodology_view(request: Request):
     )
 
 
+@router.get("/sell-direct", response_class=HTMLResponse)
+def sell_direct_view(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="sell_direct.html",
+        context={"active_page": "sell-direct"},
+    )
+
+
+@router.get("/disclosures", response_class=HTMLResponse)
+def disclosures_view(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="disclosures.html",
+        context={"active_page": "disclosures"},
+    )
+
+
+@router.get("/corrections", response_class=HTMLResponse)
+def corrections_view(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="corrections.html",
+        context={"active_page": "corrections"},
+    )
+
+
 @router.get("/parents", response_class=HTMLResponse)
 def parents_view(
     request: Request,
@@ -321,3 +355,26 @@ def healthcare_view(
     )
 
 
+@router.get("/housing", response_class=HTMLResponse)
+def housing_view(request: Request):
+    """Renders the comprehensive Housing & Rental Integrity Guide."""
+    from api.app.routers.housing import (
+        DEMOGRAPHIC_DATA,
+        RENT_DOLLAR_SPLITS,
+        OWNERSHIP_LADDER,
+        MEGA_LANDLORDS,
+        HOUSING_SWAPS,
+    )
+
+    return templates.TemplateResponse(
+        request=request,
+        name="housing.html",
+        context={
+            "active_page": "housing",
+            "demographics": DEMOGRAPHIC_DATA,
+            "rent_dollar_splits": RENT_DOLLAR_SPLITS,
+            "ownership_ladder": OWNERSHIP_LADDER,
+            "mega_landlords": MEGA_LANDLORDS,
+            "swaps": HOUSING_SWAPS,
+        },
+    )

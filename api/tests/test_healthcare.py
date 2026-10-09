@@ -1,8 +1,11 @@
+import re
+
 import pytest
 from fastapi.testclient import TestClient
 from api.app.main import app
 from api.app.db.session import SessionLocal
 from api.app.models.core import HealthcareIntegrity
+from pipeline.healthcare_2000 import VERIFIED_HEALTHCARE_ENTITIES
 
 
 @pytest.fixture(scope="module")
@@ -11,60 +14,40 @@ def client():
         yield c
 
 
-def test_healthcare_database_count():
-    """Verify that the database contains exactly 2,000 healthcare entities."""
+def test_healthcare_database_contains_only_curated_entities():
+    """No generated filler: the table holds exactly the hand-curated records."""
     with SessionLocal() as db:
-        count = db.query(HealthcareIntegrity).count()
-        assert count == 2000, f"Expected 2000 healthcare entities, got {count}"
-
-
-def test_healthcare_category_distribution():
-    """Verify balanced distribution across insurance, hospital chains, corporate/PE clinics, and local clinics."""
+        names = [r.name for r in db.query(HealthcareIntegrity).all()]
+    assert len(names) == len(VERIFIED_HEALTHCARE_ENTITIES)
+    assert not any(re.search(r"#\d+", n) for n in names)
     with SessionLocal() as db:
-        insurers = db.query(HealthcareIntegrity).filter(HealthcareIntegrity.entity_type == "health_insurance").count()
-        hospitals = db.query(HealthcareIntegrity).filter(HealthcareIntegrity.entity_type == "hospital_chain").count()
-        corp_clinics = db.query(HealthcareIntegrity).filter(HealthcareIntegrity.entity_type == "corporate_clinic").count()
-        local_clinics = db.query(HealthcareIntegrity).filter(HealthcareIntegrity.entity_type == "local_clinic").count()
+        assert db.query(HealthcareIntegrity).filter(HealthcareIntegrity.data_provenance == "industry_benchmark_model").count() == 0
 
-        assert insurers == 350, f"Expected 350 insurers, got {insurers}"
-        assert hospitals == 450, f"Expected 450 hospitals, got {hospitals}"
-        assert corp_clinics == 600, f"Expected 600 corporate/PE clinics, got {corp_clinics}"
-        assert local_clinics == 600, f"Expected 600 local clinics/offices, got {local_clinics}"
+
+def test_healthcare_category_coverage():
+    """Every entity type is still represented."""
+    with SessionLocal() as db:
+        for entity_type in ["health_insurance", "hospital_chain", "corporate_clinic", "local_clinic"]:
+            assert db.query(HealthcareIntegrity).filter(HealthcareIntegrity.entity_type == entity_type).count() > 0
 
 
 def test_healthcare_api_database_filtering(client):
-    """Test REST API querying, searching, and filtering across the 2,000 entities."""
-    # 1. Base database query
+    """Test REST API querying, searching, and filtering."""
     resp = client.get("/v1/healthcare/database")
     assert resp.status_code == 200
     data = resp.json()
-    assert data["total"] == 2000
-    assert len(data["entities"]) == 50
+    assert data["total"] == len(VERIFIED_HEALTHCARE_ENTITIES)
 
-    # 2. Filter by sector
     resp_ins = client.get("/v1/healthcare/database?entity_type=health_insurance&limit=10")
     assert resp_ins.status_code == 200
-    assert resp_ins.json()["total"] == 350
+    assert all(e["entity_type"] == "health_insurance" for e in resp_ins.json()["entities"])
 
-    resp_local = client.get("/v1/healthcare/database?entity_type=local_clinic&limit=10")
-    assert resp_local.status_code == 200
-    assert resp_local.json()["total"] == 600
-
-    # 3. Search query
     resp_search = client.get("/v1/healthcare/database?q=UnitedHealthcare")
     assert resp_search.status_code == 200
     search_data = resp_search.json()
     assert search_data["total"] >= 1
     assert any("UnitedHealthcare" in e["name"] for e in search_data["entities"])
 
-    # 4. Filter by PE Rollup
-    resp_pe = client.get("/v1/healthcare/database?is_pe_rollup=true")
-    assert resp_pe.status_code == 200
-    pe_data = resp_pe.json()
-    assert pe_data["total"] > 0
-    assert all(e["is_pe_rollup"] is True for e in pe_data["entities"])
-
-    # 5. Filter by Tier 1 (Owner-Operated Local Doctors & Dentists)
     resp_t1 = client.get("/v1/healthcare/database?tier=1")
     assert resp_t1.status_code == 200
     t1_data = resp_t1.json()
@@ -72,64 +55,62 @@ def test_healthcare_api_database_filtering(client):
     assert all(e["ownership_tier"] == 1 for e in t1_data["entities"])
 
 
+def test_unsourced_claims_are_withheld(client):
+    """Denial rates, markups, PE sponsors etc. are null unless the record cites a source."""
+    entities = client.get("/v1/healthcare/database?limit=1000").json()["entities"]
+    for e in entities:
+        sources = e["claim_sources"]
+        for field in ["claims_denial_rate_pct", "charge_to_cost_ratio", "medical_loss_ratio_pct",
+                      "charity_care_pct", "pe_firm_name", "is_pe_rollup", "summary_notes"]:
+            if field not in sources:
+                assert e[field] is None, f"{e['name']}: unsourced {field} published"
+        if "regulatory_citations" not in sources:
+            assert e["regulatory_citations"] == []
+        # Public output names withheld fields but never their values.
+        assert all(set(w) == {"field", "reason"} for w in e["withheld_claims"])
+
+
 def test_healthcare_api_compare(client):
-    """Test side-by-side comparison endpoint for 2 to 4 entities."""
-    # Compare UnitedHealthcare vs Plum Health Direct Primary Care
     slugs = "unitedhealthcare-optum,plum-health-direct-primary-care"
     resp = client.get(f"/v1/healthcare/compare?slugs={slugs}")
     assert resp.status_code == 200
     comp = resp.json()
 
     assert comp["compared_count"] == 2
-    assert len(comp["entities"]) == 2
-    assert "metrics_matrix" in comp
-    assert "names" in comp["metrics_matrix"]
     assert len(comp["metrics_matrix"]["names"]) == 2
-
-    # Verify integrity winner
     winner = comp["highest_integrity_entity"]
     assert "Plum Health" in winner["name"]
     assert winner["tier"] == 1
-    assert winner["score"] > 90
 
-    # Error handling for invalid slug
     resp_404 = client.get("/v1/healthcare/compare?slugs=non-existent-entity-xyz")
     assert resp_404.status_code == 404
 
 
 def test_healthcare_api_stats(client):
-    """Test stats aggregation endpoint."""
     resp = client.get("/v1/healthcare/stats")
     assert resp.status_code == 200
     stats = resp.json()
-
-    assert stats["total_entities"] == 2000
-    assert stats["by_entity_type"]["health_insurance"] == 350
-    assert stats["by_entity_type"]["hospital_chain"] == 450
-    assert stats["by_entity_type"]["corporate_clinic"] == 600
-    assert stats["by_entity_type"]["local_clinic"] == 600
-    assert stats["pe_rollups_count"] > 0
+    assert stats["total_entities"] == len(VERIFIED_HEALTHCARE_ENTITIES)
     assert "averages" in stats
-    assert stats["averages"]["clinical_care_wages_pct"] > 0
 
 
-def test_healthcare_entity_detail(client):
-    """Test individual entity scorecard detail endpoint."""
+def test_healthcare_entity_detail_uses_sec_figures(client):
+    """UnitedHealth's shareholder payout share comes from its 10-K, not a hand-typed value."""
     resp = client.get("/v1/healthcare/unitedhealthcare-optum")
     assert resp.status_code == 200
     detail = resp.json()
     assert detail["name"] == "UnitedHealthcare (Optum)"
-    assert detail["ownership_tier"] == 6
-    assert detail["grade"] == "F"
-    assert detail["clinical_care_wages_pct"] == 58.5
-    assert detail["shareholder_extraction_pct"] == 11.2
-    assert detail["swap_name"] is not None
+    assert detail["data_provenance"] == "verified_sec_filing"
+    receipt = detail["sec_receipt_details"]
+    assert receipt and receipt["filing_url"].startswith("https://www.sec.gov/Archives/")
+    assert detail["shareholder_extraction_pct"] == round(receipt["shareholder_payout_pct_of_revenue"], 1)
+    assert detail["split_basis"]["shareholder_extraction_pct"] == "sec_filing"
+    assert detail["split_basis"]["clinical_care_wages_pct"] == "estimate"
 
 
 def test_healthcare_web_view(client):
-    """Test that the /healthcare HTML view renders successfully with 2,000 comparison features."""
     resp = client.get("/healthcare")
     assert resp.status_code == 200
     assert "text/html" in resp.headers["content-type"]
-    assert "Healthcare Comparisons (2,000)" in resp.text
+    assert "Healthcare Comparisons" in resp.text
     assert "Side-by-Side Healthcare Comparison" in resp.text

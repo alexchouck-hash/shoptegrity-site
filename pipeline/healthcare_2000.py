@@ -1,6 +1,7 @@
-"""Healthcare Integrity 2,000 Entities Generator and Ingestion Pipeline.
+"""Healthcare Integrity Database Generator and Ingestion Pipeline.
 
-Generates and populates an authoritative database of 2,000 healthcare entities:
+Builds the healthcare database from hand-curated records only (no generated filler).
+Every record passes the publication gate in pipeline/provenance.py. Entity types:
 1. Health Insurance Brands (Commercial Wall Street giants, non-profit mutuals, state BCBS, DPC healthshares, Medicaid plans)
 2. Hospital Chains & Health Systems (For-profit mega-systems, large non-profit faith-based systems, public/county safety-net districts)
 3. Corporate & PE-Backed Clinic Chains (Urgent care rollups, DSOs, dermatology rollups, physical therapy chains, dialysis)
@@ -14,7 +15,6 @@ Outputs:
 import json
 import re
 import sys
-import hashlib
 from pathlib import Path
 from typing import List, Dict, Any
 
@@ -23,6 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from sqlalchemy.orm import Session
 from api.app.models.core import HealthcareIntegrity, generate_uuid
+from pipeline.provenance import gate_healthcare, assert_no_synthetic, load_financials, public_record
 
 
 def slugify(text: str) -> str:
@@ -335,7 +336,7 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "name": "HCA Healthcare",
         "entity_type": "hospital_chain",
         "sub_category": "For-Profit Wall Street Hospital Conglomerate",
-        "parent_organization": "HCA Healthcare, Inc. (Public: HCA, CIK: 0001402280)",
+        "parent_organization": "HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",
         "ownership_type": "public",
         "ownership_tier": 6,
         "composite_score": 20,
@@ -365,7 +366,7 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "state": "TN",
         "data_provenance": "verified_sec_filing",
         "source_citation": "HCA Healthcare 2023 Form 10-K (Revenue $65.0B, Net Income $5.2B, Buybacks $3.9B) & CMS Cost Reports",
-        "filing_url": "https://www.sec.gov/edgar/browse/?CIK=0001402280",
+        "filing_url": "https://www.sec.gov/edgar/browse/?CIK=0000860730",
         "summary_notes": "Largest for-profit healthcare provider in the United States, operating 186 hospitals and over 2,400 ambulatory sites."
     },
     {
@@ -862,67 +863,10 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
 
 
 # ==============================================================================
-# 2. ARCHETYPE BENCHMARK TEMPLATES FOR 2,000 SCALED GENERATION
+# 2. HEALTHCARE CATALOG BUILDER
 # ==============================================================================
-SECTOR_ARCHETYPES = [
-    # 1. Health Insurance Brands (Commercial Wall Street)
-    ("health_insurance", "Commercial Health Plan", "National Wall Street Insurer Group", "public", 6, 22, "F", 60.5, 18.5, 2.3, 11.0, 7.7, 83.5, 25.0, 3.8, 0.4, False, None, "Member-Owned Mutual BCBS or Direct Primary Care", "Mutual / DPC", "Mutual insurers and DPC return operating margins to reserves and direct care rather than Wall Street stock buybacks."),
-    # 2. Health Insurance Brands (State / Regional BCBS Mutual)
-    ("health_insurance", "Non-Profit Mutual Insurer", "Regional Mutual Health Alliance", "mutual", 3, 73, "B", 73.5, 11.0, 1.3, 0.0, 14.2, 89.8, 10.5, 2.4, 2.2, False, None, "Direct Primary Care + Catastrophic Mutual", "DPC + Mutual", "Direct Primary Care eliminates billing pre-authorization codes for standard family visits."),
-    # 3. Health Insurance Brands (Provider-Sponsored Health Plan)
-    ("health_insurance", "Provider-Sponsored Health Plan", "Regional Health System Plan", "nonprofit", 3, 78, "B+", 75.0, 9.8, 1.4, 0.0, 13.8, 91.2, 7.5, 2.1, 3.5, False, None, "Local Health Co-op / DPC", "Co-op / DPC", "Health cooperatives align patient-member interests directly with frontline clinicians."),
-    # 4. Hospital Chains (For-Profit Mega-System)
-    ("hospital_chain", "For-Profit Hospital Chain", "National For-Profit Healthcare Corp", "public", 6, 21, "F", 44.8, 16.2, 2.6, 17.5, 18.9, 68.5, 0.0, 9.1, 1.3, False, None, "Non-Profit Community Hospital or Public District", "Community Non-Profit", "Community non-profit hospitals spend 3x-5x more on charity care and do not divert cash into Wall Street buybacks."),
-    # 5. Hospital Chains (Large Non-Profit System)
-    ("hospital_chain", "Regional Non-Profit Health System", "Regional Memorial Health System", "nonprofit", 4, 62, "C+", 60.5, 13.5, 1.7, 0.0, 24.3, 80.0, 0.0, 4.2, 4.1, False, None, "Municipal / County Safety-Net Hospital", "Public Safety-Net", "Public county hospitals operate under open records transparency and focus on essential community services."),
-    # 6. Hospital Chains (Public / District Hospital)
-    ("hospital_chain", "Public County / District Hospital", "County Hospital District Authority", "government_public", 2, 92, "A", 71.5, 9.0, 0.7, 0.0, 18.8, 88.0, 0.0, 1.8, 13.5, False, None, "Public Community Hospital (Current Model)", "Public Hospital", "100% public accountability with tax-exempt community charter and emergency care access for all residents."),
-    # 7. Corporate & PE Clinics (Urgent Care Rollup)
-    ("corporate_clinic", "Urgent Care PE Rollup", "Summit Urgent Care Partners", "private_equity", 5, 31, "D", 46.5, 18.2, 3.1, 16.5, 15.7, 61.0, 0.0, 5.5, 0.4, True, "Warburg Pincus / Welsh Carson", "Independent Urgent Care or Community FQHC", "Independent / FQHC", "Community clinics provide primary and walk-in care without private equity bill-upcoding incentives."),
-    # 8. Corporate & PE Clinics (Dental Service Organization / DSO)
-    ("corporate_clinic", "Dental Service Organization (DSO)", "Premier Dental Partners Platform", "private_equity", 5, 27, "F", 36.0, 21.8, 3.6, 19.8, 18.8, 51.5, 0.0, 5.9, 0.2, True, "KKR / Ares Management", "Independent Local Family Dentist", "Independent Dentist", "Independent family dentists have zero corporate sales quotas and recommend only clinically necessary treatments."),
-    # 9. Corporate & PE Clinics (Dermatology PE Rollup)
-    ("corporate_clinic", "Dermatology PE Rollup", "Advanced Skin & Derm Platform", "private_equity", 5, 30, "D", 41.5, 19.8, 3.5, 18.2, 17.0, 57.5, 0.0, 6.9, 0.2, True, "Harvest Partners / L Catterton", "Independent Board-Certified Dermatologist", "Physician-Owned", "Physician-owned dermatology clinics have no PE biopsy quotas or non-physician provider volume mandates."),
-    # 10. Corporate & PE Clinics (Physical Therapy Rollup)
-    ("corporate_clinic", "Physical Therapy Chain", "Dynamic Physical Therapy Partners", "private_equity", 5, 35, "D", 46.5, 18.0, 3.0, 16.5, 16.0, 61.5, 0.0, 5.1, 0.3, True, "Advent International / BDT", "Therapist-Owned Local PT Clinic", "Independent PT", "Therapist-owned clinics prioritize 1-on-1 personalized physical recovery over multi-patient billing blocks."),
-    # 11. Local Clinics & Offices (Direct Primary Care - DPC)
-    ("local_clinic", "Direct Primary Care (DPC)", "Independent Physician Practice", "physician_owned", 1, 98, "A+", 82.0, 4.5, 0.0, 0.0, 13.5, 95.5, 0.0, 1.1, 7.5, False, None, "Doctor-Owned Direct Primary Care (Current Model)", "Direct Primary Care", "Flat-fee membership eliminates insurance denial bureaucracy, offering direct doctor cell access and wholesale meds."),
-    # 12. Local Clinics & Offices (Community Health Center / FQHC)
-    ("local_clinic", "Community Health Center (FQHC)", "Community Health Center Alliance", "nonprofit", 2, 95, "A+", 78.0, 7.8, 0.7, 0.0, 13.5, 92.0, 0.0, 1.3, 13.0, False, None, "Federally Qualified Community Health Center (Current Model)", "Community Health Center", "Patient-governed board (51%+ patients) ensures healthcare priorities directly serve community needs."),
-    # 13. Local Clinics & Offices (Independent Solo / Group Doctor Office)
-    ("local_clinic", "Independent Family Medical Clinic", "Local Family Medicine Associates", "physician_owned", 1, 94, "A", 77.5, 7.2, 0.0, 0.0, 15.3, 91.5, 0.0, 1.4, 5.5, False, None, "Local Independent Physician Practice (Current Model)", "Physician-Owned Practice", "Money spent stays 100% in the regional community supporting local doctors, nurses, and medical staff."),
-    # 14. Local Clinics & Offices (Independent Community Dental Office)
-    ("local_clinic", "Independent Family Dental Practice", "Community Dental Care Associates", "physician_owned", 1, 93, "A", 74.0, 8.5, 0.0, 0.0, 17.5, 89.5, 0.0, 1.5, 4.5, False, None, "Local Independent Family Dentist (Current Model)", "Independent Dental Practice", "Locally owned dental practices focus on lifelong preventative oral health without Wall Street debt pressure."),
-]
-
-# States and Major Metros for realistic geographic distribution
-US_METROS = [
-    ("Minneapolis", "MN"), ("St. Paul", "MN"), ("Rochester", "MN"), ("Duluth", "MN"),
-    ("Chicago", "IL"), ("Rockford", "IL"), ("Peoria", "IL"), ("Naperville", "IL"),
-    ("Dallas", "TX"), ("Houston", "TX"), ("Austin", "TX"), ("San Antonio", "TX"), ("Fort Worth", "TX"),
-    ("Los Angeles", "CA"), ("San Francisco", "CA"), ("San Diego", "CA"), ("Sacramento", "CA"), ("Oakland", "CA"),
-    ("New York", "NY"), ("Buffalo", "NY"), ("Rochester", "NY"), ("Albany", "NY"), ("Syracuse", "NY"),
-    ("Philadelphia", "PA"), ("Pittsburgh", "PA"), ("Allentown", "PA"), ("Erie", "PA"),
-    ("Detroit", "MI"), ("Grand Rapids", "MI"), ("Ann Arbor", "MI"), ("Lansing", "MI"),
-    ("Atlanta", "GA"), ("Savannah", "GA"), ("Augusta", "GA"),
-    ("Miami", "FL"), ("Tampa", "FL"), ("Orlando", "FL"), ("Jacksonville", "FL"),
-    ("Seattle", "WA"), ("Spokane", "WA"), ("Tacoma", "WA"),
-    ("Denver", "CO"), ("Colorado Springs", "CO"), ("Fort Collins", "CO"),
-    ("Phoenix", "AZ"), ("Tucson", "AZ"), ("Mesa", "AZ"),
-    ("Boston", "MA"), ("Worcester", "MA"), ("Springfield", "MA"),
-    ("Nashville", "TN"), ("Memphis", "TN"), ("Knoxville", "TN"),
-    ("Charlotte", "NC"), ("Raleigh", "NC"), ("Greensboro", "NC"),
-    ("Indianapolis", "IN"), ("Fort Wayne", "IN"), ("Bloomington", "IN"),
-    ("Columbus", "OH"), ("Cleveland", "OH"), ("Cincinnati", "OH"),
-    ("Kansas City", "MO"), ("St. Louis", "MO"), ("Springfield", "MO"),
-    ("Milwaukee", "WI"), ("Madison", "WI"), ("Green Bay", "WI"),
-    ("Portland", "OR"), ("Eugene", "OR"), ("Salem", "OR"),
-    ("Salt Lake City", "UT"), ("Provo", "UT"), ("Ogden", "UT"),
-]
-
-
 def generate_healthcare_2000() -> List[Dict[str, Any]]:
-    """Generates an authoritative roster of 2,000 healthcare entities."""
+    """Builds the curated healthcare roster and runs it through the publication gate."""
     entities: List[Dict[str, Any]] = []
     slug_set = set()
 
@@ -943,151 +887,17 @@ def generate_healthcare_2000() -> List[Dict[str, Any]]:
     for v in VERIFIED_HEALTHCARE_ENTITIES:
         add_entity(dict(v))
 
-    target_total = 2000
-
-    SPECIALTY_NAMES = [
-        "Family Medicine", "Pediatrics", "Internal Medicine", "Primary Care", "Health Center",
-        "Dental Arts", "Family Dentistry", "Community Dental", "Dermatology Clinic", "Skin Care Center",
-        "Physical Therapy & Rehab", "Sports Rehabilitation", "Urgent Care Center", "Express Health Clinic",
-        "Eye Care & Optometry", "Vision Specialists", "Behavioral Health & Counseling", "Community Wellness"
-    ]
-
-    GEOGRAPHIC_PREFIXES = [
-        "Metro", "Valley", "River", "Prairie", "Lake", "Cascade", "Highland", "Pinnacle",
-        "Summit", "Northstar", "Heartland", "Pacific", "Atlantic", "Blue Ridge", "Sierra",
-        "Oakwood", "Evergreen", "Maple", "Cedar", "Lakeside", "Twin Cities", "Great Lakes",
-        "Frontier", "Heritage", "Pioneer", "Cornerstone", "Community", "Neighborhood", "Centennial",
-        "Redwood", "Canyon", "Timberline", "Midwest", "Sun Valley", "Horizon", "Grand River"
-    ]
-
-    counter = len(entities) + 1
-
-    while len(entities) < target_total:
-        cur_insurers = sum(1 for e in entities if e["entity_type"] == "health_insurance")
-        cur_hospitals = sum(1 for e in entities if e["entity_type"] == "hospital_chain")
-        cur_corp_clinics = sum(1 for e in entities if e["entity_type"] == "corporate_clinic")
-        cur_local_clinics = sum(1 for e in entities if e["entity_type"] == "local_clinic")
-
-        if cur_insurers < 350:
-            arch_idx = (counter % 3)  # 0, 1, 2
-        elif cur_hospitals < 450:
-            arch_idx = 3 + (counter % 3)  # 3, 4, 5
-        elif cur_corp_clinics < 600:
-            arch_idx = 6 + (counter % 4)  # 6, 7, 8, 9
-        else:
-            arch_idx = 10 + (counter % 4)  # 10, 11, 12, 13
-
-        arch = SECTOR_ARCHETYPES[arch_idx]
-        (e_type, sub_cat, parent_prefix, own_type, tier, score, grade, care_w, admin, exec_c,
-         sh_ext, ops, mlr, denial, markup, charity, is_pe, pe_sponsor, swap_n, swap_t, swap_r) = arch
-
-        geo_city, geo_state = US_METROS[counter % len(US_METROS)]
-        prefix = GEOGRAPHIC_PREFIXES[(counter * 7) % len(GEOGRAPHIC_PREFIXES)]
-        spec = SPECIALTY_NAMES[(counter * 11) % len(SPECIALTY_NAMES)]
-
-        if e_type == "health_insurance":
-            if tier == 6:
-                name = f"{prefix} Commercial Health Choice ({geo_state})"
-                parent = f"{prefix} Healthcare Holdings Corp. (Public)"
-            elif tier == 3:
-                name = f"{prefix} Mutual Blue Cross & Health Plan of {geo_state}"
-                parent = f"{prefix} Mutual Policyholders Association"
-            else:
-                name = f"{geo_city} Community Health Co-op Plan"
-                parent = f"{geo_city} Member-Governed Health Alliance"
-        elif e_type == "hospital_chain":
-            if tier == 6:
-                name = f"{prefix} Regional Medical Center of {geo_city}"
-                parent = f"National Hospital Partners Corp. (Public: NHP)"
-            elif tier == 4:
-                name = f"{geo_city} Memorial Non-Profit Hospital"
-                parent = f"{prefix} Non-Profit Health System"
-            else:
-                name = f"{geo_city} County Public Hospital District"
-                parent = f"{geo_city} Public Hospital & Health Authority"
-        elif e_type == "corporate_clinic":
-            doctor_surnames = ["Miller", "Davis", "Johnson", "Anderson", "Smith", "Wilson", "Taylor", "Campbell", "Clark", "Wright", "Mitchell", "Roberts", "Evans", "Walker", "Harris"]
-            doc_name = doctor_surnames[(counter * 13) % len(doctor_surnames)]
-            if "Dental" in sub_cat:
-                name = f"{doc_name} & Associates Family Dental ({geo_city})"
-                parent = f"Heartland / Premier DSO Platform (KKR/Ares Portfolio #{counter % 40 + 1})"
-            elif "Dermatology" in sub_cat:
-                name = f"{prefix} Dermatology Group ({geo_city})"
-                parent = f"Forefront / Schweiger Derm Platform (L Catterton / OMERS)"
-            elif "Physical Therapy" in sub_cat:
-                name = f"{prefix} Physical Therapy & Rehab ({geo_city})"
-                parent = f"Athletico / Upstream Therapy Platform (BDT/Silver Lake)"
-            else:
-                name = f"{prefix} Express Urgent Care ({geo_city})"
-                parent = f"CityMD / UrgentCare Platform (Warburg Pincus Portfolio)"
-        else:
-            if tier == 1:
-                name = f"{prefix} Direct Primary Care ({geo_city})"
-                parent = f"Independent Physician Owner-Operator ({geo_city})"
-            elif "FQHC" in sub_cat or tier == 2:
-                name = f"{geo_city} Community Health Center (FQHC)"
-                parent = f"{geo_city} Community Health Center, Inc."
-            elif "Dental" in sub_cat:
-                name = f"{geo_city} Independent Family Dentistry"
-                parent = f"Local Dentist Owner-Operator ({geo_city})"
-            else:
-                name = f"{prefix} Independent Family Medicine ({geo_city})"
-                parent = f"Local Independent Medical Group ({geo_city})"
-
-        h = int(hashlib.md5(f"{name}_{counter}".encode("utf-8")).hexdigest()[:6], 16)
-        var_score = (h % 9) - 4
-        var_care = ((h >> 4) % 11) * 0.4 - 2.0
-        var_admin = ((h >> 8) % 9) * 0.3 - 1.2
-        var_denial = (((h >> 12) % 15) * 0.4 - 2.8) if denial > 0 else 0.0
-
-        calc_score = max(10, min(99, score + var_score))
-        calc_care = max(30.0, round(care_w + var_care, 1))
-        calc_admin = max(3.0, round(admin + var_admin, 1))
-        calc_denial = max(1.0, round(denial + var_denial, 1)) if denial > 0 else 0.0
-
-        item = {
-            "name": name,
-            "entity_type": e_type,
-            "sub_category": sub_cat,
-            "parent_organization": parent,
-            "ownership_type": own_type,
-            "ownership_tier": tier,
-            "composite_score": calc_score,
-            "grade": grade,
-            "clinical_care_wages_pct": calc_care,
-            "admin_overhead_pct": calc_admin,
-            "exec_comp_pct": round(exec_c, 1),
-            "shareholder_extraction_pct": round(sh_ext, 1),
-            "supplies_operations_pct": round(ops, 1),
-            "medical_loss_ratio_pct": round(mlr, 1),
-            "claims_denial_rate_pct": calc_denial,
-            "charge_to_cost_ratio": round(markup, 1),
-            "charity_care_pct": round(charity, 1),
-            "is_pe_rollup": is_pe,
-            "pe_firm_name": pe_sponsor if is_pe else None,
-            "regulatory_citations": [f"Benchmark compliance evaluation for {sub_cat} in {geo_state}."] if is_pe or tier >= 5 else [],
-            "swap_name": swap_n,
-            "swap_slug": slugify(swap_n.split(" (")[0]),
-            "swap_type": swap_t,
-            "swap_rationale": swap_r,
-            "location_scope": "State" if e_type == "health_insurance" else ("Metro" if tier > 2 else "Local"),
-            "city": geo_city,
-            "state": geo_state,
-            "data_provenance": "industry_benchmark_model",
-            "source_citation": f"CMS Cost Report & NAIC Annual Statement Benchmarks ({geo_state})",
-            "filing_url": None,
-            "summary_notes": f"Sector benchmark evaluation for {name} ({sub_cat}) in {geo_city}, {geo_state}."
-        }
-
-        add_entity(item)
-        counter += 1
-
-    return entities[:target_total]
+    # Every record passes the publication gate: unsourced claims are withheld,
+    # public-company financials come from SEC XBRL data.
+    financials = load_financials()
+    gated = [gate_healthcare(e, financials) for e in entities]
+    assert_no_synthetic(gated, "healthcare")
+    return gated
 
 
 def export_healthcare_json(output_path: str = "api/v1/healthcare_2000.json") -> List[Dict[str, Any]]:
-    """Generate and write the static JSON bundle for 2,000 healthcare entities."""
-    entities = generate_healthcare_2000()
+    """Generate and write the static JSON bundle for the healthcare database."""
+    entities = [public_record(e) for e in generate_healthcare_2000()]
     out = Path(output_path)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(entities, indent=2), encoding="utf-8")
@@ -1096,7 +906,7 @@ def export_healthcare_json(output_path: str = "api/v1/healthcare_2000.json") -> 
 
 
 def seed_healthcare_db(session: Session):
-    """Seed the 2,000 healthcare entities into the SQLAlchemy database."""
+    """Seed the gated healthcare records into the SQLAlchemy database."""
     data = generate_healthcare_2000()
 
     # Drop and recreate healthcare_integrity table to ensure fresh schema
@@ -1116,16 +926,16 @@ def seed_healthcare_db(session: Session):
             ownership_tier=item["ownership_tier"],
             composite_score=item["composite_score"],
             grade=item["grade"],
-            clinical_care_wages_pct=item["clinical_care_wages_pct"],
-            admin_overhead_pct=item["admin_overhead_pct"],
-            exec_comp_pct=item["exec_comp_pct"],
-            shareholder_extraction_pct=item["shareholder_extraction_pct"],
-            supplies_operations_pct=item["supplies_operations_pct"],
-            medical_loss_ratio_pct=item["medical_loss_ratio_pct"],
-            claims_denial_rate_pct=item["claims_denial_rate_pct"],
-            charge_to_cost_ratio=item["charge_to_cost_ratio"],
-            charity_care_pct=item["charity_care_pct"],
-            is_pe_rollup=item["is_pe_rollup"],
+            clinical_care_wages_pct=item.get("clinical_care_wages_pct"),
+            admin_overhead_pct=item.get("admin_overhead_pct"),
+            exec_comp_pct=item.get("exec_comp_pct"),
+            shareholder_extraction_pct=item.get("shareholder_extraction_pct"),
+            supplies_operations_pct=item.get("supplies_operations_pct"),
+            medical_loss_ratio_pct=item.get("medical_loss_ratio_pct"),
+            claims_denial_rate_pct=item.get("claims_denial_rate_pct"),
+            charge_to_cost_ratio=item.get("charge_to_cost_ratio"),
+            charity_care_pct=item.get("charity_care_pct"),
+            is_pe_rollup=item.get("is_pe_rollup"),
             pe_firm_name=item.get("pe_firm_name"),
             regulatory_citations=item.get("regulatory_citations") or [],
             swap_name=item.get("swap_name"),
@@ -1135,10 +945,15 @@ def seed_healthcare_db(session: Session):
             location_scope=item.get("location_scope", "National"),
             city=item.get("city"),
             state=item.get("state"),
-            data_provenance=item.get("data_provenance", "industry_benchmark_model"),
+            data_provenance=item.get("data_provenance", "unverified"),
             source_citation=item.get("source_citation"),
             filing_url=item.get("filing_url"),
             summary_notes=item.get("summary_notes"),
+            sec_receipt_details=item.get("sec_receipt_details"),
+            claim_sources=item.get("claim_sources") or {},
+            withheld_claims=item.get("withheld_claims") or [],
+            split_basis=item.get("split_basis") or {},
+            rating_type=item.get("rating_type"),
         )
         objects.append(obj)
 

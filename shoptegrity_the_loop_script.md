@@ -37,7 +37,7 @@ Dark navy background, white headline type, green accent, same pill-label header 
 | 5 | 12 to 13.5 | Freeze. Everything dims except the coin, hovering over You. Beat of stillness. | **Same dollar. Different direction.** |
 | 6 | 13.5 to 17.5 | A search bar types "who owns..." and the facade turns transparent, showing the tower. The coin turns instead toward a neighbor's shop (farmer, plumber, co-op). Window lights up. | **See who's really behind the counter.** |
 | 7 | 17.5 to 21.5 | The coin keeps moving, green trail: farmer → mechanic → credit union → cafe → back to You. Each stop lights up. After one lap the whole ring glows and the clock over You slows. | **Your neighbor gets paid. Then spends it next door. Then it comes back to you.** |
-| 8 | 21.5 to 24 | Coin lands in the viewer's "hand" (bottom center). Footer bar like the other gifs. | **Your dollar is a vote. See the ballot.** Footer: *Shoptegrity.com* |
+| 8 | 21.5 to 24 | Coin lands in the viewer's "hand" (bottom center). Footer bar like the other gifs. | **Your dollar is a vote. See the ballot.** Footer: *Shopteg.com* |
 
 Loop point: frame 8's lit neighborhood cross-fades to frame 1's neutral neighborhood.
 

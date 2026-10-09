@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Healthcare Integrity & Comparisons (2,000 Insurers, Hospitals & Clinics) — Shoptegrity{% endblock %}
+{% block title %}Healthcare Integrity & Comparisons — Shoptegrity{% endblock %}
 
 {% block content %}
 <section class="hero" style="background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);">
   <div class="hero-inner">
-    <div class="hero-tag" style="background: #dcfce7; color: #166534; border-color: #bbf7d0;">🏥 Database & Comparison Engine: 2,000 Insurers, Hospitals & Clinics</div>
+    <div class="hero-tag" style="background: #dcfce7; color: #166534; border-color: #bbf7d0;">🏥 Database & Comparison Engine: Insurers, Hospitals & Clinics</div>
     <h1>Who Actually Owns Your Healthcare?</h1>
-    <p>Compare 2,000 health insurance plans, hospital chains, private equity clinic rollups, and local independent doctors. See where every $100 goes: frontline patient care vs claims denial bureaucracy, executive bonuses, and Wall Street extraction.</p>
+    <p>Compare health insurers, hospital chains, private-equity clinic chains, and independent doctors. Shareholder payouts come straight from SEC filings; every other figure is shown only with a source.</p>
 
     <!-- Interactive Search Bar -->
     <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
       <div class="search-box" style="width: 100%; max-width: 760px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
-        <input type="text" id="healthSearchInput" placeholder="Search 2,000+ healthcare entities (e.g. UnitedHealthcare, HCA, Aspen Dental, Plum Health, CityMD)..." oninput="handleSearchInput()">
+        <input type="text" id="healthSearchInput" placeholder="Search healthcare organizations (e.g. UnitedHealthcare, HCA, Aspen Dental, Plum Health, CityMD)..." oninput="handleSearchInput()">
         <button type="button" class="btn btn-blue" onclick="handleSearchInput()">Search Healthcare</button>
       </div>
     </div>
@@ -22,8 +22,8 @@
 <main class="container">
   <!-- Partner Navigation Links -->
   <div style="display: flex; gap: 0.75rem; border-bottom: 2px solid var(--border); padding-bottom: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-    <a href="/healthcare" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--primary-light); border-color: #a7f3d0; color: #047857; font-weight: 750;">🏥 Healthcare Comparisons (2,000)</a>
-    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Top 2,000 Brands</a>
+    <a href="/healthcare" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem; background: var(--primary-light); border-color: #a7f3d0; color: #047857; font-weight: 750;">🏥 Healthcare Comparisons</a>
+    <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Brands Database</a>
     <a href="/parents" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Who Owns What?</a>
     <a href="/swaps" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Swap Guides</a>
     <a href="/flows" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">$100 Dollar Flow Maps</a>
@@ -53,7 +53,7 @@
   <!-- Sector Category Filter Pills -->
   <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; align-items: center;">
     <span style="font-size: 0.82rem; font-weight: 750; color: var(--muted); margin-right: 0.25rem;">Sector:</span>
-    <button class="btn btn-secondary cat-pill active" onclick="setSectorFilter('all', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">All Healthcare (2,000)</button>
+    <button class="btn btn-secondary cat-pill active" onclick="setSectorFilter('all', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">All Healthcare</button>
     <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('health_insurance', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🛡️ Health Insurance (350)</button>
     <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('hospital_chain', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🏥 Hospital Chains & Systems (450)</button>
     <button class="btn btn-secondary cat-pill" onclick="setSectorFilter('corporate_clinic', this)" style="font-size: 0.82rem; padding: 0.28rem 0.75rem; border-radius: 9999px;">🏢 Corporate & PE Clinics (600)</button>
@@ -118,7 +118,7 @@
 
   <!-- Header with Live Counter -->
   <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
-    <h2 id="healthListTitle" style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">Healthcare Entities Directory (2,000 Analyzed)</h2>
+    <h2 id="healthListTitle" style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">Healthcare Directory</h2>
     <div id="healthMatchCounter" style="font-size: 0.88rem; font-weight: 700; color: var(--primary);">Loading healthcare database...</div>
   </div>
 
@@ -145,52 +145,72 @@
               {% if e.city %}{{ e.city }}, {{ e.state }}{% else %}{{ e.location_scope }}{% endif %}
             </span>
           </div>
-          {% if e.is_pe_rollup %}
+          {% if e.is_pe_rollup == true %}
           <div style="margin-top: 0.35rem;">
             <span style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 0.72rem; font-weight: 750; padding: 0.15rem 0.45rem; border-radius: 9999px;">
-              ⚠️ Disguised PE Rollup {% if e.pe_firm_name %}({{ e.pe_firm_name }}){% endif %}
+              ⚠️ PE-owned {% if e.pe_firm_name %}({{ e.pe_firm_name }}){% endif %}
             </span>
           </div>
           {% endif %}
         </div>
         <div style="text-align: right;">
-          <span class="grade-badge {% if e.grade.startswith('A') %}grade-A{% elif e.grade.startswith('B') %}grade-B{% elif e.grade.startswith('D') %}grade-D{% else %}grade-F{% endif %}">{{ e.grade }} ({{ e.composite_score }})</span>
+          <span class="grade-badge {% if e.grade.startswith('A') %}grade-A{% elif e.grade.startswith('B') %}grade-B{% elif e.grade.startswith('D') %}grade-D{% else %}grade-F{% endif %}" title="Shoptegrity opinion rating under our published rubric">{{ e.grade }} ({{ e.composite_score }})</span>
         </div>
       </div>
 
+      {% if e.clinical_care_wages_pct is not none %}
       <div class="brand-flow-container" style="margin: 0.6rem 0;">
         <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--slate); margin-bottom: 0.25rem;">
           <span>Where $100 Goes:</span>
-          <span>Care: {{ e.clinical_care_wages_pct }}% | Wall St/PE: {{ e.shareholder_extraction_pct }}%</span>
+          <span>Care (est.): {{ e.clinical_care_wages_pct }}% | Wall St/PE: {% if e.shareholder_extraction_pct is not none %}{{ e.shareholder_extraction_pct }}%{% else %}n/a{% endif %}</span>
         </div>
         <div class="brand-split-bar">
           <div class="brand-split-seg" style="background: #16a34a; width: {{ e.clinical_care_wages_pct }}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             {% if e.clinical_care_wages_pct > 20 %}{{ e.clinical_care_wages_pct }}%{% endif %}
           </div>
-          <div class="brand-split-seg" style="background: #0284c7; width: {{ e.admin_overhead_pct }}%;"></div>
-          <div class="brand-split-seg" style="background: #9333ea; width: {{ e.exec_comp_pct * 2 }}%;"></div>
-          <div class="brand-split-seg" style="background: #dc2626; width: {{ e.shareholder_extraction_pct }}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
-            {% if e.shareholder_extraction_pct > 10 %}{{ e.shareholder_extraction_pct }}%{% endif %}
+          <div class="brand-split-seg" style="background: #0284c7; width: {{ e.admin_overhead_pct or 0 }}%;"></div>
+          <div class="brand-split-seg" style="background: #9333ea; width: {{ e.exec_comp_pct or 0 }}%;"></div>
+          <div class="brand-split-seg" style="background: #dc2626; width: {{ e.shareholder_extraction_pct or 0 }}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+            {% if (e.shareholder_extraction_pct or 0) > 10 %}{{ e.shareholder_extraction_pct }}%{% endif %}
           </div>
           <div class="brand-split-seg" style="background: #cbd5e1; flex: 1;"></div>
         </div>
       </div>
+      {% else %}
+      <div style="font-size: 0.76rem; color: var(--muted); background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 0.5rem 0.65rem; margin: 0.6rem 0;">
+        No verified financial breakdown published for this organization yet.
+      </div>
+      {% endif %}
 
       <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; font-size: 0.73rem;">
+        {% if e.medical_loss_ratio_pct is not none %}
         <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
           🩺 MLR: <strong>{{ e.medical_loss_ratio_pct }}%</strong>
         </span>
-        {% if e.claims_denial_rate_pct > 0 %}
-        <span style="background: {% if e.claims_denial_rate_pct >= 20 %}#fee2e2{% else %}#f8fafc{% endif %}; border: 1px solid {% if e.claims_denial_rate_pct >= 20 %}#fca5a5{% else %}var(--border){% endif %}; padding: 0.2rem 0.45rem; border-radius: 4px; color: {% if e.claims_denial_rate_pct >= 20 %}#991b1b{% else %}inherit{% endif %};">
+        {% endif %}
+        {% if (e.claims_denial_rate_pct or 0) > 0 %}
+        <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
           🚫 Denial Rate: <strong>{{ e.claims_denial_rate_pct }}%</strong>
         </span>
         {% endif %}
+        {% if e.charge_to_cost_ratio is not none %}
         <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
           📈 Markup: <strong>{{ e.charge_to_cost_ratio }}x</strong>
         </span>
+        {% endif %}
+        {% if e.charity_care_pct is not none %}
         <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
           🤝 Charity Care: <strong>{{ e.charity_care_pct }}%</strong>
         </span>
+        {% endif %}
+        {% if e.sec_receipt_details %}
+        <a href="{{ e.sec_receipt_details.filing_url }}" target="_blank" rel="noopener noreferrer" style="background: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; padding: 0.2rem 0.45rem; border-radius: 4px; text-decoration: none;">
+          🏛️ SEC 10-K: dividends + buybacks {{ e.sec_receipt_details.total_shareholder_payout_usd }}
+        </a>
+        {% endif %}
+        {% if e.withheld_claims %}
+        <span style="color: var(--muted); font-size: 0.68rem; align-self: center;">{{ e.withheld_claims|length }} claims pending source verification</span>
+        {% endif %}
       </div>
 
       {% if e.swap_name %}
@@ -244,12 +264,17 @@
 <div id="comparisonModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.75); z-index: 2000; overflow-y: auto; padding: 2rem 1rem;">
   <div style="background: #ffffff; border-radius: 1rem; max-width: 1140px; margin: 0 auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); overflow: hidden;">
     <!-- Modal Header -->
-    <div style="background: #f8fafc; padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+    <div style="background: #f8fafc; padding: 1.25rem 1.75rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
       <div>
         <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--navy); margin-bottom: 0.2rem;">Side-by-Side Healthcare Comparison</h2>
         <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">Detailed evaluation of ownership, financial splits, claims denials, and capital extraction.</p>
       </div>
-      <button onclick="closeComparisonModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--slate);">&times;</button>
+      <div style="display: flex; gap: 0.6rem; align-items: center;">
+        <button class="btn btn-secondary" onclick="copyComparisonLink()" style="font-size: 0.82rem; padding: 0.4rem 0.8rem; font-weight: 700; background: #ffffff;">
+          📋 Copy Link
+        </button>
+        <button onclick="closeComparisonModal()" style="background: none; border: none; font-size: 1.6rem; cursor: pointer; color: var(--slate); line-height: 1;">&times;</button>
+      </div>
     </div>
 
     <!-- Modal Content Grid -->
@@ -259,6 +284,9 @@
   </div>
 </div>
 
+<!-- Toast Feedback Container -->
+<div id="healthcareToast" style="display: none; position: fixed; bottom: 5rem; right: 2rem; background: #065f46; color: #ffffff; padding: 0.75rem 1.25rem; border-radius: 0.5rem; font-size: 0.88rem; font-weight: 700; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.2); z-index: 3000;"></div>
+
 <script>
 let allEntities = [];
 let filteredEntities = [];
@@ -267,14 +295,24 @@ let currentRenderIndex = 0;
 const PAGE_SIZE = 24;
 let selectedSlugs = new Set();
 
-// Load Healthcare 2,000 JSON Bundle
+// Gated values may be null (withheld for lack of a source).
+function hPct(v, digits = 1) { return (v === null || v === undefined) ? 'n/a' : `${Number(v).toFixed(digits)}%`; }
+function hVal(v, suffix) { return (v === null || v === undefined) ? 'Not verified' : `${v}${suffix}`; }
+function hSrc(e, field) {
+  const src = (e.claim_sources || {})[field];
+  return src ? ` <a href="${src.url}" target="_blank" rel="noopener noreferrer" title="${src.citation}" style="color:#0284c7;">[source]</a>` : '';
+}
+
+// Load healthcare JSON bundle
 async function loadHealthcareData() {
   const counter = document.getElementById("healthMatchCounter");
   const candidates = [
     'api/v1/healthcare_2000.json',
+    'api/v1/healthcare/database.json',
     '/shoptegrity-site/api/v1/healthcare_2000.json',
+    '/shoptegrity-site/api/v1/healthcare/database.json',
     '/api/v1/healthcare_2000.json',
-    '/v1/healthcare/database?limit=2000'
+    '/v1/healthcare/database?limit=1000'
   ];
 
   for (const url of candidates) {
@@ -438,64 +476,77 @@ function renderNextBatch() {
               ${e.city ? e.city + ', ' + e.state : e.location_scope}
             </span>
           </div>
-          ${e.is_pe_rollup ? `
+          ${e.is_pe_rollup === true ? `
             <div style="margin-top: 0.35rem;">
               <span style="background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; font-size: 0.72rem; font-weight: 750; padding: 0.15rem 0.45rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.25rem;">
-                ⚠️ Disguised PE Rollup ${e.pe_firm_name ? `(${e.pe_firm_name})` : ''}
+                ⚠️ PE-owned ${e.pe_firm_name ? `(${e.pe_firm_name})` : ''}${hSrc(e, 'is_pe_rollup')}
               </span>
             </div>
           ` : ''}
         </div>
         <div style="text-align: right;">
-          <span class="grade-badge ${gradeClass}">${e.grade} (${e.composite_score})</span>
+          <span class="grade-badge ${gradeClass}" title="Shoptegrity opinion rating under our published rubric">${e.grade} (${e.composite_score})</span>
         </div>
       </div>
 
-      <!-- $100 Revenue Breakdown Bar -->
+      <!-- $100 Revenue Breakdown Bar (null = withheld for lack of a source) -->
+      ${e.clinical_care_wages_pct !== null && e.clinical_care_wages_pct !== undefined ? `
       <div class="brand-flow-container" style="margin: 0.6rem 0;">
         <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; color: var(--slate); margin-bottom: 0.25rem;">
           <span>Where $100 Goes:</span>
-          <span>Care: ${e.clinical_care_wages_pct}% | Wall St/PE: ${e.shareholder_extraction_pct}%</span>
+          <span>Care (est.): ${e.clinical_care_wages_pct}% | Wall St/PE: ${hPct(e.shareholder_extraction_pct)}</span>
         </div>
-        <div class="brand-split-bar" title="Clinical Care: ${e.clinical_care_wages_pct}% | Admin/Denials: ${e.admin_overhead_pct}% | Execs: ${e.exec_comp_pct}% | Wall St: ${e.shareholder_extraction_pct}%">
+        <div class="brand-split-bar" title="Clinical Care (est.): ${hPct(e.clinical_care_wages_pct)} | Admin (est.): ${hPct(e.admin_overhead_pct)} | CEO pay: ${hPct(e.exec_comp_pct, 3)} | Dividends + buybacks: ${hPct(e.shareholder_extraction_pct)}">
           <div class="brand-split-seg" style="background: #16a34a; width: ${e.clinical_care_wages_pct}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             ${e.clinical_care_wages_pct > 20 ? e.clinical_care_wages_pct + '%' : ''}
           </div>
-          <div class="brand-split-seg" style="background: #0284c7; width: ${e.admin_overhead_pct}%;" title="Admin Overhead: ${e.admin_overhead_pct}%"></div>
-          <div class="brand-split-seg" style="background: #9333ea; width: ${e.exec_comp_pct * 2}%;" title="Exec Comp: ${e.exec_comp_pct}%"></div>
-          <div class="brand-split-seg" style="background: #dc2626; width: ${e.shareholder_extraction_pct}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
+          <div class="brand-split-seg" style="background: #0284c7; width: ${e.admin_overhead_pct || 0}%;" title="Admin Overhead (est.): ${hPct(e.admin_overhead_pct)}"></div>
+          <div class="brand-split-seg" style="background: #9333ea; width: ${e.exec_comp_pct || 0}%;" title="CEO pay (proxy statement): ${hPct(e.exec_comp_pct, 3)}"></div>
+          <div class="brand-split-seg" style="background: #dc2626; width: ${e.shareholder_extraction_pct || 0}%; color: #fff; font-size: 0.68rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">
             ${e.shareholder_extraction_pct > 10 ? e.shareholder_extraction_pct + '%' : ''}
           </div>
-          <div class="brand-split-seg" style="background: #cbd5e1; flex: 1;" title="Supplies & Facilities"></div>
+          <div class="brand-split-seg" style="background: #cbd5e1; flex: 1;" title="Supplies, Facilities & Other"></div>
         </div>
       </div>
+      ` : `
+      <div style="font-size: 0.76rem; color: var(--muted); background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; padding: 0.5rem 0.65rem; margin: 0.6rem 0;">
+        No verified financial breakdown published for this organization yet.
+      </div>
+      `}
 
-      <!-- Key Healthcare Metrics Badges -->
+      <!-- Key Healthcare Metrics Badges (each shown only when sourced) -->
       <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.6rem; font-size: 0.73rem;">
+        ${e.medical_loss_ratio_pct !== null && e.medical_loss_ratio_pct !== undefined ? `
         <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
-          🩺 MLR: <strong>${e.medical_loss_ratio_pct}%</strong>
-        </span>
+          🩺 MLR: <strong>${e.medical_loss_ratio_pct}%</strong>${hSrc(e, 'medical_loss_ratio_pct')}
+        </span>` : ''}
         ${e.claims_denial_rate_pct > 0 ? `
-          <span style="background: ${e.claims_denial_rate_pct >= 20 ? '#fee2e2' : '#f8fafc'}; border: 1px solid ${e.claims_denial_rate_pct >= 20 ? '#fca5a5' : 'var(--border)'}; padding: 0.2rem 0.45rem; border-radius: 4px; color: ${e.claims_denial_rate_pct >= 20 ? '#991b1b' : 'inherit'}; font-weight: ${e.claims_denial_rate_pct >= 20 ? '700' : 'normal'};">
-            🚫 Denial Rate: <strong>${e.claims_denial_rate_pct}%</strong>
+          <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
+            🚫 Denial Rate: <strong>${e.claims_denial_rate_pct}%</strong>${hSrc(e, 'claims_denial_rate_pct')}
           </span>
         ` : ''}
         ${e.charge_to_cost_ratio > 1 ? `
           <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
-            📈 Markup: <strong>${e.charge_to_cost_ratio}x cost</strong>
+            📈 Markup: <strong>${e.charge_to_cost_ratio}x cost</strong>${hSrc(e, 'charge_to_cost_ratio')}
           </span>
         ` : ''}
+        ${e.charity_care_pct !== null && e.charity_care_pct !== undefined ? `
         <span style="background: #f8fafc; border: 1px solid var(--border); padding: 0.2rem 0.45rem; border-radius: 4px;">
-          🤝 Charity Care: <strong>${e.charity_care_pct}%</strong>
-        </span>
+          🤝 Charity Care: <strong>${e.charity_care_pct}%</strong>${hSrc(e, 'charity_care_pct')}
+        </span>` : ''}
+        ${e.sec_receipt_details ? `
+        <a href="${e.sec_receipt_details.filing_url}" target="_blank" rel="noopener noreferrer" style="background: #ecfdf5; border: 1px solid #a7f3d0; color: #047857; padding: 0.2rem 0.45rem; border-radius: 4px; text-decoration: none;">
+          🏛️ SEC 10-K (FY ended ${e.sec_receipt_details.fiscal_year_end}): dividends + buybacks ${e.sec_receipt_details.total_shareholder_payout_usd ?? 'n/a'}
+        </a>` : ''}
       </div>
 
-      <!-- Verified Citations (if any) -->
-      ${(e.regulatory_citations && e.regulatory_citations.length > 0 && e.ownership_tier >= 4) ? `
+      <!-- Sourced enforcement actions only -->
+      ${(e.regulatory_citations && e.regulatory_citations.length > 0) ? `
         <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 0.375rem; padding: 0.45rem 0.65rem; margin-bottom: 0.6rem; font-size: 0.72rem; color: #9f1239;">
-          <strong>⚠️ Regulatory Citations:</strong> ${e.regulatory_citations[0]}
+          <strong>⚠️ Regulatory Citations:</strong> ${e.regulatory_citations[0]}${hSrc(e, 'regulatory_citations')}
         </div>
       ` : ''}
+      ${(e.withheld_claims || []).length ? `<div style="font-size: 0.66rem; color: var(--muted); margin-bottom: 0.4rem;">${e.withheld_claims.length} claims pending source verification &middot; <a href="/corrections" style="color: inherit;">report an error</a></div>` : ''}
 
       <!-- Recommended Swap Box -->
       ${e.swap_name ? `
@@ -509,11 +560,14 @@ function renderNextBatch() {
       ` : ''}
 
       <!-- Card Action Footer -->
-      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid var(--border);">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 0.6rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 0.4rem;">
         <span style="font-size: 0.75rem; color: var(--muted);">${e.sub_category}</span>
-        <button class="btn ${isSelected ? 'btn-primary' : 'btn-secondary'}" onclick="toggleCompare('${e.slug}', this)" style="font-size: 0.78rem; padding: 0.25rem 0.65rem; font-weight: 700;">
-          ${isSelected ? '✓ In Compare' : '+ Add to Compare'}
-        </button>
+        <div style="display: flex; gap: 0.4rem; align-items: center;">
+          ${e.data_provenance === 'verified_sec_filing' ? `<a href="/brands?q=${encodeURIComponent(e.name)}" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.25rem 0.55rem; color: #0369a1; border-color: #bae6fd;">🏢 Brand Check &rarr;</a>` : ''}
+          <button class="btn ${isSelected ? 'btn-primary' : 'btn-secondary'}" onclick="toggleCompare('${e.slug}', this)" style="font-size: 0.78rem; padding: 0.25rem 0.65rem; font-weight: 700;">
+            ${isSelected ? '✓ In Compare' : '+ Add to Compare'}
+          </button>
+        </div>
       </div>
     `;
 
@@ -649,7 +703,7 @@ function openComparisonModal() {
         <div style="font-size: 0.8rem; font-weight: 800; color: #047857; text-transform: uppercase;">🌱 Highest Integrity Option in Comparison:</div>
         <div style="font-size: 1.25rem; font-weight: 800; color: #065f46;">${winner.name}</div>
         <div style="font-size: 0.82rem; color: #047857; margin-top: 0.2rem;">
-          Retains <strong>${winner.clinical_care_wages_pct}%</strong> for frontline clinical care with <strong>${winner.shareholder_extraction_pct}%</strong> Wall Street shareholder extraction.
+          Highest Shoptegrity rating among the organizations compared (opinion, see methodology).
         </div>
       </div>
       <div>
@@ -695,7 +749,7 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Frontline Care Wages</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem; color: #16a34a; font-weight: 750;">
-              ${e.clinical_care_wages_pct}% of revenue
+              ${hVal(e.clinical_care_wages_pct, '% of revenue (est.)')}
             </td>
           `).join('')}
         </tr>
@@ -704,7 +758,7 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Wall St / PE Extraction</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem; color: ${e.shareholder_extraction_pct > 0 ? '#dc2626' : '#16a34a'}; font-weight: 750;">
-              ${e.shareholder_extraction_pct}% (${e.shareholder_extraction_pct > 0 ? 'Buybacks & PE profit' : '0% Wall St extraction'})
+              ${e.shareholder_extraction_pct === null || e.shareholder_extraction_pct === undefined ? 'Not verified' : `${e.shareholder_extraction_pct}% (${e.shareholder_extraction_pct > 0 ? 'dividends + buybacks, SEC 10-K' : 'no outside shareholders'})`}
             </td>
           `).join('')}
         </tr>
@@ -713,7 +767,7 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Admin & Bureaucracy</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem; color: #0284c7; font-weight: 650;">
-              ${e.admin_overhead_pct}% of revenue
+              ${hVal(e.admin_overhead_pct, '% of revenue (est.)')}
             </td>
           `).join('')}
         </tr>
@@ -722,7 +776,7 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Medical Loss Ratio (MLR)</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem; font-weight: 700;">
-              ${e.medical_loss_ratio_pct}%
+              ${hVal(e.medical_loss_ratio_pct, '%')}${hSrc(e, 'medical_loss_ratio_pct')}
             </td>
           `).join('')}
         </tr>
@@ -730,8 +784,8 @@ function openComparisonModal() {
         <tr style="border-bottom: 1px solid var(--border);">
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Claims Denial Rate</td>
           ${entities.map(e => `
-            <td style="padding: 0.75rem; color: ${e.claims_denial_rate_pct >= 15 ? '#b91c1c' : '#15803d'}; font-weight: 750;">
-              ${e.claims_denial_rate_pct > 0 ? e.claims_denial_rate_pct + '%' : 'N/A (Direct care provider)'}
+            <td style="padding: 0.75rem; font-weight: 750;">
+              ${e.claims_denial_rate_pct === null || e.claims_denial_rate_pct === undefined ? 'Not verified' : (e.claims_denial_rate_pct > 0 ? e.claims_denial_rate_pct + '%' : 'N/A (Direct care provider)')}${hSrc(e, 'claims_denial_rate_pct')}
             </td>
           `).join('')}
         </tr>
@@ -740,7 +794,7 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Price Markup Multiplier</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem;">
-              <strong>${e.charge_to_cost_ratio}x</strong> actual Medicare cost
+              ${e.charge_to_cost_ratio === null || e.charge_to_cost_ratio === undefined ? 'Not verified' : `<strong>${e.charge_to_cost_ratio}x</strong> actual Medicare cost`}${hSrc(e, 'charge_to_cost_ratio')}
             </td>
           `).join('')}
         </tr>
@@ -749,7 +803,7 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">Charity Care Contribution</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem;">
-              ${e.charity_care_pct}% of operating expenses
+              ${hVal(e.charity_care_pct, '% of operating expenses')}${hSrc(e, 'charity_care_pct')}
             </td>
           `).join('')}
         </tr>
@@ -758,13 +812,13 @@ function openComparisonModal() {
           <td style="padding: 0.75rem; font-weight: 700; color: var(--slate);">PE Rollup Detection</td>
           ${entities.map(e => `
             <td style="padding: 0.75rem;">
-              ${e.is_pe_rollup ? `
+              ${e.is_pe_rollup === true ? `
                 <span style="color: #991b1b; font-weight: 750; background: #fee2e2; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.75rem;">
-                  ⚠️ Disguised Rollup (${e.pe_firm_name || 'PE Sponsored'})
+                  ⚠️ PE-owned (${e.pe_firm_name || 'sponsor not yet sourced'})${hSrc(e, 'is_pe_rollup')}
                 </span>
-              ` : `
-                <span style="color: #047857; font-weight: 700;">✓ Not a PE Rollup</span>
-              `}
+              ` : e.is_pe_rollup === false ? `
+                <span style="color: #047857; font-weight: 700;">✓ Not PE-owned${hSrc(e, 'is_pe_rollup')}</span>
+              ` : `<span style="color: var(--muted);">Not verified</span>`}
             </td>
           `).join('')}
         </tr>
@@ -788,6 +842,32 @@ function openComparisonModal() {
 
 function closeComparisonModal() {
   document.getElementById("comparisonModal").style.display = "none";
+}
+
+function showToast(msg) {
+  const toast = document.getElementById("healthcareToast");
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.style.display = "block";
+  setTimeout(() => {
+    toast.style.display = "none";
+  }, 2800);
+}
+
+function copyComparisonLink() {
+  if (selectedSlugs.size === 0) return;
+  const slugsStr = Array.from(selectedSlugs).join(',');
+  const url = new URL(window.location.href);
+  url.searchParams.set('compare', slugsStr);
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url.toString()).then(() => {
+      showToast("✓ Comparison link copied to clipboard!");
+    }).catch(() => {
+      prompt("Copy comparison link:", url.toString());
+    });
+  } else {
+    prompt("Copy comparison link:", url.toString());
+  }
 }
 
 function resetAllFilters() {

@@ -9,10 +9,12 @@
     <h1>Healthy Food That Enriches the Right Hands</h1>
     <p>A transparent guide to food sourcing: assure your nutrition is healthy and environmentally conscious, while maximizing the dollars reaching the farmers, regenerative growers, and food workers who actually produce it.</p>
     
-    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-      <a href="#ladder" class="btn btn-primary">Explore Sourcing Ladder &darr;</a>
-      <a href="#dollar-split" class="btn btn-secondary">USDA Food Dollar Breakdown &darr;</a>
-      <a href="#makers" class="btn btn-secondary">Direct Farm & Tea Directory &darr;</a>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="#ladder" class="btn btn-primary">Sourcing Ladder &darr;</a>
+      <a href="#dollar-split" class="btn btn-secondary">USDA Food Dollar &darr;</a>
+      <a href="#farmland-ownership" class="btn btn-secondary">Who Owns The Farmland? &darr;</a>
+      <a href="#farm-budgets" class="btn btn-secondary">What Farmers Pocket &darr;</a>
+      <a href="#makers" class="btn btn-secondary">Direct Farm &amp; Tea Registry &darr;</a>
     </div>
   </div>
 </section>
@@ -212,7 +214,225 @@
     </div>
   </section>
 
-  <!-- Feature 3: Small Makers & Regenerative Growers Directory (including U.S. Tea Proof) -->
+  <!-- Feature 3: Agricultural Tenure & Landlord Reality -->
+  <section id="farmland-ownership" style="margin-bottom: 4rem;">
+    <div style="margin-bottom: 1.75rem;">
+      <div style="font-size: 0.82rem; font-weight: 700; color: #059669; text-transform: uppercase; letter-spacing: 0.05em;">Agricultural Tenure &amp; Land Monopoly</div>
+      <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy); margin-top: 0.2rem;">Who Owns America's Farmland? Tenancy, Landlords &amp; Billionaires</h2>
+      <p style="color: var(--slate); font-size: 1rem; margin-top: 0.25rem;">Beneath the pastoral myth of the multi-generational family farm lies a harsh economic matrix: nearly 40% of U.S. cropland is leased from passive landlords, non-farming heirs and Wall Street investors, while agribusiness giants avoid owning dirt and force contract growers to bear all mortgage and environmental liabilities.</p>
+    </div>
+
+    <!-- 4 Key Stat Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="font-size: 2.25rem; font-weight: 800; color: #b91c1c; line-height: 1.1;">{{ farmland_ownership.rented_percentage }}%</div>
+        <div style="font-weight: 750; color: var(--navy); margin-top: 0.4rem; font-size: 1rem;">Rented Farmland Nationally</div>
+        <p style="font-size: 0.82rem; color: var(--slate); margin-top: 0.35rem; line-height: 1.4;">
+          <strong>{{ farmland_ownership.rented_acres }} acres</strong> of America's {{ farmland_ownership.total_us_farmland_acres }} acres of agricultural land are operated by tenants rather than owner-farmers.
+        </p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="font-size: 2.25rem; font-weight: 800; color: #d97706; line-height: 1.1;">{{ farmland_ownership.non_operator_landlord_pct|int }}%</div>
+        <div style="font-weight: 750; color: var(--navy); margin-top: 0.4rem; font-size: 1rem;">Non-Operator Landlords</div>
+        <p style="font-size: 0.82rem; color: var(--slate); margin-top: 0.35rem; line-height: 1.4;">
+          8 out of 10 landlords are passive rent-collectors. Crucially, <strong>{{ farmland_ownership.non_operators_never_farmed_pct }}%</strong> have never operated a farm a single day in their lives.
+        </p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="font-size: 2.25rem; font-weight: 800; color: #7c3aed; line-height: 1.1;">{{ farmland_ownership.corn_belt_rented_pct_range }}</div>
+        <div style="font-weight: 750; color: var(--navy); margin-top: 0.4rem; font-size: 1rem;">Corn Belt Tenancy (IA, IL, IN)</div>
+        <p style="font-size: 0.82rem; color: var(--slate); margin-top: 0.35rem; line-height: 1.4;">
+          In prime Midwestern grain counties, over half to two-thirds of cropland is leased under competitive cash-rent agreements that extract up to 30% of farm revenue before planting.
+        </p>
+      </div>
+
+      <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+        <div style="font-size: 2.25rem; font-weight: 800; color: #0284c7; line-height: 1.1;">{{ farmland_ownership.top_100_landowners_pct }}%</div>
+        <div style="font-weight: 750; color: var(--navy); margin-top: 0.4rem; font-size: 1rem;">Top 100 Private Landowners</div>
+        <p style="font-size: 0.82rem; color: var(--slate); margin-top: 0.35rem; line-height: 1.4;">
+          America's 100 largest private landowners control over <strong>14.5 million acres</strong>—an area larger than the states of Maryland and Delaware combined.
+        </p>
+      </div>
+    </div>
+
+    <!-- The Conglomerate Paradox Feature Card -->
+    <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; border-radius: 0.85rem; padding: 1.75rem; margin-bottom: 2.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <span style="font-size: 0.85rem; font-weight: 800; color: #f87171; text-transform: uppercase; letter-spacing: 0.06em;">⚠️ The Conglomerate Paradox: Why Big Ag Avoids Owning the Dirt</span>
+        <span style="font-size: 0.75rem; background: rgba(239,68,68,0.2); color: #fca5a5; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">STRUCTURAL CAPTIVE MODEL</span>
+      </div>
+      <p style="font-size: 0.95rem; color: #cbd5e1; line-height: 1.55; margin-bottom: 1rem;">
+        Shoppers often assume that industrial agriculture companies like <strong>Tyson Foods, JBS, Smithfield, and Cargill</strong> own massive swaths of farmland. In reality, agribusiness giants own almost <em>no dirt</em>. Why? Farmland yields modest cash rents (2%–4% returns) and carries massive unpredictable risks—droughts, floods, avian influenza, and EPA environmental liabilities.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 0.65rem; padding: 1.25rem;">
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 750; color: #4ade80; margin-bottom: 0.35rem;">1. Captive Vertical Contracts</h4>
+          <p style="font-size: 0.82rem; color: #94a3b8; line-height: 1.45; margin: 0;">
+            Instead of buying land, conglomerates lock farmers into production contracts (<strong>99.5% of broilers, 74% of hogs</strong>). The corporate integrator owns the birds/feed and dictates strict operational guidelines, while the grower acts as a captive wage-worker.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 750; color: #f87171; margin-bottom: 0.35rem;">2. Debt &amp; Liability Outsourcing</h4>
+          <p style="font-size: 0.82rem; color: #94a3b8; line-height: 1.45; margin: 0;">
+            The contract grower must personally borrow <strong>$1.5M to $2.5M</strong> in bank debt to erect specialized barns. Growers shoulder over 70% of total industry debt and all manure cleanup liabilities, while netting as little as <strong>5¢ per bird</strong>.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 750; color: #38bdf8; margin-bottom: 0.35rem;">3. Margin Extraction</h4>
+          <p style="font-size: 0.82rem; color: #94a3b8; line-height: 1.45; margin: 0;">
+            By controlling processing and retail distribution without owning fixed capital or real estate, corporate conglomerates capture the high-margin retail spreads while shifting all farm-level financial ruin onto rural families.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elite Landowners Spotlight -->
+    <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.75rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.25rem;">
+        <div>
+          <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--navy);">👑 The New Landed Gentry: America's Elite Farmland Holders</h3>
+          <p style="font-size: 0.88rem; color: var(--slate); margin-top: 0.2rem;">From tech magnates to media conglomerates, ultra-high-net-worth investors view American farmland and water rights as safe-haven inflation hedges.</p>
+        </div>
+        <span style="font-size: 0.78rem; color: var(--muted); font-weight: 600;">Data: The Land Report 100</span>
+      </div>
+
+      <div class="cards-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;">
+        {% for owner in farmland_ownership.top_elite_landowners %}
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.65rem; padding: 1.15rem; display: flex; flex-direction: column;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem;">
+            <h4 style="font-size: 1.05rem; font-weight: 750; color: var(--navy); margin: 0;">{{ owner.name }}</h4>
+            <span style="font-size: 0.7rem; font-weight: 800; background: #e0e7ff; color: #3730a3; padding: 0.15rem 0.45rem; border-radius: 4px;">#{{ owner.rank }} U.S.</span>
+          </div>
+          <div style="font-size: 1.15rem; font-weight: 800; color: #047857; margin-bottom: 0.5rem;">
+            {{ owner.acreage_display }}
+          </div>
+          <div style="font-size: 0.8rem; color: var(--slate); margin-bottom: 0.5rem; line-height: 1.35;">
+            <strong>Holdings:</strong> {{ owner.primary_holdings }}
+          </div>
+          <div style="font-size: 0.76rem; color: #475569; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.35rem; padding: 0.5rem; margin-top: auto; line-height: 1.35;">
+            💧 <strong>Water &amp; Strategic Notes:</strong> {{ owner.water_and_resource_notes }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Citations and Methodology Note -->
+    <div style="background: #f1f5f9; border-radius: 0.5rem; padding: 0.75rem 1rem; font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+      <span><strong>Primary Data Sources:</strong> {% for s in farmland_ownership.sources %}{{ s }}{% if not loop.last %} &bull; {% endif %}{% endfor %}</span>
+      <span>Tenure &amp; Land Ownership Audit</span>
+    </div>
+  </section>
+
+  <!-- Feature 4: Farm-Gate Revenue Decomposition -->
+  <section id="farm-budgets" style="margin-bottom: 4rem; background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+    <div style="margin-bottom: 1.75rem;">
+      <div style="font-size: 0.82rem; font-weight: 700; color: #059669; text-transform: uppercase; letter-spacing: 0.05em;">Cost-of-Production Decomposition</div>
+      <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy); margin-top: 0.2rem;">Where Does Farm Revenue Go? (What Farmers Actually Pocket)</h2>
+      <p style="color: var(--slate); font-size: 1rem; margin-top: 0.25rem;">
+        When USDA reports that farmers receive 11.8¢ of your food dollar, that is <em>gross revenue</em>—not profit. Before a farm family buys groceries or pays health insurance, input oligopolies and landlords claim over 90% of that payment.
+      </p>
+    </div>
+
+    <!-- 3 Enterprise Budget Comparative Cards -->
+    <div style="display: flex; flex-direction: column; gap: 2rem; margin-bottom: 2.5rem;">
+      {% for b in farm_budgets %}
+      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+          <div>
+            <h3 style="font-size: 1.25rem; font-weight: 750; color: var(--navy); margin: 0;">{{ b.title }}</h3>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #64748b; text-transform: uppercase;">{{ b.sector }}</span>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 1.25rem; font-weight: 800; {% if b.net_farmer_pct > 50 %}color: #059669;{% elif b.net_farmer_pct > 10 %}color: #d97706;{% else %}color: #dc2626;{% endif %}">
+              {{ b.net_farmer_pct }}% Net Take-Home
+            </div>
+            <div style="font-size: 0.75rem; color: var(--muted);">${{ "%.2f"|format(b.net_farmer_income) }} per $100 Farm Revenue</div>
+          </div>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 0.45rem; padding: 0.6rem 0.85rem; font-size: 0.84rem; color: #334155; margin-bottom: 1rem;">
+          🛒 <strong>Consumer Context:</strong> {{ b.retail_context }}
+        </div>
+
+        <!-- Stacked Horizontal Proportion Bar -->
+        <div class="split-bar" style="height: 24px; margin: 0.75rem 0;">
+          {% for exp in b.expenses %}
+            {% if exp.pct > 0 %}
+            <div class="split-segment" style="width: {{ exp.pct }}%; background: {{ exp.color }};" title="{{ exp.name }}: {{ exp.pct }}%">
+              {% if exp.pct > 8 %}{{ exp.pct|int }}%{% endif %}
+            </div>
+            {% endif %}
+          {% endfor %}
+          <div class="split-segment" style="width: {{ b.net_farmer_pct }}%; background: #16a34a;" title="Net Farmer Take-Home: {{ b.net_farmer_pct }}%">
+            {% if b.net_farmer_pct > 5 %}{{ b.net_farmer_pct|int }}%{% endif %}
+          </div>
+        </div>
+
+        <!-- Expense Line Items Table -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.5rem 1.5rem; font-size: 0.82rem; margin: 1rem 0;">
+          {% for exp in b.expenses %}
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.35rem 0; border-bottom: 1px dashed #e2e8f0;">
+            <div style="display: flex; align-items: center; gap: 0.4rem;">
+              <span style="width: 9px; height: 9px; border-radius: 50%; background: {{ exp.color }}; display: inline-block;"></span>
+              <div>
+                <span style="font-weight: 650; color: #1e293b;">{{ exp.name }}</span>
+                <div style="font-size: 0.72rem; color: var(--muted);">Beneficiaries: {{ exp.beneficiaries }}</div>
+              </div>
+            </div>
+            <div style="text-align: right; white-space: nowrap; margin-left: 0.5rem;">
+              <strong>${{ "%.2f"|format(exp.amount) }}</strong>
+              <span style="color: var(--muted); font-size: 0.75rem;">({{ exp.pct }}%)</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Net Take-Home Highlight Box -->
+        <div style="margin-top: 0.75rem; padding: 0.85rem 1rem; border-radius: 0.5rem; {% if b.net_farmer_pct > 50 %}background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46;{% else %}background: #fff5f5; border: 1px solid #fecaca; color: #991b1b;{% endif %}; font-size: 0.82rem; line-height: 1.45;">
+          <strong>💡 Take-Home Reality:</strong> {{ b.take_home_notes }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- The 3 Survival Mechanisms -->
+    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.85rem; padding: 1.75rem;">
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem;">
+        🚜 The 3 Survival Mechanisms: How Conventional Farmers Stay Afloat
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--slate); margin-bottom: 1.25rem;">
+        With 93% of commodity farm revenue drained by input suppliers and landlords, how do family farmers survive consecutive down-market years without going bankrupt?
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+        <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.65rem; padding: 1.15rem;">
+          <div style="font-weight: 750; color: #b91c1c; font-size: 0.95rem; margin-bottom: 0.35rem;">1. Off-Farm Day Jobs</div>
+          <p style="font-size: 0.82rem; color: var(--slate); line-height: 1.45; margin: 0;">
+            According to USDA ERS data, <strong>82%+ of total household income</strong> on small and medium family farms is generated from off-farm employment (nursing, teaching, trucking, manufacturing) and spousal employer health coverage. The day job subsidizes the farm.
+          </p>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.65rem; padding: 1.15rem;">
+          <div style="font-weight: 750; color: #d97706; font-size: 0.95rem; margin-bottom: 0.35rem;">2. Federal Safety-Net Subsidies</div>
+          <p style="font-size: 0.82rem; color: var(--slate); line-height: 1.45; margin: 0;">
+            USDA ARC, PLC, and federally subsidized crop insurance provide emergency liquidity floors during commodity price slumps. However, ag economists confirm these payments directly capitalize into land values, inflating cash rents demanded by non-operator landlords.
+          </p>
+        </div>
+
+        <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.65rem; padding: 1.15rem;">
+          <div style="font-weight: 750; color: #047857; font-size: 0.95rem; margin-bottom: 0.35rem;">3. Generational Debt-Free Dirt</div>
+          <p style="font-size: 0.82rem; color: var(--slate); line-height: 1.45; margin: 0;">
+            The small minority of conventional row-crop farmers who consistently turn an accounting profit are multi-generational families who inherited paid-off dirt, entirely bypassing the 28% cash rent extraction paid by their tenant neighbors.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 5: Small Makers & Regenerative Growers Directory (including U.S. Tea Proof) -->
   <section id="makers" style="margin-bottom: 4rem;">
     <div style="margin-bottom: 1.5rem;">
       <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy);">Small Maker & Grower Registry</h2>

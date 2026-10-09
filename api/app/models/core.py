@@ -210,7 +210,7 @@ class Maker(Base):
 
 
 class BrandIntegrity(Base):
-    """Top 2,000 brands database with measured financial splits, labor exploitation, and waste metrics."""
+    """Brand integrity database: SEC-sourced financials, sourced labor/waste claims, and opinion ratings."""
 
     __tablename__ = "brand_integrity"
 
@@ -224,45 +224,54 @@ class BrandIntegrity(Base):
     grade: Mapped[str] = mapped_column(String(5), index=True)  # A+, A, B, C, D, F
 
     # Where the money goes ($100 breakdown)
-    worker_wages_pct: Mapped[float] = mapped_column(Float)
-    exec_comp_pct: Mapped[float] = mapped_column(Float)
-    shareholder_extraction_pct: Mapped[float] = mapped_column(Float)
-    marketing_ads_pct: Mapped[float] = mapped_column(Float)
-    cogs_supply_pct: Mapped[float] = mapped_column(Float)
-    retained_operations_pct: Mapped[float] = mapped_column(Float)
+    worker_wages_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    exec_comp_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    shareholder_extraction_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    marketing_ads_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    cogs_supply_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    retained_operations_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
 
     # Labor Exploitation
     labor_exploitation_rating: Mapped[str] = mapped_column(String(50), index=True)  # Fair, Low, Moderate, High, Severe
     sweatshop_risk: Mapped[str] = mapped_column(String(50))
-    osha_violations_count: Mapped[int] = mapped_column(Integer, default=0)
-    nlrb_complaints_count: Mapped[int] = mapped_column(Integer, default=0)
-    living_wage_certified: Mapped[bool] = mapped_column(Boolean, default=False)
-    labor_summary: Mapped[str] = mapped_column(Text)
+    osha_violations_count: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    nlrb_complaints_count: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
+    living_wage_certified: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True)
+    labor_summary: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
     # Waste & Packaging
     waste_rating: Mapped[str] = mapped_column(String(50), index=True)  # Circular, Low Waste, Moderate, High Single-Use, Severe
-    packaging_type: Mapped[str] = mapped_column(String(100))
+    packaging_type: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     repairability_score: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)  # 1-10
-    landfill_diverted_pct: Mapped[float] = mapped_column(Float, default=0.0)
-    waste_summary: Mapped[str] = mapped_column(Text)
+    landfill_diverted_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+    waste_summary: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
-    # Recommended Swap
+    # Recommended Swaps (Dual Tier: Better vs. Best)
     swap_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     swap_slug: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    swap_rationale: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    swap_rationale: Mapped[Optional[Text]] = mapped_column(Text, nullable=True)
+    better_swap: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+    best_swap: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
 
     # Retailer Specifics
     is_major_retailer: Mapped[bool] = mapped_column(Boolean, default=False, index=True)
     retailer_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
 
     # Data Provenance & Verified SEC Filings
-    data_provenance: Mapped[str] = mapped_column(String(50), default="industry_benchmark_model", index=True)  # verified_sec_filing, certified_audit, industry_benchmark_model
+    data_provenance: Mapped[str] = mapped_column(String(50), default="unverified", index=True)  # verified_sec_filing, certified_audit, industry_benchmark_model
     sec_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     sec_receipt_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
 
+    # Publication gate output (pipeline/provenance.py)
+    claim_sources: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  # field -> {citation, url}
+    withheld_claims: Mapped[Optional[list]] = mapped_column(JSON, nullable=True)  # unsourced claims held back
+    split_basis: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  # field -> sec_filing | estimate | residual | ownership_structure
+    rating_type: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    osha_enforcement: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  # DOL OSHA summary when approved
+
 
 class HealthcareIntegrity(Base):
-    """Authoritative database of 2,000 healthcare entities: insurers, hospital chains, corporate/PE clinics, and local clinics."""
+    """Healthcare integrity database: insurers, hospital chains, corporate/PE clinics, and local clinics."""
 
     __tablename__ = "healthcare_integrity"
 
@@ -278,18 +287,18 @@ class HealthcareIntegrity(Base):
     grade: Mapped[str] = mapped_column(String(5), index=True)  # A+, A, B, C, D, F
 
     # Financial Flows ($100 Breakdown)
-    clinical_care_wages_pct: Mapped[float] = mapped_column(Float)  # Frontline nurse & doctor clinical care
-    admin_overhead_pct: Mapped[float] = mapped_column(Float)  # Bureaucracy, billing, claims denial, prior auth
-    exec_comp_pct: Mapped[float] = mapped_column(Float)  # CEO and executive compensation
-    shareholder_extraction_pct: Mapped[float] = mapped_column(Float)  # Wall Street buybacks, dividends, PE profit extraction
-    supplies_operations_pct: Mapped[float] = mapped_column(Float)  # Facilities, pharmaceuticals, medical supplies
+    clinical_care_wages_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Frontline nurse & doctor clinical care
+    admin_overhead_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Bureaucracy, billing, claims denial, prior auth
+    exec_comp_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # CEO and executive compensation
+    shareholder_extraction_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Wall Street buybacks, dividends, PE profit extraction
+    supplies_operations_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Facilities, pharmaceuticals, medical supplies
 
     # Healthcare Specific Integrity Metrics
-    medical_loss_ratio_pct: Mapped[float] = mapped_column(Float)  # MLR / care spending percentage
-    claims_denial_rate_pct: Mapped[float] = mapped_column(Float)  # Denial rate of submitted claims
-    charge_to_cost_ratio: Mapped[float] = mapped_column(Float)  # Hospital/clinic markup multiplier (e.g. 2.1x vs 9.5x)
-    charity_care_pct: Mapped[float] = mapped_column(Float)  # Uncompensated charity care as % of operating expenses
-    is_pe_rollup: Mapped[bool] = mapped_column(Boolean, default=False, index=True)  # Private equity disguised acquisition
+    medical_loss_ratio_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # MLR / care spending percentage
+    claims_denial_rate_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Denial rate of submitted claims
+    charge_to_cost_ratio: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Hospital/clinic markup multiplier (e.g. 2.1x vs 9.5x)
+    charity_care_pct: Mapped[Optional[float]] = mapped_column(Float, nullable=True)  # Uncompensated charity care as % of operating expenses
+    is_pe_rollup: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True, index=True)  # Private equity disguised acquisition
     pe_firm_name: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)  # Name of PE sponsor if applicable
     regulatory_citations: Mapped[Optional[List[str]]] = mapped_column(JSON, default=list)  # Penalties, settlements, violations
 
@@ -303,8 +312,15 @@ class HealthcareIntegrity(Base):
     location_scope: Mapped[str] = mapped_column(String(50), default="National")  # National, Regional, State, Local
     city: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     state: Mapped[Optional[str]] = mapped_column(String(50), nullable=True)
-    data_provenance: Mapped[str] = mapped_column(String(50), default="industry_benchmark_model", index=True)  # verified_sec_filing, cms_cost_report, naic_filing, hrsa_report, industry_benchmark_model
+    data_provenance: Mapped[str] = mapped_column(String(50), default="unverified", index=True)  # verified_sec_filing, cms_cost_report, naic_filing, hrsa_report, industry_benchmark_model
     source_citation: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     filing_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
     summary_notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    sec_receipt_details: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)
+
+    # Publication gate output (pipeline/provenance.py)
+    claim_sources: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  # field -> {citation, url}
+    withheld_claims: Mapped[Optional[list]] = mapped_column(JSON, nullable=True)  # unsourced claims held back
+    split_basis: Mapped[Optional[dict]] = mapped_column(JSON, nullable=True)  # field -> sec_filing | estimate | residual | ownership_structure
+    rating_type: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
 

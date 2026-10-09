@@ -190,7 +190,7 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
     draw.line([(0, footer_y - 12), (W, footer_y - 12)], fill=NAVY_LIGHT, width=1)
     pulse = (math.sin(frame_idx / 4) + 1) / 2 if frame_idx > 50 else 0
     cta_color = (int(5 + pulse * 35), int(150 + pulse * 50), int(105 + pulse * 40))
-    draw.text((W // 2, footer_y), "Search 500+ brands & ethical swaps at Shoptegrity.com ->", fill=cta_color, font=f_footer, anchor="mm")
+    draw.text((W // 2, footer_y), "Search 500+ brands & ethical swaps at Shopteg.com ->", fill=cta_color, font=f_footer, anchor="mm")
 
     return img
 
@@ -323,7 +323,7 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
     draw.line([(0, footer_y - 12), (W, footer_y - 12)], fill=NAVY_LIGHT, width=1)
     pulse = (math.sin(frame_idx / 4) + 1) / 2 if frame_idx > 50 else 0
     cta_color = (int(5 + pulse * 35), int(150 + pulse * 50), int(105 + pulse * 40))
-    draw.text((W // 2, footer_y), "Look up contractors in your zip code at Shoptegrity.com/local ->", fill=cta_color, font=f_footer, anchor="mm")
+    draw.text((W // 2, footer_y), "Look up contractors in your zip code at Shopteg.com/local ->", fill=cta_color, font=f_footer, anchor="mm")
 
     return img
 
@@ -429,7 +429,7 @@ def render_frame_dollar_flow(frame_idx, total_frames, W, H):
     draw.line([(0, footer_y - 12), (W, footer_y - 12)], fill=NAVY_LIGHT, width=1)
     pulse = (math.sin(frame_idx / 4) + 1) / 2 if frame_idx > 50 else 0
     cta_color = (int(5 + pulse * 35), int(150 + pulse * 50), int(105 + pulse * 40))
-    draw.text((W // 2, footer_y), "Calculate your household dollar impact at Shoptegrity.com/flows ->", fill=cta_color, font=f_footer, anchor="mm")
+    draw.text((W // 2, footer_y), "Calculate your household dollar impact at Shopteg.com/flows ->", fill=cta_color, font=f_footer, anchor="mm")
 
     return img
 

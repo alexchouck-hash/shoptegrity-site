@@ -17,14 +17,27 @@
     
     <div style="background: var(--light-bg); border-left: 4px solid var(--primary); padding: 1.25rem; border-radius: 0 0.5rem 0.5rem 0; margin-bottom: 1.5rem;">
       <strong style="color: var(--primary-dark); font-size: 1rem;">Core Principle:</strong>
-      <p style="font-size: 0.95rem; color: var(--slate); margin-top: 0.25rem;">Scores are pure mathematical functions derived strictly from documented, publicly verifiable regulatory actions and financial filings. The scoring engine has zero read access to commercial or affiliate data.</p>
+      <p style="font-size: 0.95rem; color: var(--slate); margin-top: 0.25rem;">Grades are Shoptegrity's opinion, reached by applying this published rubric to documented facts: ownership structure, SEC financial filings, and sourced regulatory records. The scoring engine has zero read access to commercial or affiliate data.</p>
     </div>
 
     <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; color: var(--slate); font-size: 0.95rem;">
       <li><strong>No Paid Placements:</strong> We refuse sponsored brand listings, paid tier bumps, or brand consulting.</li>
       <li><strong>Evidence-Backed or Explicitly "Unknown":</strong> Private companies that refuse public disclosure are given an explicit "Unknown" rating—opacity is never rewarded.</li>
-      <li><strong>Facts, Not Characters:</strong> Every claim quotes factual legal settlements, OSHA citations, or SEC line items rather than characterizations.</li>
-      <li><strong>Public Corrections Log:</strong> Any company or citizen can submit documented factual corrections via our public intake queue. Validated corrections are deployed within 5 business days.</li>
+      <li><strong>Sourced or Withheld:</strong> A specific factual claim (an OSHA count, a denial rate, an enforcement action) is published only with a link to its source. Claims we cannot yet source are withheld automatically, not shown.</li>
+      <li><strong>Public Corrections:</strong> Any company or citizen can <a href="/corrections">request a correction</a>. We acknowledge within 2 business days and resolve within 10.</li>
+    </ul>
+  </section>
+
+  <!-- How claims are sourced -->
+  <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; margin-bottom: 3rem;">
+    <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--navy); margin-bottom: 0.75rem;">Where the Numbers Come From</h2>
+    <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; color: var(--slate); font-size: 0.95rem;">
+      <li><strong>SEC filings (reported):</strong> For public companies, revenue, net income, dividends paid, share buybacks, and CEO total compensation are extracted automatically from SEC EDGAR XBRL data for the latest fiscal year, with a link to the exact filing. "Shareholders" in the dollar split = (dividends + buybacks) &divide; revenue. "CEO pay" = CEO total compensation &divide; revenue.</li>
+      <li><strong>Estimates (labelled "est."):</strong> The wage, marketing, and cost-of-goods shares of the dollar split are Shoptegrity estimates from company disclosures and sector data. They are not reported line items. "Operations &amp; other" is whatever remains.</li>
+      <li><strong>Top 10% Ownership Index (est.):</strong> An estimate of how much of a company's shareholder payout reaches the wealthiest 10% of households, based on Federal Reserve Distributional Financial Accounts data on stock ownership.</li>
+      <li><strong>OSHA records:</strong> Violation counts come from the U.S. Department of Labor's OSHA enforcement data: citation items from inspections opened in a fixed five-year window at establishments matching the company's names, excluding withdrawn citations. A reviewer checks the matched establishment names before a count is published, and every count links to OSHA's own establishment search.</li>
+      <li><strong>Sourced facts:</strong> Regulatory and labor facts appear only with a "[source]" link to the regulator record, court filing, or report.</li>
+      <li><strong>Ratings (opinion):</strong> Letter grades and the labor, waste, and sweatshop-risk ratings are our assessments under this rubric. They are opinions, not statements of fact.</li>
     </ul>
   </section>
 

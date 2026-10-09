@@ -5,6 +5,8 @@ from api.app.schemas.domain import (
     GeoFlowBranch,
     GeoFlowScenarioSummary,
     GeoFlowTraceResponse,
+    FarmGateAudit,
+    FarmGateCostItem,
 )
 
 # Representative ZIP centroids across key metros, agricultural hubs, and corporate/financial centers
@@ -582,6 +584,250 @@ def build_scenario_data(
     return title, scenario_id, conv_nodes, alt_nodes, insight
 
 
+def get_farm_gate_decomposition(
+    scenario_id: str,
+    farm_tier: str,
+    farm_gate_amount: float,
+) -> Optional[FarmGateAudit]:
+    """Deconstructs the farm-gate payment into input supplier extractions vs net farmer income."""
+    if farm_gate_amount <= 0:
+        return None
+
+    if scenario_id == "grocery_produce":
+        if farm_tier == "contract_grower":
+            # Typical conventional row crop / produce model:
+            rent = round(0.280 * farm_gate_amount, 2)
+            fert = round(0.210 * farm_gate_amount, 2)
+            mach = round(0.180 * farm_gate_amount, 2)
+            seed = round(0.125 * farm_gate_amount, 2)
+            chem = round(0.085 * farm_gate_amount, 2)
+            fin = round(0.050 * farm_gate_amount, 2)
+            expenses_sum = round(rent + fert + mach + seed + chem + fin, 2)
+            net_income = round(farm_gate_amount - expenses_sum, 2)
+            net_pct = round((net_income / farm_gate_amount) * 100.0, 1)
+
+            return FarmGateAudit(
+                farm_type="contract_grower",
+                title="Conventional Farm-Gate Financial Decomposition",
+                gross_farm_gate_amount=farm_gate_amount,
+                input_expenses=[
+                    FarmGateCostItem(
+                        name="Cash Rent & Land Mortgage",
+                        amount=rent,
+                        percentage_of_farm_gate=28.0,
+                        corporate_beneficiaries=["Non-Operator Landlords", "Farmland REITs", "Farm Credit"],
+                        color_code="#94a3b8",
+                    ),
+                    FarmGateCostItem(
+                        name="Synthetic Fertilizer (NPK)",
+                        amount=fert,
+                        percentage_of_farm_gate=21.0,
+                        corporate_beneficiaries=["Nutrien", "CF Industries", "Mosaic"],
+                        color_code="#f59e0b",
+                    ),
+                    FarmGateCostItem(
+                        name="Machinery Depreciation, Tech & Fuel",
+                        amount=mach,
+                        percentage_of_farm_gate=18.0,
+                        corporate_beneficiaries=["Deere & Co.", "CNH Industrial", "Diesel Refiners"],
+                        color_code="#64748b",
+                    ),
+                    FarmGateCostItem(
+                        name="Patented GMO Seed",
+                        amount=seed,
+                        percentage_of_farm_gate=12.5,
+                        corporate_beneficiaries=["Bayer (Monsanto)", "Corteva Agriscience"],
+                        color_code="#dc2626",
+                    ),
+                    FarmGateCostItem(
+                        name="Crop Protection (Herbicides/Pesticides)",
+                        amount=chem,
+                        percentage_of_farm_gate=8.5,
+                        corporate_beneficiaries=["Bayer", "BASF", "Syngenta"],
+                        color_code="#ea580c",
+                    ),
+                    FarmGateCostItem(
+                        name="Operating Loan Interest & Crop Insurance",
+                        amount=fin,
+                        percentage_of_farm_gate=5.0,
+                        corporate_beneficiaries=["Commercial Ag Lenders", "Federal Crop Insurance"],
+                        color_code="#6b7280",
+                    ),
+                    FarmGateCostItem(
+                        name="Net Farmer Household Take-Home",
+                        amount=net_income,
+                        percentage_of_farm_gate=net_pct,
+                        corporate_beneficiaries=["Farmer Family Household"],
+                        is_farmer_take_home=True,
+                        color_code="#10b981",
+                    ),
+                ],
+                net_farmer_take_home_amount=net_income,
+                net_farmer_take_home_pct=net_pct,
+                notes=(
+                    "On conventional grain and produce ground, over 93% of the farm-gate payment is drained by input "
+                    "oligopolies and non-farming landlords. The farmer receives only ~7% as residual take-home, and in "
+                    "down-market years (such as 2024–2025), operator returns turn negative without federal subsidies."
+                ),
+            )
+
+        elif farm_tier == "community_farmer":
+            # Community independent / organic regenerative model:
+            crew = round(0.650 * farm_gate_amount, 2)
+            soil = round(0.100 * farm_gate_amount, 2)
+            equip = round(0.150 * farm_gate_amount, 2)
+            land = round(farm_gate_amount - (crew + soil + equip), 2)
+            land_pct = round((land / farm_gate_amount) * 100.0, 1)
+
+            return FarmGateAudit(
+                farm_type="community_farmer",
+                title="Independent Community Farm Gate Decomposition",
+                gross_farm_gate_amount=farm_gate_amount,
+                input_expenses=[
+                    FarmGateCostItem(
+                        name="Living-Wage Farmer & Crew Living Return",
+                        amount=crew,
+                        percentage_of_farm_gate=65.0,
+                        corporate_beneficiaries=["Independent Family Farmer", "Local Living-Wage Farm Crew"],
+                        is_farmer_take_home=True,
+                        color_code="#10b981",
+                    ),
+                    FarmGateCostItem(
+                        name="Appropriate Equipment Care & Renewable Energy",
+                        amount=equip,
+                        percentage_of_farm_gate=15.0,
+                        corporate_beneficiaries=["Local Mechanics", "Rural Solar"],
+                        color_code="#34d399",
+                    ),
+                    FarmGateCostItem(
+                        name="Soil Health, Cover Crops & Organic Seed",
+                        amount=soil,
+                        percentage_of_farm_gate=10.0,
+                        corporate_beneficiaries=["Regional Organic Seed Co-ops", "Green Manures"],
+                        color_code="#059669",
+                    ),
+                    FarmGateCostItem(
+                        name="Land Stewardship & Conservation Reserve",
+                        amount=land,
+                        percentage_of_farm_gate=land_pct,
+                        corporate_beneficiaries=["Family Land Trust & Conservation Fund"],
+                        color_code="#0d9488",
+                    ),
+                ],
+                net_farmer_take_home_amount=crew,
+                net_farmer_take_home_pct=65.0,
+                notes=(
+                    "By skipping patented inputs and selling direct or through cooperative wholesale, the farmer keeps "
+                    "65% of gross revenue as living family income—over 25x more net profit per retail dollar than industrial agriculture."
+                ),
+            )
+
+    elif scenario_id == "meat_poultry":
+        if farm_tier == "contract_grower":
+            # Captive poultry CAFO contract model:
+            debt = round(0.450 * farm_gate_amount, 2)
+            heat = round(0.230 * farm_gate_amount, 2)
+            repairs = round(0.170 * farm_gate_amount, 2)
+            net_income = round(farm_gate_amount - (debt + heat + repairs), 2)
+            net_pct = round((net_income / farm_gate_amount) * 100.0, 1)
+
+            return FarmGateAudit(
+                farm_type="contract_grower",
+                title="Captive CAFO Contract Grower Decomposition",
+                gross_farm_gate_amount=farm_gate_amount,
+                input_expenses=[
+                    FarmGateCostItem(
+                        name="Mortgage Debt Service on $2M+ Barns",
+                        amount=debt,
+                        percentage_of_farm_gate=45.0,
+                        corporate_beneficiaries=["Commercial Agricultural Banks", "SBA Lenders"],
+                        color_code="#94a3b8",
+                    ),
+                    FarmGateCostItem(
+                        name="Electricity & Propane Heating (Tunnel Fans)",
+                        amount=heat,
+                        percentage_of_farm_gate=23.0,
+                        corporate_beneficiaries=["Utility Monopolies", "Propane Distributors"],
+                        color_code="#f59e0b",
+                    ),
+                    FarmGateCostItem(
+                        name="Barn Maintenance, Litter & Repairs",
+                        amount=repairs,
+                        percentage_of_farm_gate=17.0,
+                        corporate_beneficiaries=["Ventilation Equipment Dealers", "Shavings Suppliers"],
+                        color_code="#64748b",
+                    ),
+                    FarmGateCostItem(
+                        name="Contract Grower Net Take-Home Pay",
+                        amount=net_income,
+                        percentage_of_farm_gate=net_pct,
+                        corporate_beneficiaries=["Contract Grower Household"],
+                        is_farmer_take_home=True,
+                        color_code="#10b981",
+                    ),
+                ],
+                net_farmer_take_home_amount=net_income,
+                net_farmer_take_home_pct=net_pct,
+                notes=(
+                    "Integrator (Tyson/Pilgrim's) owns the chicks, feed, and pricing. Grower carries 70%+ of total industry debt "
+                    "and all environmental liability, netting less than 5¢/bird (~15% of the farm check) for 70-hour workweeks."
+                ),
+            )
+
+        elif farm_tier == "community_farmer":
+            # Pasture poultry / meat steward:
+            steward = round(0.700 * farm_gate_amount, 2)
+            pasture = round(0.120 * farm_gate_amount, 2)
+            fencing = round(0.100 * farm_gate_amount, 2)
+            vet = round(farm_gate_amount - (steward + pasture + fencing), 2)
+            vet_pct = round((vet / farm_gate_amount) * 100.0, 1)
+
+            return FarmGateAudit(
+                farm_type="community_farmer",
+                title="Pasture-Raised Family Steward Decomposition",
+                gross_farm_gate_amount=farm_gate_amount,
+                input_expenses=[
+                    FarmGateCostItem(
+                        name="Pasture Steward Living Family Return",
+                        amount=steward,
+                        percentage_of_farm_gate=70.0,
+                        corporate_beneficiaries=["Family Farm Owner-Operator"],
+                        is_farmer_take_home=True,
+                        color_code="#10b981",
+                    ),
+                    FarmGateCostItem(
+                        name="Rotational Pasture Seeding & Soil Health",
+                        amount=pasture,
+                        percentage_of_farm_gate=12.0,
+                        corporate_beneficiaries=["Regional Forage & Soil Biology"],
+                        color_code="#059669",
+                    ),
+                    FarmGateCostItem(
+                        name="Mobile Fencing, Water Infrastructure & Trailers",
+                        amount=fencing,
+                        percentage_of_farm_gate=10.0,
+                        corporate_beneficiaries=["Local Hardware & Equipment Fabricators"],
+                        color_code="#34d399",
+                    ),
+                    FarmGateCostItem(
+                        name="Humane On-Farm Care & Minerals",
+                        amount=vet,
+                        percentage_of_farm_gate=vet_pct,
+                        corporate_beneficiaries=["Holistic Veterinary Care & Natural Minerals"],
+                        color_code="#0d9488",
+                    ),
+                ],
+                net_farmer_take_home_amount=steward,
+                net_farmer_take_home_pct=70.0,
+                notes=(
+                    "Pasture-raised independent stewards set their own direct-to-consumer prices, keeping 70% of the farm payment "
+                    "as net family earnings with zero debt servitude to corporate integrators."
+                ),
+            )
+
+    return None
+
+
 def compute_branch(
     option_type: str,
     display_title: str,
@@ -589,6 +835,7 @@ def compute_branch(
     origin_info: Dict[str, any],
     spend_amount: float,
     summary_text: str,
+    scenario_id: str = "grocery_produce",
 ) -> GeoFlowBranch:
     """Computes calculated nodes, distances, worker share, operations, and capital flight."""
     olat = origin_info["lat"]
@@ -631,6 +878,14 @@ def compute_branch(
 
         weighted_distance += dist * (nd["share"])
 
+        farm_audit = None
+        if nd.get("farm_tier") in ["contract_grower", "community_farmer"]:
+            farm_audit = get_farm_gate_decomposition(
+                scenario_id=scenario_id,
+                farm_tier=nd["farm_tier"],
+                farm_gate_amount=node_amount,
+            )
+
         nodes.append(
             GeoFlowNode(
                 role=nd["role"],
@@ -647,6 +902,7 @@ def compute_branch(
                 leak_category=nd["leak_cat"],
                 farm_ownership_tier=nd.get("farm_tier"),
                 farm_ownership_notes=nd.get("farm_notes"),
+                farm_gate_audit=farm_audit,
             )
         )
 
@@ -723,6 +979,7 @@ def trace_dollar_flow(
         origin_info=origin_info,
         spend_amount=spend_amount,
         summary_text="Capital is immediately siphoned across interstate holding companies, Delaware shell entities, and Wall Street funds.",
+        scenario_id=scenario_id,
     )
 
     alt_branch = compute_branch(
@@ -732,6 +989,7 @@ def trace_dollar_flow(
         origin_info=origin_info,
         spend_amount=spend_amount,
         summary_text="Over 85% of capital recirculates directly within regional independent growers, living-wage workers, and member dividends.",
+        scenario_id=scenario_id,
     )
 
     return GeoFlowTraceResponse(

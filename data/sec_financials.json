@@ -1,0 +1,927 @@
+{
+  "0000019617": {
+    "cik": "0000019617",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000019617",
+    "entity_name": "JPMORGAN CHASE & CO",
+    "figures": {
+      "buybacks": {
+        "accession": "0001628280-26-008131",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/",
+        "value": 31591000000
+      },
+      "ceo_total_comp": {
+        "accession": "0000019617-26-000096",
+        "concept": "ecd:PeoTotalCompAmt",
+        "filed": "2026-04-06",
+        "fiscal_year_end": "2025-12-31",
+        "form": "DEF 14A",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000001961726000096/",
+        "value": 40632724
+      },
+      "dividends": {
+        "accession": "0001628280-26-008131",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2026-02-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/",
+        "value": 16625000000
+      },
+      "net_income": {
+        "accession": "0001628280-26-008131",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/",
+        "value": 57048000000
+      },
+      "revenue": {
+        "accession": "0001628280-26-008131",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/19617/000162828026008131/",
+        "value": 182447000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000027419": {
+    "cik": "0000027419",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000027419",
+    "entity_name": "Target Corporation",
+    "figures": {
+      "buybacks": {
+        "accession": "0000027419-26-000016",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-03-11",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
+        "value": 408000000
+      },
+      "ceo_total_comp": {
+        "accession": "0001628280-26-027508",
+        "concept": "ecd:PeoTotalCompAmt",
+        "filed": "2026-04-27",
+        "fiscal_year_end": "2026-01-31",
+        "form": "DEF 14A",
+        "url": "https://www.sec.gov/Archives/edgar/data/27419/000162828026027508/",
+        "value": 21830088
+      },
+      "dividends": {
+        "accession": "0000027419-26-000016",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-03-11",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
+        "value": 2053000000
+      },
+      "net_income": {
+        "accession": "0000027419-26-000016",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-03-11",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
+        "value": 3705000000
+      },
+      "revenue": {
+        "accession": "0000027419-26-000016",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-03-11",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
+        "value": 104780000000
+      }
+    },
+    "fiscal_year_end": "2026-01-31"
+  },
+  "0000029534": {
+    "cik": "0000029534",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000029534",
+    "entity_name": "DOLLAR GENERAL CORP",
+    "figures": {
+      "dividends": {
+        "accession": "0001104659-26-032325",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-03-20",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/",
+        "value": 519510000
+      },
+      "net_income": {
+        "accession": "0001104659-26-032325",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-03-20",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/",
+        "value": 1512311000
+      },
+      "revenue": {
+        "accession": "0001104659-26-032325",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-03-20",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/",
+        "value": 42724369000
+      }
+    },
+    "fiscal_year_end": "2026-01-30"
+  },
+  "0000040704": {
+    "cik": "0000040704",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000040704",
+    "entity_name": "GENERAL MILLS, INC.",
+    "figures": {
+      "buybacks": {
+        "accession": "0001628280-26-046466",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-07-01",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/40704/000162828026046466/",
+        "value": 500300000
+      },
+      "ceo_total_comp": {
+        "accession": "0001628280-26-056619",
+        "concept": "ecd:PeoTotalCompAmt",
+        "filed": "2026-08-13",
+        "fiscal_year_end": "2026-05-31",
+        "form": "DEF 14A",
+        "url": "https://www.sec.gov/Archives/edgar/data/40704/000162828026056619/",
+        "value": 14018052
+      },
+      "dividends": {
+        "accession": "0001628280-26-046466",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-07-01",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/40704/000162828026046466/",
+        "value": 1315300000
+      },
+      "net_income": {
+        "accession": "0001628280-26-046466",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-07-01",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/40704/000162828026046466/",
+        "value": -87600000
+      },
+      "revenue": {
+        "accession": "0001628280-26-046466",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-07-01",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/40704/000162828026046466/",
+        "value": 18424600000
+      }
+    },
+    "fiscal_year_end": "2026-05-31"
+  },
+  "0000049071": {
+    "cik": "0000049071",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000049071",
+    "entity_name": "HUMANA INC",
+    "figures": {
+      "buybacks": {
+        "accession": "0000049071-26-000009",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-19",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/",
+        "value": 151000000
+      },
+      "dividends": {
+        "accession": "0000049071-26-000009",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2026-02-19",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/",
+        "value": 430000000
+      },
+      "net_income": {
+        "accession": "0000049071-26-000009",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-19",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/",
+        "value": 1188000000
+      },
+      "revenue": {
+        "accession": "0000049071-26-000009",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-19",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/",
+        "value": 129664000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000056873": {
+    "cik": "0000056873",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000056873",
+    "entity_name": "KROGER CO",
+    "figures": {
+      "buybacks": {
+        "accession": "0001104659-26-037723",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-03-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
+        "value": 2699000000
+      },
+      "dividends": {
+        "accession": "0001104659-26-037723",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-03-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
+        "value": 885000000
+      },
+      "net_income": {
+        "accession": "0001104659-26-037723",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-03-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
+        "value": 1016000000
+      },
+      "revenue": {
+        "accession": "0001104659-26-037723",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-03-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
+        "value": 147642000000
+      }
+    },
+    "fiscal_year_end": "2026-01-31"
+  },
+  "0000064803": {
+    "cik": "0000064803",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000064803",
+    "entity_name": "CVS HEALTH CORPORATION",
+    "figures": {
+      "buybacks": {
+        "accession": "0000064803-26-000010",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/",
+        "value": 0
+      },
+      "dividends": {
+        "accession": "0000064803-26-000010",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/",
+        "value": 3397000000
+      },
+      "net_income": {
+        "accession": "0000064803-26-000010",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/",
+        "value": 1768000000
+      },
+      "revenue": {
+        "accession": "0000064803-26-000010",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/",
+        "value": 402067000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000070318": {
+    "cik": "0000070318",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000070318",
+    "entity_name": "TENET HEALTHCARE CORP",
+    "figures": {
+      "buybacks": {
+        "accession": "0000070318-26-000012",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-17",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/",
+        "value": 1386000000
+      },
+      "net_income": {
+        "accession": "0000070318-26-000012",
+        "concept": "us-gaap:ProfitLoss",
+        "filed": "2026-02-17",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/",
+        "value": 2367000000
+      },
+      "revenue": {
+        "accession": "0000070318-26-000012",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-02-17",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/",
+        "value": 21310000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000070858": {
+    "cik": "0000070858",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000070858",
+    "entity_name": "BofA Finance LLC",
+    "figures": {
+      "buybacks": {
+        "accession": "0000070858-26-000157",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-25",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/",
+        "value": 21433000000
+      },
+      "dividends": {
+        "accession": "0000070858-26-000157",
+        "concept": "us-gaap:PaymentsOfOrdinaryDividends",
+        "filed": "2026-02-25",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/",
+        "value": 9563000000
+      },
+      "net_income": {
+        "accession": "0000070858-26-000157",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-25",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/",
+        "value": 30509000000
+      },
+      "revenue": {
+        "accession": "0000070858-26-000157",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-25",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000157/",
+        "value": 113097000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000072971": {
+    "cik": "0000072971",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000072971",
+    "entity_name": "WELLS        FARGO & COMPANY/MN",
+    "figures": {
+      "buybacks": {
+        "accession": "0000072971-26-000133",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-24",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000133/",
+        "value": 17516000000
+      },
+      "dividends": {
+        "accession": "0000072971-26-000133",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-02-24",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000133/",
+        "value": 5434000000
+      },
+      "net_income": {
+        "accession": "0000072971-26-000133",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-24",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000133/",
+        "value": 21338000000
+      },
+      "revenue": {
+        "accession": "0000072971-26-000133",
+        "concept": "us-gaap:RevenuesNetOfInterestExpense",
+        "filed": "2026-02-24",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/72971/000007297126000133/",
+        "value": 83699000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000080424": {
+    "cik": "0000080424",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000080424",
+    "entity_name": "The Procter & Gamble Company",
+    "figures": {
+      "buybacks": {
+        "accession": "0000080424-26-000103",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-08-04",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/",
+        "value": 5028000000
+      },
+      "dividends": {
+        "accession": "0000080424-26-000103",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2026-08-04",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/",
+        "value": 10232000000
+      },
+      "net_income": {
+        "accession": "0000080424-26-000103",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-08-04",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/",
+        "value": 16046000000
+      },
+      "revenue": {
+        "accession": "0000080424-26-000103",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-08-04",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/80424/000008042426000103/",
+        "value": 87032000000
+      }
+    },
+    "fiscal_year_end": "2026-06-30"
+  },
+  "0000104169": {
+    "cik": "0000104169",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000104169",
+    "entity_name": "WALMART INC.",
+    "figures": {
+      "buybacks": {
+        "accession": "0000104169-26-000055",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-03-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
+        "value": 8088000000
+      },
+      "ceo_total_comp": {
+        "accession": "0001193125-26-173673",
+        "concept": "ecd:PeoTotalCompAmt",
+        "filed": "2026-04-23",
+        "fiscal_year_end": "2026-01-31",
+        "form": "DEF 14A",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000119312526173673/",
+        "value": 29240930
+      },
+      "dividends": {
+        "accession": "0000104169-26-000055",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-03-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
+        "value": 7507000000
+      },
+      "net_income": {
+        "accession": "0000104169-26-000055",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-03-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
+        "value": 21893000000
+      },
+      "revenue": {
+        "accession": "0000104169-26-000055",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-03-13",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
+        "value": 713163000000
+      }
+    },
+    "fiscal_year_end": "2026-01-31"
+  },
+  "0000320187": {
+    "cik": "0000320187",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000320187",
+    "entity_name": "NIKE, Inc.",
+    "figures": {
+      "buybacks": {
+        "accession": "0000320187-26-000088",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-07-15",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000088/",
+        "value": 146000000
+      },
+      "ceo_total_comp": {
+        "accession": "0000320187-26-000089",
+        "concept": "ecd:PeoTotalCompAmt",
+        "filed": "2026-07-15",
+        "fiscal_year_end": "2026-05-31",
+        "form": "DEF 14A",
+        "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000089/",
+        "value": 36340876
+      },
+      "dividends": {
+        "accession": "0000320187-26-000088",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-07-15",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000088/",
+        "value": 2407000000
+      },
+      "net_income": {
+        "accession": "0000320187-26-000088",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-07-15",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000088/",
+        "value": 3108000000
+      },
+      "revenue": {
+        "accession": "0000320187-26-000088",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-07-15",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320187/000032018726000088/",
+        "value": 46398000000
+      }
+    },
+    "fiscal_year_end": "2026-05-31"
+  },
+  "0000320193": {
+    "cik": "0000320193",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000320193",
+    "entity_name": "Apple Inc.",
+    "figures": {
+      "buybacks": {
+        "accession": "0000320193-25-000079",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2025-10-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/",
+        "value": 90711000000
+      },
+      "dividends": {
+        "accession": "0000320193-25-000079",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2025-10-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/",
+        "value": 15421000000
+      },
+      "net_income": {
+        "accession": "0000320193-25-000079",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2025-10-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/",
+        "value": 112010000000
+      },
+      "revenue": {
+        "accession": "0000320193-25-000079",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2025-10-31",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/",
+        "value": 416161000000
+      }
+    },
+    "fiscal_year_end": "2025-09-27"
+  },
+  "0000354950": {
+    "cik": "0000354950",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000354950",
+    "entity_name": "The Home Depot, Inc.",
+    "figures": {
+      "buybacks": {
+        "accession": "0001628280-26-019436",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-03-18",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
+        "value": 0
+      },
+      "dividends": {
+        "accession": "0001628280-26-019436",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-03-18",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
+        "value": 9152000000
+      },
+      "net_income": {
+        "accession": "0001628280-26-019436",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-03-18",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
+        "value": 14156000000
+      },
+      "revenue": {
+        "accession": "0001628280-26-019436",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-03-18",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
+        "value": 164683000000
+      }
+    },
+    "fiscal_year_end": "2026-02-01"
+  },
+  "0000731766": {
+    "cik": "0000731766",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000731766",
+    "entity_name": "UnitedHealth Group Incorporated",
+    "figures": {
+      "buybacks": {
+        "accession": "0000731766-26-000062",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-03-02",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/",
+        "value": 5545000000
+      },
+      "dividends": {
+        "accession": "0000731766-26-000062",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-03-02",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/",
+        "value": 7916000000
+      },
+      "net_income": {
+        "accession": "0000731766-26-000062",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-03-02",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/",
+        "value": 12056000000
+      },
+      "revenue": {
+        "accession": "0000731766-26-000062",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-03-02",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/",
+        "value": 447567000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000860730": {
+    "cik": "0000860730",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000860730",
+    "entity_name": "HCA Healthcare, Inc.",
+    "figures": {
+      "buybacks": {
+        "accession": "0001193125-26-044769",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/860730/000119312526044769/",
+        "value": 10067000000
+      },
+      "dividends": {
+        "accession": "0001193125-26-044769",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/860730/000119312526044769/",
+        "value": 679000000
+      },
+      "net_income": {
+        "accession": "0001193125-26-044769",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/860730/000119312526044769/",
+        "value": 6784000000
+      },
+      "revenue": {
+        "accession": "0001193125-26-044769",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-10",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/860730/000119312526044769/",
+        "value": 75600000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0000909832": {
+    "cik": "0000909832",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0000909832",
+    "entity_name": "COSTCO WHOLESALE CORP /NEW",
+    "figures": {
+      "buybacks": {
+        "accession": "0000909832-26-000093",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-10-07",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
+        "value": 848000000
+      },
+      "dividends": {
+        "accession": "0000909832-26-000093",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-10-07",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
+        "value": 2458000000
+      },
+      "net_income": {
+        "accession": "0000909832-26-000093",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-10-07",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
+        "value": 9226000000
+      },
+      "revenue": {
+        "accession": "0000909832-26-000093",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-10-07",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
+        "value": 303154000000
+      }
+    },
+    "fiscal_year_end": "2026-08-30"
+  },
+  "0001018724": {
+    "cik": "0001018724",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0001018724",
+    "entity_name": "AMAZON COM INC",
+    "figures": {
+      "net_income": {
+        "accession": "0001018724-26-000004",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-06",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
+        "value": 77670000000
+      },
+      "revenue": {
+        "accession": "0001018724-26-000004",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-02-06",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
+        "value": 716924000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0001022079": {
+    "cik": "0001022079",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0001022079",
+    "entity_name": "Quest Diagnostics Inc",
+    "figures": {
+      "buybacks": {
+        "accession": "0001022079-26-000015",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1022079/000102207926000015/",
+        "value": 450000000
+      },
+      "dividends": {
+        "accession": "0001022079-26-000015",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1022079/000102207926000015/",
+        "value": 353000000
+      },
+      "net_income": {
+        "accession": "0001022079-26-000015",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1022079/000102207926000015/",
+        "value": 992000000
+      },
+      "revenue": {
+        "accession": "0001022079-26-000015",
+        "concept": "us-gaap:RevenueFromContractWithCustomerExcludingAssessedTax",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1022079/000102207926000015/",
+        "value": 11035000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0001071739": {
+    "cik": "0001071739",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0001071739",
+    "entity_name": "CENTENE CORPORATION",
+    "figures": {
+      "buybacks": {
+        "accession": "0001071739-26-000049",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-17",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1071739/000107173926000049/",
+        "value": 475000000
+      },
+      "net_income": {
+        "accession": "0001071739-26-000049",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-17",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1071739/000107173926000049/",
+        "value": -6674000000
+      },
+      "revenue": {
+        "accession": "0001071739-26-000049",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-17",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1071739/000107173926000049/",
+        "value": 194777000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0001156039": {
+    "cik": "0001156039",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0001156039",
+    "entity_name": "ELEVANCE HEALTH, INC.",
+    "figures": {
+      "buybacks": {
+        "accession": "0001156039-26-000013",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-06",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/",
+        "value": 2605000000
+      },
+      "dividends": {
+        "accession": "0001156039-26-000013",
+        "concept": "us-gaap:PaymentsOfDividends",
+        "filed": "2026-02-06",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/",
+        "value": 1529000000
+      },
+      "net_income": {
+        "accession": "0001156039-26-000013",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-06",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/",
+        "value": 5662000000
+      },
+      "revenue": {
+        "accession": "0001156039-26-000013",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-06",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/",
+        "value": 199125000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  },
+  "0001739940": {
+    "cik": "0001739940",
+    "edgar_url": "https://www.sec.gov/edgar/browse/?CIK=0001739940",
+    "entity_name": "The Cigna Group",
+    "figures": {
+      "buybacks": {
+        "accession": "0001739940-26-000006",
+        "concept": "us-gaap:PaymentsForRepurchaseOfCommonStock",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/",
+        "value": 3621000000
+      },
+      "dividends": {
+        "accession": "0001739940-26-000006",
+        "concept": "us-gaap:PaymentsOfDividendsCommonStock",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/",
+        "value": 1611000000
+      },
+      "net_income": {
+        "accession": "0001739940-26-000006",
+        "concept": "us-gaap:NetIncomeLoss",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/",
+        "value": 5957000000
+      },
+      "revenue": {
+        "accession": "0001739940-26-000006",
+        "concept": "us-gaap:Revenues",
+        "filed": "2026-02-26",
+        "form": "10-K",
+        "url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/",
+        "value": 274900000000
+      }
+    },
+    "fiscal_year_end": "2025-12-31"
+  }
+}

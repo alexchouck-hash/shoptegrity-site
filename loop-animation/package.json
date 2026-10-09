@@ -1,15 +1,15 @@
 {
   "name": "loop-animation",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Shoptegrity The Loop Animation",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:html": "node build_html.mjs",
+    "capture": "node capture.mjs",
+    "encode:sh": "bash encode.sh",
+    "encode:ps1": "powershell -ExecutionPolicy Bypass -File encode.ps1",
+    "build": "node capture.mjs && bash encode.sh"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "gsap": "^3.15.0",
     "playwright": "^1.63.0"

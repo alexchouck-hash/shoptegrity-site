@@ -1,5 +1,228 @@
 [
   {
+    "id": "unitedhealthcare",
+    "name": "UnitedHealthcare",
+    "item_type": "brand",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "united healthcare",
+      "unitedhealthcare",
+      "uhc",
+      "united health care",
+      "optum",
+      "medexpress",
+      "optumrx"
+    ]
+  },
+  {
+    "id": "unitedhealthcare-choice-plus",
+    "name": "UnitedHealthcare Choice Plus",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Product of UnitedHealthcare, owned by UnitedHealth Group. Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "unitedhealthcare choice plus",
+      "unitedhealthcare"
+    ]
+  },
+  {
+    "id": "unitedhealthcare-medicare-advantage",
+    "name": "UnitedHealthcare Medicare Advantage",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Product of UnitedHealthcare, owned by UnitedHealth Group. Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "unitedhealthcare medicare advantage",
+      "unitedhealthcare"
+    ]
+  },
+  {
+    "id": "unitedhealthcare-community-plan",
+    "name": "UnitedHealthcare Community Plan",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Product of UnitedHealthcare, owned by UnitedHealth Group. Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "unitedhealthcare community plan",
+      "unitedhealthcare"
+    ]
+  },
+  {
+    "id": "optum-health-clinic-network",
+    "name": "Optum Health Clinic Network",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Product of UnitedHealthcare, owned by UnitedHealth Group. Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "optum health clinic network",
+      "unitedhealthcare"
+    ]
+  },
+  {
+    "id": "optumrx-pharmacy-benefit-manager",
+    "name": "OptumRx Pharmacy Benefit Manager",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Product of UnitedHealthcare, owned by UnitedHealth Group. Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "optumrx pharmacy benefit manager",
+      "unitedhealthcare"
+    ]
+  },
+  {
+    "id": "medexpress-urgent-care",
+    "name": "MedExpress Urgent Care",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "UnitedHealth Group",
+    "ultimate_parent": "UnitedHealth Group Inc.",
+    "ownership_type": "Public Mega-Conglomerate",
+    "ticker_or_jurisdiction": "NYSE: UNH",
+    "is_surprising_or_subterfuge": true,
+    "subterfuge_details": "Product of UnitedHealthcare, owned by UnitedHealth Group. Operates under hundreds of local plan names and physician networks via Optum while aggressively deploying automated claims denial algorithms and siphoning $14.8B to Wall Street buybacks and dividends.",
+    "top_10_percent_enrichment_pct": 92.0,
+    "ethical_swap_recommendation": "HealthPartners Consumer Cooperative / Direct Primary Care / Non-Profit Mutuals",
+    "search_aliases": [
+      "medexpress urgent care",
+      "unitedhealthcare"
+    ]
+  },
+  {
+    "id": "healthpartners",
+    "name": "HealthPartners",
+    "item_type": "brand",
+    "category": "Healthcare & Insurance",
+    "parent_company": "HealthPartners",
+    "ultimate_parent": "HealthPartners Inc.",
+    "ownership_type": "Consumer-Governed Healthcare Cooperative",
+    "ticker_or_jurisdiction": "Non-Profit Cooperative",
+    "is_surprising_or_subterfuge": false,
+    "subterfuge_details": "100% consumer-governed healthcare cooperative with patient-elected board; no private equity or Wall Street extraction.",
+    "top_10_percent_enrichment_pct": 5.0,
+    "ethical_swap_recommendation": "Exemplary Co-op (Current Model)",
+    "search_aliases": [
+      "healthpartners",
+      "health partners",
+      "park nicollet",
+      "healthpartners clinics"
+    ]
+  },
+  {
+    "id": "healthpartners-consumer-health-plan",
+    "name": "HealthPartners Consumer Health Plan",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "HealthPartners",
+    "ultimate_parent": "HealthPartners Inc.",
+    "ownership_type": "Consumer-Governed Healthcare Cooperative",
+    "ticker_or_jurisdiction": "Non-Profit Cooperative",
+    "is_surprising_or_subterfuge": false,
+    "subterfuge_details": "Product of HealthPartners, owned by HealthPartners. 100% consumer-governed healthcare cooperative with patient-elected board; no private equity or Wall Street extraction.",
+    "top_10_percent_enrichment_pct": 5.0,
+    "ethical_swap_recommendation": "Exemplary Co-op (Current Model)",
+    "search_aliases": [
+      "healthpartners consumer health plan",
+      "healthpartners"
+    ]
+  },
+  {
+    "id": "healthpartners-primary-care-clinics",
+    "name": "HealthPartners Primary Care Clinics",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "HealthPartners",
+    "ultimate_parent": "HealthPartners Inc.",
+    "ownership_type": "Consumer-Governed Healthcare Cooperative",
+    "ticker_or_jurisdiction": "Non-Profit Cooperative",
+    "is_surprising_or_subterfuge": false,
+    "subterfuge_details": "Product of HealthPartners, owned by HealthPartners. 100% consumer-governed healthcare cooperative with patient-elected board; no private equity or Wall Street extraction.",
+    "top_10_percent_enrichment_pct": 5.0,
+    "ethical_swap_recommendation": "Exemplary Co-op (Current Model)",
+    "search_aliases": [
+      "healthpartners primary care clinics",
+      "healthpartners"
+    ]
+  },
+  {
+    "id": "park-nicollet-medical-clinics",
+    "name": "Park Nicollet Medical Clinics",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "HealthPartners",
+    "ultimate_parent": "HealthPartners Inc.",
+    "ownership_type": "Consumer-Governed Healthcare Cooperative",
+    "ticker_or_jurisdiction": "Non-Profit Cooperative",
+    "is_surprising_or_subterfuge": false,
+    "subterfuge_details": "Product of HealthPartners, owned by HealthPartners. 100% consumer-governed healthcare cooperative with patient-elected board; no private equity or Wall Street extraction.",
+    "top_10_percent_enrichment_pct": 5.0,
+    "ethical_swap_recommendation": "Exemplary Co-op (Current Model)",
+    "search_aliases": [
+      "park nicollet medical clinics",
+      "healthpartners"
+    ]
+  },
+  {
+    "id": "healthpartners-dental-clinics",
+    "name": "HealthPartners Dental Clinics",
+    "item_type": "product",
+    "category": "Healthcare & Insurance",
+    "parent_company": "HealthPartners",
+    "ultimate_parent": "HealthPartners Inc.",
+    "ownership_type": "Consumer-Governed Healthcare Cooperative",
+    "ticker_or_jurisdiction": "Non-Profit Cooperative",
+    "is_surprising_or_subterfuge": false,
+    "subterfuge_details": "Product of HealthPartners, owned by HealthPartners. 100% consumer-governed healthcare cooperative with patient-elected board; no private equity or Wall Street extraction.",
+    "top_10_percent_enrichment_pct": 5.0,
+    "ethical_swap_recommendation": "Exemplary Co-op (Current Model)",
+    "search_aliases": [
+      "healthpartners dental clinics",
+      "healthpartners"
+    ]
+  },
+  {
     "id": "annies-homegrown",
     "name": "Annie's Homegrown",
     "item_type": "brand",

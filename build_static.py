@@ -13,6 +13,9 @@ from fastapi.testclient import TestClient
 from api.app.main import app
 from pipeline.seed_data import run_seed
 from pipeline.top2000_brands import export_top2000_json, seed_top2000_db
+from pipeline.healthcare_2000 import export_healthcare_json, seed_healthcare_db, generate_healthcare_2000
+from pipeline.top2000_brands import generate_top_2000_brands
+from pipeline.provenance import write_verification_queue
 from api.app.db.session import SessionLocal
 from api.app.models.core import Brand
 
@@ -24,7 +27,14 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
     run_seed()
     with SessionLocal() as db:
         seed_top2000_db(db)
+        seed_healthcare_db(db)
     export_top2000_json()
+    export_healthcare_json()
+    queued = write_verification_queue({
+        "brands": generate_top_2000_brands(),
+        "healthcare": generate_healthcare_2000(),
+    })
+    print(f"Verification queue: {queued} unsourced claims withheld (data/verification_queue.csv)")
 
     out_path = Path(output_dir)
     if out_path.exists():
@@ -46,28 +56,41 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
         clean_base = base_url.rstrip("/")
         html = html.replace('href="/static/', f'href="{clean_base}/static/')
         html = html.replace('src="/static/', f'src="{clean_base}/static/')
+        html = html.replace('href="/housing', f'href="{clean_base}/housing.html')
+        html = html.replace('href="/healthcare', f'href="{clean_base}/healthcare.html')
         html = html.replace('href="/brands', f'href="{clean_base}/brands.html')
         html = html.replace('href="/food', f'href="{clean_base}/food.html')
         html = html.replace('href="/local', f'href="{clean_base}/local.html')
         html = html.replace('href="/swaps', f'href="{clean_base}/swaps.html')
         html = html.replace('href="/flows', f'href="{clean_base}/flows.html')
         html = html.replace('href="/parents', f'href="{clean_base}/parents.html')
+        html = html.replace('href="/community', f'href="{clean_base}/community.html')
         html = html.replace('href="/methodology', f'href="{clean_base}/methodology.html')
+        html = html.replace('href="/corrections', f'href="{clean_base}/corrections.html')
+        html = html.replace('href="/sell-direct', f'href="{clean_base}/sell-direct.html')
+        html = html.replace('href="/disclosures', f'href="{clean_base}/disclosures.html')
         html = html.replace('href="/"', f'href="{clean_base}/index.html"')
         html = html.replace('action="/brands"', f'action="{clean_base}/brands.html"')
         html = html.replace('action="/flows"', f'action="{clean_base}/flows.html"')
+        html = html.replace('action="/healthcare"', f'action="{clean_base}/healthcare.html"')
         return html
 
     # 2. Render primary pages
     pages = [
         ("/", "index.html"),
+        ("/housing", "housing.html"),
+        ("/healthcare", "healthcare.html"),
         ("/brands", "brands.html"),
         ("/parents", "parents.html"),
         ("/food", "food.html"),
         ("/local", "local.html"),
         ("/swaps", "swaps.html"),
         ("/flows", "flows.html"),
+        ("/community", "community.html"),
         ("/methodology", "methodology.html"),
+        ("/corrections", "corrections.html"),
+        ("/sell-direct", "sell-direct.html"),
+        ("/disclosures", "disclosures.html"),
     ]
 
     for route, filename in pages:
@@ -78,6 +101,14 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             print(f"Rendered {route} -> {filename}")
         else:
             print(f"Failed to render {route}: {res.status_code}")
+
+    # Ensure clean directory index copies for /healthcare and /housing
+    for clean_sec in ["healthcare", "housing", "food", "local", "swaps", "flows", "community", "methodology", "parents", "corrections", "sell-direct", "disclosures"]:
+        sec_file = out_path / f"{clean_sec}.html"
+        if sec_file.exists():
+            sec_dir = out_path / clean_sec
+            sec_dir.mkdir(exist_ok=True)
+            shutil.copy2(sec_file, sec_dir / "index.html")
 
     # 3. Render dynamic brand detail pages
     db = SessionLocal()
@@ -99,14 +130,20 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
     # 4. Export static API JSON endpoints for client-side queries
     api_routes = [
         ("/v1/brands", "api/v1/brands.json"),
-        ("/v1/brands/database?limit=2000", "api/v1/brands/database.json"),
+        ("/v1/brands/database?limit=1000", "api/v1/brands/database.json"),
         ("/v1/brands/retailers", "api/v1/brands/retailers.json"),
         ("/v1/food/sourcing-ladder", "api/v1/food/sourcing-ladder.json"),
         ("/v1/food/dollar-split", "api/v1/food/dollar-split.json"),
         ("/v1/food/makers", "api/v1/food/makers.json"),
+        ("/v1/food/farmland-ownership", "api/v1/food/farmland-ownership.json"),
+        ("/v1/food/farm-budgets", "api/v1/food/farm-budgets.json"),
         ("/v1/swaps", "api/v1/swaps.json"),
         ("/v1/local/places", "api/v1/local/places.json"),
         ("/v1/methodology", "api/v1/methodology.json"),
+        ("/v1/housing/overview", "api/v1/housing/overview.json"),
+        ("/v1/housing/landlords", "api/v1/housing/landlords.json"),
+        ("/v1/healthcare/database?limit=1000", "api/v1/healthcare/database.json"),
+        ("/v1/healthcare/stats", "api/v1/healthcare/stats.json"),
     ]
 
     for api_route, api_file in api_routes:
@@ -118,7 +155,7 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             print(f"Exported API JSON {api_route} -> {api_file}")
 
     # Also ensure the raw static json bundles are copied
-    for raw_f in ["brands_top2000.json", "retailers.json"]:
+    for raw_f in ["brands_top2000.json", "retailers.json", "healthcare_2000.json"]:
         raw_src = Path(f"api/v1/{raw_f}")
         if raw_src.exists():
             raw_dest = out_path / f"api/v1/{raw_f}"

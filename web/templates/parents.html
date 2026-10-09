@@ -48,6 +48,16 @@
         <div style="font-size: 1.7rem; font-weight: 800; color: var(--warning);">88% – 96%</div>
       </div>
     </div>
+
+    <!-- The BlackRock / Vanguard Wealth Pump Explained -->
+    <div style="margin-top: 1.5rem; background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #dc2626; border-radius: 8px; padding: 1rem 1.25rem;">
+      <div style="font-weight: 800; font-size: 0.95rem; color: #0f172a; display: flex; align-items: center; gap: 0.5rem;">
+        <span>🏛️</span> The Wealth Siphon Reality: How BlackRock & Vanguard Channel Profits to the Richest 10%
+      </div>
+      <p style="font-size: 0.88rem; color: #334155; line-height: 1.5; margin-top: 0.4rem;">
+        According to the Federal Reserve’s Distributional Financial Accounts, <strong>the richest 10% of U.S. households own roughly 90% of all corporate equities and mutual fund shares</strong> (the top 1% alone owns over 50%). When mega-conglomerates buy up natural brands and use profits for dividends and stock buybacks, that cash is captured by custodial asset managers (BlackRock, Vanguard, State Street) and delivered to the wealthiest 10%. Every dollar rerouted to independent makers, worker co-ops, and local credit unions starves this wealth siphon.
+      </p>
+    </div>
   </div>
 
   <!-- Search & Filter Form -->
@@ -120,13 +130,29 @@
         </h3>
 
         <!-- True Parent Banner -->
-        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 1rem;">
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem; margin-bottom: 0.85rem;">
           <div style="font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">Ultimate Corporate Parent</div>
           <div style="font-size: 1.05rem; font-weight: 800; color: var(--navy); margin-top: 0.15rem;">
             {{ item.parent_company }}
           </div>
           <div style="font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem;">
             {{ item.ultimate_parent }} &bull; <span style="color: var(--slate); font-weight: 600;">{{ item.ticker_or_jurisdiction }}</span>
+          </div>
+        </div>
+
+        <!-- Top 10% Wealth Siphon Gauge -->
+        <div style="background: #fff1f2; border: 1px solid #fecdd3; border-radius: 8px; padding: 0.65rem 0.85rem; margin-bottom: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
+            <span style="color: #9f1239; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem;">
+              <span>⚠️</span> Top 10% Wealth Siphon: <strong>{{ item.top_10_percent_enrichment_pct }}%</strong>
+            </span>
+            <span style="color: #be123c; font-size: 0.72rem; font-weight: 600;">Wall St & Asset Managers</span>
+          </div>
+          <div style="background: #fecdd3; height: 6px; border-radius: 9999px; overflow: hidden; margin-bottom: 0.35rem;">
+            <div style="background: linear-gradient(90deg, #f43f5e, #be123c); width: {{ item.top_10_percent_enrichment_pct }}%; height: 100%;"></div>
+          </div>
+          <div style="font-size: 0.72rem; color: #881337; line-height: 1.35;">
+            Corporate profits (dividends & buybacks) are captured by institutional asset managers (BlackRock, Vanguard, State Street) and delivered to the richest 10% of households who own 90%+ of equities.
           </div>
         </div>
 
@@ -139,7 +165,7 @@
       <!-- Ethical Swap Footer -->
       <div style="background: var(--primary-light); border: 1px solid #a7f3d0; border-radius: 8px; padding: 0.75rem; margin-top: 0.5rem;">
         <div style="font-size: 0.75rem; font-weight: 700; color: var(--primary-dark); text-transform: uppercase; display: flex; align-items: center; gap: 0.3rem;">
-          <span>🌱</span> High-Integrity Ethical Swap
+          <span>🌱</span> High-Integrity Ethical Swap (0% Elite Siphon)
         </div>
         <div style="font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-top: 0.2rem;">
           {{ item.ethical_swap_recommendation }}
@@ -157,7 +183,7 @@
         Are you building an AI shopping extension, browser add-on, or purchasing audit script? Connect directly to our parent feed via REST API or the Model Context Protocol (MCP) server.
       </p>
       <div style="background: #1e293b; padding: 0.75rem 1rem; border-radius: 6px; font-family: monospace; font-size: 0.85rem; color: #38bdf8; margin-bottom: 1rem; overflow-x: auto;">
-        curl "https://shoptegrity.com/v1/feed/parents/lookup?query=Annie%27s"
+        curl "https://shopteg.com/v1/feed/parents/lookup?query=Annie%27s"
       </div>
       <div style="display: flex; gap: 1rem;">
         <a href="/docs" target="_blank" style="color: #34d399; font-weight: 600; text-decoration: none; font-size: 0.9rem;">View Swagger API Docs &rarr;</a>
