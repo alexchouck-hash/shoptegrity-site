@@ -234,6 +234,22 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             print(f"  - {item}")
         sys.exit(1)
 
+    # Crawl files: sitemap of every exported page, robots.txt pointing to it
+    site = "https://shopteg.com"
+    urls = []
+    for html_file in sorted(out_path.rglob("*.html")):
+        rel = html_file.relative_to(out_path).as_posix()
+        if rel == "404.html" or rel.endswith("/index.html"):
+            continue
+        path = "/" if rel == "index.html" else "/" + rel[:-5]
+        urls.append(f"  <url><loc>{site}{path}</loc></url>")
+    sitemap = ['<?xml version="1.0" encoding="UTF-8"?>',
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">', *urls, "</urlset>", ""]
+    (out_path / "sitemap.xml").write_text("\n".join(sitemap), encoding="utf-8")
+    (out_path / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\n\nSitemap: {site}/sitemap.xml\n", encoding="utf-8")
+    print(f"Wrote sitemap.xml ({len(urls)} URLs) and robots.txt")
+
     # Retained for compatibility with the older GitHub Pages layout; harmless on Cloudflare
     (out_path / ".nojekyll").write_text("", encoding="utf-8")
     print(f"Export completed successfully to {out_path.absolute()}")

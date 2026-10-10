@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}Shoptegrity — Rerouting Capital to Integrity{% endblock %}</title>
+  <meta name="description" content="{% block description %}Shoptegrity checks who owns the brands, stores, landlords and clinics you pay, with every claim sourced, and points you to better places to spend.{% endblock %}">
+  {% if canonical_path is defined %}<link rel="canonical" href="https://shopteg.com{{ canonical_path }}">{% endif %}
   <link rel="stylesheet" href="/static/css/styles.css">
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/static/img/logo-mark.svg" type="image/svg+xml">
