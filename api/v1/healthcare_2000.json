@@ -23,15 +23,24 @@
     "swap_type": null,
     "swap_rationale": null,
     "location_scope": "National",
-    "city": "Minnetonka",
+    "city": "Eden Prairie",
     "state": "MN",
+    "claim_sources": {
+      "city": {
+        "citation": "UnitedHealth Group Inc. Form 10-K for FY2025, cover page (parent company address)",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm"
+      },
+      "state": {
+        "citation": "UnitedHealth Group Inc. Form 10-K for FY2025, cover page (parent company address)",
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/unh-20251231.htm"
+      }
+    },
     "data_provenance": "unverified",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "unitedhealthcare-optum",
-    "id": "d54e4091-15e7-4971-aaa5-32c4577ebde8",
-    "claim_sources": {},
+    "id": "16428eea-7b2b-4cb8-9e7c-2d2351eda851",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -158,13 +167,22 @@
     "location_scope": "National",
     "city": "Indianapolis",
     "state": "IN",
+    "claim_sources": {
+      "city": {
+        "citation": "Elevance Health, Inc. Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/elv-20251231.htm"
+      },
+      "state": {
+        "citation": "Elevance Health, Inc. Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/elv-20251231.htm"
+      }
+    },
     "data_provenance": "verified_sec_filing",
     "source_citation": "ELEVANCE HEALTH, INC. Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0001156039-26-000013)",
     "filing_url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/",
     "summary_notes": null,
     "slug": "elevance-health-anthem-blue-cross",
-    "id": "41d6e3f2-4961-43a0-b35d-94513ab53ce3",
-    "claim_sources": {},
+    "id": "bff71fbe-51f6-4f6a-a1de-bc0304679510",
     "sec_receipt_details": {
       "cik": "0001156039",
       "entity_name": "ELEVANCE HEALTH, INC.",
@@ -287,13 +305,22 @@
     "location_scope": "National",
     "city": "Bloomfield",
     "state": "CT",
+    "claim_sources": {
+      "city": {
+        "citation": "The Cigna Group Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/ci-20251231.htm"
+      },
+      "state": {
+        "citation": "The Cigna Group Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/ci-20251231.htm"
+      }
+    },
     "data_provenance": "verified_sec_filing",
     "source_citation": "The Cigna Group Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0001739940-26-000006)",
     "filing_url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/",
     "summary_notes": null,
     "slug": "the-cigna-group-cigna-healthcare",
-    "id": "c64809ec-9f32-4aa2-ae75-b1a12c5d64c7",
-    "claim_sources": {},
+    "id": "61984867-2dba-48a6-b405-75cbcbd626c9",
     "sec_receipt_details": {
       "cik": "0001739940",
       "entity_name": "The Cigna Group",
@@ -414,15 +441,24 @@
     "swap_type": null,
     "swap_rationale": null,
     "location_scope": "National",
-    "city": "Woonsocket",
-    "state": "RI",
+    "city": "Hartford",
+    "state": "CT",
+    "claim_sources": {
+      "city": {
+        "citation": "Aetna Inc. Form 10-K for fiscal 2017 (filed 2018), cover page: principal executive offices",
+        "url": "https://www.sec.gov/Archives/edgar/data/1122304/000112230418000027/form10-k.htm"
+      },
+      "state": {
+        "citation": "Aetna Inc. Form 10-K for fiscal 2017 (filed 2018), cover page: principal executive offices",
+        "url": "https://www.sec.gov/Archives/edgar/data/1122304/000112230418000027/form10-k.htm"
+      }
+    },
     "data_provenance": "unverified",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "aetna-cvs-health",
-    "id": "fa5e1beb-80bb-4483-a54f-5d02f99395ef",
-    "claim_sources": {},
+    "id": "582dc2fc-026d-471e-8e3e-165c897f45bc",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -549,13 +585,22 @@
     "location_scope": "National",
     "city": "Louisville",
     "state": "KY",
+    "claim_sources": {
+      "city": {
+        "citation": "Humana Inc. Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/hum-20251231.htm"
+      },
+      "state": {
+        "citation": "Humana Inc. Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/hum-20251231.htm"
+      }
+    },
     "data_provenance": "verified_sec_filing",
     "source_citation": "HUMANA INC Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0000049071-26-000009)",
     "filing_url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/",
     "summary_notes": null,
     "slug": "humana-inc",
-    "id": "d131b986-29af-412c-a552-54ba7c0faf65",
-    "claim_sources": {},
+    "id": "edb16c89-770c-44d3-bbc9-80ce7af60e12",
     "sec_receipt_details": {
       "cik": "0000049071",
       "entity_name": "HUMANA INC",
@@ -678,13 +723,22 @@
     "location_scope": "Regional",
     "city": "Bloomington",
     "state": "MN",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "HealthPartners website, About page (office address in footer)",
+        "url": "https://www.healthpartners.com/about/"
+      },
+      "state": {
+        "citation": "HealthPartners website, About page (office address in footer)",
+        "url": "https://www.healthpartners.com/about/"
+      }
+    },
+    "data_provenance": "state_insurance_filing",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "healthpartners-health-partners-plan-clinics",
-    "id": "709cae5f-abe4-4335-a137-60aec4d392f7",
-    "claim_sources": {},
+    "id": "eaac0979-998b-4a57-ad2b-983063a51ce1",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -807,13 +861,22 @@
     "location_scope": "Regional",
     "city": "Oakland",
     "state": "CA",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "Kaiser Permanente, About: Fast Facts (own website)",
+        "url": "https://about.kaiserpermanente.org/who-we-are/fast-facts"
+      },
+      "state": {
+        "citation": "Kaiser Permanente, About: Fast Facts (own website)",
+        "url": "https://about.kaiserpermanente.org/who-we-are/fast-facts"
+      }
+    },
+    "data_provenance": "state_insurance_filing",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "kaiser-permanente-kaiser-foundation-health-plan",
-    "id": "c75d2674-1691-42cb-af11-1680d341ab96",
-    "claim_sources": {},
+    "id": "d5cb2ac4-6bd5-4c8c-b811-fbd2ac383aee",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -938,14 +1001,14 @@
     "swap_type": null,
     "swap_rationale": null,
     "location_scope": "Regional",
-    "city": "Chicago",
-    "state": "IL",
+    "city": null,
+    "state": null,
     "data_provenance": "unverified",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "health-care-service-corporation-hcsc-mutual",
-    "id": "b68e5911-0c95-4bec-98e0-61dbcd024318",
+    "id": "8ced9e0e-c3c9-41a5-899c-486e383325fc",
     "claim_sources": {},
     "sec_receipt_details": null,
     "composite_score": null,
@@ -1073,13 +1136,22 @@
     "location_scope": "National",
     "city": "Nashville",
     "state": "TN",
+    "claim_sources": {
+      "city": {
+        "citation": "HCA Healthcare, Inc. Form 10-K for FY2024, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/860730/000095017025020134/hca-20241231.htm"
+      },
+      "state": {
+        "citation": "HCA Healthcare, Inc. Form 10-K for FY2024, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/860730/000095017025020134/hca-20241231.htm"
+      }
+    },
     "data_provenance": "verified_sec_filing",
     "source_citation": "HCA Healthcare, Inc. Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0001193125-26-044769)",
     "filing_url": "https://www.sec.gov/Archives/edgar/data/860730/000119312526044769/",
     "summary_notes": null,
     "slug": "hca-healthcare",
-    "id": "45518920-7ba0-40da-9bc5-41f43dbd0edb",
-    "claim_sources": {},
+    "id": "df188ac3-83c3-4fac-a1ae-daa7dec0a7d5",
     "sec_receipt_details": {
       "cik": "0000860730",
       "entity_name": "HCA Healthcare, Inc.",
@@ -1202,13 +1274,22 @@
     "location_scope": "National",
     "city": "Dallas",
     "state": "TX",
+    "claim_sources": {
+      "city": {
+        "citation": "Tenet Healthcare Corp Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/thc-20251231.htm"
+      },
+      "state": {
+        "citation": "Tenet Healthcare Corp Form 10-K for FY2025, cover page",
+        "url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/thc-20251231.htm"
+      }
+    },
     "data_provenance": "verified_sec_filing",
     "source_citation": "TENET HEALTHCARE CORP Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0000070318-26-000012)",
     "filing_url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/",
     "summary_notes": null,
     "slug": "tenet-healthcare",
-    "id": "e3cf9d3e-02ae-4084-96ea-ef41284e3905",
-    "claim_sources": {},
+    "id": "8401f634-b598-4da4-aea6-3e5ad5a7989a",
     "sec_receipt_details": {
       "cik": "0000070318",
       "entity_name": "TENET HEALTHCARE CORP",
@@ -1331,13 +1412,22 @@
     "location_scope": "National",
     "city": "St. Louis",
     "state": "MO",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "ProPublica Nonprofit Explorer: Ascension Health, IRS Form 990 data (city only)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/311662309"
+      },
+      "state": {
+        "citation": "ProPublica Nonprofit Explorer: Ascension Health, IRS Form 990 data (city only)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/311662309"
+      }
+    },
+    "data_provenance": "cms_cost_report",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "ascension-health",
-    "id": "d21729dc-93a7-4b70-b37f-34cb60c106e0",
-    "claim_sources": {},
+    "id": "c1ba6f1f-e53a-41da-b8ce-8bbbbc91c641",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -1464,13 +1554,22 @@
     "location_scope": "Metro",
     "city": "New York",
     "state": "NY",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "NYC Green Book (official City directory): organization address",
+        "url": "https://a856-gbol.nyc.gov/GBOLWebsite/GreenBook/Details?orgId=2879"
+      },
+      "state": {
+        "citation": "NYC Green Book (official City directory): organization address",
+        "url": "https://a856-gbol.nyc.gov/GBOLWebsite/GreenBook/Details?orgId=2879"
+      }
+    },
+    "data_provenance": "cms_cost_report",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "nyc-health-hospitals",
-    "id": "22f9147f-fee8-48d1-97cf-b403e3d4ae45",
-    "claim_sources": {},
+    "id": "ee22550f-6e08-4551-9282-f473e522a9b7",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -1591,14 +1690,14 @@
     "swap_type": null,
     "swap_rationale": null,
     "location_scope": "Regional",
-    "city": "New York",
-    "state": "NY",
+    "city": null,
+    "state": null,
     "data_provenance": "unverified",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "citymd-urgent-care",
-    "id": "62db1341-447a-4397-83ff-a188ce9dba92",
+    "id": "89f86ccc-9a31-4d79-a490-6cc16a3cee36",
     "claim_sources": {},
     "sec_receipt_details": null,
     "composite_score": null,
@@ -1728,14 +1827,14 @@
     "swap_type": null,
     "swap_rationale": null,
     "location_scope": "National",
-    "city": "Canonsburg",
-    "state": "PA",
+    "city": null,
+    "state": null,
     "data_provenance": "unverified",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "medexpress-urgent-care",
-    "id": "bd44f5e8-899d-4bf3-8156-e8dcac139bfc",
+    "id": "10ee37de-f093-4709-9776-3bafb3a7c8ac",
     "claim_sources": {},
     "sec_receipt_details": null,
     "composite_score": null,
@@ -1863,13 +1962,22 @@
     "location_scope": "Local",
     "city": "Detroit",
     "state": "MI",
+    "claim_sources": {
+      "city": {
+        "citation": "Plum Health Direct Primary Care website: Detroit is an office location (not a headquarters)",
+        "url": "https://plumhealthdpc.com/"
+      },
+      "state": {
+        "citation": "Plum Health Direct Primary Care website: Detroit is an office location (not a headquarters)",
+        "url": "https://plumhealthdpc.com/"
+      }
+    },
     "data_provenance": "unverified",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "plum-health-direct-primary-care",
-    "id": "017ac8ec-9ac9-48cb-b20a-c8792ff8c0d4",
-    "claim_sources": {},
+    "id": "8104048c-67ff-473d-8b09-7ad239841d95",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -1990,144 +2098,24 @@
     "swap_type": null,
     "swap_rationale": null,
     "location_scope": "Regional",
-    "city": "Los Angeles",
+    "city": "Commerce",
     "state": "CA",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "ProPublica Nonprofit Explorer: AltaMed Health Services Corp, IRS Form 990 data (city only)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/952810095"
+      },
+      "state": {
+        "citation": "ProPublica Nonprofit Explorer: AltaMed Health Services Corp, IRS Form 990 data (city only)",
+        "url": "https://projects.propublica.org/nonprofits/organizations/952810095"
+      }
+    },
+    "data_provenance": "hrsa_report",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "altamed-health-services-fqhc-network",
-    "id": "a489d2a7-e017-4016-a866-fdf6d4bc8589",
-    "claim_sources": {},
-    "sec_receipt_details": null,
-    "composite_score": null,
-    "grade": null,
-    "rating_type": null,
-    "split_basis": {},
-    "withheld_claims": [
-      {
-        "field": "parent_organization",
-        "reason": "no SEC receipt or per-claim source"
-      },
-      {
-        "field": "ownership_type",
-        "reason": "no SEC receipt or per-claim source"
-      },
-      {
-        "field": "ownership_tier",
-        "reason": "no SEC receipt or per-claim source"
-      },
-      {
-        "field": "medical_loss_ratio_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "claims_denial_rate_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "charge_to_cost_ratio",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "charity_care_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "summary_notes",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "is_pe_rollup",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "swap_name",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "swap_rationale",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "sub_category",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "swap_type",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "filing_url",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "source_citation",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "shareholder_extraction_pct",
-        "reason": "no filing or per-claim source"
-      },
-      {
-        "field": "exec_comp_pct",
-        "reason": "no filing or per-claim source"
-      },
-      {
-        "field": "clinical_care_wages_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "admin_overhead_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "supplies_operations_pct",
-        "reason": "residual needs every input published"
-      },
-      {
-        "field": "composite_score",
-        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
-      },
-      {
-        "field": "grade",
-        "reason": "no published composite_score"
-      }
-    ]
-  },
-  {
-    "name": "Pioneer Direct Primary Care",
-    "entity_type": "local_clinic",
-    "sub_category": null,
-    "parent_organization": null,
-    "ownership_type": null,
-    "ownership_tier": null,
-    "clinical_care_wages_pct": null,
-    "admin_overhead_pct": null,
-    "exec_comp_pct": null,
-    "shareholder_extraction_pct": null,
-    "supplies_operations_pct": null,
-    "medical_loss_ratio_pct": null,
-    "claims_denial_rate_pct": null,
-    "charge_to_cost_ratio": null,
-    "charity_care_pct": null,
-    "is_pe_rollup": null,
-    "pe_firm_name": null,
-    "regulatory_citations": [],
-    "swap_name": null,
-    "swap_slug": "pioneer-dpc",
-    "swap_type": null,
-    "swap_rationale": null,
-    "location_scope": "Local",
-    "city": "Dallas",
-    "state": "TX",
-    "data_provenance": "unverified",
-    "source_citation": null,
-    "filing_url": null,
-    "summary_notes": null,
-    "slug": "pioneer-direct-primary-care",
-    "id": "47ff54b4-4803-4768-879b-822b4b4d5a52",
-    "claim_sources": {},
+    "id": "6b6e42fd-0ac6-44df-a5c2-3dd2df2d0ee5",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -2250,13 +2238,22 @@
     "location_scope": "Metro",
     "city": "Chicago",
     "state": "IL",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "Erie Family Health Centers website, Contact page (listed as a mailing address)",
+        "url": "https://www.eriefamilyhealth.org/contact"
+      },
+      "state": {
+        "citation": "Erie Family Health Centers website, Contact page (listed as a mailing address)",
+        "url": "https://www.eriefamilyhealth.org/contact"
+      }
+    },
+    "data_provenance": "hrsa_report",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "erie-family-health-centers",
-    "id": "e246504e-6ae4-4cac-8cf3-6a76a032e611",
-    "claim_sources": {},
+    "id": "1c698bd2-476f-4fbd-b15e-427f3ad447f7",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,
@@ -2379,13 +2376,22 @@
     "location_scope": "Local",
     "city": "Minneapolis",
     "state": "MN",
-    "data_provenance": "unverified",
+    "claim_sources": {
+      "city": {
+        "citation": "Native American Community Clinic website, contact and location section",
+        "url": "https://nacc-healthcare.org/"
+      },
+      "state": {
+        "citation": "Native American Community Clinic website, contact and location section",
+        "url": "https://nacc-healthcare.org/"
+      }
+    },
+    "data_provenance": "hrsa_report",
     "source_citation": null,
     "filing_url": null,
     "summary_notes": null,
     "slug": "native-american-community-clinic",
-    "id": "4f9e2d2b-e0e8-46b2-b6d5-cad36620c65d",
-    "claim_sources": {},
+    "id": "6918870a-9196-4ce9-8767-bb721df30c38",
     "sec_receipt_details": null,
     "composite_score": null,
     "grade": null,

@@ -91,6 +91,8 @@ HEALTH_CLAIM_FIELDS = [
     "summary_notes",
     "is_pe_rollup",
     "pe_firm_name",
+    "city",
+    "state",
     "swap_name",
     "swap_rationale",
     # Sub-category and swap type characterize named owners and alternatives ("Wall Street", "Exemplary").

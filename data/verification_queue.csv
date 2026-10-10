@@ -1130,19 +1130,6 @@ healthcare,AltaMed Health Services,,exec_comp_pct,0.7,no filing or per-claim sou
 healthcare,AltaMed Health Services,,clinical_care_wages_pct,78.4,no per-claim source
 healthcare,AltaMed Health Services,,admin_overhead_pct,7.8,no per-claim source
 healthcare,AltaMed Health Services,,supplies_operations_pct,13.1,residual needs every input published
-healthcare,Pioneer Direct Primary Care,,parent_organization,Pioneer DPC (Physician-Owned),no SEC receipt or per-claim source
-healthcare,Pioneer Direct Primary Care,,medical_loss_ratio_pct,95.2,no per-claim source
-healthcare,Pioneer Direct Primary Care,,charge_to_cost_ratio,1.15,no per-claim source
-healthcare,Pioneer Direct Primary Care,,charity_care_pct,7.2,no per-claim source
-healthcare,Pioneer Direct Primary Care,,summary_notes,Physician-operated local clinic bypassing insurance code billing entirely to focus on preventative family health.,no per-claim source
-healthcare,Pioneer Direct Primary Care,,swap_name,Independent Direct Primary Care (Current Model),no per-claim source
-healthcare,Pioneer Direct Primary Care,,swap_rationale,100% direct patient-physician relationship with direct phone access to your doctor.,no per-claim source
-healthcare,Pioneer Direct Primary Care,,swap_type,Doctor-Owned DPC,no per-claim source
-healthcare,Pioneer Direct Primary Care,,filing_url,https://dpcalliance.org/,no per-claim source
-healthcare,Pioneer Direct Primary Care,,source_citation,Texas Medical Board Registry & DPC Alliance Roster,no per-claim source
-healthcare,Pioneer Direct Primary Care,,clinical_care_wages_pct,81.0,no per-claim source
-healthcare,Pioneer Direct Primary Care,,admin_overhead_pct,4.8,no per-claim source
-healthcare,Pioneer Direct Primary Care,,supplies_operations_pct,14.2,residual needs every input published
 healthcare,Erie Family Health Centers,,parent_organization,"Erie Family Health Center, Inc.",no SEC receipt or per-claim source
 healthcare,Erie Family Health Centers,,medical_loss_ratio_pct,91.5,no per-claim source
 healthcare,Erie Family Health Centers,,charge_to_cost_ratio,1.4,no per-claim source

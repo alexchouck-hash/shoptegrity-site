@@ -225,9 +225,12 @@ def test_serialize_withholds_everything_without_a_cited_source():
     ]:
         assert out[field] is None, field
     assert out["regulatory_citations"] == []
-    # Identity and location are not claims about ownership or performance and stay visible.
+    # Identity stays visible. Headquarters location is a claim: withheld until cited.
     assert out["name"] == "Example Clinic Group"
-    assert out["city"] == "Austin"
+    assert out["city"] is None and out["state"] is None
+    cite = {"citation": "Test source", "url": "https://example.org/hq"}
+    cited = serialize_entity(_record(claim_sources={**CITED_SOURCES, "city": cite, "state": cite}))
+    assert cited["city"] == "Austin"
 
 
 def test_serialize_publishes_cited_values():

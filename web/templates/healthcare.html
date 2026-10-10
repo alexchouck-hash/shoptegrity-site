@@ -189,7 +189,7 @@
             </span>
             {% endif %}
             <span style="background: #f1f5f9; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.72rem; color: #475569;">
-              {% if e.city %}{{ e.city }}, {{ e.state }}{% else %}{{ e.location_scope }}{% endif %}
+              {% set _c = cs.get('city') %}{% if e.city and (cited_ok(_c)|trim == '1') %}{{ e.city }}, {{ e.state }}{{ srclink(_c) }}{% else %}{{ e.location_scope }}{% endif %}
             </span>
           </div>
           {% if pe_ok %}
@@ -604,7 +604,10 @@ function cardHtml(e) {
   const brandCheck = e.data_provenance === 'verified_sec_filing'
     ? `<a href="/brands?q=${encodeURIComponent(e.name || '')}" class="btn btn-secondary" style="font-size:0.75rem; padding:0.25rem 0.55rem; color:#0369a1; border-color:#bae6fd;">🏢 Brand Check &rarr;</a>`
     : '';
-  const cityLine = e.city ? `${esc(e.city)}, ${esc(e.state)}` : esc(e.location_scope);
+  const cityCite = (e.claim_sources && e.claim_sources.city && isHttpUrl(e.claim_sources.city.url))
+    ? ` <a href="${esc(e.claim_sources.city.url)}" target="_blank" rel="noopener noreferrer" title="${esc(e.claim_sources.city.citation || '')}" style="color:#0284c7;">[source]</a>`
+    : '';
+  const cityLine = e.city ? `${esc(e.city)}, ${esc(e.state)}${cityCite}` : esc(e.location_scope);
 
   return `
     <div class="card-header" style="margin-bottom: 0.5rem;">

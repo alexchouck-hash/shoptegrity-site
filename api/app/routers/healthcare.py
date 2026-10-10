@@ -62,7 +62,7 @@ def _sort_key(r: HealthcareIntegrity):
 def _matches_query(r: HealthcareIntegrity, q_clean: str) -> bool:
     tokens = [t for t in q_clean.split() if t]
     no_space = q_clean.replace(" ", "")
-    haystacks = [(r.name or "").lower(), (r.city or "").lower()]
+    haystacks = [(r.name or "").lower(), (_shown(r, "city") or "").lower()]
     for field in ("parent_organization", SWAP_FIELD):
         value = _shown(r, field)
         if value:
@@ -292,8 +292,8 @@ def serialize_entity(r: HealthcareIntegrity) -> Dict[str, Any]:
         "swap_type": r.swap_type if swap_cited else None,
         "swap_rationale": _shown(r, "swap_rationale"),
         "location_scope": r.location_scope,
-        "city": r.city,
-        "state": r.state,
+        "city": _shown(r, "city"),
+        "state": _shown(r, "state"),
         "data_provenance": r.data_provenance,
         "source_citation": r.source_citation,
         "filing_url": r.filing_url,

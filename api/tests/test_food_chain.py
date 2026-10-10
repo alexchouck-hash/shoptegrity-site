@@ -145,7 +145,8 @@ def test_makers_api_withholds_claims():
         assert m["makes_own"] is None
         assert m["makes_own_evidence"] == WITHHELD
         assert m["certifications"] == []
-        assert m["products"]
+        # Products are listed only where the maker's own site confirms them; an empty list is a withheld list
+        assert isinstance(m["products"], list)
         if m["place"]:
             assert m["place"]["name"] == LISTED
             assert m["place"]["verified_locally"] is None
