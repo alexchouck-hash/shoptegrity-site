@@ -1,6 +1,7 @@
 from typing import Optional, Dict, Any
 from rubric.engine import compute_scores, load_rubric, CompanyScoreResult
 from api.app.models.core import Entity, Evidence
+from api.app.services.citation import has_cited_ownership
 
 
 _rubric_cache = None
@@ -14,6 +15,7 @@ def get_cached_rubric():
 
 
 def score_entity(entity: Entity, custom_weights: Optional[Dict[str, float]] = None) -> CompanyScoreResult:
+    # Only published evidence with a source URL counts as an input. Anything else is withheld.
     evidence_dicts = [
         {
             "id": ev.id,
@@ -29,8 +31,12 @@ def score_entity(entity: Entity, custom_weights: Optional[Dict[str, float]] = No
             "reviewed_by": ev.reviewed_by,
         }
         for ev in entity.evidence_items
-        if ev.status == "published"
+        if ev.status == "published" and (ev.source_url or "").strip()
     ]
+
+    # A brand's ownership counts only with a cited parent link. An entity's own filing says nothing about the brands it owns.
+    if not has_cited_ownership(entity):
+        evidence_dicts = [e for e in evidence_dicts if e["dimension"] != "ownership"]
 
     company_dict = {
         "id": entity.id,

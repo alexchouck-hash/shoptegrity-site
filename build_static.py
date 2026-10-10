@@ -1,16 +1,22 @@
-"""Static site exporter for GitHub Pages deployment.
+"""Static site exporter for Cloudflare Pages.
 
 Renders all Jinja2 pages and exports static JSON API endpoints so the
-entire Shoptegrity platform can run 100% statically on GitHub Pages.
+Shoptegrity site can be served as plain files from the site root (shopteg.com).
+
+The export fails loudly: a page that does not render, or an internal link that
+points nowhere, exits non-zero so Cloudflare does not publish a broken site.
 """
 
 import os
+import sys
 import shutil
 import argparse
+from html.parser import HTMLParser
 from pathlib import Path
 from fastapi.testclient import TestClient
 
 from api.app.main import app
+from api.app.routers.web_views import templates
 from pipeline.seed_data import run_seed
 from pipeline.top2000_brands import export_top2000_json, seed_top2000_db
 from pipeline.healthcare_2000 import export_healthcare_json, seed_healthcare_db, generate_healthcare_2000
@@ -22,7 +28,48 @@ from api.app.models.core import Brand
 client = TestClient(app)
 
 
+class _RefParser(HTMLParser):
+    """Collects href and src values from one HTML document."""
+
+    def __init__(self):
+        super().__init__()
+        self.refs = []
+
+    def handle_starttag(self, tag, attrs):
+        for name, value in attrs:
+            if name in ("href", "src") and value:
+                self.refs.append(value)
+
+
+def _root_ref_resolves(out_path: Path, ref: str) -> bool:
+    """True when a root-relative reference matches a file the static host will serve."""
+    path = ref.split("#", 1)[0].split("?", 1)[0]
+    rel = path.lstrip("/")
+    if rel == "":
+        candidates = ["index.html"]
+    elif path.endswith("/"):
+        candidates = [rel + "index.html"]
+    else:
+        candidates = [rel, rel + ".html", rel + "/index.html"]
+    return any((out_path / c).is_file() for c in candidates)
+
+
+def check_internal_links(out_path: Path) -> list:
+    """Returns (page, reference) pairs for every root-relative link that resolves to nothing."""
+    broken = []
+    for page in sorted(out_path.rglob("*.html")):
+        parser = _RefParser()
+        parser.feed(page.read_text(encoding="utf-8"))
+        for ref in parser.refs:
+            if not ref.startswith("/") or ref.startswith("//"):
+                continue
+            if not _root_ref_resolves(out_path, ref):
+                broken.append((str(page.relative_to(out_path)), ref))
+    return broken
+
+
 def export_site(output_dir: str = "dist", base_url: str = ""):
+    failures = []
     print(f"Ensuring database is seeded...")
     run_seed()
     with SessionLocal() as db:
@@ -47,6 +94,8 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
     if static_src.exists():
         shutil.copytree(static_src, static_dest)
         print(f"Copied static assets to {static_dest}")
+        # Root-level favicon: requested at /favicon.ico by browsers and crawlers
+        shutil.copy2(static_src / "favicon.ico", out_path / "favicon.ico")
 
     # Helper to clean and adjust links for base_url
     def process_html(html: str) -> str:
@@ -100,6 +149,7 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             (out_path / filename).write_text(content, encoding="utf-8")
             print(f"Rendered {route} -> {filename}")
         else:
+            failures.append(f"page {route} returned {res.status_code}")
             print(f"Failed to render {route}: {res.status_code}")
 
     # Ensure clean directory index copies for /healthcare and /housing
@@ -126,6 +176,9 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             slug_dir.mkdir(exist_ok=True)
             (slug_dir / "index.html").write_text(content, encoding="utf-8")
             print(f"Rendered brand page -> brands/{b.slug}.html")
+        else:
+            failures.append(f"brand page /brands/{b.slug} returned {res.status_code}")
+    db.close()
 
     # 4. Export static API JSON endpoints for client-side queries
     api_routes = [
@@ -153,6 +206,8 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             dest_file.parent.mkdir(parents=True, exist_ok=True)
             dest_file.write_text(res.text, encoding="utf-8")
             print(f"Exported API JSON {api_route} -> {api_file}")
+        else:
+            failures.append(f"API {api_route} returned {res.status_code}")
 
     # Also ensure the raw static json bundles are copied
     for raw_f in ["brands_top2000.json", "retailers.json", "healthcare_2000.json"]:
@@ -163,7 +218,23 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
             shutil.copy2(raw_src, raw_dest)
             print(f"Copied {raw_src} -> {raw_dest}")
 
-    # Add .nojekyll for GitHub Pages
+    # Not-found page: Cloudflare Pages serves 404.html for any path that has no file
+    not_found_html = process_html(templates.get_template("not_found.html").render(active_page=""))
+    (out_path / "404.html").write_text(not_found_html, encoding="utf-8")
+    print("Wrote 404.html")
+
+    # Refuse to publish a site with broken internal links
+    broken = check_internal_links(out_path)
+    for page, ref in broken:
+        failures.append(f"broken link in {page}: {ref}")
+
+    if failures:
+        print(f"Export FAILED with {len(failures)} problem(s):")
+        for item in failures:
+            print(f"  - {item}")
+        sys.exit(1)
+
+    # Retained for compatibility with the older GitHub Pages layout; harmless on Cloudflare
     (out_path / ".nojekyll").write_text("", encoding="utf-8")
     print(f"Export completed successfully to {out_path.absolute()}")
 
@@ -171,6 +242,10 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--out", default="dist", help="Output directory")
-    parser.add_argument("--base-url", default="/shoptegrity-site", help="Base URL for GitHub Pages")
+    parser.add_argument(
+        "--base-url",
+        default="",
+        help='URL prefix for links. Leave empty for a site served from the root (shopteg.com).',
+    )
     args = parser.parse_args()
     export_site(output_dir=args.out, base_url=args.base_url)

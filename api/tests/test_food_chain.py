@@ -1,89 +1,182 @@
 import pytest
 from fastapi.testclient import TestClient
 from api.app.main import app
+from api.app.routers import web_views
+from api.app.routers.food_chain import FoodDollarSplitPublic
 from api.app.services.geo_flow_service import get_farm_gate_decomposition
 
 client = TestClient(app)
 
+WITHHELD = "Withheld: no cited source yet"
+LISTED = "Listed, not verified"
+
+
+def test_sourcing_ladder_api():
+    """Tier names and descriptions are a labelled framework; producer shares are withheld; ordering criterion is stated."""
+    res = client.get("/v1/food/sourcing-ladder")
+    assert res.status_code == 200
+    data = res.json()
+
+    assert "Shoptegrity opinion" in data["title"]
+    assert "framework judgment" in data["description"]
+    assert "not computed from producer dollar shares" in data["description"]
+
+    tiers = data["tiers"]
+    assert [t["tier"] for t in tiers] == list(range(1, 10))
+    for t in tiers:
+        assert t["producer_dollar_share_pct"] is None
+        assert "%" not in t["description"]
+        assert "¢" not in t["description"]
+        assert "%" not in t["recommendation"]
+
 
 def test_farmland_ownership_api():
-    """Verify federal farmland ownership, tenancy statistics, and elite landowner holdings."""
+    """Statistics without a cited source are null; landowner profiles and source names are removed."""
     res = client.get("/v1/food/farmland-ownership")
     assert res.status_code == 200
     data = res.json()
 
-    assert data["rented_percentage"] == 39.2
-    assert data["rented_acres"] == "348,000,000"
-    assert data["non_operator_landlord_pct"] == 80.0
-    assert data["non_operators_never_farmed_pct"] == 52.3
-    assert data["corn_belt_rented_pct_range"] == "53% – 65%"
-    assert data["owner_operator_pct"] == 60.8
-    assert data["top_100_landowners_pct"] == 1.6
+    for key in [
+        "total_us_farmland_acres",
+        "rented_percentage",
+        "rented_acres",
+        "non_operator_landlord_pct",
+        "non_operators_never_farmed_pct",
+        "corn_belt_rented_pct_range",
+        "owner_operator_pct",
+        "institutional_investor_pct",
+        "foreign_investor_pct",
+        "top_100_landowners_pct",
+    ]:
+        assert key in data, key
+        assert data[key] is None, key
 
-    owners = data["top_elite_landowners"]
-    assert len(owners) >= 7
+    # Key names are kept; the named landowner profiles and unlinked source names are removed.
+    assert data["top_elite_landowners"] == []
+    assert data["sources"] == []
 
-    names = [o["name"] for o in owners]
-    assert any("Bill Gates" in n for n in names)
-    assert any("Stan Kroenke" in n for n in names)
-    assert any("Stewart & Lynda Resnick" in n for n in names)
-    assert any("Jeff Bezos" in n for n in names)
-    assert any("John Malone" in n for n in names)
-
-    gates = next(o for o in owners if "Bill Gates" in o["name"])
-    assert gates["acreage"] == 275000
-    assert "cropland" in gates["primary_holdings"].lower()
-
-    resnicks = next(o for o in owners if "Resnick" in o["name"])
-    assert "Kern Water Bank" in resnicks["water_and_resource_notes"]
-
-    assert len(data["sources"]) >= 4
-    assert any("USDA" in s for s in data["sources"])
-    assert any("Land Report 100" in s for s in data["sources"])
+    for name in ["Kroenke", "Emmerson", "Malone", "Ted Turner", "Bezos", "Bill Gates", "Resnick", "Kern Water Bank", "Land Report"]:
+        assert name not in res.text
 
 
 def test_farm_budgets_api():
-    """Verify enterprise cost-of-production budgets and arithmetic balance."""
+    """Enterprise cost categories keep their keys; amounts, shares, beneficiaries and take-home figures are withheld."""
     res = client.get("/v1/food/farm-budgets")
     assert res.status_code == 200
     data = res.json()
 
     assert "comparisons" in data
     budgets = data["comparisons"]
-    assert len(budgets) == 3
+    assert [b["id"] for b in budgets] == [
+        "commodity_corn_soy",
+        "contract_poultry_cafo",
+        "independent_community_farm",
+    ]
 
-    # Check each budget for exact 100% balance
     for b in budgets:
-        assert b["gross_farm_gate"] == 100.0
-        exp_sum = sum(e["amount"] for e in b["expenses"])
-        pct_sum = sum(e["pct"] for e in b["expenses"])
+        assert b["gross_farm_gate"] is None
+        assert b["retail_context"] == WITHHELD
+        assert b["net_farmer_income"] is None
+        assert b["net_farmer_pct"] is None
+        assert b["take_home_notes"] == WITHHELD
+        assert len(b["expenses"]) >= 3
+        for e in b["expenses"]:
+            assert e["amount"] is None
+            assert e["pct"] is None
+            assert e["beneficiaries"] == WITHHELD
+            assert "color" in e
 
-        # Strictly balanced: deductions + take-home == gross farm gate
-        assert round(exp_sum + b["net_farmer_income"], 2) == 100.00
-        assert round(pct_sum + b["net_farmer_pct"], 2) == 100.00
-
-    # Commodity Grain
     grain = next(b for b in budgets if b["id"] == "commodity_corn_soy")
-    assert grain["net_farmer_pct"] == 7.0
     assert any("Cash Rent" in e["name"] for e in grain["expenses"])
     assert any("Fertilizer" in e["name"] for e in grain["expenses"])
     assert any("Machinery" in e["name"] for e in grain["expenses"])
     assert any("Patented GMO Seed" in e["name"] for e in grain["expenses"])
 
-    # Captive Poultry CAFO
-    poultry = next(b for b in budgets if b["id"] == "contract_poultry_cafo")
-    assert poultry["net_farmer_pct"] == 15.0
-    assert any("Mortgage Debt" in e["name"] for e in poultry["expenses"])
+    # No named company appears as a beneficiary or anywhere in the budget payload.
+    for company in ["Nutrien", "CF Industries", "Mosaic", "Deere", "CNH", "Bayer", "Monsanto", "Corteva", "BASF", "Syngenta", "Tyson", "JBS", "Smithfield", "Cargill"]:
+        assert company not in res.text
 
-    # Independent Regenerative Co-op
-    regen = next(b for b in budgets if b["id"] == "independent_community_farm")
-    assert regen["net_farmer_pct"] == 65.0
-    seed_exp = next(e for e in regen["expenses"] if "GMO Seed" in e["name"])
-    assert seed_exp["amount"] == 0.0
+
+def test_dollar_split_api():
+    """Every ERS-attributed figure, year and citation is null or withheld; category labels are kept."""
+    res = client.get("/v1/food/dollar-split")
+    assert res.status_code == 200
+    splits = res.json()
+    assert len(splits) == 4
+
+    numeric_keys = [
+        "farm_share_cents",
+        "food_processing_cents",
+        "packaging_cents",
+        "transportation_cents",
+        "wholesale_trade_cents",
+        "retail_trade_cents",
+        "food_services_cents",
+        "energy_cents",
+        "finance_insurance_cents",
+        "advertising_cents",
+        "other_cents",
+        "year",
+    ]
+    for s in splits:
+        for k in numeric_keys:
+            assert s[k] is None, k
+        assert s["source_citation"] == WITHHELD
+        assert s["summary_insight"] == WITHHELD
+
+    assert any("Overall" in s["product_category"] for s in splits)
+
+    for figure in ["11.8", "14.5", "14.70", "USDA ERS"]:
+        assert figure not in res.text
+
+    filtered = client.get("/v1/food/dollar-split?category=Dairy").json()
+    assert [s["product_category"] for s in filtered] == ["Dairy & Fluid Milk"]
+
+
+def test_makers_api_withholds_claims():
+    """Maker names, makes-own status, certifications and verification are withheld; the entries stay listed."""
+    res = client.get("/v1/food/makers")
+    assert res.status_code == 200
+    makers = res.json()
+    assert makers, "maker registry should not be empty"
+
+    for m in makers:
+        assert m["name"] == LISTED
+        assert m["makes_own"] is None
+        assert m["makes_own_evidence"] == WITHHELD
+        assert m["certifications"] == []
+        assert m["products"]
+        if m["place"]:
+            assert m["place"]["name"] == LISTED
+            assert m["place"]["verified_locally"] is None
+            assert m["place"]["verified_how"] == WITHHELD
+            assert m["place"]["ownership_tier"] is None
+            assert m["place"]["flags"] == []
+
+    for claim in [
+        "Naturally Grown",
+        "League of Tea Growers",
+        "Certified Organic Farm",
+        "Bigelow",
+        "Table Rock Tea Farm",
+        "Camellia Forest",
+        "American Classic Tea",
+        "Tangletown Farm",
+        "Owned by",
+        "Verified",
+    ]:
+        assert claim not in res.text
+
+
+def test_makers_organic_filter_returns_nothing():
+    """Certifications are withheld, so no entry can be matched on an organic certification."""
+    res = client.get("/v1/food/makers?organic_only=true")
+    assert res.status_code == 200
+    assert res.json() == []
 
 
 def test_food_html_view_renders_all_sections():
-    """Verify HTML template renders the new tenancy, paradox, elite owner, and budget sections."""
+    """Verify the food page keeps its sections and shows withheld text where figures and claims were removed."""
     res = client.get("/food")
     assert res.status_code == 200
     html = res.text
@@ -91,44 +184,99 @@ def test_food_html_view_renders_all_sections():
     # Hero Jump Anchors
     assert "#farmland-ownership" in html
     assert "#farm-budgets" in html
+    assert "#ladder" in html
+    assert "#dollar-split" in html
+    assert "#makers" in html
 
-    # Section 3: Tenancy & Landlord Matrix
-    assert "Who Owns America&#39;s Farmland?" in html or "Who Owns America's Farmland?" in html
-    assert "39.2%" in html
-    assert "348,000,000 acres" in html
+    # Ladder: labelled framework, shares withheld
+    assert "The Universal Food Sourcing Ladder" in html
+    assert "Shoptegrity opinion" in html
+    assert WITHHELD in html
+
+    # Dollar split: figures withheld
+    assert "Where Does Your Food Dollar Land?" in html
+    assert "Overall U.S. Food Average" in html
+    assert "11.8" not in html
+    assert "14.5" not in html
+    assert "$100" not in html
+
+    # Tenancy & landowners: figures withheld, no unsourced characterizations
+    assert "Who Owns America's Farmland?" in html or "Who Owns America&#39;s Farmland?" in html
     assert "Non-Operator Landlords" in html
-    assert "52.3%" in html
     assert "Corn Belt Tenancy" in html
     assert "Top 100 Private Landowners" in html
+    for old in ["39.2%", "348,000,000", "52.3%", "80.0%", "14.5 million", "99.5% of broilers", "$1.5M", "82%+", "8 out of 10", "never operated"]:
+        assert old not in html
 
-    # Conglomerate Paradox Box
-    assert "The Conglomerate Paradox: Why Big Ag Avoids Owning the Dirt" in html
-    assert "Tyson Foods" in html or "Tyson" in html
-    assert "Captive Vertical Contracts" in html
-    assert "99.5% of broilers" in html
-    assert "$1.5M to $2.5M" in html
+    # Production contracts card: generic guidance, no named companies
+    assert "How Production Contracts Divide Risk" in html
+    assert "Read the Contract" in html
+    for company in ["Tyson", "JBS", "Smithfield", "Cargill"]:
+        assert company not in html
 
-    # Elite Landowners Spotlight
-    assert "The New Landed Gentry" in html
-    assert "Stan Kroenke" in html
-    assert "Bill Gates" in html
-    assert "Stewart &amp; Lynda Resnick" in html or "Stewart & Lynda Resnick" in html
-    assert "Kern Water Bank" in html
+    # Largest landowners: withheld, no names
+    assert "Largest Private Landowners" in html
+    for name in ["Stan Kroenke", "Bill Gates", "Resnick", "Jeff Bezos", "Kern Water Bank", "Waggoner"]:
+        assert name not in html
 
-    # Section 4: Cost of Production & Take-Home
+    # Cost of production: withheld, no named companies, no composite $100 example
     assert "Where Does Farm Revenue Go?" in html
     assert "Conventional Commodity Grain" in html
-    assert "Captive Contract Poultry Grower" in html
-    assert "Independent Regenerative Family Farm" in html
-    assert "7% Net Take-Home" in html or "7.0% Net Take-Home" in html
-    assert "65% Net Take-Home" in html or "65.0% Net Take-Home" in html
+    assert "Contract Poultry Grower" in html
+    assert "Independent Family Farm" in html
+    for old in ["7% Net Take-Home", "65% Net Take-Home", "$14.70", "11.8¢", "93%", "28%", "Beneficiaries:"]:
+        assert old not in html
+    for company in ["Nutrien", "Bayer", "Deere"]:
+        assert company not in html
 
     # 3 Survival Mechanisms
     assert "The 3 Survival Mechanisms" in html
     assert "Off-Farm Day Jobs" in html
-    assert "82%+" in html
     assert "Federal Safety-Net Subsidies" in html
     assert "Generational Debt-Free Dirt" in html
+
+    # Makers and local places: listed, not verified; claims withheld
+    assert "Small Maker &amp; Grower Registry" in html or "Small Maker & Grower Registry" in html
+    assert LISTED in html
+    assert "Table Rock Tea Farm" not in html
+
+    # Partner, verified, and source-line wording removed
+    assert "Partner Site" not in html
+    assert "Verified direct growers" not in html
+    assert "Verified democratic" not in html
+    assert "Land Report" not in html
+    assert "USDA ERS" not in html
+    assert "100% of wealth" not in html
+    assert "Over 3x" not in html
+    assert "over 5x" not in html.lower()
+    assert "SNAP / EBT Accepted" not in html
+
+
+def test_food_page_renders_figures_when_present(monkeypatch):
+    """The figure branch of the dollar-split card still renders if cited figures are later supplied."""
+    sample = FoodDollarSplitPublic(
+        product_category="Test Category",
+        farm_share_cents=20.0,
+        food_processing_cents=10.0,
+        packaging_cents=5.0,
+        transportation_cents=5.0,
+        wholesale_trade_cents=15.0,
+        retail_trade_cents=30.0,
+        food_services_cents=0.0,
+        energy_cents=5.0,
+        finance_insurance_cents=3.0,
+        advertising_cents=7.0,
+        other_cents=0.0,
+        year=2024,
+        source_citation="Test fixture",
+        summary_insight="Test fixture",
+    )
+    monkeypatch.setattr(web_views, "fetch_food_dollar_splits", lambda: [sample])
+
+    res = client.get("/food")
+    assert res.status_code == 200
+    assert "Test Category" in res.text
+    assert "Actual Grower Share" in res.text
 
 
 def test_flows_farm_gate_audit_drawer():

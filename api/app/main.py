@@ -1,6 +1,7 @@
 from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 
@@ -54,6 +55,12 @@ app.include_router(community.router)
 
 # Mount interactive HTML web portal views
 app.include_router(web_views.router)
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    # Browsers, crawlers and feed readers request this at the site root regardless of <link> tags.
+    return FileResponse(static_dir / "favicon.ico", media_type="image/x-icon")
 
 
 @app.get("/health")

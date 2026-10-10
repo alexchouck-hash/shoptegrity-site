@@ -84,6 +84,26 @@ Provides Model Context Protocol tools for AI shopping assistants:
 
 ---
 
+## 🌐 Deploying the public site (Cloudflare Pages)
+
+The public site at shopteg.com is a static export. Cloudflare Pages builds it from `main`.
+
+Set these in the Pages project (Settings → Builds):
+
+- **Framework preset:** None
+- **Production branch:** `main`
+- **Root directory:** blank (repository root)
+- **Build command:** `pip install -r requirements.txt && python build_static.py --out dist --base-url ""`
+- **Build output directory:** `dist`
+- **Environment variable:** `PYTHON_VERSION` = `3.12.10`
+- **Custom domain:** `shopteg.com`
+
+The build exits non-zero, and nothing is published, if any page fails to render or any internal link points at a file that does not exist. To check locally, run `python build_static.py --out dist` from the repository root.
+
+The build writes `api/v1/*.json`, `data/verification_queue.csv`, and `dist/`. The first two are tracked files that the build regenerates.
+
+---
+
 ## 🚀 Quickstart
 
 ### 1. Requirements & Setup

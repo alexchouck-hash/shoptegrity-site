@@ -4,28 +4,23 @@
     "category": "Retail Giants & Supermarkets",
     "parent_company": "Walmart Inc. (Public: WMT, CIK: 0000104169)",
     "ownership_type": "public",
-    "composite_score": 22,
-    "grade": "F",
-    "worker_wages_pct": 11.1,
+    "worker_wages_pct": null,
     "exec_comp_pct": 0.004,
     "shareholder_extraction_pct": 2.2,
-    "marketing_ads_pct": 5.4,
-    "cogs_supply_pct": 66.2,
-    "retained_operations_pct": 15.1,
-    "labor_exploitation_rating": "Severe",
-    "sweatshop_risk": "High",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Severe",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "WinCo Foods / Local Food Co-ops",
+    "swap_name": null,
     "swap_slug": "winco-foods",
-    "swap_rationale": "WinCo Foods is 100% Employee-Owned (ESOP) with matching or lower prices and retirement pensions worth $500k+ for long-term workers.",
+    "swap_rationale": null,
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
     "sec_url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/",
@@ -36,41 +31,17 @@
       "worker_wage_floor": null,
       "ceo_pay": "$29.24 Million",
       "ceo_pay_ratio": null,
-      "swap_highlight": "Swap to WinCo Foods (100% ESOP) or local independent grocery cooperatives to keep 100% of profit in worker pockets.",
-      "better_swap": {
-        "name": "WinCo Foods / Aldi",
-        "tier": "better",
-        "score": "84/100 (Grade B+)",
-        "price_level": "Matches or beats Walmart pricing",
-        "experience": "Standard supermarket aisles & checkout; 100% ESOP or living wages."
-      },
-      "best_swap": {
-        "name": "Local Independent Food Co-ops & Direct CSAs",
-        "tier": "best",
-        "score": "96/100 (Grade A+)",
-        "price_level": "Cost may be higher on specialty goods",
-        "experience": "May differ: weekly produce box or bulk bin refills; 100% regional wealth retention."
-      },
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null,
       "fiscal_year_end": "2026-01-31",
       "filing_url": "https://www.sec.gov/Archives/edgar/data/104169/000010416926000055/"
     },
-    "better_swap": {
-      "name": "WinCo Foods / Aldi",
-      "tier": "better",
-      "score": "84/100 (Grade B+)",
-      "price_level": "Matches or beats Walmart pricing",
-      "experience": "Standard supermarket aisles & checkout; 100% ESOP or living wages."
-    },
-    "best_swap": {
-      "name": "Local Independent Food Co-ops & Direct CSAs",
-      "tier": "best",
-      "score": "96/100 (Grade A+)",
-      "price_level": "Cost may be higher on specialty goods",
-      "experience": "May differ: weekly produce box or bulk bin refills; 100% regional wealth retention."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "walmart",
-    "id": "ac013f59-3793-4b6e-add7-9d59afb8d68b",
+    "id": "24202cb5-475a-4f7e-a1cd-725a864dc89d",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": {
@@ -92,13 +63,15 @@
       "ceo_pay_pct_of_revenue": 0.0041,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
     "split_basis": {
       "shareholder_extraction_pct": "sec_filing",
-      "exec_comp_pct": "sec_filing_ceo_only",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
+      "exec_comp_pct": "sec_filing_ceo_only"
     },
     "withheld_claims": [
       {
@@ -134,43 +107,101 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
       {
         "field": "retailer_details.ceo_pay_ratio",
         "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Target",
     "category": "Retail Giants & Supermarkets",
     "parent_company": "Target Corporation (Public: TGT, CIK: 0000027419)",
     "ownership_type": "public",
-    "composite_score": 44,
-    "grade": "D",
-    "worker_wages_pct": 14.5,
+    "worker_wages_pct": null,
     "exec_comp_pct": 0.021,
     "shareholder_extraction_pct": 2.4,
-    "marketing_ads_pct": 7.2,
-    "cogs_supply_pct": 59.8,
-    "retained_operations_pct": 16.1,
-    "labor_exploitation_rating": "Moderate",
-    "sweatshop_risk": "Moderate",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "High Single-Use",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "Co-op Marketplaces & Public Goods",
+    "swap_name": null,
     "swap_slug": "public-goods",
-    "swap_rationale": "Member-owned cooperatives and Certified B Corps provide clean staples and refillable household goods without extractive corporate overhead.",
+    "swap_rationale": null,
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
     "sec_url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/",
@@ -181,41 +212,17 @@
       "worker_wage_floor": null,
       "ceo_pay": "$21.83 Million",
       "ceo_pay_ratio": null,
-      "swap_highlight": "Reroute household shopping to community co-ops, Public Goods, and Grove Collaborative for refillable non-toxic essentials.",
-      "better_swap": {
-        "name": "Public Goods / Grove Collaborative",
-        "tier": "better",
-        "score": "82/100 (Grade B+)",
-        "price_level": "Accessible everyday refill prices",
-        "experience": "Doorstep delivery of clean personal care & paper goods; Certified B Corps."
-      },
-      "best_swap": {
-        "name": "Zero-Waste Refill Shops & Mission-Locked B-Corps",
-        "tier": "best",
-        "score": "94/100 (Grade A)",
-        "price_level": "Upfront container cost is higher",
-        "experience": "May differ: bringing own containers to neighborhood dispensaries; 100% circular."
-      },
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null,
       "fiscal_year_end": "2026-01-31",
       "filing_url": "https://www.sec.gov/Archives/edgar/data/27419/000002741926000016/"
     },
-    "better_swap": {
-      "name": "Public Goods / Grove Collaborative",
-      "tier": "better",
-      "score": "82/100 (Grade B+)",
-      "price_level": "Accessible everyday refill prices",
-      "experience": "Doorstep delivery of clean personal care & paper goods; Certified B Corps."
-    },
-    "best_swap": {
-      "name": "Zero-Waste Refill Shops & Mission-Locked B-Corps",
-      "tier": "best",
-      "score": "94/100 (Grade A)",
-      "price_level": "Upfront container cost is higher",
-      "experience": "May differ: bringing own containers to neighborhood dispensaries; 100% circular."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "target",
-    "id": "8c4bd4ff-779d-4840-b1ad-6bda7d3b605b",
+    "id": "ac79f28d-dbeb-4e8b-8696-ddb81fa24ab8",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": {
@@ -237,13 +244,15 @@
       "ceo_pay_pct_of_revenue": 0.0208,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
     "split_basis": {
       "shareholder_extraction_pct": "sec_filing",
-      "exec_comp_pct": "sec_filing_ceo_only",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
+      "exec_comp_pct": "sec_filing_ceo_only"
     },
     "withheld_claims": [
       {
@@ -279,43 +288,101 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
       {
         "field": "retailer_details.ceo_pay_ratio",
         "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Costco Wholesale",
     "category": "Retail Giants & Supermarkets",
     "parent_company": "Costco Wholesale Corporation (Public: COST, CIK: 0000909832)",
     "ownership_type": "public",
-    "composite_score": 62,
-    "grade": "B-",
-    "worker_wages_pct": 19.8,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 1.1,
-    "marketing_ads_pct": 1.2,
-    "cogs_supply_pct": 67.8,
-    "retained_operations_pct": 10.1,
-    "labor_exploitation_rating": "Low Risk",
-    "sweatshop_risk": "Low",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Moderate",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "Azure Standard & Co-op Bulk Aisles",
+    "swap_name": null,
     "swap_slug": "azure-standard",
-    "swap_rationale": "Azure Standard and independent food co-op bulk aisles deliver non-GMO bulk grains and staples direct to community drops without membership fees or Wall Street extraction.",
+    "swap_rationale": null,
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
     "sec_url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/",
@@ -326,41 +393,17 @@
       "worker_wage_floor": null,
       "ceo_pay": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "While Costco treats workers significantly better than Walmart, bulk buying clubs like Azure Standard and local co-op bulk bins keep 100% of wealth regional.",
-      "better_swap": {
-        "name": "WinCo Bulk Sections / Regional Wholesale",
-        "tier": "better",
-        "score": "80/100 (Grade B+)",
-        "price_level": "No $65/yr membership fee; equal bulk savings",
-        "experience": "Similar large-format bulk staples and snacks in quantity."
-      },
-      "best_swap": {
-        "name": "Azure Standard & Co-op Bulk Aisles",
-        "tier": "best",
-        "score": "95/100 (Grade A)",
-        "price_level": "Comparable bulk pricing on organic grains",
-        "experience": "May differ: neighborhood truck drops or scoop-your-own co-op bins; zero plastic packaging."
-      },
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null,
       "fiscal_year_end": "2026-08-30",
       "filing_url": "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/"
     },
-    "better_swap": {
-      "name": "WinCo Bulk Sections / Regional Wholesale",
-      "tier": "better",
-      "score": "80/100 (Grade B+)",
-      "price_level": "No $65/yr membership fee; equal bulk savings",
-      "experience": "Similar large-format bulk staples and snacks in quantity."
-    },
-    "best_swap": {
-      "name": "Azure Standard & Co-op Bulk Aisles",
-      "tier": "best",
-      "score": "95/100 (Grade A)",
-      "price_level": "Comparable bulk pricing on organic grains",
-      "experience": "May differ: neighborhood truck drops or scoop-your-own co-op bins; zero plastic packaging."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "costco-wholesale",
-    "id": "53685920-ff3e-4d4f-b950-a0da1f10352a",
+    "id": "1d75e349-abca-48ec-a429-c5e520eba97f",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": {
@@ -382,12 +425,14 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -423,6 +468,14 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
@@ -431,111 +484,126 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Amazon / Whole Foods",
     "category": "Retail Giants & Supermarkets",
-    "parent_company": "Amazon.com Inc. (Public: AMZN, CIK: 0001018724)",
-    "ownership_type": "public",
-    "composite_score": 19,
-    "grade": "F",
-    "worker_wages_pct": 10.5,
+    "parent_company": null,
+    "ownership_type": null,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": null,
-    "marketing_ads_pct": 8.5,
-    "cogs_supply_pct": 61.1,
-    "retained_operations_pct": 19.9,
-    "labor_exploitation_rating": "Severe",
-    "sweatshop_risk": "High",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Severe",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "Bookshop.org / DoneGood / Direct Makers",
+    "swap_name": null,
     "swap_slug": "bookshop-org",
-    "swap_rationale": "Bookshop.org routes 80%+ of profit to local independent bookstores; DoneGood indexes vetted ethical artisans and B Corps.",
+    "swap_rationale": null,
     "is_major_retailer": true,
-    "data_provenance": "verified_sec_filing",
-    "sec_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
+    "data_provenance": "unverified",
+    "sec_url": null,
     "retailer_details": {
-      "annual_revenue": "$716.92 Billion",
-      "net_income": "$77.67 Billion",
+      "annual_revenue": null,
+      "net_income": null,
       "shareholder_payouts_annual": null,
       "worker_wage_floor": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "Break the Amazon default: buy books on Bookshop.org, ethical home goods on DoneGood, and farm produce direct from local CSAs.",
-      "better_swap": {
-        "name": "Direct Merchant Sites / Chewy / eBay",
-        "tier": "better",
-        "score": "72/100 (Grade B)",
-        "price_level": "Direct checkout price match",
-        "experience": "Similar 1-click ordering and fast doorstep delivery; avoids Amazon 50% seller fee take rate."
-      },
-      "best_swap": {
-        "name": "Bookshop.org / DoneGood / CSAs",
-        "tier": "best",
-        "score": "98/100 (Grade A+)",
-        "price_level": "Standard retail pricing; shipping 2-4 days",
-        "experience": "May differ: purpose-built platforms routing 80%+ of profit to local bookstores & ethical makers."
-      },
-      "fiscal_year_end": "2025-12-31",
-      "filing_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/"
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null
     },
-    "better_swap": {
-      "name": "Direct Merchant Sites / Chewy / eBay",
-      "tier": "better",
-      "score": "72/100 (Grade B)",
-      "price_level": "Direct checkout price match",
-      "experience": "Similar 1-click ordering and fast doorstep delivery; avoids Amazon 50% seller fee take rate."
-    },
-    "best_swap": {
-      "name": "Bookshop.org / DoneGood / CSAs",
-      "tier": "best",
-      "score": "98/100 (Grade A+)",
-      "price_level": "Standard retail pricing; shipping 2-4 days",
-      "experience": "May differ: purpose-built platforms routing 80%+ of profit to local bookstores & ethical makers."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "amazon-whole-foods",
-    "id": "02fd92ab-aaaf-487a-934f-7536426b28fe",
+    "id": "62e2d471-a50f-4e2b-a195-da1c7d44fd51",
     "claim_sources": {},
     "osha_enforcement": null,
-    "sec_receipt_details": {
-      "cik": "0001018724",
-      "entity_name": "AMAZON COM INC",
-      "fiscal_year_end": "2025-12-31",
-      "filing_url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/",
-      "accession": "0001018724-26-000004",
-      "total_revenue_usd": "$716.92 Billion",
-      "net_income_usd": "$77.67 Billion",
-      "shareholder_dividends_usd": null,
-      "shareholder_buybacks_usd": null,
-      "total_shareholder_payout_usd": null,
-      "shareholder_payout_pct_of_revenue": null,
-      "shareholder_payout_pct_of_net_income": null,
-      "ceo_compensation_usd": null,
-      "ceo_comp_fiscal_year_end": null,
-      "ceo_comp_filing_url": null,
-      "ceo_pay_pct_of_revenue": null,
-      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
-    },
-    "split_basis": {
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
-    },
+    "sec_receipt_details": null,
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_company",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "osha_violations_count",
         "reason": "no per-claim source"
@@ -569,6 +637,30 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sec_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.annual_revenue",
+        "reason": "no filing or citation"
+      },
+      {
+        "field": "retailer_details.net_income",
+        "reason": "no filing or citation"
+      },
+      {
+        "field": "retailer_details.shareholder_payouts_annual",
+        "reason": "no filing or citation"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
@@ -577,43 +669,93 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
         "field": "shareholder_extraction_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
       },
       {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "The Kroger Co.",
     "category": "Retail Giants & Supermarkets",
     "parent_company": "The Kroger Co. (Public: KR, CIK: 0000056873)",
     "ownership_type": "public",
-    "composite_score": 28,
-    "grade": "F",
-    "worker_wages_pct": 12.0,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 2.4,
-    "marketing_ads_pct": 6.8,
-    "cogs_supply_pct": 67.3,
-    "retained_operations_pct": 11.5,
-    "labor_exploitation_rating": "High Risk",
-    "sweatshop_risk": "Moderate",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "High Single-Use",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "Regional Cooperative Supermarkets",
+    "swap_name": null,
     "swap_slug": "food-coops",
-    "swap_rationale": "Community-owned food co-ops return surplus as patronage dividends, pay living wages, and source over 40% of shelf items from local regional growers.",
+    "swap_rationale": null,
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
     "sec_url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/",
@@ -623,41 +765,17 @@
       "shareholder_payouts_annual": "$3.58 Billion",
       "worker_wage_floor": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "Shop at independent unionized or co-op grocery stores to ensure your food dollars stay in local farms rather than share repurchases.",
-      "better_swap": {
-        "name": "Aldi & Unionized Regional Grocers",
-        "tier": "better",
-        "score": "76/100 (Grade B)",
-        "price_level": "Equal grocery prices",
-        "experience": "Identical full-service grocery aisles and price points; UFCW contracts guarantee wage & health floors."
-      },
-      "best_swap": {
-        "name": "Regional Cooperative Supermarkets",
-        "tier": "best",
-        "score": "95/100 (Grade A)",
-        "price_level": "Patronage dividend returns surplus cash",
-        "experience": "May differ: shopper-owned democratic control; sources 8x more food from local farms."
-      },
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null,
       "fiscal_year_end": "2026-01-31",
       "filing_url": "https://www.sec.gov/Archives/edgar/data/56873/000110465926037723/"
     },
-    "better_swap": {
-      "name": "Aldi & Unionized Regional Grocers",
-      "tier": "better",
-      "score": "76/100 (Grade B)",
-      "price_level": "Equal grocery prices",
-      "experience": "Identical full-service grocery aisles and price points; UFCW contracts guarantee wage & health floors."
-    },
-    "best_swap": {
-      "name": "Regional Cooperative Supermarkets",
-      "tier": "best",
-      "score": "95/100 (Grade A)",
-      "price_level": "Patronage dividend returns surplus cash",
-      "experience": "May differ: shopper-owned democratic control; sources 8x more food from local farms."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "the-kroger-co",
-    "id": "a67f7a77-ebb9-4d65-9661-db764242eacf",
+    "id": "06133b56-4e7d-48da-960a-42e22fdb805d",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": {
@@ -679,12 +797,14 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -720,6 +840,14 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
@@ -728,39 +856,89 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Dollar General",
     "category": "Retail Giants & Supermarkets",
     "parent_company": "Dollar General Corporation (Public: DG, CIK: 0000029534)",
     "ownership_type": "public",
-    "composite_score": 14,
-    "grade": "F",
-    "worker_wages_pct": 8.5,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 1.2,
-    "marketing_ads_pct": 4.1,
-    "cogs_supply_pct": 66.9,
-    "retained_operations_pct": 19.3,
-    "labor_exploitation_rating": "Severe",
-    "sweatshop_risk": "High",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Severe",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "Local Independent Grocers / Aldi / Co-ops",
+    "swap_name": null,
     "swap_slug": "local-independent-grocers",
-    "swap_rationale": "Independent discount grocers and community mutual aid programs provide affordable staples without subjecting solo workers to hazardous retail conditions.",
+    "swap_rationale": null,
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
     "sec_url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/",
@@ -770,41 +948,17 @@
       "shareholder_payouts_annual": "$519.51 Million",
       "worker_wage_floor": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "Dollar General extracts capital from food deserts while cutting staffing to hazardous minimums. Support local independent markets or bulk buying clubs.",
-      "better_swap": {
-        "name": "Aldi / Regional Independent Discounters",
-        "tier": "better",
-        "score": "74/100 (Grade B)",
-        "price_level": "Deep discount parity ($1-$5)",
-        "experience": "Similar low grocery prices without severe solo-clerk OSHA safety violations."
-      },
-      "best_swap": {
-        "name": "Community Mutual Aid & Bulk Co-ops",
-        "tier": "best",
-        "score": "96/100 (Grade A)",
-        "price_level": "Community-governed affordable access",
-        "experience": "May differ: cooperative buying clubs or neighborhood food hubs relieving food desert extraction."
-      },
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null,
       "fiscal_year_end": "2026-01-30",
       "filing_url": "https://www.sec.gov/Archives/edgar/data/29534/000110465926032325/"
     },
-    "better_swap": {
-      "name": "Aldi / Regional Independent Discounters",
-      "tier": "better",
-      "score": "74/100 (Grade B)",
-      "price_level": "Deep discount parity ($1-$5)",
-      "experience": "Similar low grocery prices without severe solo-clerk OSHA safety violations."
-    },
-    "best_swap": {
-      "name": "Community Mutual Aid & Bulk Co-ops",
-      "tier": "best",
-      "score": "96/100 (Grade A)",
-      "price_level": "Community-governed affordable access",
-      "experience": "May differ: cooperative buying clubs or neighborhood food hubs relieving food desert extraction."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "dollar-general",
-    "id": "023166c3-e9c8-4980-83d1-ceec4e2695ca",
+    "id": "8ec28c05-cdee-481b-84b9-a964ba41736a",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": {
@@ -826,12 +980,14 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -867,6 +1023,14 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
@@ -875,39 +1039,89 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "The Home Depot",
     "category": "Retail Giants & Supermarkets",
     "parent_company": "The Home Depot Inc. (Public: HD, CIK: 0000354950)",
     "ownership_type": "public",
-    "composite_score": 38,
-    "grade": "D",
-    "worker_wages_pct": 13.0,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 5.6,
-    "marketing_ads_pct": 5.8,
-    "cogs_supply_pct": 59.7,
-    "retained_operations_pct": 15.9,
-    "labor_exploitation_rating": "Moderate",
-    "sweatshop_risk": "Moderate",
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Moderate",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
-    "swap_name": "Ace Hardware (Retailer-Owned Cooperative)",
+    "swap_name": null,
     "swap_slug": "ace-hardware",
-    "swap_rationale": "Ace Hardware is a retailer-owned cooperative of 5,000+ local independent hardware stores. Profits recirculate in your local hometown community.",
+    "swap_rationale": null,
     "is_major_retailer": true,
     "data_provenance": "verified_sec_filing",
     "sec_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/",
@@ -917,41 +1131,17 @@
       "shareholder_payouts_annual": "$9.15 Billion",
       "worker_wage_floor": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "Swap to Ace Hardware or True Value\u2014local independent cooperatives where store profits recirculate directly in your hometown.",
-      "better_swap": {
-        "name": "True Value & Independent Lumberyards",
-        "tier": "better",
-        "score": "80/100 (Grade B+)",
-        "price_level": "Price parity on DIY tools & hardware",
-        "experience": "Similar wide hardware aisles and lumber drive-through without corporate buyback extraction."
-      },
-      "best_swap": {
-        "name": "Ace Hardware (Co-op) & Tool Libraries",
-        "tier": "best",
-        "score": "94/100 (Grade A)",
-        "price_level": "Free tool borrowing / competitive hardware",
-        "experience": "May differ: 5,000+ retailer-owned co-op stores & free community tool borrowing for DIY jobs."
-      },
+      "swap_highlight": null,
+      "better_swap": null,
+      "best_swap": null,
       "fiscal_year_end": "2026-02-01",
       "filing_url": "https://www.sec.gov/Archives/edgar/data/354950/000162828026019436/"
     },
-    "better_swap": {
-      "name": "True Value & Independent Lumberyards",
-      "tier": "better",
-      "score": "80/100 (Grade B+)",
-      "price_level": "Price parity on DIY tools & hardware",
-      "experience": "Similar wide hardware aisles and lumber drive-through without corporate buyback extraction."
-    },
-    "best_swap": {
-      "name": "Ace Hardware (Co-op) & Tool Libraries",
-      "tier": "best",
-      "score": "94/100 (Grade A)",
-      "price_level": "Free tool borrowing / competitive hardware",
-      "experience": "May differ: 5,000+ retailer-owned co-op stores & free community tool borrowing for DIY jobs."
-    },
+    "better_swap": null,
+    "best_swap": null,
     "is_champion": false,
     "slug": "the-home-depot",
-    "id": "db8942eb-2a2d-4e4f-80f4-96d1c28f5c45",
+    "id": "1c4943cb-f5ba-4796-a0c7-d03a24be3b8f",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": {
@@ -973,12 +1163,14 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -1014,6 +1206,14 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.worker_wage_floor",
         "reason": "no per-claim source"
       },
@@ -1022,64 +1222,122 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retailer_details.better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "retailer_details.best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "better_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
+        "field": "best_swap.name",
+        "reason": "ranked option: no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "WinCo Foods",
     "category": "Retail Giants & Supermarkets",
-    "parent_company": "WinCo Foods Holdings (100% Employee-Owned ESOP)",
-    "ownership_type": "worker_esop",
-    "composite_score": 96,
-    "grade": "A+",
-    "worker_wages_pct": 34.5,
+    "parent_company": null,
+    "ownership_type": null,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "marketing_ads_pct": 1.1,
-    "cogs_supply_pct": 52.0,
-    "retained_operations_pct": 12.4,
-    "labor_exploitation_rating": "Fair / Verified",
-    "sweatshop_risk": "None",
+    "shareholder_extraction_pct": null,
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Circular / Low Waste",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
     "swap_name": null,
     "swap_slug": null,
-    "swap_rationale": "High-integrity destination! Already the gold standard for employee-owned grocery shopping.",
+    "swap_rationale": null,
     "is_major_retailer": true,
-    "data_provenance": "certified_audit",
+    "data_provenance": "unverified",
     "retailer_details": {
       "annual_revenue": null,
       "shareholder_payouts_annual": null,
       "worker_wage_floor": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "The premier ethical alternative to Walmart and Kroger in the Western & Central US."
+      "swap_highlight": null
     },
-    "is_champion": true,
+    "is_champion": false,
     "better_swap": null,
     "best_swap": null,
     "slug": "winco-foods",
-    "id": "9c487157-ae9b-4f74-8c02-94bba854eb6a",
+    "id": "dbc35ee0-d698-4092-911a-08861c12e60d",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_company",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "osha_violations_count",
         "reason": "no per-claim source"
@@ -1113,6 +1371,10 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.annual_revenue",
         "reason": "no filing or citation"
       },
@@ -1129,64 +1391,114 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "is_champion",
+        "reason": "champion status needs a published composite_score of 90 or more"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Ace Hardware",
     "category": "Retail Giants & Supermarkets",
-    "parent_company": "Ace Hardware Corporation (Retailer-Owned Cooperative)",
-    "ownership_type": "cooperative",
-    "composite_score": 91,
-    "grade": "A",
-    "worker_wages_pct": 28.0,
+    "parent_company": null,
+    "ownership_type": null,
+    "worker_wages_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "marketing_ads_pct": 3.2,
-    "cogs_supply_pct": 54.0,
-    "retained_operations_pct": 14.8,
-    "labor_exploitation_rating": "Fair / Verified",
-    "sweatshop_risk": "None",
+    "shareholder_extraction_pct": null,
+    "marketing_ads_pct": null,
+    "cogs_supply_pct": null,
+    "retained_operations_pct": null,
     "osha_violations_count": null,
     "nlrb_complaints_count": null,
     "living_wage_certified": null,
     "labor_summary": null,
-    "waste_rating": "Circular / Low Waste",
     "packaging_type": null,
     "repairability_score": null,
     "landfill_diverted_pct": null,
     "waste_summary": null,
     "swap_name": null,
     "swap_slug": null,
-    "swap_rationale": "Gold-standard local cooperative swap for Home Depot and Lowe's.",
+    "swap_rationale": null,
     "is_major_retailer": true,
-    "data_provenance": "certified_audit",
+    "data_provenance": "unverified",
     "retailer_details": {
       "annual_revenue": null,
       "shareholder_payouts_annual": null,
       "worker_wage_floor": null,
       "ceo_pay_ratio": null,
-      "swap_highlight": "The direct cooperative swap for Home Depot and Lowe's."
+      "swap_highlight": null
     },
-    "is_champion": true,
+    "is_champion": false,
     "better_swap": null,
     "best_swap": null,
     "slug": "ace-hardware",
-    "id": "b4d3ae20-8dc0-4fd0-b739-42c1444ab4d3",
+    "id": "1e8f6729-8d01-4f50-8728-d03bcc504887",
     "claim_sources": {},
     "osha_enforcement": null,
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "worker_wages_pct": "estimate",
-      "marketing_ads_pct": "estimate",
-      "cogs_supply_pct": "estimate",
-      "retained_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "labor_exploitation_rating": null,
+    "sweatshop_risk": null,
+    "waste_rating": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_company",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "osha_violations_count",
         "reason": "no per-claim source"
@@ -1220,6 +1532,10 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "retailer_details.annual_revenue",
         "reason": "no filing or citation"
       },
@@ -1236,10 +1552,57 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "retailer_details.swap_highlight",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "worker_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "marketing_ads_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "cogs_supply_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "retained_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
+      },
+      {
+        "field": "labor_exploitation_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "sweatshop_risk",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "waste_rating",
+        "reason": "no code computes this rating from cited inputs"
+      },
+      {
+        "field": "is_champion",
+        "reason": "champion status needs a published composite_score of 90 or more"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   }
 ]

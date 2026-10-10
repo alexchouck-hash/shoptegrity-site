@@ -1,8 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}{{ brand.name }} Scorecard & Ethical Alternatives — Shoptegrity{% endblock %}
+{% block title %}{{ brand.name }} Scorecard & Alternatives — Shoptegrity{% endblock %}
 
 {% block content %}
+{# A published evidence row counts as cited only when it links to an http(s) source. Rows without a link are not shown. #}
+{% set cited_rows = namespace(rows=[], dims=[]) %}
+{% for ev in brand.evidence %}
+  {% if ev.source_url and ev.source_url.startswith(('http://', 'https://')) %}
+    {% set cited_rows.rows = cited_rows.rows + [ev] %}
+    {% set cited_rows.dims = cited_rows.dims + [ev.dimension] %}
+  {% endif %}
+{% endfor %}
+{% set parent_cited = 'parent_link' in cited_rows.dims %}
+{% set any_cited = cited_rows.dims | length > 0 %}
+
 <main class="container" style="max-width: 1000px;">
   <div style="margin-bottom: 1rem;">
     <a href="/brands" style="color: var(--blue); text-decoration: none; font-size: 0.9rem;">&larr; Back to Brand Directory</a>
@@ -14,22 +25,26 @@
       <div>
         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
           <h1 style="font-size: 2.2rem; font-weight: 850; letter-spacing: -0.02em;">{{ brand.name }}</h1>
-          {% if brand.website %}
-            <a href="{{ brand.website }}" target="_blank" style="font-size: 0.85rem; color: var(--muted); text-decoration: none;">🔗 official site</a>
+          {% if brand.website and brand.website.startswith(('http://', 'https://')) %}
+            <a href="{{ brand.website }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.85rem; color: var(--muted); text-decoration: none;">🔗 official site</a>
           {% endif %}
         </div>
-        <p style="font-size: 1.05rem; color: var(--slate); margin-bottom: 0.75rem;">{{ brand.description }}</p>
-        
-        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.75rem 1rem; display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.9rem;">
+        <p style="font-size: 1.05rem; color: var(--muted); margin-bottom: 0.75rem;">Description withheld: no cited source yet</p>
+
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.75rem 1rem; display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.9rem; flex-wrap: wrap;">
           <span>Ultimate Parent Company:</span>
-          <strong style="color: var(--navy);">{{ brand.parent_entity.name }}</strong>
-          <span style="background: #e2e8f0; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">{{ brand.parent_entity.ownership_type }}</span>
+          {% if parent_cited %}
+            <strong style="color: var(--navy);">{{ brand.parent_entity.name }}</strong>
+            <span style="background: #e2e8f0; padding: 0.15rem 0.45rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">{{ brand.parent_entity.ownership_type }}</span>
+          {% else %}
+            <strong style="color: var(--muted);">Withheld: no cited source yet</strong>
+          {% endif %}
         </div>
       </div>
 
       <div style="text-align: right;">
         <div style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.2rem;">Shoptegrity Composite Score</div>
-        {% if brand.composite_score %}
+        {% if any_cited and brand.composite_score is not none %}
           {% if brand.composite_score >= 70 %}
             <span class="score-badge score-high" style="font-size: 1.6rem; padding: 0.5rem 1rem;">{{ brand.composite_score }} / 100</span>
           {% elif brand.composite_score >= 45 %}
@@ -37,47 +52,50 @@
           {% else %}
             <span class="score-badge score-low" style="font-size: 1.6rem; padding: 0.5rem 1rem;">{{ brand.composite_score }} / 100</span>
           {% endif %}
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--navy); margin-top: 0.35rem;">Shoptegrity opinion</div>
         {% else %}
-          <span class="score-badge" style="background: #f1f5f9; color: var(--muted); font-size: 1.4rem;">Unknown</span>
+          <span class="score-badge" style="background: #f1f5f9; color: var(--muted); font-size: 1rem;">Withheld: no cited source yet</span>
         {% endif %}
-        <div style="font-size: 0.75rem; color: var(--muted); margin-top: 0.35rem;">Confidence: {{ (brand.confidence * 100)|int }}%</div>
       </div>
     </div>
 
-    <!-- 6-Dimension Score Breakdown -->
+    <!-- Six-dimension scorecard: a score shows only where a cited evidence row exists for that dimension -->
     <div style="margin-top: 2.25rem;">
-      <h3 style="font-size: 1.15rem; font-weight: 750; margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Six-Dimension Integrity Scorecard</h3>
-      
+      <h3 style="font-size: 1.15rem; font-weight: 750; margin-bottom: 0.35rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">Six-Dimension Integrity Scorecard</h3>
+      <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem;">Scores are Shoptegrity opinion. A dimension is scored only when it has a cited source.</p>
+
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
         {% for k, dim in brand.scorecard.items() %}
+        {% set dim_cited = (k in cited_rows.dims) and (dim.value is not none) %}
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
             <span style="font-weight: 700; font-size: 0.92rem;">{{ dim.name }}</span>
             <span style="font-weight: 800; font-size: 0.95rem;">
-              {% if dim.value is not none %}
+              {% if dim_cited %}
                 {{ dim.value|int }} / 100
               {% else %}
-                <span style="color: var(--muted); font-weight: 500;">Unknown</span>
+                <span style="color: var(--muted); font-weight: 500; font-size: 0.8rem;">Withheld: no cited source yet</span>
               {% endif %}
             </span>
           </div>
 
+          {% if dim_cited %}
           <div class="progress-track">
-            <div class="progress-fill" style="width: {{ dim.value or 0 }}%; {% if dim.value and dim.value < 40 %}background: var(--danger);{% elif dim.value and dim.value < 70 %}background: var(--warning);{% endif %}"></div>
+            <div class="progress-fill" style="width: {{ dim.value }}%; {% if dim.value < 40 %}background: var(--danger);{% elif dim.value < 70 %}background: var(--warning);{% endif %}"></div>
           </div>
-
-          <p style="font-size: 0.8rem; color: var(--slate); margin-top: 0.5rem; line-height: 1.4;">{{ dim.explanation }}</p>
+          <div style="font-size: 0.7rem; color: var(--muted); margin-top: 0.35rem;">Shoptegrity opinion</div>
+          {% endif %}
         </div>
         {% endfor %}
       </div>
     </div>
   </div>
 
-  <!-- Better Alternatives Rail -->
+  <!-- Alternatives: names and tiers only. Rationale, price, where to buy, savings and scores are withheld until sourced. -->
   <section style="margin-bottom: 2.5rem;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--primary-dark);">✨ Recommended Higher-Integrity Alternatives</h2>
-      <span style="font-size: 0.85rem; color: var(--muted);">Editor-approved swaps</span>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+      <h2 style="font-size: 1.6rem; font-weight: 800; color: var(--primary-dark);">✨ Alternatives (names only; claims withheld until cited)</h2>
+      <span style="font-size: 0.85rem; color: var(--muted);">Swap options for this brand</span>
     </div>
 
     {% if brand.alternatives %}
@@ -92,27 +110,13 @@
                 <span class="swap-badge-best">🏆 Best Swap</span>
               {% endif %}
               <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--navy);">{{ alt.brand_name }}</h3>
-              <span class="flag-chip flag-coop">{{ alt.ownership_type.replace('_', ' ').title() }}</span>
-              <span style="font-size: 0.8rem; color: var(--muted);">({{ alt.price_band }})</span>
             </div>
-            <p style="font-size: 0.92rem; color: var(--slate); margin-bottom: 0.4rem;">{{ alt.rationale }}</p>
-            {% if alt.similarity_notes %}
-              <div style="font-size: 0.82rem; color: #0284c7; margin-bottom: 0.35rem;">
-                <strong>Experience Note:</strong> {{ alt.similarity_notes }}
-              </div>
-            {% endif %}
             <div style="font-size: 0.82rem; color: var(--muted);">
-              <strong>Where to buy:</strong> {{ alt.where_to_buy }}
-              {% if alt.savings_estimate %} &bull; <span style="color: var(--primary); font-weight: 600;">{{ alt.savings_estimate }}</span>{% endif %}
+              Details (rationale, price, where to buy, savings and score): Withheld: no cited source yet
             </div>
           </div>
 
           <div style="text-align: right;">
-            {% if alt.composite_score %}
-              <div class="score-badge score-high" style="font-size: 1.25rem; padding: 0.4rem 0.8rem;">
-                Score: {{ alt.composite_score }}
-              </div>
-            {% endif %}
             <div style="margin-top: 0.5rem;">
               <a href="/brands/{{ alt.brand_slug }}" class="btn btn-primary" style="font-size: 0.85rem; padding: 0.4rem 0.9rem;">View Alternative &rarr;</a>
             </div>
@@ -130,23 +134,23 @@
   <!-- Evidence & Receipts Section -->
   <section style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; margin-bottom: 3rem;">
     <h2 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.4rem;">Cited Evidence & Regulatory Receipts</h2>
-    <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem;">Every fact is cited with direct links to official regulator actions, SEC filings, or independent audits.</p>
+    <p style="font-size: 0.88rem; color: var(--muted); margin-bottom: 1.25rem;">Only entries that link to their source are listed here.</p>
 
-    {% if brand.evidence %}
+    {% if cited_rows.rows %}
       <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-        {% for ev in brand.evidence %}
+        {% for ev in cited_rows.rows %}
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; font-size: 0.9rem;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem; flex-wrap: wrap; gap: 0.5rem;">
             <span style="font-weight: 700; text-transform: uppercase; font-size: 0.75rem; color: var(--slate);">{{ ev.dimension.replace('_', ' ') }}</span>
             <span style="font-size: 0.75rem; color: var(--muted);">Source: {{ ev.source_name }}</span>
           </div>
           <p style="color: var(--navy); margin-bottom: 0.4rem;">{{ ev.fact_text }}</p>
-          <a href="{{ ev.source_url }}" target="_blank" style="color: var(--blue); text-decoration: none; font-size: 0.8rem; font-weight: 600;">Inspect Original Source Filing &rarr;</a>
+          <a href="{{ ev.source_url }}" target="_blank" rel="noopener noreferrer" style="color: var(--blue); text-decoration: none; font-size: 0.8rem; font-weight: 600;">Open source &rarr;</a>
         </div>
         {% endfor %}
       </div>
     {% else %}
-      <p style="font-size: 0.9rem; color: var(--muted);">No external regulatory actions currently logged for this entity.</p>
+      <p style="font-size: 0.9rem; color: var(--muted);">No entries in our database</p>
     {% endif %}
   </section>
 </main>

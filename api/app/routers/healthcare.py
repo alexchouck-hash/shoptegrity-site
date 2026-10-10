@@ -1,12 +1,75 @@
-from typing import List, Optional, Dict, Any
+from typing import Any, Dict, Optional
+
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from sqlalchemy import or_, func
 
 from api.app.db.session import get_db
 from api.app.models.core import HealthcareIntegrity
 
 router = APIRouter(prefix="/v1/healthcare", tags=["Healthcare Integrity & Comparisons"])
+
+WITHHELD_TEXT = "Withheld: no cited source yet"
+
+# A value is published only when it has a cited source: a claim_sources entry with a citation
+# and an http(s) url. SEC-backed fields may instead cite the entity's SEC 10-K receipt
+# (sec_receipt_details.filing_url). The page template and its JavaScript apply the same rule.
+SEC_BACKED_FIELDS = {
+    "parent_organization",
+    "ownership_type",
+    "ownership_tier",
+    "shareholder_extraction_pct",
+    "exec_comp_pct",
+}
+# The composite score is the rating; the grade is published only when the score is cited.
+RATING_FIELD = "composite_score"
+# Swap name is the recommendation; swap slug and type are published only when the swap name is cited.
+SWAP_FIELD = "swap_name"
+
+
+def _is_http_url(value: Any) -> bool:
+    return isinstance(value, str) and value.startswith(("http://", "https://"))
+
+
+def cited_source(r: HealthcareIntegrity, field: str) -> Optional[Dict[str, str]]:
+    """Return the source that backs a field, or None when the field is unsourced."""
+    src = (r.claim_sources or {}).get(field)
+    if isinstance(src, dict) and _is_http_url(src.get("url")) and str(src.get("citation", "")).strip():
+        return {"url": src["url"], "citation": str(src["citation"])}
+    if field in SEC_BACKED_FIELDS:
+        sec = r.sec_receipt_details if isinstance(r.sec_receipt_details, dict) else {}
+        if _is_http_url(sec.get("filing_url")):
+            return {"url": sec["filing_url"], "citation": r.source_citation or "SEC Form 10-K"}
+    return None
+
+
+def _shown(r: HealthcareIntegrity, field: str) -> Any:
+    """The field's value when it has a cited source, otherwise None (withheld)."""
+    value = getattr(r, field)
+    if value is None or cited_source(r, field) is None:
+        return None
+    return value
+
+
+def _title(value: Optional[str]) -> Optional[str]:
+    return value.replace("_", " ").title() if value else None
+
+
+def _sort_key(r: HealthcareIntegrity):
+    score = _shown(r, RATING_FIELD)
+    return (score is None, -(score or 0), r.name or "")
+
+
+def _matches_query(r: HealthcareIntegrity, q_clean: str) -> bool:
+    tokens = [t for t in q_clean.split() if t]
+    no_space = q_clean.replace(" ", "")
+    haystacks = [(r.name or "").lower(), (r.city or "").lower()]
+    for field in ("parent_organization", SWAP_FIELD):
+        value = _shown(r, field)
+        if value:
+            haystacks.append(str(value).lower())
+    if any(q_clean in h or no_space in h.replace(" ", "") for h in haystacks):
+        return True
+    return len(tokens) > 1 and all(any(t in h for h in haystacks) for t in tokens)
 
 
 @router.get("/database")
@@ -23,52 +86,45 @@ def get_healthcare_database(
     offset: int = Query(0, ge=0),
     db: Session = Depends(get_db),
 ):
-    """Query the healthcare integrity database. Unsourced claims are withheld (null) and listed in withheld_claims."""
+    """Query the healthcare integrity database. Unsourced claims are withheld (null) and listed in withheld_claims.
+    Filters match cited values only, so a filter never reveals a value that is not published."""
     query = db.query(HealthcareIntegrity)
-
-    if q:
-        from sqlalchemy import and_
-        q_clean = q.strip().lower()
-        search_pat = f"%{q_clean}%"
-        search_no_space = f"%{q_clean.replace(' ', '')}%"
-        tokens = [f"%{t}%" for t in q_clean.split() if t]
-
-        conditions = [
-            HealthcareIntegrity.name.ilike(search_pat),
-            HealthcareIntegrity.name.ilike(search_no_space),
-            HealthcareIntegrity.parent_organization.ilike(search_pat),
-            HealthcareIntegrity.parent_organization.ilike(search_no_space),
-            HealthcareIntegrity.city.ilike(search_pat),
-            HealthcareIntegrity.swap_name.ilike(search_pat),
-        ]
-        if len(tokens) > 1:
-            conditions.append(and_(*[HealthcareIntegrity.name.ilike(t) for t in tokens]))
-            conditions.append(and_(*[HealthcareIntegrity.parent_organization.ilike(t) for t in tokens]))
-
-        query = query.filter(or_(*conditions))
     if entity_type and entity_type != "all":
         query = query.filter(HealthcareIntegrity.entity_type == entity_type)
-    if tier is not None:
-        query = query.filter(HealthcareIntegrity.ownership_tier == tier)
-    if grade and grade != "all":
-        query = query.filter(HealthcareIntegrity.grade.startswith(grade))
-    if is_pe_rollup is not None:
-        query = query.filter(HealthcareIntegrity.is_pe_rollup == is_pe_rollup)
     if state and state != "all":
         query = query.filter(HealthcareIntegrity.state == state.upper())
-    if min_claims_denial is not None:
-        query = query.filter(HealthcareIntegrity.claims_denial_rate_pct >= min_claims_denial)
-    if min_markup is not None:
-        query = query.filter(HealthcareIntegrity.charge_to_cost_ratio >= min_markup)
 
-    total_matches = query.count()
-    records = query.order_by(HealthcareIntegrity.composite_score.desc()).offset(offset).limit(limit).all()
+    q_clean = q.strip().lower() if q else ""
+    matched = []
+    for r in query.all():
+        if q_clean and not _matches_query(r, q_clean):
+            continue
+        if tier is not None and _shown(r, "ownership_tier") != tier:
+            continue
+        if grade and grade != "all":
+            rated_grade = r.grade if _shown(r, RATING_FIELD) is not None else None
+            if not (rated_grade or "").startswith(grade):
+                continue
+        if is_pe_rollup is not None and _shown(r, "is_pe_rollup") != is_pe_rollup:
+            continue
+        if min_claims_denial is not None:
+            rate = _shown(r, "claims_denial_rate_pct")
+            if rate is None or rate < min_claims_denial:
+                continue
+        if min_markup is not None:
+            markup = _shown(r, "charge_to_cost_ratio")
+            if markup is None or markup < min_markup:
+                continue
+        matched.append(r)
+
+    matched.sort(key=_sort_key)
+    page = matched[offset: offset + limit]
 
     return {
-        "total": total_matches,
+        "total": len(matched),
         "offset": offset,
         "limit": limit,
-        "entities": [serialize_entity(r) for r in records],
+        "entities": [serialize_entity(r) for r in page],
     }
 
 
@@ -77,7 +133,8 @@ def compare_healthcare_entities(
     slugs: str = Query(..., description="Comma-separated slugs to compare, e.g. 'unitedhealthcare-optum,kaiser-permanente,plum-health-direct-primary-care'"),
     db: Session = Depends(get_db),
 ):
-    """Side-by-side comparison of 2 to 6 healthcare entities across ownership, revenue splits, denial rates, and markups."""
+    """Side-by-side comparison of 2 to 6 healthcare entities across ownership, revenue splits, denial rates, and markups.
+    Values without a cited source are null; no ranking is produced unless a rating is cited."""
     slug_list = [s.strip().lower() for s in slugs.split(",") if s.strip()]
     if not slug_list:
         raise HTTPException(status_code=400, detail="Must provide at least one slug to compare")
@@ -94,91 +151,102 @@ def compare_healthcare_entities(
 
     serialized = [serialize_entity(r) for r in ordered_records]
 
-    # Metrics Matrix for easy client rendering
+    # Metrics matrix built from the published (cited-only) values
     metrics_comparison = {
-        "names": [r.name for r in ordered_records],
-        "slugs": [r.slug for r in ordered_records],
-        "ownership_tier": [r.ownership_tier for r in ordered_records],
-        "ownership_type": [r.ownership_type.replace('_', ' ').title() for r in ordered_records],
-        "composite_score": [r.composite_score for r in ordered_records],
-        "grade": [r.grade for r in ordered_records],
-        "clinical_care_wages_pct": [r.clinical_care_wages_pct for r in ordered_records],
-        "admin_overhead_pct": [r.admin_overhead_pct for r in ordered_records],
-        "exec_comp_pct": [r.exec_comp_pct for r in ordered_records],
-        "shareholder_extraction_pct": [r.shareholder_extraction_pct for r in ordered_records],
-        "medical_loss_ratio_pct": [r.medical_loss_ratio_pct for r in ordered_records],
-        "claims_denial_rate_pct": [r.claims_denial_rate_pct for r in ordered_records],
-        "charge_to_cost_ratio": [r.charge_to_cost_ratio for r in ordered_records],
-        "charity_care_pct": [r.charity_care_pct for r in ordered_records],
-        "is_pe_rollup": [r.is_pe_rollup for r in ordered_records],
-        "swap_name": [r.swap_name for r in ordered_records],
+        "names": [s["name"] for s in serialized],
+        "slugs": [s["slug"] for s in serialized],
+        "ownership_tier": [s["ownership_tier"] for s in serialized],
+        "ownership_type": [_title(s["ownership_type"]) for s in serialized],
+        "composite_score": [s["composite_score"] for s in serialized],
+        "grade": [s["grade"] for s in serialized],
+        "clinical_care_wages_pct": [s["clinical_care_wages_pct"] for s in serialized],
+        "admin_overhead_pct": [s["admin_overhead_pct"] for s in serialized],
+        "exec_comp_pct": [s["exec_comp_pct"] for s in serialized],
+        "shareholder_extraction_pct": [s["shareholder_extraction_pct"] for s in serialized],
+        "medical_loss_ratio_pct": [s["medical_loss_ratio_pct"] for s in serialized],
+        "claims_denial_rate_pct": [s["claims_denial_rate_pct"] for s in serialized],
+        "charge_to_cost_ratio": [s["charge_to_cost_ratio"] for s in serialized],
+        "charity_care_pct": [s["charity_care_pct"] for s in serialized],
+        "is_pe_rollup": [s["is_pe_rollup"] for s in serialized],
+        "swap_name": [s["swap_name"] for s in serialized],
     }
 
-    # Best-in-comparison integrity winner
-    winner = max(ordered_records, key=lambda x: x.composite_score)
+    # Highest rating among entities that have a cited rating (Shoptegrity opinion)
+    rated = [s for s in serialized if s["composite_score"] is not None]
+    if rated:
+        winner = max(rated, key=lambda s: s["composite_score"])
+        highest = {
+            "name": winner["name"],
+            "slug": winner["slug"],
+            "tier": winner["ownership_tier"],
+            "score": winner["composite_score"],
+            "grade": winner["grade"],
+            "rationale": (
+                f"{winner['name']} has the highest Shoptegrity rating ({winner['composite_score']}/100, "
+                f"Shoptegrity opinion) among the entities compared that have a cited rating."
+            ),
+        }
+    else:
+        highest = {
+            "name": None,
+            "slug": None,
+            "tier": None,
+            "score": None,
+            "grade": None,
+            "rationale": WITHHELD_TEXT,
+        }
 
     return {
         "compared_count": len(ordered_records),
         "entities": serialized,
         "metrics_matrix": metrics_comparison,
-        "highest_integrity_entity": {
-            "name": winner.name,
-            "slug": winner.slug,
-            "tier": winner.ownership_tier,
-            "score": winner.composite_score,
-            "grade": winner.grade,
-            "rationale": f"{winner.name} has the highest Shoptegrity rating ({winner.composite_score}/100) among the entities compared.",
-        }
+        "highest_integrity_entity": highest,
     }
 
 
 @router.get("/stats")
 def get_healthcare_stats(db: Session = Depends(get_db)):
-    """Summary statistics across the healthcare database (averages skip withheld values)."""
-    total = db.query(HealthcareIntegrity).count()
+    """Summary statistics across the healthcare database. Entity counts are dataset counts;
+    tier, PE and average figures use cited values only (averages are null when nothing is cited)."""
+    rows = db.query(HealthcareIntegrity).all()
+    total = len(rows)
 
-    type_counts = dict(
-        db.query(HealthcareIntegrity.entity_type, func.count(HealthcareIntegrity.id))
-        .group_by(HealthcareIntegrity.entity_type)
-        .all()
-    )
+    type_counts: Dict[str, int] = {}
+    tier_counts: Dict[int, int] = {}
+    pe_rollups = 0
+    pe_known = 0
+    for r in rows:
+        type_counts[r.entity_type] = type_counts.get(r.entity_type, 0) + 1
+        tier = _shown(r, "ownership_tier")
+        if tier is not None:
+            tier_counts[tier] = tier_counts.get(tier, 0) + 1
+        if _shown(r, "is_pe_rollup") is not None:
+            pe_known += 1
+        if _shown(r, "is_pe_rollup") is True:
+            pe_rollups += 1
 
-    tier_counts = dict(
-        db.query(HealthcareIntegrity.ownership_tier, func.count(HealthcareIntegrity.id))
-        .group_by(HealthcareIntegrity.ownership_tier)
-        .all()
-    )
-
-    pe_rollups = db.query(HealthcareIntegrity).filter(HealthcareIntegrity.is_pe_rollup == True).count()
-
-    # Averages
-    avg_score = db.query(func.avg(HealthcareIntegrity.composite_score)).scalar() or 0.0
-    avg_care = db.query(func.avg(HealthcareIntegrity.clinical_care_wages_pct)).scalar() or 0.0
-    avg_extraction = db.query(func.avg(HealthcareIntegrity.shareholder_extraction_pct)).scalar() or 0.0
-    avg_denial_insurers = (
-        db.query(func.avg(HealthcareIntegrity.claims_denial_rate_pct))
-        .filter(HealthcareIntegrity.entity_type == "health_insurance")
-        .scalar() or 0.0
-    )
-    avg_markup_hospitals = (
-        db.query(func.avg(HealthcareIntegrity.charge_to_cost_ratio))
-        .filter(HealthcareIntegrity.entity_type == "hospital_chain")
-        .scalar() or 0.0
-    )
+    def _avg(values):
+        vals = [v for v in values if v is not None]
+        return round(sum(vals) / len(vals), 1) if vals else None
 
     return {
         "total_entities": total,
         "by_entity_type": type_counts,
         "by_ownership_tier": tier_counts,
-        "pe_rollups_count": pe_rollups,
-        "pe_rollups_pct": round((pe_rollups / total * 100) if total > 0 else 0, 1),
+        # Null until at least one record has a cited PE determination; zero would read as "none found"
+        "pe_rollups_count": pe_rollups if pe_known else None,
+        "pe_rollups_pct": round(pe_rollups / pe_known * 100, 1) if pe_known else None,
         "averages": {
-            "composite_score": round(avg_score, 1),
-            "clinical_care_wages_pct": round(avg_care, 1),
-            "shareholder_extraction_pct": round(avg_extraction, 1),
-            "insurers_claims_denial_pct": round(avg_denial_insurers, 1),
-            "hospitals_charge_to_cost_markup": round(avg_markup_hospitals, 1),
-        }
+            "composite_score": _avg(_shown(r, RATING_FIELD) for r in rows),
+            "clinical_care_wages_pct": _avg(_shown(r, "clinical_care_wages_pct") for r in rows),
+            "shareholder_extraction_pct": _avg(_shown(r, "shareholder_extraction_pct") for r in rows),
+            "insurers_claims_denial_pct": _avg(
+                _shown(r, "claims_denial_rate_pct") for r in rows if r.entity_type == "health_insurance"
+            ),
+            "hospitals_charge_to_cost_markup": _avg(
+                _shown(r, "charge_to_cost_ratio") for r in rows if r.entity_type == "hospital_chain"
+            ),
+        },
     }
 
 
@@ -192,40 +260,44 @@ def get_healthcare_entity_detail(slug: str, db: Session = Depends(get_db)):
 
 
 def serialize_entity(r: HealthcareIntegrity) -> Dict[str, Any]:
+    """Public view of one entity. Identity fields are always shown; every claim without a cited
+    source is None (or [] for lists) and is named in withheld_claims."""
+    rated = _shown(r, RATING_FIELD) is not None
+    swap_cited = _shown(r, SWAP_FIELD) is not None
     return {
         "id": r.id,
         "name": r.name,
         "slug": r.slug,
         "entity_type": r.entity_type,
         "sub_category": r.sub_category,
-        "parent_organization": r.parent_organization,
-        "ownership_type": r.ownership_type,
-        "ownership_tier": r.ownership_tier,
-        "composite_score": r.composite_score,
-        "grade": r.grade,
-        "clinical_care_wages_pct": r.clinical_care_wages_pct,
-        "admin_overhead_pct": r.admin_overhead_pct,
-        "exec_comp_pct": r.exec_comp_pct,
-        "shareholder_extraction_pct": r.shareholder_extraction_pct,
-        "supplies_operations_pct": r.supplies_operations_pct,
-        "medical_loss_ratio_pct": r.medical_loss_ratio_pct,
-        "claims_denial_rate_pct": r.claims_denial_rate_pct,
-        "charge_to_cost_ratio": r.charge_to_cost_ratio,
-        "charity_care_pct": r.charity_care_pct,
-        "is_pe_rollup": r.is_pe_rollup,
-        "pe_firm_name": r.pe_firm_name,
-        "regulatory_citations": r.regulatory_citations or [],
-        "swap_name": r.swap_name,
-        "swap_slug": r.swap_slug,
-        "swap_type": r.swap_type,
-        "swap_rationale": r.swap_rationale,
+        "parent_organization": _shown(r, "parent_organization"),
+        "ownership_type": _shown(r, "ownership_type"),
+        "ownership_tier": _shown(r, "ownership_tier"),
+        "composite_score": _shown(r, RATING_FIELD),
+        "grade": r.grade if rated else None,
+        "clinical_care_wages_pct": _shown(r, "clinical_care_wages_pct"),
+        "admin_overhead_pct": _shown(r, "admin_overhead_pct"),
+        "exec_comp_pct": _shown(r, "exec_comp_pct"),
+        "shareholder_extraction_pct": _shown(r, "shareholder_extraction_pct"),
+        "supplies_operations_pct": _shown(r, "supplies_operations_pct"),
+        "medical_loss_ratio_pct": _shown(r, "medical_loss_ratio_pct"),
+        "claims_denial_rate_pct": _shown(r, "claims_denial_rate_pct"),
+        "charge_to_cost_ratio": _shown(r, "charge_to_cost_ratio"),
+        "charity_care_pct": _shown(r, "charity_care_pct"),
+        "is_pe_rollup": _shown(r, "is_pe_rollup"),
+        "pe_firm_name": _shown(r, "pe_firm_name"),
+        "regulatory_citations": list(r.regulatory_citations or []) if cited_source(r, "regulatory_citations") else [],
+        "swap_name": _shown(r, SWAP_FIELD),
+        "swap_slug": r.swap_slug if swap_cited else None,
+        "swap_type": r.swap_type if swap_cited else None,
+        "swap_rationale": _shown(r, "swap_rationale"),
         "location_scope": r.location_scope,
         "city": r.city,
         "state": r.state,
         "data_provenance": r.data_provenance,
         "source_citation": r.source_citation,
         "filing_url": r.filing_url,
-        "summary_notes": r.summary_notes,
+        "summary_notes": _shown(r, "summary_notes"),
         "sec_receipt_details": r.sec_receipt_details,
         "claim_sources": r.claim_sources or {},
         "withheld_claims": r.withheld_claims or [],

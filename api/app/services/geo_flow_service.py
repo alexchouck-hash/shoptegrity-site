@@ -9,36 +9,31 @@ from api.app.schemas.domain import (
     FarmGateCostItem,
 )
 
-# Representative ZIP centroids across key metros, agricultural hubs, and corporate/financial centers
+# Illustrative location centroids. These are metro and agricultural places used only as
+# modeled locations for payee categories. None of them is the headquarters or facility of a
+# named company, and no payee in this model is a named company.
 KNOWN_ZIPS: Dict[str, Dict[str, any]] = {
     # Twin Cities & MN Agriculture
     "55401": {"city": "Minneapolis", "state": "MN", "lat": 44.9818, "lon": -93.2687},
     "55407": {"city": "Minneapolis", "state": "MN", "lat": 44.9352, "lon": -93.2568},
     "55415": {"city": "Minneapolis", "state": "MN", "lat": 44.9742, "lon": -93.2575},
     "55419": {"city": "Minneapolis", "state": "MN", "lat": 44.9026, "lon": -93.2842},
-    "55426": {"city": "Golden Valley", "state": "MN", "lat": 44.9877, "lon": -93.3762},
     "55104": {"city": "St. Paul", "state": "MN", "lat": 44.9556, "lon": -93.1612},
     "55107": {"city": "St. Paul", "state": "MN", "lat": 44.9421, "lon": -93.0825},
     "55370": {"city": "Plato", "state": "MN", "lat": 44.7733, "lon": -94.0416},
     "55350": {"city": "Hutchinson", "state": "MN", "lat": 44.8883, "lon": -94.3683},
     "54665": {"city": "Viroqua", "state": "WI", "lat": 43.5558, "lon": -90.8885},
-    # Major Corporate & Financial Centers
+    # Metro and agricultural-region locations
     "10001": {"city": "New York", "state": "NY", "lat": 40.7501, "lon": -73.9996},
-    "10005": {"city": "New York", "state": "NY", "lat": 40.7064, "lon": -74.0090},
-    "10055": {"city": "New York", "state": "NY", "lat": 40.7610, "lon": -73.9740},
-    "19355": {"city": "Malvern", "state": "PA", "lat": 40.0362, "lon": -75.5138},
-    "19801": {"city": "Wilmington", "state": "DE", "lat": 39.7391, "lon": -75.5398},
-    "72716": {"city": "Bentonville", "state": "AR", "lat": 36.3729, "lon": -94.2088},
-    "72764": {"city": "Springdale", "state": "AR", "lat": 36.1867, "lon": -94.1288},
     "68102": {"city": "Omaha", "state": "NE", "lat": 41.2565, "lon": -95.9345},
     "60601": {"city": "Chicago", "state": "IL", "lat": 41.8860, "lon": -87.6225},
+    "72701": {"city": "Fayetteville", "state": "AR", "lat": 36.0626, "lon": -94.1574},
     "94104": {"city": "San Francisco", "state": "CA", "lat": 37.7915, "lon": -122.4019},
     "98109": {"city": "Seattle", "state": "WA", "lat": 47.6253, "lon": -122.3477},
     "90012": {"city": "Los Angeles", "state": "CA", "lat": 34.0625, "lon": -118.2386},
     "78701": {"city": "Austin", "state": "TX", "lat": 30.2711, "lon": -97.7437},
-    "28202": {"city": "Charlotte", "state": "NC", "lat": 35.2271, "lon": -80.8431},
-    "29685": {"city": "Sunset", "state": "SC", "lat": 34.9818, "lon": -82.8137},
     "27516": {"city": "Chapel Hill", "state": "NC", "lat": 35.9132, "lon": -79.0558},
+    "29685": {"city": "Sunset", "state": "SC", "lat": 34.9818, "lon": -82.8137},
 }
 
 # 3-digit ZIP prefix fallback table to support any 5-digit US ZIP code
@@ -55,6 +50,12 @@ ZIP3_FALLBACK: Dict[str, Dict[str, any]] = {
     "9": {"city": "Pacific Coast", "state": "CA", "lat": 34.0522, "lon": -118.2437},
 }
 
+# Leak categories used by the model:
+#   local_community     - payee category assigned to the local area
+#   corporate_overhead  - payee category assigned to corporate or out-of-area overhead
+#   shareholder_return  - payee category assigned to shareholder payouts
+OUT_OF_AREA_LEAKS = ("corporate_overhead", "shareholder_return")
+
 
 def resolve_zip(zip_code: str) -> Dict[str, any]:
     """Resolves a 5-digit US ZIP code to city, state, and lat/lon coordinates."""
@@ -68,7 +69,7 @@ def resolve_zip(zip_code: str) -> Dict[str, any]:
             "lat": info["lat"],
             "lon": info["lon"],
         }
-    
+
     first_digit = clean_zip[0]
     fallback = ZIP3_FALLBACK.get(first_digit, ZIP3_FALLBACK["5"])
     return {
@@ -100,27 +101,38 @@ SCENARIOS_META = [
         id="grocery_produce",
         name="Grocery & Fresh Produce",
         category="Grocery",
-        description="Contrasts industrial supermarket supply chains with direct community farm and food co-op sourcing.",
+        description="Illustrative comparison of a conventional supermarket supply chain with a food co-op and community-farm model.",
     ),
     GeoFlowScenarioSummary(
         id="meat_poultry",
         name="Meat & Poultry",
         category="Food & Meat",
-        description="Exposes the corporate integrator poultry model versus pasture-raised independent family growers.",
+        description="Illustrative comparison of a contract-grower poultry model with a pasture-raised family-farm model.",
     ),
     GeoFlowScenarioSummary(
         id="banking_services",
         name="Banking & Financial Services",
         category="Banking",
-        description="Tracks consumer banking dollars: Wall Street buyback leakage versus local credit union retention.",
+        description="Illustrative comparison of where a bank-account dollar is modeled to go: a large-bank model versus a member-owned credit union.",
     ),
     GeoFlowScenarioSummary(
         id="home_services",
         name="Home Trade Services (HVAC/Plumbing)",
         category="Local Services",
-        description="Shows capital extraction by private equity rollups versus local independent journeyman trades.",
+        description="Illustrative comparison of a multi-location service-company model with a locally owned independent trade.",
     ),
 ]
+
+
+def _insight(prefix: str, conv_defs: List[dict], alt_defs: List[dict]) -> str:
+    """Builds the comparison sentence from the scenario's own assumed shares."""
+    conv_out = sum(nd["share"] for nd in conv_defs if nd.get("leak_cat") in OUT_OF_AREA_LEAKS) * 100.0
+    alt_local = sum(nd["share"] for nd in alt_defs if nd.get("leak_cat") == "local_community") * 100.0
+    return (
+        f"{prefix} {conv_out:.1f}% of the conventional dollar is assigned to corporate-overhead or "
+        f"shareholder-return categories, and {alt_local:.1f}% of the community dollar is assigned to "
+        f"local categories. These are assumed shares, not measurements."
+    )
 
 
 def build_scenario_data(
@@ -128,29 +140,30 @@ def build_scenario_data(
     origin_info: Dict[str, any],
     spend_amount: float,
 ) -> Tuple[str, str, List[dict], List[dict], str]:
-    """Returns (title, category, conventional_node_defs, alternative_node_defs, comparison_insight)"""
+    """Returns (title, category, conventional_node_defs, alternative_node_defs, comparison_insight)
+
+    Every payee is a category (for example "Contract grower (category)"). No company is named.
+    Locations are illustrative metro or regional centroids. Shares are assumptions.
+    """
     oz = origin_info["zip"]
-    olat = origin_info["lat"]
-    olon = origin_info["lon"]
-    ocity = origin_info["city"]
     ostate = origin_info["state"]
 
     if scenario_id == "meat_poultry":
-        title = "Meat & Poultry: Corporate Integrator CAFO vs. Pasture-Raised Family Farm"
+        title = "Meat & Poultry: Contract-Grower Model vs. Pasture-Raised Family Farm (Illustrative)"
         conv_nodes = [
             {
-                "role": "Captive Contract Farm Gate",
-                "payee_name": "Tyson Contract Grower (Debt-Bound)",
-                "zip": "72764",
+                "role": "Contract-grower farm gate (illustrative)",
+                "payee_name": "Contract grower (category)",
+                "zip": "72701",
                 "share": 0.112,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "worker_farmer",
                 "farm_tier": "contract_grower",
-                "farm_notes": "Nominal family farm, but company owns the birds, feed, and pricing contract; grower carries $1M+ mortgage.",
+                "farm_notes": "Illustrative assumption: the grower operates under a contract that sets birds, feed and pricing, and carries the facility debt.",
             },
             {
-                "role": "Frontline Supermarket Meat Counter & Cashiers",
-                "payee_name": "Supermarket Meat Department Hourly Staff",
+                "role": "Retail meat counter & cashiers",
+                "payee_name": "Retail store hourly staff (category)",
                 "zip": oz,
                 "share": 0.120,
                 "leak_cat": "local_community",
@@ -159,8 +172,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Industrial Meatpacking Line Workers",
-                "payee_name": "Processing Plant Line Workers",
+                "role": "Processing plant line work",
+                "payee_name": "Processing plant hourly staff (category)",
                 "zip": "68102",
                 "share": 0.128,
                 "leak_cat": "corporate_overhead",
@@ -169,8 +182,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Cold Chain Transport & Specialized Packaging",
-                "payee_name": "Multinational Logistics Conglomerate",
+                "role": "Cold-chain transport & packaging",
+                "payee_name": "Refrigerated transport and packaging (category)",
                 "zip": "60601",
                 "share": 0.180,
                 "leak_cat": "corporate_overhead",
@@ -179,19 +192,19 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Corporate Integrator Processing Margin",
-                "payee_name": "Tyson Foods Corporate Agribusiness",
-                "zip": "72764",
+                "role": "Processor margin (feed, processing, branding)",
+                "payee_name": "Processor margin (category)",
+                "zip": "72701",
                 "share": 0.160,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "executive_shareholder",
                 "farm_tier": "corporate_agribusiness",
-                "farm_notes": "Integrator captures dominant margin on feed milling, processing, and brand markup.",
+                "farm_notes": "Illustrative assumption: the processor keeps the largest margin on feed milling, processing and branding.",
             },
             {
-                "role": "Supermarket Retail Corporate HQ Margin",
-                "payee_name": "Supermarket Corporate Headquarters",
-                "zip": "72716",
+                "role": "Retail headquarters margin",
+                "payee_name": "Retail headquarters (category)",
+                "zip": "10001",
                 "share": 0.150,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "executive_shareholder",
@@ -199,11 +212,11 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Wall Street Shareholders & Private Equity",
-                "payee_name": "Institutional Dividend & Buyback Pool",
-                "zip": "19801",
+                "role": "Shareholder dividends & buybacks",
+                "payee_name": "Shareholder returns (category)",
+                "zip": "10001",
                 "share": 0.150,
-                "leak_cat": "wall_street_leak",
+                "leak_cat": "shareholder_return",
                 "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
@@ -211,18 +224,18 @@ def build_scenario_data(
         ]
         alt_nodes = [
             {
-                "role": "Independent Community Farm Gate",
-                "payee_name": "Pasture-Raised Family Steward",
+                "role": "Pasture-raised family farm gate",
+                "payee_name": "Independent family farm (category)",
                 "zip": "55370" if ostate == "MN" else oz,
                 "share": 0.720,
                 "leak_cat": "local_community",
                 "func_cat": "worker_farmer",
                 "farm_tier": "community_farmer",
-                "farm_notes": "100% Independent owner-operator. Rotational pasture grazing, sets own direct-to-consumer prices.",
+                "farm_notes": "Illustrative assumption: an owner-operator using rotational pasture grazing and setting direct sales prices.",
             },
             {
-                "role": "Artisan USDA Regional Processor",
-                "payee_name": "Local Small-Batch Meat Locker",
+                "role": "Small-batch processing",
+                "payee_name": "Local small-batch processor (category)",
                 "zip": "55350" if ostate == "MN" else oz,
                 "share": 0.160,
                 "leak_cat": "local_community",
@@ -231,8 +244,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Local Delivery & Farm Stand Staff",
-                "payee_name": "Community Farm Drivers & Handlers",
+                "role": "Local delivery & farm-stand staff",
+                "payee_name": "Local delivery and stand staff (category)",
                 "zip": oz,
                 "share": 0.080,
                 "leak_cat": "local_community",
@@ -241,28 +254,24 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Soil Regeneration & Stewardship Reinvestment",
-                "payee_name": "Farm Soil Health Capital",
+                "role": "Soil and pasture reinvestment",
+                "payee_name": "Farm soil-health reinvestment (category)",
                 "zip": "55370" if ostate == "MN" else oz,
                 "share": 0.040,
                 "leak_cat": "local_community",
                 "func_cat": "operations",
                 "farm_tier": "community_farmer",
-                "farm_notes": "Reinvested directly into multi-species pasture and soil biology.",
+                "farm_notes": "Illustrative assumption: reinvested in pasture and soil biology.",
             },
         ]
-        insight = (
-            f"Under the conventional poultry model, only 11.2¢ of each dollar goes to a debt-bound contract grower in Springdale, AR, "
-            f"while 50¢ leaks to corporate integrators, supermarket HQs, and Wall Street. "
-            f"Buying direct from an independent community farmer keeps 72¢ directly with the soil steward."
-        )
+        prefix = "In this illustrative poultry model,"
 
     elif scenario_id == "banking_services":
-        title = "Banking: Wall Street Megabank vs. Community Credit Union"
+        title = "Banking: Large-Bank Model vs. Member-Owned Credit Union (Illustrative)"
         conv_nodes = [
             {
-                "role": "Local Branch Cashiers & Tellers",
-                "payee_name": "Frontline Metro Branch Workers",
+                "role": "Branch staff (cashiers & tellers)",
+                "payee_name": "Branch staff, hourly (category)",
                 "zip": oz,
                 "share": 0.140,
                 "leak_cat": "local_community",
@@ -271,9 +280,9 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Corporate Central IT & Compliance",
-                "payee_name": "National Operations Hub",
-                "zip": "28202",
+                "role": "Central operations & compliance",
+                "payee_name": "Central operations and compliance (category)",
+                "zip": "60601",
                 "share": 0.100,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "operations",
@@ -281,18 +290,18 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Financial Derivatives & Trading Speculation",
-                "payee_name": "Delaware Capital Markets Holding Co",
-                "zip": "19801",
+                "role": "Trading & derivatives operations",
+                "payee_name": "Trading and derivatives operations (category)",
+                "zip": "10001",
                 "share": 0.220,
-                "leak_cat": "wall_street_leak",
+                "leak_cat": "corporate_overhead",
                 "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
             },
             {
-                "role": "Executive Compensation & Golden Parachutes",
-                "payee_name": "Megabank Executive Committee",
+                "role": "Executive compensation",
+                "payee_name": "Executive compensation (category)",
                 "zip": "94104",
                 "share": 0.125,
                 "leak_cat": "corporate_overhead",
@@ -301,11 +310,11 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Wall Street Stock Buybacks & Dividends",
-                "payee_name": "Institutional Hedge Funds & Asset Managers",
-                "zip": "10005",
+                "role": "Buybacks & dividends to investors",
+                "payee_name": "Institutional investors: buybacks and dividends (category)",
+                "zip": "10001",
                 "share": 0.415,
-                "leak_cat": "wall_street_leak",
+                "leak_cat": "shareholder_return",
                 "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
@@ -313,8 +322,8 @@ def build_scenario_data(
         ]
         alt_nodes = [
             {
-                "role": "Member High-Yield Dividend & APY",
-                "payee_name": "Member Depositor Account (Returned to You)",
+                "role": "Member dividends & deposit yield",
+                "payee_name": "Member dividends and deposit yield (category)",
                 "zip": oz,
                 "share": 0.380,
                 "leak_cat": "local_community",
@@ -323,8 +332,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Living Wage Loan Officers & Tellers",
-                "payee_name": "Local Member-Owned Credit Union Staff",
+                "role": "Loan officers & tellers",
+                "payee_name": "Member-owned credit union staff (category)",
                 "zip": "55107" if ostate == "MN" else oz,
                 "share": 0.340,
                 "leak_cat": "local_community",
@@ -333,8 +342,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Local Small Business & Farm Lending Pool",
-                "payee_name": "Community Development Loan Reserve",
+                "role": "Local small-business & farm lending",
+                "payee_name": "Local small-business and farm lending (category)",
                 "zip": oz,
                 "share": 0.200,
                 "leak_cat": "local_community",
@@ -343,8 +352,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Community Education & Youth Grants",
-                "payee_name": "Local Cooperative Foundation",
+                "role": "Community education & youth grants",
+                "payee_name": "Community education grants (category)",
                 "zip": oz,
                 "share": 0.080,
                 "leak_cat": "local_community",
@@ -353,17 +362,14 @@ def build_scenario_data(
                 "farm_notes": None,
             },
         ]
-        insight = (
-            f"Megabanks bleed $76.00 of every $100 spent directly into Wall Street buybacks, golden parachutes, and Delaware derivatives entities. "
-            f"A community credit union keeps 100% of capital within the local member ecosystem and regional lending pools."
-        )
+        prefix = "In this illustrative banking model,"
 
     elif scenario_id == "home_services":
-        title = "Home Services: PE-Owned Rollup Disguised vs. Local Independent Trade"
+        title = "Home Services: Multi-Location Company Model vs. Local Independent Trade (Illustrative)"
         conv_nodes = [
             {
-                "role": "Frontline Service Technician",
-                "payee_name": "Hourly HVAC/Plumbing Tech",
+                "role": "Field technician wages",
+                "payee_name": "Field technician, hourly (category)",
                 "zip": oz,
                 "share": 0.220,
                 "leak_cat": "local_community",
@@ -372,8 +378,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "National Aggregator Call Center",
-                "payee_name": "Centralized Dispatch & Overhead",
+                "role": "Centralized dispatch & call center",
+                "payee_name": "Centralized dispatch and overhead (category)",
                 "zip": "90012",
                 "share": 0.220,
                 "leak_cat": "corporate_overhead",
@@ -382,8 +388,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Proprietary Software & Fleet Lease",
-                "payee_name": "Corporate Tech Vendor",
+                "role": "Software & fleet leases",
+                "payee_name": "Software and fleet vendor (category)",
                 "zip": "78701",
                 "share": 0.180,
                 "leak_cat": "corporate_overhead",
@@ -392,11 +398,11 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Private Equity Management Fees & LBO Debt",
-                "payee_name": "Wall Street PE Rollup Platform",
-                "zip": "19801",
+                "role": "Management fees & acquisition-debt service",
+                "payee_name": "Management fees and debt service (category)",
+                "zip": "10001",
                 "share": 0.380,
-                "leak_cat": "wall_street_leak",
+                "leak_cat": "shareholder_return",
                 "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
@@ -404,8 +410,8 @@ def build_scenario_data(
         ]
         alt_nodes = [
             {
-                "role": "Master Journeyman / Owner-Operator",
-                "payee_name": "Local Licensed Trade Owner",
+                "role": "Owner-operator journeyman",
+                "payee_name": "Locally licensed owner-operator (category)",
                 "zip": oz,
                 "share": 0.580,
                 "leak_cat": "local_community",
@@ -414,8 +420,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Apprentice & Local Helper Wages",
-                "payee_name": "Local Trade Apprentice",
+                "role": "Apprentice & helper wages",
+                "payee_name": "Local trade apprentice (category)",
                 "zip": oz,
                 "share": 0.240,
                 "leak_cat": "local_community",
@@ -424,8 +430,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Independent Hardware Co-op Supplies",
-                "payee_name": "Local Hardware / Plumbing Supply Co-op",
+                "role": "Local supply purchases",
+                "payee_name": "Local supply vendor (category)",
                 "zip": oz,
                 "share": 0.140,
                 "leak_cat": "local_community",
@@ -434,8 +440,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Local Tool & Van Reinvestment",
-                "payee_name": "Local Business Capital Account",
+                "role": "Local tool & van reinvestment",
+                "payee_name": "Local equipment reinvestment (category)",
                 "zip": oz,
                 "share": 0.040,
                 "leak_cat": "local_community",
@@ -444,27 +450,24 @@ def build_scenario_data(
                 "farm_notes": None,
             },
         ]
-        insight = (
-            f"A private equity rollup operating under a legacy local name drains 38¢ of every dollar to PE management fees and 40¢ to national overhead. "
-            f"Hiring an independent owner-operator keeps 100% recirculating in your town."
-        )
+        prefix = "In this illustrative home-services model,"
 
     else:  # default: grocery_produce
-        title = "Grocery: Conventional Supermarket Chain vs. Food Co-op & Community Farm"
+        title = "Grocery: Conventional Supermarket Chain vs. Food Co-op & Community Farm (Illustrative)"
         conv_nodes = [
             {
-                "role": "Industrial Agribusiness Farm Gate",
-                "payee_name": "Corporate-Contracted Monoculture Farm",
-                "zip": "72764",
+                "role": "Contract farm gate",
+                "payee_name": "Contract farm grower (category)",
+                "zip": "72701",
                 "share": 0.147,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "worker_farmer",
                 "farm_tier": "contract_grower",
-                "farm_notes": "Contracted to agribusiness distributor. Subject to commodity spot pricing; land often leased from farmland REITs.",
+                "farm_notes": "Illustrative assumption: the grower sells under a contract to an agribusiness buyer and is exposed to commodity prices. Land may be leased.",
             },
             {
-                "role": "Frontline Store Workers & Cashiers",
-                "payee_name": "Supermarket Hourly Store Staff",
+                "role": "Store workers & cashiers",
+                "payee_name": "Store staff, hourly (category)",
                 "zip": oz,
                 "share": 0.125,
                 "leak_cat": "local_community",
@@ -473,9 +476,9 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "CPG Processing, Transport & Packaging",
-                "payee_name": "General Mills CPG Manufacturing",
-                "zip": "55426",
+                "role": "Processing, transport & packaging",
+                "payee_name": "Food processing and packaging (category)",
+                "zip": "55419",
                 "share": 0.283,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "operations",
@@ -483,8 +486,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Corporate Brand Marketing & Advertising",
-                "payee_name": "Madison Avenue Ad Agencies",
+                "role": "Brand marketing & advertising",
+                "payee_name": "Advertising and marketing services (category)",
                 "zip": "10001",
                 "share": 0.085,
                 "leak_cat": "corporate_overhead",
@@ -493,9 +496,9 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Supermarket Store Real Estate Triple-Net REIT",
-                "payee_name": "Commercial Net Lease REIT (Realty Income Corp)",
-                "zip": "92078",
+                "role": "Store real-estate lease",
+                "payee_name": "Commercial property owner (category)",
+                "zip": "90012",
                 "share": 0.160,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "operations",
@@ -503,9 +506,9 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Corporate Executive Compensation",
-                "payee_name": "Supermarket C-Suite & Stock Grants",
-                "zip": "72716",
+                "role": "Retail executive compensation",
+                "payee_name": "Retail executive compensation (category)",
+                "zip": "94104",
                 "share": 0.042,
                 "leak_cat": "corporate_overhead",
                 "func_cat": "executive_shareholder",
@@ -513,11 +516,11 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Wall Street Buybacks & Institutional Dividends",
-                "payee_name": "BlackRock, Vanguard & State Street",
-                "zip": "10005",
+                "role": "Shareholder buybacks & dividends",
+                "payee_name": "Institutional investors: buybacks and dividends (category)",
+                "zip": "10001",
                 "share": 0.158,
-                "leak_cat": "wall_street_leak",
+                "leak_cat": "shareholder_return",
                 "func_cat": "executive_shareholder",
                 "farm_tier": None,
                 "farm_notes": None,
@@ -525,18 +528,18 @@ def build_scenario_data(
         ]
         alt_nodes = [
             {
-                "role": "Independent Community Farm Gate",
-                "payee_name": "Tangletown Family Farm & Regional Co-op",
+                "role": "Independent community farm gate",
+                "payee_name": "Independent family farm (category)",
                 "zip": "55370" if ostate == "MN" else oz,
                 "share": 0.420,
                 "leak_cat": "local_community",
                 "func_cat": "worker_farmer",
                 "farm_tier": "community_farmer",
-                "farm_notes": "100% Independent community grower. 140-acre regenerative family farm, direct harvest, no agribusiness middlemen.",
+                "farm_notes": "Illustrative assumption: a regenerative family farm selling direct or through a regional co-op.",
             },
             {
-                "role": "Living Wage Food Co-op Staff",
-                "payee_name": "Wedge Community Co-op Union Staff",
+                "role": "Co-op staff, living wage",
+                "payee_name": "Food co-op staff (category)",
                 "zip": "55407" if ostate == "MN" else oz,
                 "share": 0.285,
                 "leak_cat": "local_community",
@@ -545,8 +548,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Regional Organic Logistics & Cold Storage",
-                "payee_name": "Midwest Organic Food Hub",
+                "role": "Regional logistics & cold storage",
+                "payee_name": "Regional food hub and cold storage (category)",
                 "zip": "55415" if ostate == "MN" else oz,
                 "share": 0.180,
                 "leak_cat": "local_community",
@@ -555,8 +558,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Member Patronage Dividends (Returned to You)",
-                "payee_name": "Member Shopper Rebates (Returned to Consumer)",
+                "role": "Member patronage rebates",
+                "payee_name": "Member rebates (category)",
                 "zip": oz,
                 "share": 0.065,
                 "leak_cat": "local_community",
@@ -565,8 +568,8 @@ def build_scenario_data(
                 "farm_notes": None,
             },
             {
-                "role": "Community Food Access & Education Grants",
-                "payee_name": "Neighborhood Food Sovereignty Fund",
+                "role": "Community food-access grants",
+                "payee_name": "Community food-access grants (category)",
                 "zip": oz,
                 "share": 0.050,
                 "leak_cat": "local_community",
@@ -575,12 +578,9 @@ def build_scenario_data(
                 "farm_notes": None,
             },
         ]
-        insight = (
-            f"At a conventional supermarket, over $20.00 of every $100 is extracted by Wall Street buybacks and executive comp, "
-            f"while only $12.50 stays with local frontline store clerks and $14.70 goes to an agribusiness grower. "
-            f"At a food co-op, $70.50 goes directly to local family farmers and living-wage staff, with zero Wall Street leakage."
-        )
+        prefix = "In this illustrative grocery model,"
 
+    insight = _insight(prefix, conv_nodes, alt_nodes)
     return title, scenario_id, conv_nodes, alt_nodes, insight
 
 
@@ -589,13 +589,17 @@ def get_farm_gate_decomposition(
     farm_tier: str,
     farm_gate_amount: float,
 ) -> Optional[FarmGateAudit]:
-    """Deconstructs the farm-gate payment into input supplier extractions vs net farmer income."""
+    """Splits a farm-gate payment into assumed input and land shares and a modeled residual.
+
+    All shares are illustrative assumptions entered in code. They are not measurements,
+    and the beneficiary entries are categories, not named companies.
+    """
     if farm_gate_amount <= 0:
         return None
 
     if scenario_id == "grocery_produce":
         if farm_tier == "contract_grower":
-            # Typical conventional row crop / produce model:
+            # Assumed row-crop / produce cost structure (illustrative)
             rent = round(0.280 * farm_gate_amount, 2)
             fert = round(0.210 * farm_gate_amount, 2)
             mach = round(0.180 * farm_gate_amount, 2)
@@ -608,56 +612,56 @@ def get_farm_gate_decomposition(
 
             return FarmGateAudit(
                 farm_type="contract_grower",
-                title="Conventional Farm-Gate Financial Decomposition",
+                title="Illustrative Conventional Farm-Gate Model (assumed shares)",
                 gross_farm_gate_amount=farm_gate_amount,
                 input_expenses=[
                     FarmGateCostItem(
                         name="Cash Rent & Land Mortgage",
                         amount=rent,
                         percentage_of_farm_gate=28.0,
-                        corporate_beneficiaries=["Non-Operator Landlords", "Farmland REITs", "Farm Credit"],
+                        corporate_beneficiaries=["Non-operator landlords (category)", "Farmland investors (category)", "Agricultural lenders (category)"],
                         color_code="#94a3b8",
                     ),
                     FarmGateCostItem(
                         name="Synthetic Fertilizer (NPK)",
                         amount=fert,
                         percentage_of_farm_gate=21.0,
-                        corporate_beneficiaries=["Nutrien", "CF Industries", "Mosaic"],
+                        corporate_beneficiaries=["Fertilizer manufacturers (category)"],
                         color_code="#f59e0b",
                     ),
                     FarmGateCostItem(
                         name="Machinery Depreciation, Tech & Fuel",
                         amount=mach,
                         percentage_of_farm_gate=18.0,
-                        corporate_beneficiaries=["Deere & Co.", "CNH Industrial", "Diesel Refiners"],
+                        corporate_beneficiaries=["Equipment manufacturers (category)", "Fuel suppliers (category)"],
                         color_code="#64748b",
                     ),
                     FarmGateCostItem(
-                        name="Patented GMO Seed",
+                        name="Patented Seed",
                         amount=seed,
                         percentage_of_farm_gate=12.5,
-                        corporate_beneficiaries=["Bayer (Monsanto)", "Corteva Agriscience"],
+                        corporate_beneficiaries=["Patented seed suppliers (category)"],
                         color_code="#dc2626",
                     ),
                     FarmGateCostItem(
                         name="Crop Protection (Herbicides/Pesticides)",
                         amount=chem,
                         percentage_of_farm_gate=8.5,
-                        corporate_beneficiaries=["Bayer", "BASF", "Syngenta"],
+                        corporate_beneficiaries=["Crop protection suppliers (category)"],
                         color_code="#ea580c",
                     ),
                     FarmGateCostItem(
                         name="Operating Loan Interest & Crop Insurance",
                         amount=fin,
                         percentage_of_farm_gate=5.0,
-                        corporate_beneficiaries=["Commercial Ag Lenders", "Federal Crop Insurance"],
+                        corporate_beneficiaries=["Agricultural lenders (category)", "Crop insurance (category)"],
                         color_code="#6b7280",
                     ),
                     FarmGateCostItem(
-                        name="Net Farmer Household Take-Home",
+                        name="Net Farmer Take-Home (illustrative residual)",
                         amount=net_income,
                         percentage_of_farm_gate=net_pct,
-                        corporate_beneficiaries=["Farmer Family Household"],
+                        corporate_beneficiaries=["Farmer household (category)"],
                         is_farmer_take_home=True,
                         color_code="#10b981",
                     ),
@@ -665,14 +669,13 @@ def get_farm_gate_decomposition(
                 net_farmer_take_home_amount=net_income,
                 net_farmer_take_home_pct=net_pct,
                 notes=(
-                    "On conventional grain and produce ground, over 93% of the farm-gate payment is drained by input "
-                    "oligopolies and non-farming landlords. The farmer receives only ~7% as residual take-home, and in "
-                    "down-market years (such as 2024–2025), operator returns turn negative without federal subsidies."
+                    f"Illustrative assumption: in this model, input and land costs take most of the farm-gate payment, "
+                    f"leaving the grower a modeled residual of {net_pct:.1f}%. These are assumed shares, not measurements."
                 ),
             )
 
         elif farm_tier == "community_farmer":
-            # Community independent / organic regenerative model:
+            # Assumed community / regenerative model (illustrative)
             crew = round(0.650 * farm_gate_amount, 2)
             soil = round(0.100 * farm_gate_amount, 2)
             equip = round(0.150 * farm_gate_amount, 2)
@@ -681,50 +684,51 @@ def get_farm_gate_decomposition(
 
             return FarmGateAudit(
                 farm_type="community_farmer",
-                title="Independent Community Farm Gate Decomposition",
+                title="Illustrative Independent Community Farm-Gate Model (assumed shares)",
                 gross_farm_gate_amount=farm_gate_amount,
                 input_expenses=[
                     FarmGateCostItem(
                         name="Living-Wage Farmer & Crew Living Return",
                         amount=crew,
                         percentage_of_farm_gate=65.0,
-                        corporate_beneficiaries=["Independent Family Farmer", "Local Living-Wage Farm Crew"],
+                        corporate_beneficiaries=["Independent family farmer (category)", "Farm crew (category)"],
                         is_farmer_take_home=True,
                         color_code="#10b981",
                     ),
                     FarmGateCostItem(
-                        name="Appropriate Equipment Care & Renewable Energy",
+                        name="Equipment Care & Renewable Energy",
                         amount=equip,
                         percentage_of_farm_gate=15.0,
-                        corporate_beneficiaries=["Local Mechanics", "Rural Solar"],
+                        corporate_beneficiaries=["Local equipment repair (category)", "Local energy providers (category)"],
                         color_code="#34d399",
                     ),
                     FarmGateCostItem(
                         name="Soil Health, Cover Crops & Organic Seed",
                         amount=soil,
                         percentage_of_farm_gate=10.0,
-                        corporate_beneficiaries=["Regional Organic Seed Co-ops", "Green Manures"],
+                        corporate_beneficiaries=["Organic seed suppliers (category)", "Cover-crop suppliers (category)"],
                         color_code="#059669",
                     ),
                     FarmGateCostItem(
                         name="Land Stewardship & Conservation Reserve",
                         amount=land,
                         percentage_of_farm_gate=land_pct,
-                        corporate_beneficiaries=["Family Land Trust & Conservation Fund"],
+                        corporate_beneficiaries=["Land trust or conservation fund (category)"],
                         color_code="#0d9488",
                     ),
                 ],
                 net_farmer_take_home_amount=crew,
                 net_farmer_take_home_pct=65.0,
                 notes=(
-                    "By skipping patented inputs and selling direct or through cooperative wholesale, the farmer keeps "
-                    "65% of gross revenue as living family income—over 25x more net profit per retail dollar than industrial agriculture."
+                    "Illustrative assumption: in this model the farm family and crew keep 65% of the farm-gate payment "
+                    "as living return, with no purchased patented inputs and direct or cooperative sales. "
+                    "These are assumed shares, not measurements."
                 ),
             )
 
     elif scenario_id == "meat_poultry":
         if farm_tier == "contract_grower":
-            # Captive poultry CAFO contract model:
+            # Assumed contract-grower model (illustrative)
             debt = round(0.450 * farm_gate_amount, 2)
             heat = round(0.230 * farm_gate_amount, 2)
             repairs = round(0.170 * farm_gate_amount, 2)
@@ -733,35 +737,35 @@ def get_farm_gate_decomposition(
 
             return FarmGateAudit(
                 farm_type="contract_grower",
-                title="Captive CAFO Contract Grower Decomposition",
+                title="Illustrative Contract-Grower Model (assumed shares)",
                 gross_farm_gate_amount=farm_gate_amount,
                 input_expenses=[
                     FarmGateCostItem(
-                        name="Mortgage Debt Service on $2M+ Barns",
+                        name="Debt Service on Facilities (illustrative)",
                         amount=debt,
                         percentage_of_farm_gate=45.0,
-                        corporate_beneficiaries=["Commercial Agricultural Banks", "SBA Lenders"],
+                        corporate_beneficiaries=["Agricultural lenders (category)", "Small-business lenders (category)"],
                         color_code="#94a3b8",
                     ),
                     FarmGateCostItem(
-                        name="Electricity & Propane Heating (Tunnel Fans)",
+                        name="Electricity & Heating Fuel (ventilation and heating)",
                         amount=heat,
                         percentage_of_farm_gate=23.0,
-                        corporate_beneficiaries=["Utility Monopolies", "Propane Distributors"],
+                        corporate_beneficiaries=["Utilities (category)", "Fuel distributors (category)"],
                         color_code="#f59e0b",
                     ),
                     FarmGateCostItem(
-                        name="Barn Maintenance, Litter & Repairs",
+                        name="Facility Maintenance, Bedding & Repairs",
                         amount=repairs,
                         percentage_of_farm_gate=17.0,
-                        corporate_beneficiaries=["Ventilation Equipment Dealers", "Shavings Suppliers"],
+                        corporate_beneficiaries=["Ventilation equipment dealers (category)", "Bedding suppliers (category)"],
                         color_code="#64748b",
                     ),
                     FarmGateCostItem(
-                        name="Contract Grower Net Take-Home Pay",
+                        name="Contract Grower Net Take-Home Pay (illustrative residual)",
                         amount=net_income,
                         percentage_of_farm_gate=net_pct,
-                        corporate_beneficiaries=["Contract Grower Household"],
+                        corporate_beneficiaries=["Grower household (category)"],
                         is_farmer_take_home=True,
                         color_code="#10b981",
                     ),
@@ -769,13 +773,14 @@ def get_farm_gate_decomposition(
                 net_farmer_take_home_amount=net_income,
                 net_farmer_take_home_pct=net_pct,
                 notes=(
-                    "Integrator (Tyson/Pilgrim's) owns the chicks, feed, and pricing. Grower carries 70%+ of total industry debt "
-                    "and all environmental liability, netting less than 5¢/bird (~15% of the farm check) for 70-hour workweeks."
+                    f"Illustrative assumption: under the contract model assumed here, the integrator sets birds, feed and pricing, "
+                    f"and the grower carries facility debt and operating costs. Modeled residual: {net_pct:.1f}% of the farm payment. "
+                    f"These are assumed shares, not measurements."
                 ),
             )
 
         elif farm_tier == "community_farmer":
-            # Pasture poultry / meat steward:
+            # Assumed pasture-raised family-farm model (illustrative)
             steward = round(0.700 * farm_gate_amount, 2)
             pasture = round(0.120 * farm_gate_amount, 2)
             fencing = round(0.100 * farm_gate_amount, 2)
@@ -784,14 +789,14 @@ def get_farm_gate_decomposition(
 
             return FarmGateAudit(
                 farm_type="community_farmer",
-                title="Pasture-Raised Family Steward Decomposition",
+                title="Illustrative Pasture-Raised Family Farm Model (assumed shares)",
                 gross_farm_gate_amount=farm_gate_amount,
                 input_expenses=[
                     FarmGateCostItem(
                         name="Pasture Steward Living Family Return",
                         amount=steward,
                         percentage_of_farm_gate=70.0,
-                        corporate_beneficiaries=["Family Farm Owner-Operator"],
+                        corporate_beneficiaries=["Family farm owner-operator (category)"],
                         is_farmer_take_home=True,
                         color_code="#10b981",
                     ),
@@ -799,29 +804,29 @@ def get_farm_gate_decomposition(
                         name="Rotational Pasture Seeding & Soil Health",
                         amount=pasture,
                         percentage_of_farm_gate=12.0,
-                        corporate_beneficiaries=["Regional Forage & Soil Biology"],
+                        corporate_beneficiaries=["Forage and soil-biology suppliers (category)"],
                         color_code="#059669",
                     ),
                     FarmGateCostItem(
                         name="Mobile Fencing, Water Infrastructure & Trailers",
                         amount=fencing,
                         percentage_of_farm_gate=10.0,
-                        corporate_beneficiaries=["Local Hardware & Equipment Fabricators"],
+                        corporate_beneficiaries=["Local hardware and equipment fabricators (category)"],
                         color_code="#34d399",
                     ),
                     FarmGateCostItem(
-                        name="Humane On-Farm Care & Minerals",
+                        name="Animal Care & Minerals",
                         amount=vet,
                         percentage_of_farm_gate=vet_pct,
-                        corporate_beneficiaries=["Holistic Veterinary Care & Natural Minerals"],
+                        corporate_beneficiaries=["Veterinary and mineral suppliers (category)"],
                         color_code="#0d9488",
                     ),
                 ],
                 net_farmer_take_home_amount=steward,
                 net_farmer_take_home_pct=70.0,
                 notes=(
-                    "Pasture-raised independent stewards set their own direct-to-consumer prices, keeping 70% of the farm payment "
-                    "as net family earnings with zero debt servitude to corporate integrators."
+                    "Illustrative assumption: in this model the owner-operator sets direct-to-consumer prices and keeps 70% "
+                    "of the farm payment as family earnings. These are assumed shares, not measurements."
                 ),
             )
 
@@ -837,7 +842,11 @@ def compute_branch(
     summary_text: str,
     scenario_id: str = "grocery_produce",
 ) -> GeoFlowBranch:
-    """Computes calculated nodes, distances, worker share, operations, and capital flight."""
+    """Computes calculated nodes, distances, worker share, operations, and out-of-area amounts.
+
+    Field names such as capital_flight_amount are kept for API compatibility. In the output
+    they are the modeled amount assigned outside the local area.
+    """
     olat = origin_info["lat"]
     olon = origin_info["lon"]
 
@@ -960,13 +969,15 @@ def compute_branch(
     )
 
 
-
 def trace_dollar_flow(
     origin_zip: str = "55401",
     scenario_id: str = "grocery_produce",
     spend_amount: float = 100.0,
 ) -> GeoFlowTraceResponse:
-    """Computes a full side-by-side dollar routing trace based on user origin ZIP."""
+    """Computes an illustrative side-by-side dollar routing trace based on the origin ZIP.
+
+    Payees are category-level labels only. Shares and locations are assumptions, not measurements.
+    """
     origin_info = resolve_zip(origin_zip)
     title, cat, conv_defs, alt_defs, insight = build_scenario_data(
         scenario_id, origin_info, spend_amount
@@ -974,21 +985,21 @@ def trace_dollar_flow(
 
     conv_branch = compute_branch(
         option_type="conventional",
-        display_title="Conventional Supply Chain & Corporate Agribusiness",
+        display_title="Conventional Supply Chain (illustrative)",
         node_defs=conv_defs,
         origin_info=origin_info,
         spend_amount=spend_amount,
-        summary_text="Capital is immediately siphoned across interstate holding companies, Delaware shell entities, and Wall Street funds.",
+        summary_text="Illustrative model. Shares are assumptions, not measurements, and each payee is a category rather than a named company.",
         scenario_id=scenario_id,
     )
 
     alt_branch = compute_branch(
         option_type="alternative",
-        display_title="Independent Community Farm & Local Co-op Alternative",
+        display_title="Community Farm & Local Co-op Alternative (illustrative)",
         node_defs=alt_defs,
         origin_info=origin_info,
         spend_amount=spend_amount,
-        summary_text="Over 85% of capital recirculates directly within regional independent growers, living-wage workers, and member dividends.",
+        summary_text="Illustrative model. Shares are assumptions, not measurements. The alternative assigns its shares to local categories and member rebates.",
         scenario_id=scenario_id,
     )
 

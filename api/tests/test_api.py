@@ -4,6 +4,8 @@ from api.app.main import app
 
 client = TestClient(app)
 
+WITHHELD = "Withheld: no cited source yet"
+
 
 def test_health():
     res = client.get("/health")
@@ -12,54 +14,49 @@ def test_health():
 
 
 def test_web_portal_views():
-    # Landing Portal Home
+    # Landing portal: cause picker and platform cards
     res_home = client.get("/")
     assert res_home.status_code == 200
     assert "Shoptegrity" in res_home.text
-    assert "Food Chain Integrity" in res_home.text
-    assert "Brand Integrity" in res_home.text
+    assert "Food Chain" in res_home.text
+    assert "Brand Check & Swaps" in res_home.text
+    assert 'id="causes"' in res_home.text
+    assert "/static/js/causes.js" in res_home.text
 
-    # Brands View
+    # Brands listing: parent companies are withheld until a cited ownership source exists
     res_brands = client.get("/brands")
     assert res_brands.status_code == 200
     assert "Annie&#39;s Homegrown" in res_brands.text or "Annie's" in res_brands.text
-    assert "General Mills" in res_brands.text
+    assert WITHHELD in res_brands.text
 
-    # Brand Detail View
+    # Brand detail: ownership is withheld, and the scorecard is still shown
     res_detail = client.get("/brands/annies-homegrown")
     assert res_detail.status_code == 200
-    assert "General Mills" in res_detail.text
-    assert "Six-Dimension Integrity Scorecard" in res_detail.text
-    assert "Organic Valley" in res_detail.text
+    assert "Ultimate Parent Company" in res_detail.text
+    assert "General Mills" not in res_detail.text
+    assert WITHHELD in res_detail.text
 
-    # Food Chain View
+    # Food chain: unsourced figures are withheld
     res_food = client.get("/food")
     assert res_food.status_code == 200
-    assert "Universal Food Sourcing Ladder" in res_food.text
-    assert "Food Dollar" in res_food.text
-    assert "Table Rock Tea" in res_food.text
+    assert WITHHELD in res_food.text
 
-    # Local Directory View
+    # Local directory: demo listings are never shown
     res_local = client.get("/local")
     assert res_local.status_code == 200
-    assert "Local Services Ownership Ladder" in res_local.text
-    assert "Example Rollup Plumbing" in res_local.text
-    assert "DISGUISED PE ROLLUP" in res_local.text
+    assert "Example Rollup Plumbing" not in res_local.text
 
-    # Swaps View
+    # Swaps view: retailer figures are withheld
     res_swaps = client.get("/swaps")
     assert res_swaps.status_code == 200
-    assert "Credit Unions" in res_swaps.text
-    assert "BETTER SWAP" in res_swaps.text
-    assert "BEST SWAP" in res_swaps.text
-    assert "How Shoptegrity Tiers Swaps: Best vs. Better" in res_swaps.text
+    assert WITHHELD in res_swaps.text
 
-    # Flows View
+    # Flows view
     res_flows = client.get("/flows")
     assert res_flows.status_code == 200
     assert "Dollar Flow Map" in res_flows.text
 
-    # Methodology View
+    # Methodology view
     res_method = client.get("/methodology")
     assert res_method.status_code == 200
     assert "Integrity Firewall Policy" in res_method.text
@@ -75,17 +72,21 @@ def test_brands_api():
     assert res_search.status_code == 200
     found = res_search.json()
     assert any("Annie" in b["name"] for b in found)
+    # Parent company is withheld until cited
+    assert all(b["parent_company_name"] is None for b in found)
 
     res_detail = client.get("/v1/brands/annies-homegrown")
     assert res_detail.status_code == 200
     detail = res_detail.json()
     assert detail["name"] == "Annie's Homegrown"
-    assert detail["parent_entity"]["name"] == "General Mills, Inc."
+    assert detail["parent_entity"]["name"] is None
+    assert detail["description"] is None
     assert "ownership" in detail["scorecard"]
     assert "pay_equity" in detail["scorecard"]
-    assert len(detail["alternatives"]) >= 1
+    # Swap recommendations are served only after editor approval (none are approved yet)
+    assert detail["alternatives"] == []
 
-    # Brands Database Endpoint
+    # Brands Database Endpoint: keys stay, withheld values are null
     res_db = client.get("/v1/brands/database?limit=10")
     assert res_db.status_code == 200
     db_data = res_db.json()
@@ -113,19 +114,24 @@ def test_food_chain_api():
     assert res_ladder.status_code == 200
     data = res_ladder.json()
     assert len(data["tiers"]) == 9
+    # Tier shares are withheld until cited
+    assert all(t["producer_dollar_share_pct"] is None for t in data["tiers"])
 
     res_split = client.get("/v1/food/dollar-split")
     assert res_split.status_code == 200
     splits = res_split.json()
     assert len(splits) >= 3
     overall = next(s for s in splits if "Overall" in s["product_category"])
-    assert overall["farm_share_cents"] == 11.8
+    # The farm-share figure is withheld until it is cited to the ERS table
+    assert overall["farm_share_cents"] is None
 
     res_makers = client.get("/v1/food/makers")
     assert res_makers.status_code == 200
     makers = res_makers.json()
-    assert any("Table Rock" in m["name"] for m in makers)
-    assert any("American Classic" in m["name"] for m in makers)
+    assert len(makers) >= 1
+    # Maker names and claims are withheld until cited; only the listing status is shown
+    assert all(m["name"] == "Listed, not verified" for m in makers)
+    assert all(m["makes_own"] is None and m["certifications"] == [] for m in makers)
 
 
 def test_local_places_api_and_pe_match():
@@ -133,16 +139,18 @@ def test_local_places_api_and_pe_match():
     assert res_places.status_code == 200
     places = res_places.json()
     assert len(places) >= 3
+    # Demo listings are never served
+    assert all("demo_listing" not in (p.get("flags") or []) for p in places)
 
+    # The demo listing is gone, so it cannot match and cannot carry a rollup warning
     res_pe = client.post(
         "/v1/local/match",
         json={"name": "Example Rollup Plumbing"},
     )
     assert res_pe.status_code == 200
     match_data = res_pe.json()
-    assert match_data["matched"] is True
-    assert match_data["warning_flag"] == "DISGUISED_ROLLUP"
-    assert "private equity" in match_data["ownership_explanation"].lower()
+    assert match_data["warning_flag"] is None
+    assert "private equity" not in (match_data.get("ownership_explanation") or "").lower()
 
 
 def test_methodology_api():
@@ -170,41 +178,27 @@ def test_swaps_api_dual_tiers():
     assert "best_swap" in guide
     assert "better_swap" in guide
 
-    # Check Best Swap attributes
-    best = guide["best_swap"]
-    assert "Credit Union" in best["name"]
-    assert "98" in best["score"]
-    assert "High Ethical Standard" in best["tier_label"]
+    # Savings figures are withheld until each has a cited source (R1)
+    assert guide["best_swap"].get("average_savings") in (None, WITHHELD)
 
-    # Check Better Swap attributes
-    better = guide["better_swap"]
-    assert "Similar Price & Experience" in better["tier_label"]
-    assert "82" in better["score"]
-    assert "Zero maintenance fees" in better["price_level"]
-
-    # Check tiered recommended alternatives
-    assert "best_alternatives" in banking_data
-    assert "better_alternatives" in banking_data
-    assert len(banking_data["best_alternatives"]) >= 1
-    assert len(banking_data["better_alternatives"]) >= 1
+    # Editor-approved swap recommendations are served by name; rationale and where-to-buy stay withheld
+    assert [a["brand_name"] for a in banking_data["best_alternatives"]] == ["Affinity Plus Credit Union Accounts"]
+    assert [a["brand_name"] for a in banking_data["better_alternatives"]] == ["Alliant High-Yield Checking & Mobile Banking"]
+    for card in banking_data["best_alternatives"] + banking_data["better_alternatives"]:
+        assert card["rationale"] is None and card["where_to_buy"] is None and card["parent_name"] is None
 
     # Check Grocery category detail
     res_grocery = client.get("/v1/swaps/grocery")
     assert res_grocery.status_code == 200
     grocery_data = res_grocery.json()
-    assert "WinCo Foods" in grocery_data["guide"]["better_swap"]["name"]
-    assert "Member-Owned" in grocery_data["guide"]["best_swap"]["name"]
+    assert "guide" in grocery_data
 
-    # Check Retailer dual swap details
+    # Retailer dual swap details: names only, claims withheld
     res_ret = client.get("/v1/brands/retailers")
     assert res_ret.status_code == 200
     ret_list = res_ret.json()
     walmart = next(r for r in ret_list if r["name"] == "Walmart")
-    assert "better_swap" in walmart["retailer_details"]
-    assert "best_swap" in walmart["retailer_details"]
-    assert "WinCo" in walmart["retailer_details"]["better_swap"]["name"]
-    assert "Co-ops" in walmart["retailer_details"]["best_swap"]["name"]
-
+    assert "retailer_details" in walmart
 
 
 def test_sell_direct_and_disclosure_pages():
@@ -219,3 +213,38 @@ def test_sell_direct_and_disclosure_pages():
     # Affiliate links never appear on rating pages.
     for path in ["/brands", "/healthcare", "/swaps"]:
         assert "pxf.io" not in client.get(path).text
+
+
+# Phrases that were removed from the public site under the sourced-or-withheld policy.
+# If one of these comes back on a public page, it has been republished without a citation.
+REMOVED_CLAIMS = [
+    "Apex Service Partners",
+    "Alpine Investors",
+    "Verified PE Rollups",
+    "100% Cited Evidence",
+    "Zero brand advertising",
+    "Top 10% Ownership Index",
+    "Example Rollup Plumbing",
+    "Sarah M.",
+    "Dave R.",
+    "Elena T.",
+    "Precision Air",
+    "Valley Animal Hospital",
+    "Heritage Tree",
+    "Kroenke",
+    "Subterfuge",
+    "Glass-Steagall",
+    "Shoptegrity opinion rating under",
+]
+
+
+@pytest.mark.parametrize("path", [
+    "/", "/brands", "/brands/annies-homegrown", "/healthcare", "/parents", "/food",
+    "/local", "/swaps", "/flows", "/housing", "/community", "/methodology",
+    "/corrections", "/disclosures", "/sell-direct",
+])
+def test_public_pages_carry_no_removed_claims(path):
+    res = client.get(path)
+    assert res.status_code == 200
+    for phrase in REMOVED_CLAIMS:
+        assert phrase not in res.text, f"{phrase!r} reappeared on {path}"

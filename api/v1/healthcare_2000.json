@@ -1,18 +1,16 @@
 [
   {
-    "name": "UnitedHealthcare (Optum)",
+    "name": "UnitedHealthcare",
     "entity_type": "health_insurance",
-    "sub_category": "Commercial Wall Street Insurer",
-    "parent_organization": "UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",
-    "ownership_type": "public",
-    "ownership_tier": 6,
-    "composite_score": 19,
-    "grade": "F",
-    "clinical_care_wages_pct": 58.5,
-    "admin_overhead_pct": 19.8,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 3.0,
-    "supplies_operations_pct": 18.7,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -20,46 +18,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Direct Primary Care + Member-Governed Healthshare",
+    "swap_name": null,
     "swap_slug": "dpc-healthshare",
-    "swap_type": "Direct Primary Care & Mutual Alternative",
-    "swap_rationale": "DPC removes insurance denial bureaucracy entirely, pairing flat-fee direct physician care with non-profit catastrophic sharing.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Minnetonka",
     "state": "MN",
-    "data_provenance": "verified_sec_filing",
-    "source_citation": "UnitedHealth Group Incorporated Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0000731766-26-000062)",
-    "filing_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "unitedhealthcare-optum",
-    "id": "81ade7b5-8f70-472b-805e-310258eaae9f",
+    "id": "d54e4091-15e7-4971-aaa5-32c4577ebde8",
     "claim_sources": {},
-    "sec_receipt_details": {
-      "cik": "0000731766",
-      "entity_name": "UnitedHealth Group Incorporated",
-      "fiscal_year_end": "2025-12-31",
-      "filing_url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000062/",
-      "accession": "0000731766-26-000062",
-      "total_revenue_usd": "$447.57 Billion",
-      "net_income_usd": "$12.06 Billion",
-      "shareholder_dividends_usd": "$7.92 Billion",
-      "shareholder_buybacks_usd": "$5.54 Billion",
-      "total_shareholder_payout_usd": "$13.46 Billion",
-      "shareholder_payout_pct_of_revenue": 3.01,
-      "shareholder_payout_pct_of_net_income": 111.7,
-      "ceo_compensation_usd": null,
-      "ceo_comp_fiscal_year_end": null,
-      "ceo_comp_filing_url": null,
-      "ceo_pay_pct_of_revenue": null,
-      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
-    },
-    "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "sec_receipt_details": null,
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -89,26 +79,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
-    "name": "Elevance Health (Anthem Blue Cross)",
+    "name": "Elevance Health",
     "entity_type": "health_insurance",
-    "sub_category": "Commercial Wall Street Insurer",
+    "sub_category": null,
     "parent_organization": "Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",
     "ownership_type": "public",
     "ownership_tier": 6,
-    "composite_score": 23,
-    "grade": "F",
-    "clinical_care_wages_pct": 62.1,
-    "admin_overhead_pct": 17.5,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 2.1,
-    "supplies_operations_pct": 18.3,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -116,10 +151,10 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Regional Non-Profit Blue Shield Mutual",
+    "swap_name": null,
     "swap_slug": "blue-shield-mutual",
-    "swap_type": "Non-Profit Mutual Plan",
-    "swap_rationale": "Non-profit mutuals return surpluses to policyholder reserves rather than Wall Street quarterly share repurchases.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Indianapolis",
     "state": "IN",
@@ -128,7 +163,7 @@
     "filing_url": "https://www.sec.gov/Archives/edgar/data/1156039/000115603926000013/",
     "summary_notes": null,
     "slug": "elevance-health-anthem-blue-cross",
-    "id": "c4cc138c-6b73-4666-a8e6-3ae6d1cbc2a0",
+    "id": "41d6e3f2-4961-43a0-b35d-94513ab53ce3",
     "claim_sources": {},
     "sec_receipt_details": {
       "cik": "0001156039",
@@ -149,11 +184,11 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -185,26 +220,59 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
-    "name": "The Cigna Group (Cigna Healthcare)",
+    "name": "The Cigna Group",
     "entity_type": "health_insurance",
-    "sub_category": "Commercial Wall Street Insurer",
+    "sub_category": null,
     "parent_organization": "The Cigna Group (Public: CI, CIK: 0001739940)",
     "ownership_type": "public",
     "ownership_tier": 6,
-    "composite_score": 21,
-    "grade": "F",
-    "clinical_care_wages_pct": 60.4,
-    "admin_overhead_pct": 18.2,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 1.9,
-    "supplies_operations_pct": 19.5,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -212,10 +280,10 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Independent Direct Primary Care Network",
+    "swap_name": null,
     "swap_slug": "independent-dpc",
-    "swap_type": "Direct Primary Care Alternative",
-    "swap_rationale": "Direct Primary Care eliminates automated claim denial algorithms, restoring direct doctor-patient decision making.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Bloomfield",
     "state": "CT",
@@ -224,7 +292,7 @@
     "filing_url": "https://www.sec.gov/Archives/edgar/data/1739940/000173994026000006/",
     "summary_notes": null,
     "slug": "the-cigna-group-cigna-healthcare",
-    "id": "69a731f3-ac6a-4691-99b4-59f96ea73d19",
+    "id": "c64809ec-9f32-4aa2-ae75-b1a12c5d64c7",
     "claim_sources": {},
     "sec_receipt_details": {
       "cik": "0001739940",
@@ -245,11 +313,11 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -281,26 +349,59 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
-    "name": "Aetna (CVS Health)",
+    "name": "Aetna",
     "entity_type": "health_insurance",
-    "sub_category": "Commercial Wall Street Insurer",
-    "parent_organization": "CVS Health Corporation (Public: CVS, CIK: 0000064803)",
-    "ownership_type": "public",
-    "ownership_tier": 6,
-    "composite_score": 25,
-    "grade": "F",
-    "clinical_care_wages_pct": 63.8,
-    "admin_overhead_pct": 16.4,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.8,
-    "supplies_operations_pct": 19.0,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -308,46 +409,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Consumer-Governed Health Cooperative",
+    "swap_name": null,
     "swap_slug": "health-coop",
-    "swap_type": "Cooperative Health Plan",
-    "swap_rationale": "Consumer cooperatives have member-elected boards where patient health outcomes supersede corporate PBM margins.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Woonsocket",
     "state": "RI",
-    "data_provenance": "verified_sec_filing",
-    "source_citation": "CVS HEALTH CORPORATION Form 10-K, fiscal year ended 2025-12-31 (SEC accession 0000064803-26-000010)",
-    "filing_url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "aetna-cvs-health",
-    "id": "a1a26a88-176f-4257-956f-ba096e788a4a",
+    "id": "fa5e1beb-80bb-4483-a54f-5d02f99395ef",
     "claim_sources": {},
-    "sec_receipt_details": {
-      "cik": "0000064803",
-      "entity_name": "CVS HEALTH CORPORATION",
-      "fiscal_year_end": "2025-12-31",
-      "filing_url": "https://www.sec.gov/Archives/edgar/data/64803/000006480326000010/",
-      "accession": "0000064803-26-000010",
-      "total_revenue_usd": "$402.07 Billion",
-      "net_income_usd": "$1.77 Billion",
-      "shareholder_dividends_usd": "$3.40 Billion",
-      "shareholder_buybacks_usd": "$0",
-      "total_shareholder_payout_usd": "$3.40 Billion",
-      "shareholder_payout_pct_of_revenue": 0.84,
-      "shareholder_payout_pct_of_net_income": 192.1,
-      "ceo_compensation_usd": null,
-      "ceo_comp_fiscal_year_end": null,
-      "ceo_comp_filing_url": null,
-      "ceo_pay_pct_of_revenue": null,
-      "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
-    },
-    "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "sec_receipt_details": null,
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -377,26 +470,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Humana Inc.",
     "entity_type": "health_insurance",
-    "sub_category": "Commercial Wall Street Insurer",
+    "sub_category": null,
     "parent_organization": "Humana Inc. (Public: HUM, CIK: 0000049071)",
     "ownership_type": "public",
     "ownership_tier": 6,
-    "composite_score": 24,
-    "grade": "F",
-    "clinical_care_wages_pct": 65.2,
-    "admin_overhead_pct": 15.6,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 0.5,
-    "supplies_operations_pct": 18.7,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -404,10 +542,10 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Traditional Medicare + Medigap Mutual",
+    "swap_name": null,
     "swap_slug": "traditional-medicare-mutual",
-    "swap_type": "Public Plan + Mutual Supplemental",
-    "swap_rationale": "Traditional Medicare does not require prior authorization for standard treatments, eliminating corporate denial delays.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Louisville",
     "state": "KY",
@@ -416,7 +554,7 @@
     "filing_url": "https://www.sec.gov/Archives/edgar/data/49071/000004907126000009/",
     "summary_notes": null,
     "slug": "humana-inc",
-    "id": "9d356c05-e2e6-4d5a-93b7-a238235e8093",
+    "id": "d131b986-29af-412c-a552-54ba7c0faf65",
     "claim_sources": {},
     "sec_receipt_details": {
       "cik": "0000049071",
@@ -437,11 +575,11 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -473,26 +611,59 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "HealthPartners / Health Partners Plan & Clinics",
     "entity_type": "health_insurance",
-    "sub_category": "Consumer-Governed Health Cooperative",
-    "parent_organization": "HealthPartners Inc. / Health Partners (Consumer-Governed Co-op)",
-    "ownership_type": "cooperative",
-    "ownership_tier": 2,
-    "composite_score": 91,
-    "grade": "A",
-    "clinical_care_wages_pct": 79.5,
-    "admin_overhead_pct": 8.2,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 12.3,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -500,28 +671,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "High-Integrity Co-op (Current Model)",
+    "swap_name": null,
     "swap_slug": "healthpartners-coop",
-    "swap_type": "Exemplary Consumer Co-op",
-    "swap_rationale": "Nation's largest consumer-governed healthcare cooperative with 100% of board elected by patient-members.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Regional",
     "city": "Bloomington",
     "state": "MN",
-    "data_provenance": "state_insurance_filing",
-    "source_citation": "Minnesota Department of Commerce Insurance Filings & HealthPartners 2023 Community Benefit Report",
-    "filing_url": "https://www.healthpartners.com/about/governance/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "healthpartners-health-partners-plan-clinics",
-    "id": "9a3bf23d-3800-4806-9bcc-5d60df3b439c",
+    "id": "709cae5f-abe4-4335-a137-60aec4d392f7",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -547,26 +728,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
-    "name": "Kaiser Permanente (Kaiser Foundation Health Plan)",
+    "name": "Kaiser Permanente",
     "entity_type": "health_insurance",
-    "sub_category": "Integrated Non-Profit Health System",
-    "parent_organization": "Kaiser Foundation Hospitals & Health Plan",
-    "ownership_type": "nonprofit",
-    "ownership_tier": 3,
-    "composite_score": 76,
-    "grade": "B+",
-    "clinical_care_wages_pct": 74.2,
-    "admin_overhead_pct": 9.8,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 16.0,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -574,28 +800,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Local Direct Primary Care Collective",
+    "swap_name": null,
     "swap_slug": "local-dpc",
-    "swap_type": "Local Physician-Owned Alternative",
-    "swap_rationale": "Local DPC clinics offer unrestricted physician time without integrated health plan HMO gatekeeping.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Regional",
     "city": "Oakland",
     "state": "CA",
-    "data_provenance": "state_insurance_filing",
-    "source_citation": "Kaiser Foundation Health Plan 2023 Audited Financial Statements ($100.8B Operating Revenue)",
-    "filing_url": "https://about.kaiserpermanente.org/who-we-are/annual-reports",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "kaiser-permanente-kaiser-foundation-health-plan",
-    "id": "b60b4b3c-6751-4a03-a226-9b2ea93e89b9",
+    "id": "c75d2674-1691-42cb-af11-1680d341ab96",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -625,26 +861,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
-    "name": "Health Care Service Corporation (HCSC Mutual)",
+    "name": "Health Care Service Corporation",
     "entity_type": "health_insurance",
-    "sub_category": "Policyholder-Owned Mutual Insurer",
-    "parent_organization": "Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",
-    "ownership_type": "mutual",
-    "ownership_tier": 3,
-    "composite_score": 71,
-    "grade": "B",
-    "clinical_care_wages_pct": 72.8,
-    "admin_overhead_pct": 11.2,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 16.0,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -652,28 +933,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Direct Primary Care + Community Co-op",
+    "swap_name": null,
     "swap_slug": "dpc-community",
-    "swap_type": "Direct Primary Care",
-    "swap_rationale": "Direct Primary Care provides same-day appointments and wholesale labs without mutual insurance pre-authorizations.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Regional",
     "city": "Chicago",
     "state": "IL",
-    "data_provenance": "naic_filing",
-    "source_citation": "NAIC Annual Statutory Financial Statements & Illinois Department of Insurance Filings",
-    "filing_url": "https://www.hcsc.com/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "health-care-service-corporation-hcsc-mutual",
-    "id": "c22541b1-aff1-4c02-ac1f-110cd7f9a23e",
+    "id": "b68e5911-0c95-4bec-98e0-61dbcd024318",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -703,26 +994,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "HCA Healthcare",
     "entity_type": "hospital_chain",
-    "sub_category": "For-Profit Wall Street Hospital Conglomerate",
+    "sub_category": null,
     "parent_organization": "HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",
     "ownership_type": "public",
     "ownership_tier": 6,
-    "composite_score": 20,
-    "grade": "F",
-    "clinical_care_wages_pct": 44.5,
-    "admin_overhead_pct": 16.5,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 14.2,
-    "supplies_operations_pct": 24.8,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -730,10 +1066,10 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Public County Hospital District or Non-Profit Community Hospital",
+    "swap_name": null,
     "swap_slug": "community-public-hospital",
-    "swap_type": "Public / Non-Profit Hospital",
-    "swap_rationale": "Public and municipal hospitals allocate 3x-6x more to free charity care and have zero Wall Street share buybacks.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Nashville",
     "state": "TN",
@@ -742,7 +1078,7 @@
     "filing_url": "https://www.sec.gov/Archives/edgar/data/860730/000119312526044769/",
     "summary_notes": null,
     "slug": "hca-healthcare",
-    "id": "d8101290-2e77-4348-8a86-d20474a3102c",
+    "id": "45518920-7ba0-40da-9bc5-41f43dbd0edb",
     "claim_sources": {},
     "sec_receipt_details": {
       "cik": "0000860730",
@@ -763,11 +1099,11 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -799,26 +1135,59 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Tenet Healthcare",
     "entity_type": "hospital_chain",
-    "sub_category": "For-Profit Wall Street Hospital System",
+    "sub_category": null,
     "parent_organization": "Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",
     "ownership_type": "public",
     "ownership_tier": 6,
-    "composite_score": 22,
-    "grade": "F",
-    "clinical_care_wages_pct": 45.2,
-    "admin_overhead_pct": 15.8,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": 6.5,
-    "supplies_operations_pct": 32.5,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -826,10 +1195,10 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Local District or Non-Profit Community Health System",
+    "swap_name": null,
     "swap_slug": "nonprofit-community-hospital",
-    "swap_type": "Non-Profit Hospital Alternative",
-    "swap_rationale": "Non-profit community hospitals reinvest 100% of operating margins back into clinical technology and local staffing.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Dallas",
     "state": "TX",
@@ -838,7 +1207,7 @@
     "filing_url": "https://www.sec.gov/Archives/edgar/data/70318/000007031826000012/",
     "summary_notes": null,
     "slug": "tenet-healthcare",
-    "id": "53797c54-58cf-47c0-b912-f5f2308d0148",
+    "id": "e3cf9d3e-02ae-4084-96ea-ef41284e3905",
     "claim_sources": {},
     "sec_receipt_details": {
       "cik": "0000070318",
@@ -859,11 +1228,11 @@
       "ceo_pay_pct_of_revenue": null,
       "source_note": "Figures extracted from SEC EDGAR XBRL financial data for the cited filings."
     },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {
-      "shareholder_extraction_pct": "sec_filing",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
+      "shareholder_extraction_pct": "sec_filing"
     },
     "withheld_claims": [
       {
@@ -895,26 +1264,59 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Ascension Health",
     "entity_type": "hospital_chain",
-    "sub_category": "National Non-Profit Health System",
-    "parent_organization": "Ascension Health Alliance",
-    "ownership_type": "nonprofit",
-    "ownership_tier": 4,
-    "composite_score": 58,
-    "grade": "C",
-    "clinical_care_wages_pct": 57.8,
-    "admin_overhead_pct": 14.2,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 28.0,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -922,28 +1324,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Public County Safety-Net Hospital or Municipal District",
+    "swap_name": null,
     "swap_slug": "public-safety-net",
-    "swap_type": "Public Safety-Net",
-    "swap_rationale": "Public county hospitals maintain open governance meetings and public financial audits under state freedom of information laws.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "St. Louis",
     "state": "MO",
-    "data_provenance": "cms_cost_report",
-    "source_citation": "Ascension FY2023 Audited Financial Statements & IRS Form 990 filings",
-    "filing_url": "https://www.ascension.org/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "ascension-health",
-    "id": "33bba478-064f-4b43-ad53-9a4e6fd0e821",
+    "id": "d21729dc-93a7-4b70-b37f-34cb60c106e0",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -973,26 +1385,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "NYC Health + Hospitals",
     "entity_type": "hospital_chain",
-    "sub_category": "Municipal Public Safety-Net Health System",
-    "parent_organization": "New York City Health and Hospitals Corporation",
-    "ownership_type": "government_public",
-    "ownership_tier": 2,
-    "composite_score": 93,
-    "grade": "A",
-    "clinical_care_wages_pct": 72.4,
-    "admin_overhead_pct": 8.5,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 19.1,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1000,190 +1457,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "High-Integrity Public Provider (Current Model)",
+    "swap_name": null,
     "swap_slug": "nyc-health-hospitals",
-    "swap_type": "Exemplary Public System",
-    "swap_rationale": "Nation's largest public health system, guaranteeing care to all New Yorkers regardless of insurance or immigration status.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Metro",
     "city": "New York",
     "state": "NY",
-    "data_provenance": "cms_cost_report",
-    "source_citation": "NYC Health + Hospitals Audited Financial Statements & New York City Comptroller Reports",
-    "filing_url": "https://www.nychealthandhospitals.org/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "nyc-health-hospitals",
-    "id": "8031a936-8181-4c31-9ad8-b68042eedfcd",
+    "id": "22f9147f-fee8-48d1-97cf-b403e3d4ae45",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
-    "withheld_claims": [
-      {
-        "field": "medical_loss_ratio_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "claims_denial_rate_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "charge_to_cost_ratio",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "charity_care_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "summary_notes",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "is_pe_rollup",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "exec_comp_pct",
-        "reason": "no filing"
-      }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
-  },
-  {
-    "name": "Heartland Dental (1,700+ Rollup Offices)",
-    "entity_type": "corporate_clinic",
-    "sub_category": "Dental Service Organization (PE Rollup)",
-    "parent_organization": "KKR & Co. Inc. (Private Equity Platform)",
-    "ownership_type": "private_equity",
-    "ownership_tier": 5,
-    "composite_score": 28,
-    "grade": "D",
-    "clinical_care_wages_pct": null,
-    "admin_overhead_pct": null,
-    "exec_comp_pct": null,
-    "shareholder_extraction_pct": null,
-    "supplies_operations_pct": null,
-    "medical_loss_ratio_pct": null,
-    "claims_denial_rate_pct": null,
-    "charge_to_cost_ratio": null,
-    "charity_care_pct": null,
-    "is_pe_rollup": null,
-    "pe_firm_name": null,
-    "regulatory_citations": [],
-    "swap_name": "Independent Local Family Dentist",
-    "swap_slug": "independent-dentist",
-    "swap_type": "Owner-Operated Local Dental Practice",
-    "swap_rationale": "Independent dentists have zero PE profit quotas, ensuring treatment recommendations are based strictly on dental health.",
-    "location_scope": "National",
-    "city": "Effingham",
-    "state": "IL",
-    "data_provenance": "ownership_profile",
-    "source_citation": null,
-    "filing_url": null,
-    "summary_notes": null,
-    "slug": "heartland-dental-1700-rollup-offices",
-    "id": "ffcf8bc3-8949-4dc5-80cc-bcdbc202422b",
-    "claim_sources": {},
-    "sec_receipt_details": null,
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {},
     "withheld_claims": [
       {
-        "field": "medical_loss_ratio_pct",
-        "reason": "no per-claim source"
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
       },
       {
-        "field": "claims_denial_rate_pct",
-        "reason": "no per-claim source"
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
       },
       {
-        "field": "charge_to_cost_ratio",
-        "reason": "no per-claim source"
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
       },
-      {
-        "field": "charity_care_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "regulatory_citations",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "summary_notes",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "is_pe_rollup",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "pe_firm_name",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "clinical_care_wages_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "admin_overhead_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "exec_comp_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "shareholder_extraction_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "supplies_operations_pct",
-        "reason": "modeled, not from a filing"
-      }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
-  },
-  {
-    "name": "Aspen Dental (TAG - The Aspen Group)",
-    "entity_type": "corporate_clinic",
-    "sub_category": "Dental Service Organization (PE Rollup)",
-    "parent_organization": "Ares Management & Leonard Green & Partners",
-    "ownership_type": "private_equity",
-    "ownership_tier": 5,
-    "composite_score": 26,
-    "grade": "F",
-    "clinical_care_wages_pct": null,
-    "admin_overhead_pct": null,
-    "exec_comp_pct": null,
-    "shareholder_extraction_pct": null,
-    "supplies_operations_pct": null,
-    "medical_loss_ratio_pct": null,
-    "claims_denial_rate_pct": null,
-    "charge_to_cost_ratio": null,
-    "charity_care_pct": null,
-    "is_pe_rollup": null,
-    "pe_firm_name": null,
-    "regulatory_citations": [],
-    "swap_name": "Local Community Dental Health Clinic or Independent Doctor",
-    "swap_slug": "community-dental-clinic",
-    "swap_type": "Non-Profit / Independent Dental Clinic",
-    "swap_rationale": "Non-profit community health centers offer sliding-fee dental care with zero third-party high-interest credit card traps.",
-    "location_scope": "National",
-    "city": "Chicago",
-    "state": "IL",
-    "data_provenance": "ownership_profile",
-    "source_citation": null,
-    "filing_url": null,
-    "summary_notes": null,
-    "slug": "aspen-dental-tag-the-aspen-group",
-    "id": "15eec2d1-3995-412a-b6a6-6aaeea316b4d",
-    "claim_sources": {},
-    "sec_receipt_details": null,
-    "split_basis": {},
-    "withheld_claims": [
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1201,10 +1506,6 @@
         "reason": "no per-claim source"
       },
       {
-        "field": "regulatory_citations",
-        "reason": "no per-claim source"
-      },
-      {
         "field": "summary_notes",
         "reason": "no per-claim source"
       },
@@ -1213,46 +1514,71 @@
         "reason": "no per-claim source"
       },
       {
-        "field": "pe_firm_name",
+        "field": "swap_name",
         "reason": "no per-claim source"
       },
       {
-        "field": "clinical_care_wages_pct",
-        "reason": "modeled, not from a filing"
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
       },
       {
-        "field": "admin_overhead_pct",
-        "reason": "modeled, not from a filing"
+        "field": "sub_category",
+        "reason": "no per-claim source"
       },
       {
-        "field": "exec_comp_pct",
-        "reason": "modeled, not from a filing"
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
       },
       {
         "field": "shareholder_extraction_pct",
-        "reason": "modeled, not from a filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
       },
       {
         "field": "supplies_operations_pct",
-        "reason": "modeled, not from a filing"
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "CityMD Urgent Care",
     "entity_type": "corporate_clinic",
-    "sub_category": "Urgent Care PE Platform",
-    "parent_organization": "Warburg Pincus / VillageMD / Walgreens Boots Alliance",
-    "ownership_type": "private_equity",
-    "ownership_tier": 5,
-    "composite_score": 32,
-    "grade": "D",
-    "clinical_care_wages_pct": 48.2,
-    "admin_overhead_pct": 17.5,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": null,
-    "supplies_operations_pct": 34.3,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1260,27 +1586,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Independent Urgent Care or FQHC Walk-In Clinic",
+    "swap_name": null,
     "swap_slug": "independent-urgent-care",
-    "swap_type": "Community / Independent Urgent Care",
-    "swap_rationale": "Community Health Centers provide walk-in urgent primary care with transparent sliding-scale pricing and zero upcoding incentives.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Regional",
     "city": "New York",
     "state": "NY",
     "data_provenance": "unverified",
-    "source_citation": "DOJ False Claims Settlement & Walgreens Boots Alliance Form 10-K Disclosures",
-    "filing_url": "https://www.citymd.com/",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "citymd-urgent-care",
-    "id": "65b962a4-5568-439b-aa54-d84b68473534",
+    "id": "62db1341-447a-4397-83ff-a188ce9dba92",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1314,30 +1651,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
         "field": "shareholder_extraction_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
       },
       {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "MedExpress Urgent Care",
     "entity_type": "corporate_clinic",
-    "sub_category": "Corporate Urgent Care Chain",
-    "parent_organization": "Optum / UnitedHealth Group (Public: UNH)",
-    "ownership_type": "public",
-    "ownership_tier": 6,
-    "composite_score": 30,
-    "grade": "D",
-    "clinical_care_wages_pct": 47.0,
-    "admin_overhead_pct": 18.0,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
     "shareholder_extraction_pct": null,
-    "supplies_operations_pct": 35.0,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1345,197 +1723,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Locally Owned Independent Urgent Care",
+    "swap_name": null,
     "swap_slug": "local-independent-clinic",
-    "swap_type": "Local Physician-Owned Clinic",
-    "swap_rationale": "Doctor-owned clinics employ licensed nursing staff and direct consultations rather than corporate automated intake.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "National",
     "city": "Canonsburg",
     "state": "PA",
     "data_provenance": "unverified",
-    "source_citation": "Optum Health Segment Financials & National Labor Reports",
-    "filing_url": "https://www.medexpress.com/",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "medexpress-urgent-care",
-    "id": "32ebc427-615c-40af-bcdc-8982eae7b5d3",
+    "id": "bd44f5e8-899d-4bf3-8156-e8dcac139bfc",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
-    "withheld_claims": [
-      {
-        "field": "medical_loss_ratio_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "claims_denial_rate_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "charge_to_cost_ratio",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "charity_care_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "regulatory_citations",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "summary_notes",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "is_pe_rollup",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "shareholder_extraction_pct",
-        "reason": "no filing"
-      },
-      {
-        "field": "exec_comp_pct",
-        "reason": "no filing"
-      }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
-  },
-  {
-    "name": "Schweiger Dermatology Group",
-    "entity_type": "corporate_clinic",
-    "sub_category": "Dermatology PE Rollup",
-    "parent_organization": "L Catterton (Private Equity)",
-    "ownership_type": "private_equity",
-    "ownership_tier": 5,
-    "composite_score": 31,
-    "grade": "D",
-    "clinical_care_wages_pct": null,
-    "admin_overhead_pct": null,
-    "exec_comp_pct": null,
-    "shareholder_extraction_pct": null,
-    "supplies_operations_pct": null,
-    "medical_loss_ratio_pct": null,
-    "claims_denial_rate_pct": null,
-    "charge_to_cost_ratio": null,
-    "charity_care_pct": null,
-    "is_pe_rollup": null,
-    "pe_firm_name": null,
-    "regulatory_citations": [],
-    "swap_name": "Independent Board-Certified Dermatologist",
-    "swap_slug": "independent-dermatologist",
-    "swap_type": "Physician-Owned Practice",
-    "swap_rationale": "Independent dermatologists have no private equity biopsy quotas or corporate cross-selling mandates.",
-    "location_scope": "Regional",
-    "city": "New York",
-    "state": "NY",
-    "data_provenance": "ownership_profile",
-    "source_citation": null,
-    "filing_url": null,
-    "summary_notes": null,
-    "slug": "schweiger-dermatology-group",
-    "id": "81e519d5-5ab3-4605-88ed-3a2e709debb4",
-    "claim_sources": {},
-    "sec_receipt_details": null,
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
     "split_basis": {},
     "withheld_claims": [
       {
-        "field": "medical_loss_ratio_pct",
-        "reason": "no per-claim source"
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
       },
       {
-        "field": "claims_denial_rate_pct",
-        "reason": "no per-claim source"
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
       },
       {
-        "field": "charge_to_cost_ratio",
-        "reason": "no per-claim source"
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
       },
-      {
-        "field": "charity_care_pct",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "regulatory_citations",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "summary_notes",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "is_pe_rollup",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "pe_firm_name",
-        "reason": "no per-claim source"
-      },
-      {
-        "field": "clinical_care_wages_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "admin_overhead_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "exec_comp_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "shareholder_extraction_pct",
-        "reason": "modeled, not from a filing"
-      },
-      {
-        "field": "supplies_operations_pct",
-        "reason": "modeled, not from a filing"
-      }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
-  },
-  {
-    "name": "Athletico Physical Therapy",
-    "entity_type": "corporate_clinic",
-    "sub_category": "Physical Therapy PE Rollup",
-    "parent_organization": "BDT & MSD Partners / Silver Lake",
-    "ownership_type": "private_equity",
-    "ownership_tier": 5,
-    "composite_score": 34,
-    "grade": "D",
-    "clinical_care_wages_pct": null,
-    "admin_overhead_pct": null,
-    "exec_comp_pct": null,
-    "shareholder_extraction_pct": null,
-    "supplies_operations_pct": null,
-    "medical_loss_ratio_pct": null,
-    "claims_denial_rate_pct": null,
-    "charge_to_cost_ratio": null,
-    "charity_care_pct": null,
-    "is_pe_rollup": null,
-    "pe_firm_name": null,
-    "regulatory_citations": [],
-    "swap_name": "Independent Physical Therapist-Owned Clinic",
-    "swap_slug": "independent-pt",
-    "swap_type": "Independent PT Practice",
-    "swap_rationale": "Therapist-owned clinics offer 1-on-1 personalized rehabilitation rather than double-booked PE treatment tracks.",
-    "location_scope": "National",
-    "city": "Oak Brook",
-    "state": "IL",
-    "data_provenance": "ownership_profile",
-    "source_citation": null,
-    "filing_url": null,
-    "summary_notes": null,
-    "slug": "athletico-physical-therapy",
-    "id": "06b1c1c1-0d80-4f77-a17c-219a46d33eb0",
-    "claim_sources": {},
-    "sec_receipt_details": null,
-    "split_basis": {},
-    "withheld_claims": [
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1565,46 +1784,71 @@
         "reason": "no per-claim source"
       },
       {
-        "field": "pe_firm_name",
+        "field": "swap_name",
         "reason": "no per-claim source"
       },
       {
-        "field": "clinical_care_wages_pct",
-        "reason": "modeled, not from a filing"
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
       },
       {
-        "field": "admin_overhead_pct",
-        "reason": "modeled, not from a filing"
+        "field": "sub_category",
+        "reason": "no per-claim source"
       },
       {
-        "field": "exec_comp_pct",
-        "reason": "modeled, not from a filing"
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
       },
       {
         "field": "shareholder_extraction_pct",
-        "reason": "modeled, not from a filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "exec_comp_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
       },
       {
         "field": "supplies_operations_pct",
-        "reason": "modeled, not from a filing"
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Plum Health Direct Primary Care",
     "entity_type": "local_clinic",
-    "sub_category": "Direct Primary Care (DPC)",
-    "parent_organization": "Plum Health DPC (Doctor-Owned)",
-    "ownership_type": "physician_owned",
-    "ownership_tier": 1,
-    "composite_score": 98,
-    "grade": "A+",
-    "clinical_care_wages_pct": 82.5,
-    "admin_overhead_pct": 4.5,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 13.0,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1612,28 +1856,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Exemplary Local Direct Primary Care (Current Model)",
+    "swap_name": null,
     "swap_slug": "plum-health-dpc",
-    "swap_type": "Exemplary Direct Primary Care",
-    "swap_rationale": "Plum Health charges a flat monthly fee with zero insurance copays, zero claims denials, and wholesale medications.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Local",
     "city": "Detroit",
     "state": "MI",
     "data_provenance": "unverified",
-    "source_citation": "Direct Primary Care Coalition Verified Practice & Detroit Medical Registry",
-    "filing_url": "https://www.plumhealthdpc.com/",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "plum-health-direct-primary-care",
-    "id": "12432e87-4e93-47fe-a2ca-73f01557d3a6",
+    "id": "017ac8ec-9ac9-48cb-b20a-c8792ff8c0d4",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1659,26 +1913,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
-    "name": "AltaMed Health Services (FQHC Network)",
+    "name": "AltaMed Health Services",
     "entity_type": "local_clinic",
-    "sub_category": "Federally Qualified Health Center (FQHC)",
-    "parent_organization": "AltaMed Health Services Corporation",
-    "ownership_type": "nonprofit",
-    "ownership_tier": 2,
-    "composite_score": 96,
-    "grade": "A+",
-    "clinical_care_wages_pct": 78.4,
-    "admin_overhead_pct": 7.8,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 13.8,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1686,28 +1985,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "High-Integrity Community Health Center (Current Model)",
+    "swap_name": null,
     "swap_slug": "altamed-fqhc",
-    "swap_type": "Exemplary Community Health Center",
-    "swap_rationale": "Governed by a patient-majority board (51%+ patients), ensuring services reflect community clinical needs rather than profit.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Regional",
     "city": "Los Angeles",
     "state": "CA",
-    "data_provenance": "hrsa_report",
-    "source_citation": "HRSA Uniform Data System (UDS) FY2023 Report & AltaMed Audited Financial Statements",
-    "filing_url": "https://www.altamed.org/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "altamed-health-services-fqhc-network",
-    "id": "a62eb9cc-87a3-45bb-8203-d823d0037f80",
+    "id": "a489d2a7-e017-4016-a866-fdf6d4bc8589",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1733,26 +2042,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Pioneer Direct Primary Care",
     "entity_type": "local_clinic",
-    "sub_category": "Direct Primary Care (DPC)",
-    "parent_organization": "Pioneer DPC (Physician-Owned)",
-    "ownership_type": "physician_owned",
-    "ownership_tier": 1,
-    "composite_score": 97,
-    "grade": "A+",
-    "clinical_care_wages_pct": 81.0,
-    "admin_overhead_pct": 4.8,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 14.2,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1760,28 +2114,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Independent Direct Primary Care (Current Model)",
+    "swap_name": null,
     "swap_slug": "pioneer-dpc",
-    "swap_type": "Doctor-Owned DPC",
-    "swap_rationale": "100% direct patient-physician relationship with direct phone access to your doctor.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Local",
     "city": "Dallas",
     "state": "TX",
     "data_provenance": "unverified",
-    "source_citation": "Texas Medical Board Registry & DPC Alliance Roster",
-    "filing_url": "https://dpcalliance.org/",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "pioneer-direct-primary-care",
-    "id": "a0881022-d8e6-4fc6-940c-baaf00b3dcf2",
+    "id": "47ff54b4-4803-4768-879b-822b4b4d5a52",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1807,26 +2171,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Erie Family Health Centers",
     "entity_type": "local_clinic",
-    "sub_category": "Federally Qualified Health Center (FQHC)",
-    "parent_organization": "Erie Family Health Center, Inc.",
-    "ownership_type": "nonprofit",
-    "ownership_tier": 2,
-    "composite_score": 95,
-    "grade": "A+",
-    "clinical_care_wages_pct": 77.2,
-    "admin_overhead_pct": 8.0,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 14.8,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1834,28 +2243,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Exemplary Non-Profit Health Center (Current Model)",
+    "swap_name": null,
     "swap_slug": "erie-family-health",
-    "swap_type": "Community Health Center",
-    "swap_rationale": "High-quality community clinic delivering bilingual healthcare regardless of ability to pay.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Metro",
     "city": "Chicago",
     "state": "IL",
-    "data_provenance": "hrsa_report",
-    "source_citation": "HRSA UDS Federal Filing & Illinois Primary Health Care Association",
-    "filing_url": "https://www.eriefamilyhealth.org/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "erie-family-health-centers",
-    "id": "84f7aab8-8fa2-4ab8-947a-072b4cb7eba9",
+    "id": "e246504e-6ae4-4cac-8cf3-6a76a032e611",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1881,26 +2300,71 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   },
   {
     "name": "Native American Community Clinic",
     "entity_type": "local_clinic",
-    "sub_category": "Community Health Center (FQHC)",
-    "parent_organization": "Native American Community Clinic (NACC)",
-    "ownership_type": "nonprofit",
-    "ownership_tier": 2,
-    "composite_score": 97,
-    "grade": "A+",
-    "clinical_care_wages_pct": 79.0,
-    "admin_overhead_pct": 7.2,
+    "sub_category": null,
+    "parent_organization": null,
+    "ownership_type": null,
+    "ownership_tier": null,
+    "clinical_care_wages_pct": null,
+    "admin_overhead_pct": null,
     "exec_comp_pct": null,
-    "shareholder_extraction_pct": 0.0,
-    "supplies_operations_pct": 13.8,
+    "shareholder_extraction_pct": null,
+    "supplies_operations_pct": null,
     "medical_loss_ratio_pct": null,
     "claims_denial_rate_pct": null,
     "charge_to_cost_ratio": null,
@@ -1908,28 +2372,38 @@
     "is_pe_rollup": null,
     "pe_firm_name": null,
     "regulatory_citations": [],
-    "swap_name": "Indigenous Community Clinic (Current Model)",
+    "swap_name": null,
     "swap_slug": "nacc-minneapolis",
-    "swap_type": "Community Health Clinic",
-    "swap_rationale": "Community-governed indigenous health organization combining Western medicine with traditional healing.",
+    "swap_type": null,
+    "swap_rationale": null,
     "location_scope": "Local",
     "city": "Minneapolis",
     "state": "MN",
-    "data_provenance": "hrsa_report",
-    "source_citation": "HRSA UDS Report & Minnesota Community Health Center Registry",
-    "filing_url": "https://nacc-healthcare.org/",
+    "data_provenance": "unverified",
+    "source_citation": null,
+    "filing_url": null,
     "summary_notes": null,
     "slug": "native-american-community-clinic",
-    "id": "d3cc4d87-dd4b-4fc1-aa64-69b1c42c403d",
+    "id": "4f9e2d2b-e0e8-46b2-b6d5-cad36620c65d",
     "claim_sources": {},
     "sec_receipt_details": null,
-    "split_basis": {
-      "shareholder_extraction_pct": "ownership_structure",
-      "clinical_care_wages_pct": "estimate",
-      "admin_overhead_pct": "estimate",
-      "supplies_operations_pct": "residual"
-    },
+    "composite_score": null,
+    "grade": null,
+    "rating_type": null,
+    "split_basis": {},
     "withheld_claims": [
+      {
+        "field": "parent_organization",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_type",
+        "reason": "no SEC receipt or per-claim source"
+      },
+      {
+        "field": "ownership_tier",
+        "reason": "no SEC receipt or per-claim source"
+      },
       {
         "field": "medical_loss_ratio_pct",
         "reason": "no per-claim source"
@@ -1955,10 +2429,57 @@
         "reason": "no per-claim source"
       },
       {
+        "field": "swap_name",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_rationale",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "sub_category",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "swap_type",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "filing_url",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "source_citation",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "shareholder_extraction_pct",
+        "reason": "no filing or per-claim source"
+      },
+      {
         "field": "exec_comp_pct",
-        "reason": "no filing"
+        "reason": "no filing or per-claim source"
+      },
+      {
+        "field": "clinical_care_wages_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "admin_overhead_pct",
+        "reason": "no per-claim source"
+      },
+      {
+        "field": "supplies_operations_pct",
+        "reason": "residual needs every input published"
+      },
+      {
+        "field": "composite_score",
+        "reason": "rubric inputs not published: ownership_type, shareholder_extraction_pct, ceo_pay_ratio, osha_violations_count, nlrb_complaints_count, living_wage_certified, landfill_diverted_pct, waste_summary, locality_tier"
+      },
+      {
+        "field": "grade",
+        "reason": "no published composite_score"
       }
-    ],
-    "rating_type": "Shoptegrity opinion rating under the published rubric (see /methodology)"
+    ]
   }
 ]

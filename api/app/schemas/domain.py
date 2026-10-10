@@ -30,9 +30,9 @@ class DimensionScoreSchema(BaseModel):
 
 class EntityScoreSummary(BaseModel):
     id: str
-    name: str
+    name: Optional[str] = None  # None until ownership is cited (sourced-or-withheld)
     slug: str
-    ownership_type: str
+    ownership_type: Optional[str] = None
     hq_city: Optional[str] = None
     hq_state: Optional[str] = None
     locality_tier: str
@@ -47,11 +47,11 @@ class BrandSummary(BaseModel):
     id: str
     name: str
     slug: str
-    description: str
+    description: Optional[str] = None  # withheld: no citation field exists for descriptions
     category_tags: List[str] = []
-    parent_company_name: str
-    parent_company_slug: str
-    ownership_type: str
+    parent_company_name: Optional[str] = None  # None until ownership is cited
+    parent_company_slug: Optional[str] = None
+    ownership_type: Optional[str] = None
     composite_score: Optional[float] = None
     confidence: float
 
@@ -60,12 +60,12 @@ class AlternativeCard(BaseModel):
     id: str
     brand_name: str
     brand_slug: str
-    parent_name: str
-    ownership_type: str
+    parent_name: Optional[str] = None
+    ownership_type: Optional[str] = None
     composite_score: Optional[float]
-    rationale: str
-    price_band: str
-    where_to_buy: str
+    rationale: Optional[str] = None  # withheld until cited
+    price_band: Optional[str] = None
+    where_to_buy: Optional[str] = None
     savings_estimate: Optional[str] = None
     swap_tier: str = "best"
     similarity_notes: Optional[str] = None
@@ -75,7 +75,7 @@ class BrandDetail(BaseModel):
     id: str
     name: str
     slug: str
-    description: str
+    description: Optional[str] = None  # withheld: no citation field exists for descriptions
     website: Optional[str] = None
     category_tags: List[str] = []
     parent_entity: EntityScoreSummary

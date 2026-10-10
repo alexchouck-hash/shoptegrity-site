@@ -7,8 +7,29 @@ from api.app.db.session import get_db
 from api.app.models.core import Brand, Entity, Alternative, Evidence, BrandIntegrity
 from api.app.schemas.domain import BrandSummary, BrandDetail, AlternativeCard, EntityScoreSummary, DimensionScoreSchema, EvidenceSchema
 from api.app.services.scoring_service import score_entity
+from api.app.services.citation import cited_ownership_name, cited_ownership_type, has_cited_ownership
 
 router = APIRouter(prefix="/v1/brands", tags=["Brands & Scorecards"])
+
+
+def _publish(payload: dict, row) -> dict:
+    """Null every field the publication gate withheld (row.withheld_claims).
+
+    Shape is unchanged: keys stay, values become None (or [] for list fields). A dotted name such as
+    'sec_receipt_details.ceo_name' nulls only that nested key. Nothing is filled in to replace a value.
+    """
+    for item in (row.withheld_claims or []):
+        field = item.get("field") if isinstance(item, dict) else None
+        if not isinstance(field, str) or not field:
+            continue
+        if "." in field:
+            parent, child = field.split(".", 1)
+            sub = payload.get(parent)
+            if isinstance(sub, dict) and child in sub:
+                payload[parent] = {**sub, child: None}
+        elif field in payload and field not in ("claim_sources", "withheld_claims"):
+            payload[field] = [] if isinstance(payload[field], list) else None
+    return payload
 
 
 @router.get("/database")
@@ -53,7 +74,7 @@ def get_brands_database(
         "offset": offset,
         "limit": limit,
         "brands": [
-            {
+            _publish({
                 "id": r.id,
                 "name": r.name,
                 "slug": r.slug,
@@ -94,7 +115,7 @@ def get_brands_database(
                 "split_basis": r.split_basis or {},
                 "rating_type": r.rating_type,
                 "osha_enforcement": r.osha_enforcement,
-            }
+            }, r)
             for r in records
         ],
     }
@@ -110,7 +131,7 @@ def get_major_retailers(db: Session = Depends(get_db)):
         .all()
     )
     return [
-        {
+        _publish({
             "name": r.name,
             "slug": r.slug,
             "category": r.category,
@@ -142,7 +163,7 @@ def get_major_retailers(db: Session = Depends(get_db)):
             "split_basis": r.split_basis or {},
             "rating_type": r.rating_type,
             "osha_enforcement": r.osha_enforcement,
-        }
+        }, r)
         for r in retailers
     ]
 
@@ -173,11 +194,11 @@ def list_or_search_brands(
                 id=b.id,
                 name=b.name,
                 slug=b.slug,
-                description=b.description,
+                description=None,  # withheld: no citation field exists for descriptions
                 category_tags=b.category_tags or [],
-                parent_company_name=b.entity.name,
-                parent_company_slug=b.entity.slug,
-                ownership_type=b.entity.ownership_type,
+                parent_company_name=cited_ownership_name(b.entity),
+                parent_company_slug=b.entity.slug if has_cited_ownership(b.entity) else None,
+                ownership_type=cited_ownership_type(b.entity),
                 composite_score=score_res.composite_score,
                 confidence=score_res.confidence,
             )
@@ -237,13 +258,13 @@ def get_brand_by_slug(slug: str, db: Session = Depends(get_db)):
                 id=alt.id,
                 brand_name=target_brand.name,
                 brand_slug=target_brand.slug,
-                parent_name=target_brand.entity.name,
-                ownership_type=target_brand.entity.ownership_type,
+                parent_name=cited_ownership_name(target_brand.entity),
+                ownership_type=cited_ownership_type(target_brand.entity),
                 composite_score=target_score.composite_score,
-                rationale=alt.rationale,
-                price_band=alt.price_band,
-                where_to_buy=alt.where_to_buy,
-                savings_estimate=alt.savings_estimate,
+                rationale=None,  # withheld until each recommendation is cited (R1)
+                price_band=None,  # withheld until cited (R1)
+                where_to_buy=None,  # withheld until cited (R1)
+                savings_estimate=None,  # dollar savings are withheld until each has a cited source (R1)
                 swap_tier=getattr(alt, "swap_tier", "best"),
                 similarity_notes=getattr(alt, "similarity_notes", None),
             )
@@ -251,9 +272,9 @@ def get_brand_by_slug(slug: str, db: Session = Depends(get_db)):
 
     parent_summary = EntityScoreSummary(
         id=entity.id,
-        name=entity.name,
+        name=cited_ownership_name(entity),
         slug=entity.slug,
-        ownership_type=entity.ownership_type,
+        ownership_type=cited_ownership_type(entity),
         hq_city=entity.hq_city,
         hq_state=entity.hq_state,
         locality_tier=entity.locality_tier,
@@ -276,14 +297,14 @@ def get_brand_by_slug(slug: str, db: Session = Depends(get_db)):
             status=ev.status,
         )
         for ev in entity.evidence_items
-        if ev.status == "published"
+        if ev.status == "published" and has_cited_ownership(entity)
     ]
 
     return BrandDetail(
         id=brand.id,
         name=brand.name,
         slug=brand.slug,
-        description=brand.description,
+        description=None,  # withheld: no citation field exists for descriptions
         website=brand.website,
         category_tags=brand.category_tags or [],
         parent_entity=parent_summary,

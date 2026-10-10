@@ -56,12 +56,13 @@ def get_methodology():
             },
         ],
         "integrity_firewall_policy": {
-            "principle": "Scores are derived strictly from documented, publicly verifiable facts and pure mathematical rubrics.",
+            "principle": "Grades are Shoptegrity opinions, applied with a published rubric to cited facts. A grade is withheld when its facts are not cited.",
             "rules": [
-                "No entity can pay to improve, alter, or remove a score.",
-                "Affiliate relationships or advertising never touch the scoring engine. Affiliate data lives in a separate isolated database layer that the rubric engine cannot read.",
-                "Every negative claim must cite an official regulatory record, legal settlement, or filed document with a direct URL.",
-                "Corrections submitted with valid evidence are reviewed and publicly logged within 5 business days.",
+                "Our policy: no entity can pay to improve, alter, or remove a score.",
+                "Our policy: we do not accept sponsored listings, paid placements, or consulting from rated brands. Commercial relationships are listed on the disclosures page.",
+                "Our policy: every negative factual claim must cite an official regulatory record, legal filing, or primary document with a direct URL. A claim without a citation is marked withheld.",
+                "The only affiliate link on the site is on the Sell Direct page. The test suite checks that the brand, healthcare, and swap pages carry no affiliate links.",
+                "Our policy: corrections are reviewed before any change is made. See the corrections page for how to request one.",
             ],
         },
     }

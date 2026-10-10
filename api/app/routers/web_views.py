@@ -17,6 +17,7 @@ from api.app.routers.food_chain import (
 from api.app.routers.swaps import get_swap_guide_detail
 from api.app.services.geo_flow_service import SCENARIOS_META, trace_dollar_flow
 from api.app.services.scoring_service import score_entity, get_cached_rubric
+from api.app.services.citation import cited_ownership_name, cited_ownership_type, has_cited_ownership
 
 templates_dir = Path(__file__).parent.parent.parent.parent / "web" / "templates"
 templates = Jinja2Templates(directory=str(templates_dir))
@@ -48,13 +49,14 @@ def brands_view(request: Request, q: Optional[str] = Query(None), db: Session = 
     brand_summaries = []
     for b in brands:
         score_res = score_entity(b.entity)
+        owner_type = cited_ownership_type(b.entity)
         brand_summaries.append({
             "id": b.id,
             "name": b.name,
             "slug": b.slug,
-            "description": b.description,
-            "parent_company_name": b.entity.name,
-            "ownership_type": b.entity.ownership_type.replace('_', ' ').title(),
+            "description": None,  # withheld: no citation field exists for descriptions
+            "parent_company_name": cited_ownership_name(b.entity),
+            "ownership_type": owner_type.replace('_', ' ').title() if owner_type else None,
             "composite_score": score_res.composite_score,
             "confidence": score_res.confidence,
         })
@@ -102,17 +104,18 @@ def brand_detail_view(request: Request, slug: str, db: Session = Depends(get_db)
             "id": alt.id,
             "brand_name": alt.to_brand.name,
             "brand_slug": alt.to_brand.slug,
-            "parent_name": alt.to_brand.entity.name,
-            "ownership_type": alt.to_brand.entity.ownership_type,
+            "parent_name": cited_ownership_name(alt.to_brand.entity),
+            "ownership_type": cited_ownership_type(alt.to_brand.entity),
             "composite_score": target_score.composite_score,
-            "rationale": alt.rationale,
-            "price_band": alt.price_band,
-            "where_to_buy": alt.where_to_buy,
-            "savings_estimate": alt.savings_estimate,
+            "rationale": None,  # withheld until cited (R1)
+            "price_band": None,  # withheld until cited (R1)
+            "where_to_buy": None,  # withheld until cited (R1)
+            "savings_estimate": None,  # withheld until cited (R1)
             "swap_tier": getattr(alt, "swap_tier", "best"),
             "similarity_notes": getattr(alt, "similarity_notes", None),
         })
 
+    # Evidence attached to the parent entity is shown only once the brand-to-parent link is cited
     evidence_list = [
         {
             "dimension": ev.dimension,
@@ -121,18 +124,19 @@ def brand_detail_view(request: Request, slug: str, db: Session = Depends(get_db)
             "source_name": ev.source_name,
         }
         for ev in entity.evidence_items
-        if ev.status == "published"
+        if ev.status == "published" and has_cited_ownership(entity)
     ]
 
+    owner_type = cited_ownership_type(entity)
     brand_data = {
         "id": brand.id,
         "name": brand.name,
         "slug": brand.slug,
-        "description": brand.description,
+        "description": None,  # withheld: no citation field exists for descriptions
         "website": brand.website,
         "parent_entity": {
-            "name": entity.name,
-            "ownership_type": entity.ownership_type.replace('_', ' ').title(),
+            "name": cited_ownership_name(entity),
+            "ownership_type": owner_type.replace('_', ' ').title() if owner_type else None,
         },
         "composite_score": score_res.composite_score,
         "confidence": score_res.confidence,
@@ -174,7 +178,8 @@ def food_view(request: Request, db: Session = Depends(get_db)):
 
 @router.get("/local", response_class=HTMLResponse)
 def local_view(request: Request, db: Session = Depends(get_db)):
-    places = db.query(Place).all()
+    # Demo listings are never shown publicly
+    places = [p for p in db.query(Place).all() if "demo_listing" not in (p.flags or [])]
     return templates.TemplateResponse(
         request=request,
         name="local.html",
@@ -284,15 +289,13 @@ def parents_view(
     request: Request,
     q: Optional[str] = Query(None),
     category: Optional[str] = Query(None),
-    subterfuge: Optional[str] = Query(None),
 ):
     from api.app.services.parent_lookup_service import parent_service
 
-    is_subterfuge = True if subterfuge == "true" else None
+    # The subterfuge filter was withdrawn: parent-company flags are not published until cited.
     feed_data = parent_service.get_feed(
         q=q,
         category=category,
-        is_surprising=is_subterfuge,
         limit=60,
     )
     stats = parent_service.get_stats()
@@ -307,7 +310,7 @@ def parents_view(
             "stats": stats,
             "search_query": q,
             "selected_category": category,
-            "subterfuge_only": is_subterfuge,
+            "subterfuge_only": False,
         },
     )
 
@@ -326,11 +329,10 @@ def healthcare_view(
         search_pat = f"%{q_clean}%"
         search_no_space = f"%{q_clean.replace(' ', '')}%"
         tokens = [f"%{t}%" for t in q_clean.split() if t]
+        # Search names and cities only. Parent organizations are withheld until cited, so they are not searchable.
         conditions = [
             HealthcareIntegrity.name.ilike(search_pat),
             HealthcareIntegrity.name.ilike(search_no_space),
-            HealthcareIntegrity.parent_organization.ilike(search_pat),
-            HealthcareIntegrity.parent_organization.ilike(search_no_space),
             HealthcareIntegrity.city.ilike(search_pat),
         ]
         if len(tokens) > 1:
@@ -339,7 +341,8 @@ def healthcare_view(
     if sector and sector != "all":
         query = query.filter(HealthcareIntegrity.entity_type == sector)
 
-    initial_entities = query.order_by(HealthcareIntegrity.composite_score.desc()).limit(24).all()
+    # Ratings are withheld until their inputs are cited, so list alphabetically rather than by score
+    initial_entities = query.order_by(HealthcareIntegrity.name).limit(24).all()
     total_count = query.count()
 
     return templates.TemplateResponse(

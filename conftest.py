@@ -1,3 +1,9 @@
+import os
+
+# Tests must never write into the live database (shoptegrity.db). Point the engine at a
+# separate file before any app module is imported; override with DATABASE_URL to run in parallel.
+os.environ.setdefault("DATABASE_URL", "sqlite:///./.pytest_shoptegrity.db")
+
 import pytest
 from pipeline.seed_data import run_seed
 from pipeline.top2000_brands import seed_top2000_db

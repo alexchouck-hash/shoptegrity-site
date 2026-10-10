@@ -1,8 +1,12 @@
 """Housing & Rental Integrity Router.
 
-Provides data on US housing demographics, the 6-tier ownership hierarchy,
-the $100 rent dollar cash-flow split, institutional mega-landlord registry,
-and actionable housing swaps.
+Data behind /housing and /v1/housing: a tenure overview, the ownership-model
+ladder (with Shoptegrity opinion grades), an illustrative rent-dollar split,
+the landlord registry, and housing swap guidance.
+
+Sourcing rule: a figure or factual claim about a named party is kept only with
+a cited source. Anything without one is None, an empty list, or the text
+"Withheld: no cited source yet". Route paths and key names are kept stable.
 """
 
 from typing import Dict, Any, List
@@ -10,18 +14,24 @@ from fastapi import APIRouter
 
 router = APIRouter(prefix="/v1/housing", tags=["Housing & Rental Integrity"])
 
-# Demographic benchmarks from US Census Bureau & Federal Reserve
+WITHHELD = "Withheld: no cited source yet"
+OPINION_LABEL = "Shoptegrity opinion"
+ILLUSTRATIVE_LABEL = "Illustrative input for a calculator. Not a measurement. No cited source yet."
+
+# Every figure is withheld (None) until it is linked to a cited source table.
+# data_sources lists candidate sources to cite; no figure is cited to them yet.
 DEMOGRAPHIC_DATA: Dict[str, Any] = {
-    "homeownership_rate_pct": 65.6,
-    "renter_rate_pct": 34.4,
-    "total_homeowner_households": "85.5 Million",
-    "total_renter_households": "44.8 Million",
-    "single_family_rentals_count": "15.2 Million",
-    "single_family_rentals_share_of_rentals_pct": 33.9,
-    "under_35_renter_rate_pct": 62.1,
-    "median_homeowner_net_worth_usd": 396200,
-    "median_renter_net_worth_usd": 10400,
-    "net_worth_wealth_multiplier": 38.1,
+    "status": WITHHELD,
+    "homeownership_rate_pct": None,
+    "renter_rate_pct": None,
+    "total_homeowner_households": None,
+    "total_renter_households": None,
+    "single_family_rentals_count": None,
+    "single_family_rentals_share_of_rentals_pct": None,
+    "under_35_renter_rate_pct": None,
+    "median_homeowner_net_worth_usd": None,
+    "median_renter_net_worth_usd": None,
+    "net_worth_wealth_multiplier": None,
     "data_sources": [
         "US Census Bureau Housing Vacancies and Homeownership (CPS/HVS)",
         "Federal Reserve Survey of Consumer Finances (SCF)",
@@ -29,249 +39,161 @@ DEMOGRAPHIC_DATA: Dict[str, Any] = {
     ],
 }
 
-# Where every $100 in monthly rent flows
+
+def _split_tier(model: str, tier: int, description: str, breakdown: List[Dict[str, Any]]) -> Dict[str, Any]:
+    """Builds one illustrative split. Local and outside shares are summed from the breakdown."""
+    total = round(sum(row["cents"] for row in breakdown), 1)
+    if total != 100.0:
+        raise ValueError(f"Illustrative split for {model!r} sums to {total}, not 100")
+    outside = round(sum(row["cents"] for row in breakdown if row["outside"]), 1)
+    return {
+        "model": model,
+        "tier": tier,
+        "label": ILLUSTRATIVE_LABEL,
+        "local_retention_pct": round(100.0 - outside, 1),
+        "wall_street_leakage_pct": outside,
+        "description": description,
+        "breakdown": breakdown,
+    }
+
+
+# Where every $100 of rent could go, as an illustrative example only.
+# The cents are example inputs, not measurements of any landlord or company.
 RENT_DOLLAR_SPLITS: Dict[str, Any] = {
-    "tier_1_clt": {
-        "model": "Community Land Trust / Housing Co-op",
-        "tier": 1,
-        "score": 98,
-        "grade": "A+",
-        "local_retention_pct": 100.0,
-        "wall_street_leakage_pct": 0.0,
-        "description": "100% of revenue stays in the building and local community. Zero speculative extraction.",
-        "breakdown": [
-            {"category": "Direct Maintenance & Local Trades", "cents": 48.0, "destination": "Local tradespeople & contractors"},
-            {"category": "Capital Replacement Reserve Fund", "cents": 28.0, "destination": "Future roof/boiler replacement escrow"},
-            {"category": "Municipal Property Taxes & Public Schools", "cents": 16.0, "destination": "Local city infrastructure & schools"},
-            {"category": "Cooperative Administration & Governance", "cents": 8.0, "destination": "Democratic member management"},
-            {"category": "Wall Street / Shareholder Extraction", "cents": 0.0, "destination": "Zero remote extraction ($0)"},
+    "tier_1_clt": _split_tier(
+        model="Community Land Trust / Housing Co-op (example)",
+        tier=1,
+        description="Example allocation for illustration only. Not a measurement.",
+        breakdown=[
+            {"category": "Direct maintenance & local trades", "cents": 48.0, "destination": "Local tradespeople & contractors", "outside": False},
+            {"category": "Capital replacement reserve", "cents": 28.0, "destination": "Reserve fund for future replacements", "outside": False},
+            {"category": "Municipal property taxes & schools", "cents": 16.0, "destination": "Local government and schools", "outside": False},
+            {"category": "Cooperative administration & governance", "cents": 8.0, "destination": "Member governance", "outside": False},
+            {"category": "Outside shareholder distributions", "cents": 0.0, "destination": "None assumed in this example", "outside": True},
         ],
-    },
-    "tier_3_mom_pop": {
-        "model": "Independent Local 'Mom-and-Pop' Landlord (1-4 Units)",
-        "tier": 3,
-        "score": 78,
-        "grade": "B+",
-        "local_retention_pct": 82.0,
-        "wall_street_leakage_pct": 18.0,
-        "description": "Owner lives locally. Most spending recirculates into local hardware stores, trades, and municipal taxes.",
-        "breakdown": [
-            {"category": "Mortgage Principal & Interest", "cents": 45.0, "destination": "Local bank or mortgage servicer"},
-            {"category": "Property Maintenance & Repairs", "cents": 22.0, "destination": "Local handymen, plumbers, HVAC"},
-            {"category": "Property Taxes & Public Services", "cents": 18.0, "destination": "Local school district & county roads"},
-            {"category": "Owner Household Income / Retirement", "cents": 15.0, "destination": "Local neighborhood household income"},
-            {"category": "Corporate Wall Street Extraction", "cents": 0.0, "destination": "No remote corporate siphon"},
+    ),
+    "tier_3_mom_pop": _split_tier(
+        model="Independent Local Owner, 1-4 Units (example)",
+        tier=3,
+        description="Example allocation for illustration only. The interest line assumes an out-of-area lender.",
+        breakdown=[
+            {"category": "Mortgage principal", "cents": 27.0, "destination": "Local lender", "outside": False},
+            {"category": "Mortgage interest", "cents": 18.0, "destination": "Out-of-area lender (example assumption)", "outside": True},
+            {"category": "Property maintenance & repairs", "cents": 22.0, "destination": "Local handymen, plumbers, HVAC", "outside": False},
+            {"category": "Property taxes & public services", "cents": 18.0, "destination": "Local school district & county", "outside": False},
+            {"category": "Owner household income / retirement", "cents": 15.0, "destination": "Owner's household", "outside": False},
         ],
-    },
-    "tier_6_institutional": {
-        "model": "Wall Street Private Equity / Public Mega-REIT",
-        "tier": 6,
-        "score": 16,
-        "grade": "F",
-        "local_retention_pct": 26.0,
-        "wall_street_leakage_pct": 74.0,
-        "description": "Centralized extraction machine. Revenue flows to Manhattan/Dallas headquarters, debt service, and algorithmic yield pricing.",
-        "breakdown": [
-            {"category": "Shareholder Dividends & Stock Buybacks", "cents": 32.0, "destination": "Wall Street hedge funds & institutional investors"},
-            {"category": "Leveraged Buyout Debt Service", "cents": 24.0, "destination": "Investment banks & bondholders"},
-            {"category": "Algorithmic Pricing (RealPage) & Corp HQ", "cents": 18.0, "destination": "Software fees & corporate executive comp"},
-            {"category": "Local Property Taxes", "cents": 14.0, "destination": "Local municipality"},
-            {"category": "Actual Local Maintenance & Repairs", "cents": 12.0, "destination": "Subcontracted network (frequently deferred)"},
+    ),
+    "tier_6_institutional": _split_tier(
+        model="Large Investor Owner (example)",
+        tier=6,
+        description="Example allocation for illustration only. Not a measurement.",
+        breakdown=[
+            {"category": "Shareholder distributions & buybacks", "cents": 32.0, "destination": "Investors and shareholders", "outside": True},
+            {"category": "Acquisition loan debt service", "cents": 24.0, "destination": "Lenders and bondholders", "outside": True},
+            {"category": "Software fees & corporate overhead", "cents": 18.0, "destination": "Software vendors and corporate offices", "outside": True},
+            {"category": "Local property taxes", "cents": 14.0, "destination": "Local municipality", "outside": False},
+            {"category": "Local maintenance & repairs", "cents": 12.0, "destination": "Contracted local network", "outside": False},
         ],
-    },
+    ),
 }
 
-# The 6-Tier Housing Ownership Ladder
+# The 6-tier ownership ladder. Grades use the same bands as the brand pages:
+# A 90-100, B 70-89, C 50-69, D 30-49, F under 30.
 OWNERSHIP_LADDER: List[Dict[str, Any]] = [
     {
         "tier": 1,
         "name": "Community Land Trusts (CLTs) & Housing Co-ops",
         "score": 98,
-        "grade": "A+",
-        "description": "Land held in perpetuity for community benefit; homes sold at restricted affordable prices or governed cooperatively.",
-        "retention_rate_pct": 100.0,
-        "wall_street_risk": "Zero",
+        "grade": "A",
+        "rating_label": OPINION_LABEL,
+        "description": "Land is held in trust for community benefit; homes are sold at restricted prices or governed cooperatively.",
     },
     {
         "tier": 2,
         "name": "Resident & Family Owner-Occupants",
         "score": 92,
         "grade": "A",
-        "description": "Primary homeowner living in the residence. 100% of equity accrues to the resident household.",
-        "retention_rate_pct": 95.0,
-        "wall_street_risk": "Low (except mortgage origination/servicing)",
+        "rating_label": OPINION_LABEL,
+        "description": "Primary homeowner living in the residence. Mortgage principal payments build equity over time; the amount depends on loan terms.",
     },
     {
         "tier": 3,
         "name": "Independent Local 'Mom-and-Pop' Landlords (1-4 Units)",
         "score": 78,
-        "grade": "B+",
-        "description": "Individual local owners owning 1 to 4 units. Direct human contact, negotiable lease terms, local capital recycling.",
-        "retention_rate_pct": 82.0,
-        "wall_street_risk": "Minimal",
+        "grade": "B",
+        "rating_label": OPINION_LABEL,
+        "description": "Individual owners who rent out 1 to 4 units. Direct contact and negotiable lease terms are possible.",
     },
     {
         "tier": 4,
         "name": "Regional Property Management & Mid-Scale LLCs",
         "score": 58,
         "grade": "C",
-        "description": "Commercial entities managing 10 to 200 units. Standardized fees, online portals, market-rate annual escalations.",
-        "retention_rate_pct": 55.0,
-        "wall_street_risk": "Moderate",
+        "rating_label": OPINION_LABEL,
+        "description": "Commercial entities managing about 10 to 200 units. Standardized leases and online portals are typical.",
     },
     {
         "tier": 5,
         "name": "Institutional Single-Family Rental (SFR) Rollups",
         "score": 28,
-        "grade": "D-",
-        "description": "Private equity platforms bulk-purchasing entry-level starter homes. Concentrated in Sunbelt metros.",
-        "retention_rate_pct": 32.0,
-        "wall_street_risk": "High (automated evictions, maintenance delays)",
+        "grade": "F",
+        "rating_label": OPINION_LABEL,
+        "description": "Institutional investors that buy starter family homes, sometimes in bulk.",
     },
     {
         "tier": 6,
-        "name": "Mega Private Equity Firms & Public Apartment REITs",
+        "name": "Large Private Equity Firms & Public Apartment REITs",
         "score": 16,
         "grade": "F",
-        "description": "Wall Street giants utilizing algorithmic revenue-management software (RealPage) to maximize rents and extract capital.",
-        "retention_rate_pct": 26.0,
-        "wall_street_risk": "Severe (DOJ antitrust lawsuits for price fixing)",
+        "rating_label": OPINION_LABEL,
+        "description": "Large private equity funds and publicly traded apartment REITs.",
     },
 ]
 
-# Major Corporate Landlords & Evidence Records
-MEGA_LANDLORDS: List[Dict[str, Any]] = [
-    {
-        "name": "Invitation Homes",
-        "ticker": "NYSE: INVH",
-        "cik": "0001687229",
-        "ownership_type": "Public REIT (Spun off from Blackstone)",
-        "tier": 5,
-        "score": 26,
-        "grade": "F",
-        "portfolio_units": "~85,000 Single-Family Homes",
-        "key_markets": "Atlanta, Phoenix, Dallas, Tampa, Charlotte, Southern California",
-        "ceo_pay_ratio": "165:1 (SEC Item 402(u))",
-        "algorithmic_pricing": "Yes (YieldStar / RealPage User)",
-        "regulatory_citations": [
-            {"agency": "FTC / CFPB", "detail": "Settled federal inquiry regarding deceptive utility fee markups and withheld security deposits."},
-            {"agency": "US House Financial Services Committee", "detail": "Subpoenaed for documented high eviction filing rates during housing moratoriums."},
-        ],
-        "warning_flag": "Concentrated in entry-level starter home neighborhoods, outbidding first-time homebuyers with all-cash institutional offers.",
-    },
-    {
-        "name": "Progress Residential (Pretium Partners)",
-        "ticker": "Private Equity",
-        "cik": None,
-        "ownership_type": "Private Equity Fund Platform",
-        "tier": 5,
-        "score": 22,
-        "grade": "F",
-        "portfolio_units": "~85,000 Single-Family Homes",
-        "key_markets": "Atlanta, Phoenix, Charlotte, Nashville, Las Vegas, Orlando",
-        "ceo_pay_ratio": "Not Disclosed (Private)",
-        "algorithmic_pricing": "Yes",
-        "regulatory_citations": [
-            {"agency": "Congressional Investigation (2022)", "detail": "Filed evictions at nearly double the rate of independent landlords across Georgia and Florida."},
-            {"agency": "State AG Inquiries", "detail": "Subject of tenant class actions regarding automated maintenance portals and unreturned security deposits."},
-        ],
-        "warning_flag": "Disguised ownership: Homes are rented through dozens of obscure shell LLCs while tenants communicate only through offshore app call centers.",
-    },
-    {
-        "name": "Blackstone Inc. (Tricon Residential)",
-        "ticker": "NYSE: BX",
-        "cik": "0001393818",
-        "ownership_type": "Global Private Equity Asset Manager",
-        "tier": 6,
-        "score": 18,
-        "grade": "F",
-        "portfolio_units": "~37,000 SFR Homes + 300,000+ Multi-Family Units Globally",
-        "key_markets": "Global (Sunbelt US, Canada, UK, Western Europe)",
-        "ceo_pay_ratio": "320:1",
-        "algorithmic_pricing": "Yes (Enterprise algorithmic asset management)",
-        "regulatory_citations": [
-            {"agency": "United Nations Special Rapporteur on Housing", "detail": "Formally cited for financializing global housing markets and exacerbating homelessness."},
-            {"agency": "SEC Form 10-K", "detail": "$3.5 Billion acquisition of Tricon Residential completed in 2024 to expand single-family rental footprint."},
-        ],
-        "warning_flag": "World's largest corporate landlord. Leverages sovereign wealth and pension capital to treat residential shelter as an extraction asset class.",
-    },
-    {
-        "name": "Greystar Real Estate Partners",
-        "ticker": "Private Real Estate Conglomerate",
-        "cik": None,
-        "ownership_type": "Global Property Management & Development Firm",
-        "tier": 6,
-        "score": 19,
-        "grade": "F",
-        "portfolio_units": "800,000+ Multi-Family Units Managed Worldwide",
-        "key_markets": "National across 50 US metros",
-        "ceo_pay_ratio": "Private",
-        "algorithmic_pricing": "Yes (Primary RealPage Co-conspirator)",
-        "regulatory_citations": [
-            {"agency": "US Department of Justice (DOJ)", "detail": "Named in landmark federal antitrust lawsuit (DOJ v. RealPage, 2024) for alleged algorithmic rent price-fixing."},
-            {"agency": "DC Attorney General", "detail": "Sued for participating in district-wide rent-setting exchange that inflated apartment prices by up to 15%."},
-        ],
-        "warning_flag": "Manages hundreds of 'luxury' apartment towers under local-sounding names while sharing non-public tenant lease data with central pricing algorithms.",
-    },
-    {
-        "name": "American Homes 4 Rent (AMH)",
-        "ticker": "NYSE: AMH",
-        "cik": "0001562401",
-        "ownership_type": "Public REIT",
-        "tier": 5,
-        "score": 25,
-        "grade": "F",
-        "portfolio_units": "~60,000 Single-Family Homes",
-        "key_markets": "Midwest, Southeast, Texas",
-        "ceo_pay_ratio": "142:1 (SEC Form DEF 14A)",
-        "algorithmic_pricing": "Yes",
-        "regulatory_citations": [
-            {"agency": "Consumer Financial Protection Bureau (CFPB)", "detail": "Monitored for mandatory fee transparency and automated late penalty charges."},
-        ],
-        "warning_flag": "Pioneered 'build-to-rent' subdivisions where entire neighborhoods of new homes are built exclusively for permanent rental, blocking homeownership.",
-    },
-]
+# Landlord registry. No records are published yet: Withheld: no cited source yet.
+MEGA_LANDLORDS: List[Dict[str, Any]] = []
 
-# Actionable Housing Swaps
+# Housing swaps. Non-numeric guidance only; savings and price figures are withheld.
 HOUSING_SWAPS: List[Dict[str, Any]] = [
     {
-        "title": "Corporate Apartment Complex -> Local Duplex / Independent Multi-Family",
+        "title": "Corporate Complex -> Local Duplex / Co-op",
         "category": "Renting",
-        "bad_model": "Wall Street managed complex with $150/mo mandatory amenity & trash fees",
-        "good_model": "Independent local landlord owning 1-4 units, duplex, or member co-op",
-        "financial_impact": "Saves $1,800 - $3,600 per year in eliminated junk fees; human lease negotiation",
-        "integrity_gain": "Shifts rent from remote private equity extraction to local community recirculation",
+        "bad_model": "Large apartment complex with mandatory amenity, trash and portal fees added to rent",
+        "good_model": "Independent local landlord with 1-4 units, a duplex, or a housing co-op",
+        "financial_impact": "Add up every mandatory fee in your lease and compare the total with the alternative. Savings amounts: Withheld: no cited source yet",
+        "integrity_gain": "Rent may stay in the local community. Check each owner's structure and governing documents",
     },
     {
-        "title": "Big Wall Street Bank Mortgage -> Community Credit Union Mortgage",
+        "title": "Large National Bank -> Community Credit Union",
         "category": "Financing",
-        "bad_model": "Wells Fargo / Chase mortgage with high origination fees, bundled and sold to Wall Street",
-        "good_model": "Member-owned local credit union or mutual savings bank with portfolio servicing",
-        "financial_impact": "Saves $3,000 - $8,000 in closing fees; mortgage payments fund local community loans",
-        "integrity_gain": "Profits return to credit union members via lower loan rates and higher deposit dividends",
+        "bad_model": "Taking the first mortgage offer without comparing fees and rates",
+        "good_model": "Member-owned local credit union. Ask whether it keeps and services the loans it makes",
+        "financial_impact": "Compare the Loan Estimate fees and rate from each lender. Closing-cost amounts: Withheld: no cited source yet",
+        "integrity_gain": "Credit unions are member-owned; compare their terms directly with other lenders",
     },
     {
-        "title": "Speculative Market Starter Home -> Community Land Trust (CLT) Home",
+        "title": "Competitive Market Home -> Community Land Trust",
         "category": "Purchasing",
-        "bad_model": "Bidding wars against institutional cash buyers for inflated suburban starter homes",
-        "good_model": "Community Land Trust purchase (buying house, leasing land under perpetual trust)",
-        "financial_impact": "Purchase price is 25% - 40% below market value; insulated from market crashes",
-        "integrity_gain": "Permanent community equity; prevents speculative flipping and preserves neighborhood stability",
+        "bad_model": "Bidding against cash buyers in a competitive market",
+        "good_model": "Community land trust purchase: you buy the home and lease the land from the trust",
+        "financial_impact": "Purchase price and resale rules come from the trust's ground lease. Price discounts: Withheld: no cited source yet. Read the resale terms first",
+        "integrity_gain": "Land stays in trust, which can limit speculative resale; check the lease terms for the specific trust",
     },
     {
-        "title": "Single-Family Primary Purchase -> FHA 3.5% 'House Hacking' (2-4 Units)",
+        "title": "Standalone House -> Multi-Unit 'House Hacking'",
         "category": "Wealth Building",
-        "bad_model": "Stretching budget to pay 100% of mortgage on a standalone house with 0 rental offset",
-        "good_model": "Buying a duplex, triplex, or fourplex with 3.5% down FHA; tenant rent offsets mortgage",
-        "financial_impact": "Cuts net housing costs by 60% - 100%; tenants pay down your real estate equity",
-        "integrity_gain": "Enables working families to build generational wealth while providing fair, local housing to neighbors",
+        "bad_model": "Paying the full mortgage from your own income with no rental income",
+        "good_model": "Buy a 2-4 unit property, live in one unit and rent the others, if loan rules allow it",
+        "financial_impact": "Rent from other units can offset part of the housing cost. Amounts depend on local rents and loan rules: Withheld: no cited source yet",
+        "integrity_gain": "Owner-occupants can house neighbors in the other units; check local rules for rental registration",
     },
 ]
 
 
 @router.get("/overview")
 def get_housing_overview() -> Dict[str, Any]:
-    """Returns comprehensive housing and rental integrity data."""
+    """Returns housing and rental data, with withheld figures set to None."""
     return {
         "demographics": DEMOGRAPHIC_DATA,
         "rent_dollar_splits": RENT_DOLLAR_SPLITS,
@@ -283,11 +205,11 @@ def get_housing_overview() -> Dict[str, Any]:
 
 @router.get("/rent-split")
 def get_rent_split() -> Dict[str, Any]:
-    """Returns the $100 rent dollar cash-flow breakdown across tiers."""
+    """Returns the illustrative $100 rent split across example owner models."""
     return RENT_DOLLAR_SPLITS
 
 
 @router.get("/landlords")
 def get_mega_landlords() -> List[Dict[str, Any]]:
-    """Returns the registry of institutional mega-landlords with evidence citations."""
+    """Returns the landlord registry. Empty until records have cited sources."""
     return MEGA_LANDLORDS

@@ -23,7 +23,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from sqlalchemy.orm import Session
 from api.app.models.core import HealthcareIntegrity, generate_uuid
-from pipeline.provenance import gate_healthcare, assert_no_synthetic, load_financials, public_record
+from pipeline.provenance import (
+    HEALTH_GATED_COLUMNS, allow_null_columns, assert_no_synthetic, gate_healthcare, load_financials, public_record,
+)
 
 
 def slugify(text: str) -> str:
@@ -46,8 +48,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "UnitedHealth Group Inc. (Public: UNH, CIK: 0000731766)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 19,
-        "grade": "F",
         "clinical_care_wages_pct": 58.5,
         "admin_overhead_pct": 19.8,
         "exec_comp_pct": 2.4,
@@ -83,8 +83,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Elevance Health, Inc. (Public: ELV, CIK: 0001156039)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 23,
-        "grade": "F",
         "clinical_care_wages_pct": 62.1,
         "admin_overhead_pct": 17.5,
         "exec_comp_pct": 2.1,
@@ -119,8 +117,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "The Cigna Group (Public: CI, CIK: 0001739940)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 21,
-        "grade": "F",
         "clinical_care_wages_pct": 60.4,
         "admin_overhead_pct": 18.2,
         "exec_comp_pct": 2.2,
@@ -155,8 +151,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "CVS Health Corporation (Public: CVS, CIK: 0000064803)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 25,
-        "grade": "F",
         "clinical_care_wages_pct": 63.8,
         "admin_overhead_pct": 16.4,
         "exec_comp_pct": 1.9,
@@ -191,8 +185,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Humana Inc. (Public: HUM, CIK: 0000049071)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 24,
-        "grade": "F",
         "clinical_care_wages_pct": 65.2,
         "admin_overhead_pct": 15.6,
         "exec_comp_pct": 2.0,
@@ -231,8 +223,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "HealthPartners Inc. / Health Partners (Consumer-Governed Co-op)",
         "ownership_type": "cooperative",
         "ownership_tier": 2,
-        "composite_score": 91,
-        "grade": "A",
         "clinical_care_wages_pct": 79.5,
         "admin_overhead_pct": 8.2,
         "exec_comp_pct": 0.8,
@@ -264,8 +254,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Kaiser Foundation Hospitals & Health Plan",
         "ownership_type": "nonprofit",
         "ownership_tier": 3,
-        "composite_score": 76,
-        "grade": "B+",
         "clinical_care_wages_pct": 74.2,
         "admin_overhead_pct": 9.8,
         "exec_comp_pct": 1.5,
@@ -300,8 +288,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Health Care Service Corporation (BCBS of IL, MT, NM, OK, TX)",
         "ownership_type": "mutual",
         "ownership_tier": 3,
-        "composite_score": 71,
-        "grade": "B",
         "clinical_care_wages_pct": 72.8,
         "admin_overhead_pct": 11.2,
         "exec_comp_pct": 1.4,
@@ -339,8 +325,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "HCA Healthcare, Inc. (Public: HCA, CIK: 0000860730)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 20,
-        "grade": "F",
         "clinical_care_wages_pct": 44.5,
         "admin_overhead_pct": 16.5,
         "exec_comp_pct": 2.8,
@@ -376,8 +360,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Tenet Healthcare Corporation (Public: THC, CIK: 0000070318)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 22,
-        "grade": "F",
         "clinical_care_wages_pct": 45.2,
         "admin_overhead_pct": 15.8,
         "exec_comp_pct": 2.5,
@@ -412,8 +394,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Ascension Health Alliance",
         "ownership_type": "nonprofit",
         "ownership_tier": 4,
-        "composite_score": 58,
-        "grade": "C",
         "clinical_care_wages_pct": 57.8,
         "admin_overhead_pct": 14.2,
         "exec_comp_pct": 1.8,
@@ -448,8 +428,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "New York City Health and Hospitals Corporation",
         "ownership_type": "government_public",
         "ownership_tier": 2,
-        "composite_score": 93,
-        "grade": "A",
         "clinical_care_wages_pct": 72.4,
         "admin_overhead_pct": 8.5,
         "exec_comp_pct": 0.6,
@@ -479,86 +457,12 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
     # CORPORATE & PE-BACKED CLINIC CHAINS & ROLLUPS (Tier 5: PE Rollups)
     # --------------------------------------------------------------------------
     {
-        "name": "Heartland Dental (1,700+ Rollup Offices)",
-        "entity_type": "corporate_clinic",
-        "sub_category": "Dental Service Organization (PE Rollup)",
-        "parent_organization": "KKR & Co. Inc. (Private Equity Platform)",
-        "ownership_type": "private_equity",
-        "ownership_tier": 5,
-        "composite_score": 28,
-        "grade": "D",
-        "clinical_care_wages_pct": 36.5,
-        "admin_overhead_pct": 21.5,
-        "exec_comp_pct": 3.5,
-        "shareholder_extraction_pct": 19.5,
-        "supplies_operations_pct": 19.0,
-        "medical_loss_ratio_pct": 52.0,
-        "claims_denial_rate_pct": 0.0,
-        "charge_to_cost_ratio": 5.8,
-        "charity_care_pct": 0.2,
-        "is_pe_rollup": True,
-        "pe_firm_name": "KKR & Co. Inc.",
-        "regulatory_citations": [
-            "Corporate practice of medicine regulatory scrutiny regarding non-dentist management fee extractions",
-            "Extensive private equity debt loading following KKR recapitalizations ($1.5B+ leveraged loans)"
-        ],
-        "swap_name": "Independent Local Family Dentist",
-        "swap_slug": "independent-dentist",
-        "swap_type": "Owner-Operated Local Dental Practice",
-        "swap_rationale": "Independent dentists have zero PE profit quotas, ensuring treatment recommendations are based strictly on dental health.",
-        "location_scope": "National",
-        "city": "Effingham",
-        "state": "IL",
-        "data_provenance": "industry_benchmark_model",
-        "source_citation": "KKR & Co. Portfolio Disclosure & ADA Health Policy Institute DSO Analysis",
-        "filing_url": "https://heartland.com/",
-        "summary_notes": "Largest Dental Support Organization (DSO) in the U.S. Supported practices retain original local dentist names, masking KKR private equity ownership."
-    },
-    {
-        "name": "Aspen Dental (TAG - The Aspen Group)",
-        "entity_type": "corporate_clinic",
-        "sub_category": "Dental Service Organization (PE Rollup)",
-        "parent_organization": "Ares Management & Leonard Green & Partners",
-        "ownership_type": "private_equity",
-        "ownership_tier": 5,
-        "composite_score": 26,
-        "grade": "F",
-        "clinical_care_wages_pct": 35.0,
-        "admin_overhead_pct": 22.0,
-        "exec_comp_pct": 3.8,
-        "shareholder_extraction_pct": 20.2,
-        "supplies_operations_pct": 19.0,
-        "medical_loss_ratio_pct": 50.5,
-        "claims_denial_rate_pct": 0.0,
-        "charge_to_cost_ratio": 6.2,
-        "charity_care_pct": 0.3,
-        "is_pe_rollup": True,
-        "pe_firm_name": "Ares Management & Leonard Green",
-        "regulatory_citations": [
-            "New York Attorney General $450,000 settlement over deceptive advertising and high-interest medical credit cards",
-            "Massachusetts AG settlement for misrepresenting dentures pricing and non-refundable treatment plans"
-        ],
-        "swap_name": "Local Community Dental Health Clinic or Independent Doctor",
-        "swap_slug": "community-dental-clinic",
-        "swap_type": "Non-Profit / Independent Dental Clinic",
-        "swap_rationale": "Non-profit community health centers offer sliding-fee dental care with zero third-party high-interest credit card traps.",
-        "location_scope": "National",
-        "city": "Chicago",
-        "state": "IL",
-        "data_provenance": "industry_benchmark_model",
-        "source_citation": "State Attorney General Enforcement Records & PE Stakeholder Project Dental Brief",
-        "filing_url": "https://www.aspendental.com/",
-        "summary_notes": "Over 1,000 branded locations heavily targeting low-income and uninsured patients with private equity debt-financed dental credit."
-    },
-    {
         "name": "CityMD Urgent Care",
         "entity_type": "corporate_clinic",
         "sub_category": "Urgent Care PE Platform",
         "parent_organization": "Warburg Pincus / VillageMD / Walgreens Boots Alliance",
         "ownership_type": "private_equity",
         "ownership_tier": 5,
-        "composite_score": 32,
-        "grade": "D",
         "clinical_care_wages_pct": 48.2,
         "admin_overhead_pct": 17.5,
         "exec_comp_pct": 2.8,
@@ -592,8 +496,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Optum / UnitedHealth Group (Public: UNH)",
         "ownership_type": "public",
         "ownership_tier": 6,
-        "composite_score": 30,
-        "grade": "D",
         "clinical_care_wages_pct": 47.0,
         "admin_overhead_pct": 18.0,
         "exec_comp_pct": 2.5,
@@ -620,76 +522,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "filing_url": "https://www.medexpress.com/",
         "summary_notes": "Acquired by UnitedHealth Group's Optum division in 2015. Over 250 urgent care centers across 14 states."
     },
-    {
-        "name": "Schweiger Dermatology Group",
-        "entity_type": "corporate_clinic",
-        "sub_category": "Dermatology PE Rollup",
-        "parent_organization": "L Catterton (Private Equity)",
-        "ownership_type": "private_equity",
-        "ownership_tier": 5,
-        "composite_score": 31,
-        "grade": "D",
-        "clinical_care_wages_pct": 42.0,
-        "admin_overhead_pct": 19.5,
-        "exec_comp_pct": 3.5,
-        "shareholder_extraction_pct": 18.0,
-        "supplies_operations_pct": 17.0,
-        "medical_loss_ratio_pct": 58.0,
-        "claims_denial_rate_pct": 0.0,
-        "charge_to_cost_ratio": 6.8,
-        "charity_care_pct": 0.2,
-        "is_pe_rollup": True,
-        "pe_firm_name": "L Catterton",
-        "regulatory_citations": [
-            "Trade investigations into PE dermatology rollups pushing non-physician provider biopsy volume quotas"
-        ],
-        "swap_name": "Independent Board-Certified Dermatologist",
-        "swap_slug": "independent-dermatologist",
-        "swap_type": "Physician-Owned Practice",
-        "swap_rationale": "Independent dermatologists have no private equity biopsy quotas or corporate cross-selling mandates.",
-        "location_scope": "Regional",
-        "city": "New York",
-        "state": "NY",
-        "data_provenance": "industry_benchmark_model",
-        "source_citation": "L Catterton Portfolio Disclosure & Journal of the American Academy of Dermatology PE Studies",
-        "filing_url": "https://www.schweigerderm.com/",
-        "summary_notes": "100+ dermatology locations across NY, NJ, and PA acquired through aggressive physician practice rollup financing."
-    },
-    {
-        "name": "Athletico Physical Therapy",
-        "entity_type": "corporate_clinic",
-        "sub_category": "Physical Therapy PE Rollup",
-        "parent_organization": "BDT & MSD Partners / Silver Lake",
-        "ownership_type": "private_equity",
-        "ownership_tier": 5,
-        "composite_score": 34,
-        "grade": "D",
-        "clinical_care_wages_pct": 46.0,
-        "admin_overhead_pct": 18.5,
-        "exec_comp_pct": 3.0,
-        "shareholder_extraction_pct": 16.5,
-        "supplies_operations_pct": 16.0,
-        "medical_loss_ratio_pct": 60.5,
-        "claims_denial_rate_pct": 0.0,
-        "charge_to_cost_ratio": 5.2,
-        "charity_care_pct": 0.3,
-        "is_pe_rollup": True,
-        "pe_firm_name": "BDT Capital Partners",
-        "regulatory_citations": [
-            "Acquisition of Pivot Health Solutions creating a 900-clinic mega-chain loaded with private debt"
-        ],
-        "swap_name": "Independent Physical Therapist-Owned Clinic",
-        "swap_slug": "independent-pt",
-        "swap_type": "Independent PT Practice",
-        "swap_rationale": "Therapist-owned clinics offer 1-on-1 personalized rehabilitation rather than double-booked PE treatment tracks.",
-        "location_scope": "National",
-        "city": "Oak Brook",
-        "state": "IL",
-        "data_provenance": "industry_benchmark_model",
-        "source_citation": "BDT & MSD Partners Portfolio & Physical Therapy Board Filings",
-        "filing_url": "https://www.athletico.com/",
-        "summary_notes": "Over 900 therapy locations across 24 states acquired through successive private equity buyouts."
-    },
 
     # --------------------------------------------------------------------------
     # LOCAL CLINICS & OFFICES (Tiers 1 & 2: DPC, FQHC, Independent Doctors)
@@ -701,8 +533,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Plum Health DPC (Doctor-Owned)",
         "ownership_type": "physician_owned",
         "ownership_tier": 1,
-        "composite_score": 98,
-        "grade": "A+",
         "clinical_care_wages_pct": 82.5,
         "admin_overhead_pct": 4.5,
         "exec_comp_pct": 0.0,  # Physician salary is clinical care
@@ -734,8 +564,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "AltaMed Health Services Corporation",
         "ownership_type": "nonprofit",
         "ownership_tier": 2,
-        "composite_score": 96,
-        "grade": "A+",
         "clinical_care_wages_pct": 78.4,
         "admin_overhead_pct": 7.8,
         "exec_comp_pct": 0.7,
@@ -767,8 +595,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Pioneer DPC (Physician-Owned)",
         "ownership_type": "physician_owned",
         "ownership_tier": 1,
-        "composite_score": 97,
-        "grade": "A+",
         "clinical_care_wages_pct": 81.0,
         "admin_overhead_pct": 4.8,
         "exec_comp_pct": 0.0,
@@ -800,8 +626,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Erie Family Health Center, Inc.",
         "ownership_type": "nonprofit",
         "ownership_tier": 2,
-        "composite_score": 95,
-        "grade": "A+",
         "clinical_care_wages_pct": 77.2,
         "admin_overhead_pct": 8.0,
         "exec_comp_pct": 0.8,
@@ -833,8 +657,6 @@ VERIFIED_HEALTHCARE_ENTITIES: List[Dict[str, Any]] = [
         "parent_organization": "Native American Community Clinic (NACC)",
         "ownership_type": "nonprofit",
         "ownership_tier": 2,
-        "composite_score": 97,
-        "grade": "A+",
         "clinical_care_wages_pct": 79.0,
         "admin_overhead_pct": 7.2,
         "exec_comp_pct": 0.6,
@@ -887,12 +709,13 @@ def generate_healthcare_2000() -> List[Dict[str, Any]]:
     for v in VERIFIED_HEALTHCARE_ENTITIES:
         add_entity(dict(v))
 
+    # Refuse generated rows on the raw output, before any gate runs. Raises, so the build fails.
+    assert_no_synthetic(entities, "healthcare")
+
     # Every record passes the publication gate: unsourced claims are withheld,
-    # public-company financials come from SEC XBRL data.
+    # public-company financials come from SEC XBRL data, ratings come from the rubric.
     financials = load_financials()
-    gated = [gate_healthcare(e, financials) for e in entities]
-    assert_no_synthetic(gated, "healthcare")
-    return gated
+    return [gate_healthcare(e, financials) for e in entities]
 
 
 def export_healthcare_json(output_path: str = "api/v1/healthcare_2000.json") -> List[Dict[str, Any]]:
@@ -908,6 +731,9 @@ def export_healthcare_json(output_path: str = "api/v1/healthcare_2000.json") -> 
 def seed_healthcare_db(session: Session):
     """Seed the gated healthcare records into the SQLAlchemy database."""
     data = generate_healthcare_2000()
+
+    # Gated ratings and ownership fields are None by design; the model declares some of them NOT NULL.
+    allow_null_columns(HealthcareIntegrity.__table__, HEALTH_GATED_COLUMNS)
 
     # Drop and recreate healthcare_integrity table to ensure fresh schema
     HealthcareIntegrity.__table__.drop(bind=session.get_bind(), checkfirst=True)

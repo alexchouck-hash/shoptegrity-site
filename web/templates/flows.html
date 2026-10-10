@@ -166,9 +166,9 @@
 {% block content %}
 <section class="hero" style="padding-bottom: 2rem;">
   <div class="hero-inner">
-    <div class="hero-tag">💸 Supply-Chain Geographic Trace</div>
+    <div class="hero-tag">💸 Illustrative Supply-Chain Model</div>
     <h1>The Dollar Flow Map</h1>
-    <p>See where every single cent of your purchase travels from your hometown: what stays with frontline workers and independent family growers vs. what leaks across state lines into Wall Street buybacks and corporate conglomerates.</p>
+    <p>An illustrative model of where a purchase could go, by payee category and by local area. The shares and locations are assumptions, not measurements, and no company is named.</p>
 
     <!-- Search / Filter Bar -->
     <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 14px rgba(0,0,0,0.06); margin-top: 1.5rem; text-align: left;">
@@ -177,14 +177,14 @@
           <label for="zipInput" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.35rem;">
             📍 Origin ZIP Code
           </label>
-          <input 
-            type="text" 
-            id="zipInput" 
-            name="zip" 
-            value="{{ origin_zip }}" 
-            maxlength="5" 
-            pattern="[0-9]{5}" 
-            required 
+          <input
+            type="text"
+            id="zipInput"
+            name="zip"
+            value="{{ origin_zip }}"
+            maxlength="5"
+            pattern="[0-9]{5}"
+            required
             style="width: 100%; padding: 0.65rem 0.9rem; font-size: 1.05rem; font-weight: 600; border: 1px solid var(--border); border-radius: 0.5rem; outline: none;"
           />
         </div>
@@ -193,9 +193,9 @@
           <label for="scenarioSelect" style="display: block; font-size: 0.85rem; font-weight: 700; color: var(--navy); margin-bottom: 0.35rem;">
             🛒 What Are You Buying?
           </label>
-          <select 
-            id="scenarioSelect" 
-            name="scenario" 
+          <select
+            id="scenarioSelect"
+            name="scenario"
             style="width: 100%; padding: 0.65rem 0.9rem; font-size: 0.95rem; font-weight: 600; border: 1px solid var(--border); border-radius: 0.5rem; outline: none; background: #fff;"
           >
             {% for s in scenarios %}
@@ -212,13 +212,13 @@
           </label>
           <div style="position: relative;">
             <span style="position: absolute; left: 0.75rem; top: 0.65rem; font-weight: 700; color: var(--muted);">$</span>
-            <input 
-              type="number" 
-              id="spendInput" 
-              name="spend" 
-              value="{{ "%.0f"|format(spend_amount) }}" 
-              min="1" 
-              step="1" 
+            <input
+              type="number"
+              id="spendInput"
+              name="spend"
+              value="{{ "%.0f"|format(spend_amount) }}"
+              min="1"
+              step="1"
               style="width: 100%; padding: 0.65rem 0.75rem 0.65rem 1.8rem; font-size: 1.05rem; font-weight: 600; border: 1px solid var(--border); border-radius: 0.5rem; outline: none;"
             />
           </div>
@@ -246,20 +246,26 @@
 
 <main class="container" style="padding-top: 1.5rem;">
 
-  <!-- SECTION 1: THE HIGH-LEVEL VERDICT (EASY TO READ AT A GLANCE) -->
+  <!-- ILLUSTRATIVE MODEL NOTE -->
+  <div role="note" style="background: #fffbeb; border: 1px solid #fcd34d; color: #78350f; border-radius: 0.65rem; padding: 0.9rem 1.1rem; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">
+    <strong>Illustrative model. Output is not a measurement.</strong>
+    Payee categories, locations and shares on this page are assumptions entered in code. No company is named, and nothing here measures any company, payee or local economy. Items marked "Withheld: no cited source yet" have no source yet.
+  </div>
+
+  <!-- SECTION 1: THE HIGH-LEVEL SUMMARY (EASY TO READ AT A GLANCE) -->
   <section style="margin-bottom: 2.5rem;">
     <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; border-radius: 1rem; padding: 1.75rem 2rem; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
         <div>
           <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.05em;">
-            Where Your ${{ "%.0f"|format(spend_amount) }} Lands
+            Modeled allocation of your ${{ "%.0f"|format(spend_amount) }}
           </span>
           <h2 style="font-size: 1.7rem; font-weight: 800; color: #f8fafc; margin-top: 0.4rem;">
             {{ trace.scenario_title }}
           </h2>
         </div>
         <div style="background: rgba(255, 255, 255, 0.08); padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem;">
-          📍 You are in: <strong>{{ trace.origin_city }}, {{ trace.origin_state }} ({{ trace.origin_zip }})</strong>
+          📍 Origin: <strong>{{ trace.origin_city }}, {{ trace.origin_state }} ({{ trace.origin_zip }})</strong>
         </div>
       </div>
       <p style="font-size: 1.05rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 1.5rem;">
@@ -268,55 +274,59 @@
 
       <!-- Side-by-Side Quick Summary Bar -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.25rem;">
-        
+
         <!-- Conventional Card -->
         <div style="background: rgba(220, 38, 38, 0.1); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 0.75rem; padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
               <span style="font-size: 0.78rem; font-weight: 800; color: #fca5a5; text-transform: uppercase; letter-spacing: 0.05em;">
-                🛑 Option A: Conventional Corporate Chain
+                🛑 Option A: Conventional Supply Chain (illustrative)
               </span>
               <span style="background: rgba(239, 68, 68, 0.25); color: #fca5a5; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px;">
-                {{ trace.conventional.capital_flight_pct }}% Capital Flight
+                {{ trace.conventional.capital_flight_pct }}% Outside Local Area
               </span>
             </div>
 
             <div style="font-size: 1.6rem; font-weight: 800; color: #f87171; margin: 0.25rem 0 0.1rem 0;">
-              ${{ "%.2f"|format(trace.conventional.capital_flight_amount) }} Leaves Your State
+              ${{ "%.2f"|format(trace.conventional.capital_flight_amount) }} Modeled Outside Local Area
             </div>
             <div style="font-size: 0.8rem; color: #fca5a5; margin-bottom: 0.75rem;">
-              Average distance traveled: <strong>{{ trace.conventional.avg_miles_traveled }} miles</strong> across state lines.
+              Modeled average distance: <strong>{{ trace.conventional.avg_miles_traveled }} miles</strong> (illustrative locations).
             </div>
 
-            <!-- Proportional 100% Visual Allocation Bar -->
+            <!-- Proportional Visual Allocation Bar -->
             <div style="font-size: 0.75rem; font-weight: 700; color: #cbd5e1; display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-              <span>Where Every Dollar Lands</span>
-              <span>100% Accounted</span>
+              <span>Modeled allocation</span>
+              <span>Modeled total</span>
             </div>
-            <div class="alloc-bar" title="Financial Allocation: {{ trace.conventional.worker_farmer_pct }}% Workers, {{ trace.conventional.operations_logistics_pct }}% Facilities/Logistics, {{ trace.conventional.executive_shareholder_pct }}% Wall St">
-              <div class="alloc-seg" style="width: {{ trace.conventional.worker_farmer_pct }}%; background: #38bdf8;" title="Workers & Farmers: {{ trace.conventional.worker_farmer_pct }}%"></div>
-              <div class="alloc-seg" style="width: {{ trace.conventional.operations_logistics_pct }}%; background: #94a3b8;" title="Facilities & Logistics: {{ trace.conventional.operations_logistics_pct }}%"></div>
-              <div class="alloc-seg" style="width: {{ trace.conventional.executive_shareholder_pct }}%; background: #ef4444;" title="Wall St & C-Suite: {{ trace.conventional.executive_shareholder_pct }}%"></div>
+            <div class="alloc-bar" title="Modeled allocation: {{ trace.conventional.worker_farmer_pct }}% workers and farm gate, {{ trace.conventional.operations_logistics_pct }}% facilities and logistics, {{ trace.conventional.executive_shareholder_pct }}% shareholder returns and executive pay">
+              <div class="alloc-seg" style="width: {{ trace.conventional.worker_farmer_pct }}%; background: #38bdf8;" title="Workers & farm gate: {{ trace.conventional.worker_farmer_pct }}%"></div>
+              <div class="alloc-seg" style="width: {{ trace.conventional.operations_logistics_pct }}%; background: #94a3b8;" title="Facilities & logistics: {{ trace.conventional.operations_logistics_pct }}%"></div>
+              <div class="alloc-seg" style="width: {{ trace.conventional.executive_shareholder_pct }}%; background: #ef4444;" title="Shareholder returns & executive pay: {{ trace.conventional.executive_shareholder_pct }}%"></div>
             </div>
 
-            <!-- Itemized 100% Financial Ledger -->
+            <!-- Itemized Modeled Ledger -->
             <div class="ledger-box">
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🌾 Frontline Workers & Farm Gate</span>
+                <span style="color: #cbd5e1;">🌾 Workers & Farm Gate (category)</span>
                 <strong style="color: #38bdf8;">${{ "%.2f"|format(trace.conventional.worker_farmer_amount) }} ({{ trace.conventional.worker_farmer_pct }}%)</strong>
               </div>
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🏭 Facilities, Logistics & Processing</span>
+                <span style="color: #cbd5e1;">🏭 Facilities, Logistics & Processing (category)</span>
                 <strong style="color: #cbd5e1;">${{ "%.2f"|format(trace.conventional.operations_logistics_amount) }} ({{ trace.conventional.operations_logistics_pct }}%)</strong>
               </div>
+              {% if trace.conventional.executive_shareholder_amount > 0 %}
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🏛️ Wall St Buybacks, PE & C-Suite</span>
+                <span style="color: #cbd5e1;">🏛️ Shareholder returns & executive pay (category)</span>
                 <strong style="color: #f87171;">${{ "%.2f"|format(trace.conventional.executive_shareholder_amount) }} ({{ trace.conventional.executive_shareholder_pct }}%)</strong>
               </div>
+              {% endif %}
+              {% if trace.conventional.member_dividends_amount > 0 %}
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🤝 Member Patronage Dividends</span>
-                <strong style="color: #94a3b8;">$0.00 (0.0%)</strong>
+                <span style="color: #cbd5e1;">🤝 Member rebates (category)</span>
+                <strong style="color: #fbbf24;">${{ "%.2f"|format(trace.conventional.member_dividends_amount) }} ({{ trace.conventional.member_dividends_pct }}%)</strong>
               </div>
+              {% endif %}
               <div class="ledger-row total-row">
                 <span style="color: #f8fafc;">Total Financial Allocation</span>
                 <span style="color: #f8fafc;">${{ "%.2f"|format(trace.conventional.total_spend) }} (100.0%)</span>
@@ -325,9 +335,9 @@
           </div>
 
           <!-- Geographic Footprint Row -->
-          <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem; display: flex; justify-content: space-between; color: #fca5a5;">
-            <span>📍 Local Hometown: <strong>${{ "%.2f"|format(trace.conventional.local_retained_amount) }} ({{ trace.conventional.local_retained_pct }}%)</strong></span>
-            <span>✈️ Capital Flight: <strong>${{ "%.2f"|format(trace.conventional.capital_flight_amount) }} ({{ trace.conventional.capital_flight_pct }}%)</strong></span>
+          <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; color: #fca5a5;">
+            <span>📍 Local area (modeled): <strong>${{ "%.2f"|format(trace.conventional.local_retained_amount) }} ({{ trace.conventional.local_retained_pct }}%)</strong></span>
+            <span>Outside local area (modeled): <strong>${{ "%.2f"|format(trace.conventional.capital_flight_amount) }} ({{ trace.conventional.capital_flight_pct }}%)</strong></span>
           </div>
         </div>
 
@@ -336,49 +346,53 @@
           <div>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
               <span style="font-size: 0.78rem; font-weight: 800; color: #6ee7b7; text-transform: uppercase; letter-spacing: 0.05em;">
-                🌱 Option B: Community Farm & Co-op
+                🌱 Option B: Community Farm & Co-op (illustrative)
               </span>
               <span style="background: rgba(16, 185, 129, 0.25); color: #6ee7b7; font-size: 0.72rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 9999px;">
-                {{ trace.alternative.local_retained_pct }}% Local Retention
+                {{ trace.alternative.local_retained_pct }}% Modeled Local Share
               </span>
             </div>
 
             <div style="font-size: 1.6rem; font-weight: 800; color: #34d399; margin: 0.25rem 0 0.1rem 0;">
-              ${{ "%.2f"|format(trace.alternative.local_retained_amount) }} Stays in Your Community
+              ${{ "%.2f"|format(trace.alternative.local_retained_amount) }} Modeled Local Amount
             </div>
             <div style="font-size: 0.8rem; color: #a7f3d0; margin-bottom: 0.75rem;">
-              Average distance traveled: <strong>{{ trace.alternative.avg_miles_traveled }} miles</strong> within regional foodshed.
+              Modeled average distance: <strong>{{ trace.alternative.avg_miles_traveled }} miles</strong> (illustrative locations).
             </div>
 
-            <!-- Proportional 100% Visual Allocation Bar -->
+            <!-- Proportional Visual Allocation Bar -->
             <div style="font-size: 0.75rem; font-weight: 700; color: #cbd5e1; display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
-              <span>Where Every Dollar Lands</span>
-              <span>100% Accounted</span>
+              <span>Modeled allocation</span>
+              <span>Modeled total</span>
             </div>
-            <div class="alloc-bar" title="Financial Allocation: {{ trace.alternative.worker_farmer_pct }}% Workers/Farmers, {{ trace.alternative.operations_logistics_pct }}% Operations/Grants, {{ trace.alternative.member_dividends_pct }}% Member Dividends">
-              <div class="alloc-seg" style="width: {{ trace.alternative.worker_farmer_pct }}%; background: #34d399;" title="Independent Farmers & Staff: {{ trace.alternative.worker_farmer_pct }}%"></div>
-              <div class="alloc-seg" style="width: {{ trace.alternative.operations_logistics_pct }}%; background: #2dd4bf;" title="Regional Hub & Grants: {{ trace.alternative.operations_logistics_pct }}%"></div>
-              <div class="alloc-seg" style="width: {{ trace.alternative.member_dividends_pct }}%; background: #fbbf24;" title="Member Dividends: {{ trace.alternative.member_dividends_pct }}%"></div>
+            <div class="alloc-bar" title="Modeled allocation: {{ trace.alternative.worker_farmer_pct }}% workers and farmers, {{ trace.alternative.operations_logistics_pct }}% operations and grants, {{ trace.alternative.member_dividends_pct }}% member rebates">
+              <div class="alloc-seg" style="width: {{ trace.alternative.worker_farmer_pct }}%; background: #34d399;" title="Farmers & staff: {{ trace.alternative.worker_farmer_pct }}%"></div>
+              <div class="alloc-seg" style="width: {{ trace.alternative.operations_logistics_pct }}%; background: #2dd4bf;" title="Regional hub & grants: {{ trace.alternative.operations_logistics_pct }}%"></div>
+              <div class="alloc-seg" style="width: {{ trace.alternative.member_dividends_pct }}%; background: #fbbf24;" title="Member rebates: {{ trace.alternative.member_dividends_pct }}%"></div>
             </div>
 
-            <!-- Itemized 100% Financial Ledger -->
+            <!-- Itemized Modeled Ledger -->
             <div class="ledger-box">
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🌾 Independent Farmers & Co-op Staff</span>
+                <span style="color: #cbd5e1;">🌾 Farmers & Co-op Staff (category)</span>
                 <strong style="color: #34d399;">${{ "%.2f"|format(trace.alternative.worker_farmer_amount) }} ({{ trace.alternative.worker_farmer_pct }}%)</strong>
               </div>
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🏭 Regional Hub, Cold Storage & Grants</span>
+                <span style="color: #cbd5e1;">🏭 Regional Hub, Cold Storage & Grants (category)</span>
                 <strong style="color: #2dd4bf;">${{ "%.2f"|format(trace.alternative.operations_logistics_amount) }} ({{ trace.alternative.operations_logistics_pct }}%)</strong>
               </div>
+              {% if trace.alternative.member_dividends_amount > 0 %}
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🤝 Member Patronage Dividends (To You)</span>
+                <span style="color: #cbd5e1;">🤝 Member rebates (category)</span>
                 <strong style="color: #fbbf24;">${{ "%.2f"|format(trace.alternative.member_dividends_amount) }} ({{ trace.alternative.member_dividends_pct }}%)</strong>
               </div>
+              {% endif %}
+              {% if trace.alternative.executive_shareholder_amount > 0 %}
               <div class="ledger-row">
-                <span style="color: #cbd5e1;">🏛️ Wall Street & PE Extraction</span>
-                <strong style="color: #94a3b8;">$0.00 (0.0%)</strong>
+                <span style="color: #cbd5e1;">🏛️ Shareholder returns & executive pay (category)</span>
+                <strong style="color: #f87171;">${{ "%.2f"|format(trace.alternative.executive_shareholder_amount) }} ({{ trace.alternative.executive_shareholder_pct }}%)</strong>
               </div>
+              {% endif %}
               <div class="ledger-row total-row">
                 <span style="color: #f8fafc;">Total Financial Allocation</span>
                 <span style="color: #f8fafc;">${{ "%.2f"|format(trace.alternative.total_spend) }} (100.0%)</span>
@@ -388,8 +402,7 @@
 
           <!-- Geographic Footprint Row -->
           <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.78rem; display: flex; justify-content: space-between; color: #a7f3d0;">
-            <span>📍 Local Hometown: <strong>${{ "%.2f"|format(trace.alternative.local_retained_amount) }} ({{ trace.alternative.local_retained_pct }}%)</strong></span>
-            <span>✈️ Capital Flight: <strong>$0.00 (0.0%)</strong></span>
+            <span>📍 Local area (modeled): <strong>${{ "%.2f"|format(trace.alternative.local_retained_amount) }} ({{ trace.alternative.local_retained_pct }}%)</strong></span>
           </div>
         </div>
 
@@ -402,7 +415,7 @@
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
       <div>
         <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">Interactive Geographic Map</h3>
-        <p style="font-size: 0.88rem; color: var(--muted);">Click any pin or line to inspect the payment amount, distance, and destination.</p>
+        <p style="font-size: 0.88rem; color: var(--muted);">Click any pin or line to see the modeled amount, distance and payee category. Locations are illustrative.</p>
       </div>
 
       <!-- View Filter Controls -->
@@ -411,10 +424,10 @@
           🔘 Compare Both Routes
         </button>
         <button type="button" class="map-toggle-btn conv" id="btnShowConv" onclick="setMapView('conv')">
-          🛑 Conventional Only (Where it Leaks)
+          🛑 Conventional Only (Outside Local Area)
         </button>
         <button type="button" class="map-toggle-btn alt" id="btnShowAlt" onclick="setMapView('alt')">
-          🌱 Community Only (Where it Stays)
+          🌱 Community Only (Local Area)
         </button>
       </div>
     </div>
@@ -427,25 +440,25 @@
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; padding: 0.75rem 1rem; font-size: 0.82rem; border-top: 1px solid var(--border); margin-top: 0.5rem; background: #fafafa; border-radius: 0.5rem;">
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #0284c7; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3);"></span>
-          <strong>You in {{ trace.origin_city }} ({{ trace.origin_zip }})</strong>
+          <strong>Origin: {{ trace.origin_city }} ({{ trace.origin_zip }})</strong>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #dc2626;"></span>
-          <span>Red Pins: Corporate Headquarters, Distant Agribusiness & Wall Street</span>
+          <span>Red pins: out-of-region payees (category), modeled</span>
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #059669;"></span>
-          <span>Green Pins: Local Independent Farmers, Co-op Staff & Member Rebates</span>
+          <span>Green pins: local payees (category), modeled</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 3: STEP-BY-STEP SUPPLY CHAIN LEDGER -->
+  <!-- SECTION 3: STEP-BY-STEP MODELED ROUTING -->
   <section style="margin-bottom: 4rem;">
     <div style="text-align: center; max-width: 750px; margin: 0 auto 2rem auto;">
-      <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--navy);">The Step-by-Step Supply Chain Routing</h3>
-      <p style="color: var(--muted); font-size: 0.95rem;">Follow the dollar trail from the retail register back through processing, transportation, and farm ownership.</p>
+      <h3 style="font-size: 1.6rem; font-weight: 800; color: var(--navy);">Step-by-Step Modeled Routing</h3>
+      <p style="color: var(--muted); font-size: 0.95rem;">Each stage is a payee category in the illustrative model, with an assumed share of the purchase and an illustrative location.</p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2rem;">
@@ -454,14 +467,14 @@
         <div style="background: #fef2f2; border: 2px solid #fca5a5; border-radius: 0.75rem; padding: 1.25rem;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <h4 style="font-size: 1.2rem; font-weight: 800; color: #991b1b; margin: 0;">
-              🛑 Conventional Route
+              🛑 Conventional Route (illustrative)
             </h4>
             <span style="background: #dc2626; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px;">
-              {{ trace.conventional.capital_flight_pct }}% Leaks Out
+              {{ trace.conventional.capital_flight_pct }}% Outside Local Area
             </span>
           </div>
           <p style="font-size: 0.85rem; color: #7f1d1d; margin-top: 0.4rem; margin-bottom: 0;">
-            Money rapidly fragments into distant corporate holdings, marketing fees, and shareholder buybacks.
+            In this illustrative model, each stage below is assigned an assumed share of the purchase.
           </p>
         </div>
 
@@ -477,27 +490,27 @@
               </div>
             </div>
             <div style="font-size: 0.85rem; color: var(--slate); margin-bottom: 0.45rem;">
-              Payee: <strong>{{ node.payee_name }}</strong>
+              Payee category: <strong>{{ node.payee_name }}</strong>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--muted); background: #f8fafc; padding: 0.4rem 0.6rem; border-radius: 0.35rem;">
-              <span>📍 {{ node.city }}, {{ node.state }} (ZIP {{ node.destination_zip }})</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.35rem; font-size: 0.82rem; color: var(--muted); background: #f8fafc; padding: 0.4rem 0.6rem; border-radius: 0.35rem;">
+              <span>📍 Modeled location: {{ node.city }}, {{ node.state }} (ZIP {{ node.destination_zip }})</span>
               <span style="font-weight: 700; color: {% if node.is_local %}#059669{% elif node.distance_miles < 30 %}#d97706{% else %}#dc2626{% endif %};">
                 {% if node.is_local %}
-                  🟢 Local Bioregion ({{ node.distance_miles }} mi)
+                  Local area, modeled ({{ node.distance_miles }} mi)
                 {% elif node.distance_miles < 30 %}
-                  🏢 Corporate Entity ({{ node.distance_miles }} mi)
+                  Nearby, not a local category ({{ node.distance_miles }} mi)
                 {% else %}
-                  ✈️ Interstate Flight ({{ node.distance_miles }} mi)
+                  Outside local area ({{ node.distance_miles }} mi)
                 {% endif %}
               </span>
             </div>
 
-            <!-- Farm Ownership Inspection -->
+            <!-- Farm Ownership Model -->
             {% if node.farm_ownership_tier %}
               <div style="margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px dashed #e2e8f0; font-size: 0.8rem;">
                 <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;">
                   <span style="background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; font-size: 0.72rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px;">
-                    ⚠️ CAPTIVE CONTRACT GROWER
+                    {% if node.farm_ownership_tier == 'contract_grower' %}Contract-grower model (illustrative){% else %}Illustrative processor margin{% endif %}
                   </span>
                 </div>
                 <p style="margin: 0; color: #475569; line-height: 1.4;">
@@ -508,13 +521,13 @@
                   <!-- Expandable Farm-Gate Audit -->
                   <details style="margin-top: 0.65rem; background: #fff5f5; border: 1px solid #fecaca; border-radius: 0.45rem; padding: 0.5rem 0.65rem;">
                     <summary style="font-weight: 750; color: #b91c1c; cursor: pointer; outline: none; display: flex; justify-content: space-between; align-items: center;">
-                      <span>🔍 Farm-Gate Audit: What Does the Farmer Actually Pocket?</span>
+                      <span>🔍 Farm-Gate Audit: What Does the Farmer Actually Pocket? (illustrative)</span>
                       <span style="font-size: 0.7rem; background: #fee2e2; color: #991b1b; padding: 0.1rem 0.4rem; border-radius: 9999px;">View Deductions</span>
                     </summary>
                     <div style="margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid #fecaca;">
                       <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: #7f1d1d; margin-bottom: 0.35rem;">
                         <span>Gross Farm Gate Share: <strong>${{ "%.2f"|format(node.farm_gate_audit.gross_farm_gate_amount) }}</strong></span>
-                        <span>Where the money goes:</span>
+                        <span>Assumed split:</span>
                       </div>
                       <div class="alloc-bar" style="height: 8px; margin: 0.25rem 0 0.5rem 0;">
                         {% for item in node.farm_gate_audit.input_expenses %}
@@ -540,7 +553,7 @@
                         {% endfor %}
                       </div>
                       <div style="margin-top: 0.55rem; padding: 0.4rem 0.5rem; border-radius: 0.35rem; background: #fee2e2; color: #991b1b; font-size: 0.74rem; line-height: 1.35;">
-                        <strong>Net Farmer Take-Home: ${{ "%.2f"|format(node.farm_gate_audit.net_farmer_take_home_amount) }}</strong> ({{ node.farm_gate_audit.net_farmer_take_home_pct }}% of farm payment).<br>
+                        <strong>Net Farmer Take-Home (illustrative): ${{ "%.2f"|format(node.farm_gate_audit.net_farmer_take_home_amount) }}</strong> ({{ node.farm_gate_audit.net_farmer_take_home_pct }}% of farm payment, assumed).<br>
                         {{ node.farm_gate_audit.notes }}
                       </div>
                     </div>
@@ -554,11 +567,11 @@
         <!-- Conventional Reconciliation Footer -->
         <div style="background: #fef2f2; border: 1px solid #fca5a5; border-radius: 0.65rem; padding: 0.85rem 1rem; font-size: 0.85rem; margin-top: 0.5rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: #991b1b;">
-            <span>Total Conventional Routing</span>
-            <span style="font-size: 1.05rem;">${{ "%.2f"|format(trace.conventional.total_spend) }} (100.0%)</span>
+            <span>Total Conventional Routing (modeled)</span>
+            <span style="font-size: 1.05rem;">${{ "%.2f"|format(trace.conventional.total_spend) }}</span>
           </div>
           <div style="font-size: 0.78rem; color: #7f1d1d; margin-top: 0.25rem;">
-            100% of purchase routed across {{ trace.conventional.nodes|length }} supply chain stages.
+            Modeled total across {{ trace.conventional.nodes|length }} illustrative stages. Shares are assumptions, not measurements.
           </div>
         </div>
       </div>
@@ -568,14 +581,14 @@
         <div style="background: #f0fdf4; border: 2px solid #86efac; border-radius: 0.75rem; padding: 1.25rem;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <h4 style="font-size: 1.2rem; font-weight: 800; color: #166534; margin: 0;">
-              🌱 Community Alternative Route
+              🌱 Community Alternative Route (illustrative)
             </h4>
             <span style="background: #059669; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 9999px;">
-              {{ trace.alternative.local_retained_pct }}% Retained
+              {{ trace.alternative.local_retained_pct }}% Modeled Local Share
             </span>
           </div>
           <p style="font-size: 0.85rem; color: #14532d; margin-top: 0.4rem; margin-bottom: 0;">
-            100% of profit stays within independent growers, regional living-wage workers, and member patronage rebates.
+            In this illustrative model, the alternative assigns its assumed shares to local categories: farmers, co-op staff and member rebates.
           </p>
         </div>
 
@@ -591,25 +604,25 @@
               </div>
             </div>
             <div style="font-size: 0.85rem; color: #14532d; margin-bottom: 0.45rem;">
-              Payee: <strong>{{ node.payee_name }}</strong>
+              Payee category: <strong>{{ node.payee_name }}</strong>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: #15803d; background: #ecfdf5; padding: 0.4rem 0.6rem; border-radius: 0.35rem;">
-              <span>📍 {{ node.city }}, {{ node.state }} (ZIP {{ node.destination_zip }})</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.35rem; font-size: 0.82rem; color: #15803d; background: #ecfdf5; padding: 0.4rem 0.6rem; border-radius: 0.35rem;">
+              <span>📍 Modeled location: {{ node.city }}, {{ node.state }} (ZIP {{ node.destination_zip }})</span>
               <span style="font-weight: 700;">
                 {% if node.is_local %}
-                  🟢 Local Bioregion ({{ node.distance_miles }} mi)
+                  Local area, modeled ({{ node.distance_miles }} mi)
                 {% else %}
-                  🌱 Regional Partner ({{ node.distance_miles }} mi)
+                  Regional, modeled ({{ node.distance_miles }} mi)
                 {% endif %}
               </span>
             </div>
 
-            <!-- Farm Ownership Inspection -->
+            <!-- Farm Ownership Model -->
             {% if node.farm_ownership_tier == 'community_farmer' %}
               <div style="margin-top: 0.6rem; padding-top: 0.6rem; border-top: 1px dashed #a7f3d0; font-size: 0.8rem;">
                 <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.25rem;">
                   <span style="background: #dcfce7; color: #166534; border: 1px solid #86efac; font-size: 0.72rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px;">
-                    ✅ VERIFIED INDEPENDENT COMMUNITY FARMER
+                    Community-farm model (illustrative)
                   </span>
                 </div>
                 <p style="margin: 0; color: #14532d; line-height: 1.4;">
@@ -620,13 +633,13 @@
                   <!-- Expandable Farm-Gate Audit -->
                   <details style="margin-top: 0.65rem; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 0.45rem; padding: 0.5rem 0.65rem;">
                     <summary style="font-weight: 750; color: #15803d; cursor: pointer; outline: none; display: flex; justify-content: space-between; align-items: center;">
-                      <span>🔍 Farm-Gate Audit: What Does the Farmer Actually Pocket?</span>
+                      <span>🔍 Farm-Gate Audit: What Does the Farmer Actually Pocket? (illustrative)</span>
                       <span style="font-size: 0.7rem; background: #dcfce7; color: #166534; padding: 0.1rem 0.4rem; border-radius: 9999px;">View Distribution</span>
                     </summary>
                     <div style="margin-top: 0.6rem; padding-top: 0.5rem; border-top: 1px solid #bbf7d0;">
                       <div style="display: flex; justify-content: space-between; font-size: 0.76rem; color: #14532d; margin-bottom: 0.35rem;">
                         <span>Gross Farm Gate Share: <strong>${{ "%.2f"|format(node.farm_gate_audit.gross_farm_gate_amount) }}</strong></span>
-                        <span>Direct-to-grower retention:</span>
+                        <span>Assumed split:</span>
                       </div>
                       <div class="alloc-bar" style="height: 8px; margin: 0.25rem 0 0.5rem 0;">
                         {% for item in node.farm_gate_audit.input_expenses %}
@@ -652,7 +665,7 @@
                         {% endfor %}
                       </div>
                       <div style="margin-top: 0.55rem; padding: 0.4rem 0.5rem; border-radius: 0.35rem; background: #dcfce7; color: #14532d; font-size: 0.74rem; line-height: 1.35;">
-                        <strong>Farmer Living Return: ${{ "%.2f"|format(node.farm_gate_audit.net_farmer_take_home_amount) }}</strong> ({{ node.farm_gate_audit.net_farmer_take_home_pct }}% retained directly by the farm family).<br>
+                        <strong>Farmer Living Return (illustrative): ${{ "%.2f"|format(node.farm_gate_audit.net_farmer_take_home_amount) }}</strong> ({{ node.farm_gate_audit.net_farmer_take_home_pct }}% of farm payment, assumed).<br>
                         {{ node.farm_gate_audit.notes }}
                       </div>
                     </div>
@@ -666,18 +679,18 @@
         <!-- Alternative Reconciliation Footer -->
         <div style="background: #f0fdf4; border: 1px solid #86efac; border-radius: 0.65rem; padding: 0.85rem 1rem; font-size: 0.85rem; margin-top: 0.5rem;">
           <div style="display: flex; justify-content: space-between; align-items: center; font-weight: 800; color: #166534;">
-            <span>Total Alternative Routing</span>
-            <span style="font-size: 1.05rem;">${{ "%.2f"|format(trace.alternative.total_spend) }} (100.0%)</span>
+            <span>Total Alternative Routing (modeled)</span>
+            <span style="font-size: 1.05rem;">${{ "%.2f"|format(trace.alternative.total_spend) }}</span>
           </div>
           <div style="font-size: 0.78rem; color: #14532d; margin-top: 0.25rem;">
-            100% of purchase retained across {{ trace.alternative.nodes|length }} regional stewardship stages.
+            Modeled total across {{ trace.alternative.nodes|length }} illustrative stages. Shares are assumptions, not measurements.
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 4: EMPIRICAL METHODOLOGY & VERIFIED BENCHMARKS -->
+  <!-- SECTION 4: METHODOLOGY -->
   <section style="margin-bottom: 4rem;">
     <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; box-shadow: 0 4px 14px rgba(0,0,0,0.03);">
       <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
@@ -686,230 +699,81 @@
         </span>
       </div>
       <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem;">
-        How We Calculate Dollar Routing: Empirical Sources & Real Economic Benchmarks
+        How This Illustrative Model Works
       </h3>
       <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6; max-width: 900px; margin-bottom: 1.75rem;">
-        Shoptegrity replaces vague marketing claims with rigorous empirical economic accounting. Every percentage and mileage calculation is calibrated against peer-reviewed federal datasets, publicly audited SEC 10-K disclosures, and cooperative industry reports.
+        This page is an illustrative model. Its payee categories, locations and shares are assumptions entered in code, and the page shows the totals those assumptions produce. The model is not a measurement of any company, and no company is named. No benchmark on this page has a cited source yet: <strong>Withheld: no cited source yet.</strong>
       </p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.25rem;">
-        
-        <!-- USDA ERS Food Dollar Series -->
+
         <div class="method-card">
-          <h5>🌾 USDA Economic Research Service (ERS) Food Dollar Series</h5>
-          <p>
-            The USDA’s input-output macroeconomic model reveals that across the conventional US food dollar, the average farm gate share is just <strong>14.5¢</strong>. The remaining <strong>85.5¢</strong> is absorbed by industrial food processing (28.3¢), commercial packaging & freight (11.5¢), retail grocery trade (12.4¢), and corporate finance & advertising (17.2¢).
-          </p>
+          <h5>Farm share of the retail food dollar</h5>
+          <p><strong>Withheld: no cited source yet.</strong> A figure is added here only with a dated primary record and its URL.</p>
         </div>
 
-        <!-- SEC Form 10-K Corporate Disclosures -->
         <div class="method-card">
-          <h5>📊 SEC Form 10-K Filings (Kroger, Walmart, Tyson, General Mills)</h5>
-          <p>
-            Financial extractions are derived directly from audited 10-K annual reports. In FY2023–2024, top supermarket and agribusiness conglomerates allocated <strong>15–20% of net retail margins</strong> to institutional share repurchases and cash dividends to Wall Street asset managers (BlackRock, Vanguard, State Street) while paying multi-million-dollar executive equity grants.
-          </p>
+          <h5>Corporate filing allocations</h5>
+          <p><strong>Withheld: no cited source yet.</strong> A figure is added here only with the filing section, its date and its URL.</p>
         </div>
 
-        <!-- National Co+op Grocers Impact Report -->
         <div class="method-card">
-          <h5>🤝 National Co+op Grocers (NCG) Food Co-op Impact Study</h5>
-          <p>
-            Representing 148 independent retail food cooperatives, NCG benchmarks confirm that consumer-owned food co-ops source <strong>21% to 42% of total inventory directly from local independent producers</strong> within 100 miles (vs. 1.8% at conventional grocery chains), pay starting living wages 30% above local minimums, and return net surplus to consumer-owners via patronage rebates.
-          </p>
+          <h5>Food co-op local sourcing</h5>
+          <p><strong>Withheld: no cited source yet.</strong> A figure is added here only with the study title, its date and its URL.</p>
         </div>
 
-        <!-- Contract CAFO Integrators vs Community Stewards -->
         <div class="method-card">
-          <h5>⚠️ USDA Packers & Stockyards: Captive Contract Grower Economics</h5>
-          <p>
-            Contract poultry and hog growers invest $1.2M to $2.4M in physical debt per facility to satisfy corporate integrator tournament contracts. While growers carry <strong>70%+ of the physical debt and manure liability</strong>, the conglomerate owns the animals, feed formula, and spot pricing, yielding growers net returns of only 3.5¢ to 4.5¢ per pound.
-          </p>
+          <h5>Contract-grower economics</h5>
+          <p><strong>Withheld: no cited source yet.</strong> A figure is added here only with the agency table, its date and its URL.</p>
         </div>
 
-        <!-- Private Equity Rollups -->
         <div class="method-card">
-          <h5>🏢 Private Equity Rollup Extraction (PitchBook & AELP Studies)</h5>
-          <p>
-            In home trades (HVAC, plumbing, roofing), private equity consolidators acquire legacy local brand names and immediately divert <strong>35% to 40% of customer invoices</strong> into platform management fees and leveraged buyout (LBO) debt service, replacing local apprentices with centralized out-of-state call centers.
-          </p>
+          <h5>Home-trade service fee structures</h5>
+          <p><strong>Withheld: no cited source yet.</strong> A figure is added here only with the study or filing, its date and its URL.</p>
         </div>
 
-        <!-- FDIC Deposit Recycling -->
         <div class="method-card">
-          <h5>🏦 FDIC & Federal Reserve Community Banking Reports</h5>
-          <p>
-            Community banks and member-owned credit unions recirculate <strong>82% of retail deposits</strong> directly into local residential mortgages and hometown small business commercial loans, compared to money-center Wall Street megabanks that route over 80% into proprietary trading, derivatives, and global capital markets.
-          </p>
+          <h5>Bank deposit recirculation</h5>
+          <p><strong>Withheld: no cited source yet.</strong> A figure is added here only with the regulator report, its date and its URL.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- SECTION 5: THE MACROECONOMIC DIVERGENCE (1989–PRESENT) & HISTORICAL SOLUTIONS -->
+  <!-- SECTION 5: WEALTH-CONCENTRATION TIME SERIES (WITHHELD) & HISTORICAL PARALLELS -->
   <section style="margin-bottom: 4rem;">
     <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.04);">
-      
+
       <!-- Section Header -->
       <div style="max-width: 800px; margin-bottom: 2rem;">
-        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: #fee2e2; color: #991b1b; font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 9999px; text-transform: uppercase; margin-bottom: 0.6rem;">
-          <span>📈</span> Federal Reserve DFA Empirical Time-Series (1989–Present)
+        <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: #f1f5f9; color: #334155; font-size: 0.75rem; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 9999px; text-transform: uppercase; margin-bottom: 0.6rem;">
+          <span>📈</span> Time series: withheld until cited
         </div>
         <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--navy); margin-bottom: 0.5rem; letter-spacing: -0.02em;">
-          The 35-Year Wealth Divergence: How Equities Were Siphoned to the Top 10%
+          Equity Ownership by Wealth Tier (time series withheld)
         </h3>
         <p style="color: var(--slate); font-size: 0.95rem; line-height: 1.6;">
-          Your individual purchasing decisions happen inside a macroeconomic pipeline that has steadily starved the bottom 90% of Americans. Federal Reserve Distributional Financial Accounts prove that <strong>corporate stock and mutual fund ownership has concentrated almost exclusively into the top decile</strong> over the last 35 years, while custodial index managers (BlackRock, Vanguard, State Street) swelled to over $24 Trillion.
+          <strong>Withheld: no cited source yet.</strong> This section will show a time series only after each value is taken from a cited Federal Reserve Distributional Financial Accounts table, with its release date. Asset-manager totals and proxy-voting shares are withheld until each has its own cited primary record.
         </p>
       </div>
 
-      <!-- Macro Chart Container -->
-      <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 2rem;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-          <div style="font-weight: 750; font-size: 0.95rem; color: var(--navy);">
-            U.S. Corporate Equity & Mutual Fund Ownership Share by Wealth Tier
-          </div>
-          <div style="display: flex; gap: 1rem; font-size: 0.78rem; font-weight: 700; flex-wrap: wrap;">
-            <span style="color: #be123c; display: flex; align-items: center; gap: 0.3rem;"><span style="width: 12px; height: 3px; background: #be123c; display: inline-block;"></span> Top 10% Share (~91%)</span>
-            <span style="color: #991b1b; display: flex; align-items: center; gap: 0.3rem;"><span style="width: 12px; height: 3px; background: #991b1b; display: inline-block;"></span> Top 1% Share (~54%)</span>
-            <span style="color: #64748b; display: flex; align-items: center; gap: 0.3rem;"><span style="width: 12px; height: 3px; background: #64748b; display: inline-block;"></span> Bottom 50% Share (&lt;1%)</span>
-            <span style="color: #7c3aed; display: flex; align-items: center; gap: 0.3rem;"><span style="width: 12px; height: 3px; background: #7c3aed; border-top: 1px dashed; display: inline-block;"></span> Big Three AUM ($24.2T)</span>
-          </div>
-        </div>
-
-        <!-- Responsive Vector SVG Time-Series Chart -->
-        <div style="width: 100%; overflow-x: auto;">
-          <svg viewBox="0 0 900 320" style="width: 100%; height: auto; min-width: 650px; font-family: sans-serif;">
-            <!-- Grid lines & Y Axis Labels -->
-            <line x1="60" y1="40" x2="860" y2="40" stroke="#e2e8f0" stroke-dasharray="4" />
-            <text x="50" y="44" fill="#94a3b8" font-size="11" text-anchor="end">100%</text>
-
-            <line x1="60" y1="95" x2="860" y2="95" stroke="#e2e8f0" stroke-dasharray="4" />
-            <text x="50" y="99" fill="#94a3b8" font-size="11" text-anchor="end">75%</text>
-
-            <line x1="60" y1="150" x2="860" y2="150" stroke="#e2e8f0" stroke-dasharray="4" />
-            <text x="50" y="154" fill="#94a3b8" font-size="11" text-anchor="end">50%</text>
-
-            <line x1="60" y1="205" x2="860" y2="205" stroke="#e2e8f0" stroke-dasharray="4" />
-            <text x="50" y="209" fill="#94a3b8" font-size="11" text-anchor="end">25%</text>
-
-            <line x1="60" y1="260" x2="860" y2="260" stroke="#cbd5e1" stroke-width="1.5" />
-            <text x="50" y="264" fill="#94a3b8" font-size="11" text-anchor="end">0%</text>
-
-            <!-- X Axis Years -->
-            <!-- 1989 (x=100), 1995 (x=225), 2001 (x=350), 2008 (x=475), 2015 (x=600), 2020 (x=725), 2026 (x=830) -->
-            <text x="100" y="282" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">1989</text>
-            <text x="225" y="282" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">1995</text>
-            <text x="350" y="282" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">2001</text>
-            <text x="475" y="282" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">2008</text>
-            <text x="600" y="282" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">2015</text>
-            <text x="725" y="282" fill="#64748b" font-size="12" font-weight="600" text-anchor="middle">2020</text>
-            <text x="830" y="282" fill="#64748b" font-size="12" font-weight="700" text-anchor="middle">2026</text>
-
-            <!-- Line 1: Top 10% Equity Share (y = 260 - (pct * 2.2)) -->
-            <!-- 81.7% -> y=80.2 | 84.5% -> y=74.1 | 85.1% -> y=72.8 | 86.2% -> y=70.4 | 88.1% -> y=66.2 | 89.2% -> y=63.8 | 91.3% -> y=59.1 -->
-            <path d="M 100 80 L 225 74 L 350 73 L 475 70 L 600 66 L 725 64 L 830 59" fill="none" stroke="#be123c" stroke-width="3.5" stroke-linecap="round" />
-            
-            <!-- Line 2: Top 1% Equity Share -->
-            <!-- 38.6% -> y=175.1 | 42.1% -> y=167.4 | 45.3% -> y=160.3 | 47.8% -> y=154.8 | 49.5% -> y=151.1 | 52.4% -> y=144.7 | 54.2% -> y=140.8 -->
-            <path d="M 100 175 L 225 167 L 350 160 L 475 155 L 600 151 L 725 145 L 830 141" fill="none" stroke="#991b1b" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 1" />
-
-            <!-- Line 3: Bottom 50% Equity Share -->
-            <!-- 3.9% -> y=251.4 | 2.7% -> y=254.1 | 1.8% -> y=256.0 | 1.4% -> y=256.9 | 1.1% -> y=257.6 | 0.9% -> y=258.0 | 0.6% -> y=258.7 -->
-            <path d="M 100 251 L 225 254 L 350 256 L 475 257 L 600 258 L 725 258 L 830 259" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" />
-
-            <!-- Line 4: Big Three AUM Explosion (normalized curve) -->
-            <!-- 0.08T -> y=258 | 0.45T -> y=252 | 1.4T -> y=240 | 4.8T -> y=200 | 11.2T -> y=140 | 17.5T -> y=85 | 24.2T -> y=35 -->
-            <path d="M 100 258 Q 280 250 350 240 T 475 200 T 600 140 T 725 85 T 830 35" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-dasharray="5 3" />
-
-            <!-- Interactive Points for Top 10% -->
-            <circle cx="100" cy="80" r="5" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(1989)" />
-            <circle cx="225" cy="74" r="5" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(1995)" />
-            <circle cx="350" cy="73" r="5" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(2001)" />
-            <circle cx="475" cy="70" r="5" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(2008)" />
-            <circle cx="600" cy="66" r="5" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(2015)" />
-            <circle cx="725" cy="64" r="5" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(2020)" />
-            <circle cx="830" cy="59" r="6" fill="#be123c" style="cursor:pointer;" onclick="selectMacroYear(2026)" />
-
-            <!-- Callout Labels -->
-            <text x="835" y="55" fill="#be123c" font-size="11" font-weight="800">91.3%</text>
-            <text x="835" y="138" fill="#991b1b" font-size="11" font-weight="800">54.2%</text>
-            <text x="835" y="255" fill="#64748b" font-size="10" font-weight="700">0.6%</text>
-            <text x="835" y="32" fill="#7c3aed" font-size="11" font-weight="800">$24.2T AUM</text>
-          </svg>
-        </div>
-
-        <!-- Clickable Milestone Inspector -->
-        <div style="display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; margin-bottom: 1.25rem;">
-          <button type="button" class="preset-pill" onclick="selectMacroYear(1989)">1989: 401(k) Shift</button>
-          <button type="button" class="preset-pill" onclick="selectMacroYear(1995)">1995: Dot-Com Expansion</button>
-          <button type="button" class="preset-pill" onclick="selectMacroYear(2001)">2001: Glass-Steagall Repeal</button>
-          <button type="button" class="preset-pill" onclick="selectMacroYear(2008)">2008: GFC Bailouts</button>
-          <button type="button" class="preset-pill" onclick="selectMacroYear(2015)">2015: ZIRP Buyback Era</button>
-          <button type="button" class="preset-pill" onclick="selectMacroYear(2020)">2020: Pandemic Liquidity</button>
-          <button type="button" class="preset-pill active" id="btnMacroLatest" onclick="selectMacroYear(2026)">2026: The $24T Monopoly</button>
-        </div>
-
-        <!-- Dynamic Milestone Content Card -->
-        <div id="macroMilestoneBox" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 1rem 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.4rem; margin-bottom: 0.5rem;">
-            <strong id="milestoneYear" style="font-size: 1.1rem; color: var(--navy);">Year 2026 Milestone: The $24 Trillion Monopoly</strong>
-            <span id="milestoneStats" style="font-size: 0.82rem; font-weight: 700; color: #be123c;">Top 10%: 91.3% | Top 1%: 54.2% | Bottom 50%: 0.6%</span>
-          </div>
-          <p id="milestoneDesc" style="font-size: 0.88rem; color: var(--slate); margin: 0; line-height: 1.5;">
-            The Big Three institutional asset managers (BlackRock, Vanguard, State Street) oversee over $24 Trillion, casting ~80% of institutional proxy votes across the S&P 500. Frontline workers receive stagnant wages while corporate profits flow directly into equity buybacks that feed the richest decile.
-          </p>
-        </div>
+      <!-- Withheld chart placeholder -->
+      <div style="background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 0.75rem; padding: 2rem 1.5rem; margin-bottom: 2rem; text-align: center;">
+        <div style="font-weight: 800; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem;">Withheld: no cited source yet</div>
+        <p style="margin: 0 auto; max-width: 620px; font-size: 0.88rem; color: var(--muted); line-height: 1.5;">
+          No chart is shown. Values are added only from a cited primary table, with the table name, release date and URL shown beside each value.
+        </p>
       </div>
 
-      <!-- HISTORICAL PRECEDENTS GRID -->
+      <!-- HISTORICAL PARALLELS (WITHHELD) -->
       <div style="margin-top: 2.5rem;">
         <h4 style="font-size: 1.35rem; font-weight: 800; color: var(--navy); margin-bottom: 0.4rem;">
-          Has This Happened Before? How History Has Broken Wealth Bottlenecks
+          Historical Parallels: Withheld
         </h4>
         <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
-          Extreme concentration of capital is not new. Throughout history, societies that refused to decentralize wealth faced collapse, while those that built cooperative counter-institutions and enacted antitrust reforms flourished.
+          <strong>Withheld: no cited source yet.</strong> Historical examples are listed only with a cited historian's source for each claim.
         </p>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
-          
-          <!-- Rome -->
-          <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.65rem; padding: 1.25rem;">
-            <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #991b1b; margin-bottom: 0.3rem;">The Roman Republic (133 BCE)</div>
-            <h5 style="font-size: 1.05rem; font-weight: 750; color: #7f1d1d; margin-bottom: 0.4rem;">The Latifundia Trap</h5>
-            <p style="font-size: 0.84rem; color: #991b1b; line-height: 1.45; margin-bottom: 0.6rem;">
-              Giant estates (latifundia) owned by senatorial oligarchs swallowed up family farms using captive labor and debt. Small farmers lost their land and became an impoverished urban underclass.
-            </p>
-            <div style="font-size: 0.78rem; font-weight: 700; color: #7f1d1d;">
-              <strong>Historical Lesson:</strong> The oligarchy assassinated the Gracchi reformers rather than yield land, triggering 100 years of civil war that ended the Republic.
-            </div>
-          </div>
-
-          <!-- Gilded Age -->
-          <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 0.65rem; padding: 1.25rem;">
-            <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #1e40af; margin-bottom: 0.3rem;">American Gilded Age (1890–1914)</div>
-            <h5 style="font-size: 1.05rem; font-weight: 750; color: #1e3a8a; margin-bottom: 0.4rem;">Trust-Busting & Progressive Tax</h5>
-            <p style="font-size: 0.84rem; color: #1e40af; line-height: 1.45; margin-bottom: 0.6rem;">
-              Standard Oil, J.P. Morgan, and railroad monopolies cornered American markets, depressing agricultural prices and driving extreme wealth inequality.
-            </p>
-            <div style="font-size: 0.78rem; font-weight: 700; color: #1e3a8a;">
-              <strong>Historical Lesson:</strong> Citizens organized: the Sherman Antitrust Act (1890), Teddy Roosevelt's trust-busting, and the 16th Amendment (Federal Income Tax) dismantled the monopolies.
-            </div>
-          </div>
-
-          <!-- Swedish Co-ops -->
-          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 0.65rem; padding: 1.25rem;">
-            <div style="font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #166534; margin-bottom: 0.3rem;">Swedish Co-op Revolt (1920s–1930s)</div>
-            <h5 style="font-size: 1.05rem; font-weight: 750; color: #14532d; margin-bottom: 0.4rem;">Smashing Cartels with Co-ops</h5>
-            <p style="font-size: 0.84rem; color: #166534; line-height: 1.45; margin-bottom: 0.6rem;">
-              Private flour milling and electric lightbulb cartels price-gouged Swedish families. Rather than waiting for government, working-class consumers organized Kooperativa Förbundet (KF).
-            </p>
-            <div style="font-size: 0.78rem; font-weight: 700; color: #14532d;">
-              <strong>Historical Lesson:</strong> The consumer federation built its own cooperative mills and factories, cutting retail prices in half and bankrupting the cartels through economic solidarity.
-            </div>
-          </div>
-
-        </div>
       </div>
 
       <!-- THE CALL TO ACTION -->
@@ -917,21 +781,21 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;">
           <div style="max-width: 650px;">
             <h4 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.4rem; color: #ffffff;">
-              The 4 Levers: How You Can Stop Feeding the Siphon Today
+              Four Comparisons to Make Before You Buy
             </h4>
             <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.25rem;">
-              Wall Street depends on your passive compliance: direct deposits in megabanks, autopilot 401(k) allocations, and buying from disguised brand rollups. Here are four frictionless moves to redirect your capital:
+              General guidance for comparing options. It makes no claim about any named company.
             </p>
             <ul style="color: #f1f5f9; font-size: 0.88rem; line-height: 1.6; padding-left: 1.25rem; margin: 0;">
-              <li><strong>Move your cash to a Credit Union:</strong> Cuts off the low-cost deposit base used by megabanks to fund private equity rollups.</li>
-              <li><strong>Buy food through CSAs & Farmer Co-ops:</strong> Sends 85¢+ of your dollar to farmers instead of 11.8¢ at conventional grocers.</li>
-              <li><strong>Check `/parents` before hiring local services:</strong> Avoid private equity rollups in HVAC, plumbing, and veterinary clinics.</li>
-              <li><strong>Reclaim 401(k) proxy voting:</strong> Demand self-directed or pass-through voting options from your employer's plan administrator.</li>
+              <li><strong>Compare a credit union with your current bank:</strong> check fees, rates and membership rules, and look up each institution's registration before you decide.</li>
+              <li><strong>Ask farms and co-ops how a purchase price is divided:</strong> compare their answer with your own receipt.</li>
+              <li><strong>Ask who owns a local service business before you hire it:</strong> then look the business up in your state's business registry.</li>
+              <li><strong>Ask your retirement plan administrator about proxy voting:</strong> find out which voting options the plan offers.</li>
             </ul>
           </div>
           <div>
             <a href="/swaps" class="btn" style="background: var(--primary); color: #ffffff; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; text-decoration: none; display: inline-block;">
-              Browse Top Ethical Swaps &rarr;
+              Browse swap guides &rarr;
             </a>
           </div>
         </div>
@@ -950,6 +814,10 @@
 
   // --- LEAFLET MAP IMPLEMENTATION ---
   document.addEventListener('DOMContentLoaded', function() {
+    if (typeof L === 'undefined' || !document.getElementById('leafletMap')) {
+      return;
+    }
+
     const originLat = {{ trace.origin_lat }};
     const originLon = {{ trace.origin_lon }};
     const originCity = "{{ trace.origin_city }}";
@@ -982,7 +850,7 @@
       iconAnchor: [14, 14]
     });
     const originMarker = L.marker([originLat, originLon], { icon: originIcon })
-      .bindPopup(`<strong>📍 You are here</strong><br>${originCity}, ${originState} (${originZip})`)
+      .bindPopup(`<strong>📍 Origin</strong><br>${originCity}, ${originState} (${originZip})`)
       .addTo(map);
 
     // Draw Conventional Nodes
@@ -1011,10 +879,10 @@
           .bindPopup(`
             <div style="min-width: 170px;">
               <strong style="color:#dc2626;">${role}</strong><br>
-              <span style="font-size:13px; font-weight:700;">$${amount.toFixed(2)}</span><br>
+              <span style="font-size:13px; font-weight:700;">$${amount.toFixed(2)} (modeled)</span><br>
               <em>${payee}</em><br>
-              <span style="color:#64748b; font-size:12px;">📍 ${city}, ${state} (${zip})</span><br>
-              <span style="color:#991b1b; font-size:11px; font-weight:600;">✈️ ${dist} miles away</span>
+              <span style="color:#64748b; font-size:12px;">📍 ${city}, ${state} (${zip}), illustrative location</span><br>
+              <span style="color:#991b1b; font-size:11px; font-weight:600;">Modeled distance: ${dist} miles</span>
             </div>
           `);
         convLayer.addLayer(marker);
@@ -1031,7 +899,7 @@
             weight: 2.5,
             opacity: 0.7,
             dashArray: '6, 6'
-          }).bindPopup(`<strong>$${amount.toFixed(2)}</strong> to ${payee} (${dist} mi away)`);
+          }).bindPopup(`<strong>$${amount.toFixed(2)} (modeled)</strong> to ${payee} (modeled ${dist} mi)`);
           convLayer.addLayer(line);
         }
       })();
@@ -1063,10 +931,10 @@
           .bindPopup(`
             <div style="min-width: 170px;">
               <strong style="color:#059669;">${role}</strong><br>
-              <span style="font-size:13px; font-weight:700;">$${amount.toFixed(2)}</span><br>
+              <span style="font-size:13px; font-weight:700;">$${amount.toFixed(2)} (modeled)</span><br>
               <em>${payee}</em><br>
-              <span style="color:#64748b; font-size:12px;">📍 ${city}, ${state} (${zip})</span><br>
-              <span style="color:#166534; font-size:11px; font-weight:600;">🌱 ${dist} miles away</span>
+              <span style="color:#64748b; font-size:12px;">📍 ${city}, ${state} (${zip}), illustrative location</span><br>
+              <span style="color:#166534; font-size:11px; font-weight:600;">Modeled distance: ${dist} miles</span>
             </div>
           `);
         altLayer.addLayer(marker);
@@ -1081,7 +949,7 @@
           color: '#059669',
           weight: 3.5,
           opacity: 0.85
-        }).bindPopup(`<strong>🌱 $${amount.toFixed(2)}</strong> to ${payee} (${dist} mi)`);
+        }).bindPopup(`<strong>$${amount.toFixed(2)} (modeled)</strong> to ${payee} (modeled ${dist} mi)`);
         altLayer.addLayer(line);
       })();
     {% endfor %}
@@ -1122,53 +990,6 @@
         if (map.hasLayer(convLayer)) map.removeLayer(convLayer);
         if (!map.hasLayer(altLayer)) map.addLayer(altLayer);
       }
-    };
-
-    // Macro Timeline Interactive Switcher
-    const macroData = {
-      1989: {
-        title: "Year 1989 Milestone: The 401(k) Shift Begins",
-        stats: "Top 10%: 81.7% | Top 1%: 38.6% | Bottom 50%: 3.9% | Big Three AUM: $0.08T",
-        desc: "Automated paycheck deductions in Defined Contribution 401(k) plans start taking over from traditional employer pensions, routing American workers' life savings directly into Wall Street asset managers."
-      },
-      1995: {
-        title: "Year 1995 Milestone: The Dot-Com Mutual Fund Boom",
-        stats: "Top 10%: 84.5% | Top 1%: 42.1% | Bottom 50%: 2.7% | Big Three AUM: $0.45T",
-        desc: "Retail mutual funds and index funds expand rapidly as tech stocks soar. The bottom 50%'s share of equities begins dropping below 3%."
-      },
-      2001: {
-        title: "Year 2001 Milestone: Glass-Steagall Repealed",
-        stats: "Top 10%: 85.1% | Top 1%: 45.3% | Bottom 50%: 1.8% | Big Three AUM: $1.40T",
-        desc: "The Gramm-Leach-Bliley Act of 1999 tears down the wall between traditional consumer banking and speculative investment banking, fueling unprecedented conglomerate mergers."
-      },
-      2008: {
-        title: "Year 2008 Milestone: GFC Bailouts & The Rise of BlackRock",
-        stats: "Top 10%: 86.2% | Top 1%: 47.8% | Bottom 50%: 1.4% | Big Three AUM: $4.80T",
-        desc: "During the Global Financial Crisis, the Federal Reserve enlists BlackRock to manage toxic assets. BlackRock buys Barclays Global Investors (iShares), laying the groundwork for passive indexing hegemony."
-      },
-      2015: {
-        title: "Year 2015 Milestone: The ZIRP Share Buyback Era",
-        stats: "Top 10%: 88.1% | Top 1%: 49.5% | Bottom 50%: 1.1% | Big Three AUM: $11.20T",
-        desc: "Near-zero interest rates enable corporations to borrow hundreds of billions to buy back their own shares rather than raise worker wages, inflating equity wealth for top executive packages."
-      },
-      2020: {
-        title: "Year 2020 Milestone: Pandemic Asset Surge",
-        stats: "Top 10%: 89.2% | Top 1%: 52.4% | Bottom 50%: 0.9% | Big Three AUM: $17.50T",
-        desc: "Emergency Federal Reserve stimulus inflates corporate equities by trillions. For the first time in modern records, the wealthiest 1% of households owns more than 50% of all corporate equities."
-      },
-      2026: {
-        title: "Year 2026 Milestone: The $24 Trillion Monopoly",
-        stats: "Top 10%: 91.3% | Top 1%: 54.2% | Bottom 50%: 0.6% | Big Three AUM: $24.20T",
-        desc: "The Big Three institutional asset managers (BlackRock, Vanguard, State Street) oversee over $24 Trillion, casting ~80% of institutional proxy votes across the S&P 500. Frontline workers receive stagnant wages while corporate profits flow directly into equity buybacks that feed the richest decile."
-      }
-    };
-
-    window.selectMacroYear = function(year) {
-      const item = macroData[year];
-      if (!item) return;
-      document.getElementById('milestoneYear').textContent = item.title;
-      document.getElementById('milestoneStats').textContent = item.stats;
-      document.getElementById('milestoneDesc').textContent = item.desc;
     };
   });
 </script>

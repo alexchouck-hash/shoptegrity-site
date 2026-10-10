@@ -9,6 +9,10 @@ from sqlalchemy import or_
 from api.app.db.session import SessionLocal, haversine_distance_km
 from api.app.models.core import Brand, Entity, Alternative, Place, Maker, FlowProfile, BrandIntegrity
 from api.app.services.scoring_service import score_entity
+from api.app.services.citation import cited_ownership_name, cited_ownership_type, has_cited_ownership
+
+
+WITHHELD_TEXT = "Withheld: no cited source yet"
 
 
 def lookup_brand(name: str) -> Dict[str, Any]:
@@ -22,8 +26,8 @@ def lookup_brand(name: str) -> Dict[str, Any]:
         score_res = score_entity(brand.entity)
         return {
             "brand": brand.name,
-            "parent_company": brand.entity.name,
-            "ownership_type": brand.entity.ownership_type,
+            "parent_company": cited_ownership_name(brand.entity),
+            "ownership_type": cited_ownership_type(brand.entity),
             "composite_score": score_res.composite_score,
             "confidence": score_res.confidence,
             "scorecard": {
@@ -36,8 +40,8 @@ def lookup_brand(name: str) -> Dict[str, Any]:
                 for k, v in score_res.dimensions.items()
             },
             "summary": (
-                f"{brand.name} is owned by {brand.entity.name} ({brand.entity.ownership_type}). "
-                f"Integrity Score: {score_res.composite_score}/100."
+                f"{brand.name}: ownership {'cited' if has_cited_ownership(brand.entity) else WITHHELD_TEXT}. "
+                f"Integrity score: {score_res.composite_score if score_res.composite_score is not None else WITHHELD_TEXT}."
             ),
         }
     finally:
@@ -63,19 +67,19 @@ def find_alternatives(brand_name: str) -> Dict[str, Any]:
             target_score = score_entity(a.to_brand.entity)
             cards.append({
                 "alternative_brand": a.to_brand.name,
-                "parent_entity": a.to_brand.entity.name,
-                "ownership_type": a.to_brand.entity.ownership_type,
+                "parent_entity": cited_ownership_name(a.to_brand.entity),
+                "ownership_type": cited_ownership_type(a.to_brand.entity),
                 "composite_score": target_score.composite_score,
-                "rationale": a.rationale,
-                "price_band": a.price_band,
-                "where_to_buy": a.where_to_buy,
-                "savings_estimate": a.savings_estimate,
+                "rationale": None,  # withheld until cited (R1)
+                "price_band": None,  # withheld until cited (R1)
+                "where_to_buy": None,  # withheld until cited (R1)
+                "savings_estimate": None,  # withheld until cited (R1)
             })
 
         return {
             "source_brand": brand.name,
             "recommended_alternatives": cards,
-            "summary": f"Found {len(cards)} verified higher-integrity alternatives for {brand.name}."
+            "summary": f"Found {len(cards)} editor-approved alternatives for {brand.name}."
         }
     finally:
         db.close()
@@ -94,14 +98,16 @@ def find_local_businesses(lat: float, lon: float, category: Optional[str] = None
         for p in places:
             dist = haversine_distance_km(lat, lon, p.lat, p.lon)
             if dist <= radius_km:
+                if "demo_listing" in (p.flags or []):
+                    continue  # demo rows are never public
                 results.append({
                     "name": p.name,
                     "category": p.category,
                     "address": f"{p.address}, {p.city}, {p.state}",
                     "distance_km": dist,
-                    "ownership_tier": p.ownership_tier,
-                    "flags": p.flags or [],
-                    "verified_locally": p.verified_locally,
+                    "ownership_tier": None,  # withheld until cited
+                    "flags": [],  # ownership flags appear only with a cited ownership record
+                    "verified_locally": False,  # withheld until cited
                     "website": p.website,
                 })
         results.sort(key=lambda x: x["distance_km"])
@@ -121,8 +127,8 @@ def dollar_split_summary(category: str = "grocery") -> Dict[str, Any]:
                 {
                     "title": f.display_title,
                     "type": f.option_type,
-                    "summary": f.summary_text,
-                    "nodes": f.nodes_json,
+                    "summary": WITHHELD_TEXT,  # dollar splits are withheld until cited (R1)
+                    "nodes": None,
                 }
                 for f in flow
             ]
@@ -302,31 +308,30 @@ def get_retailer_swaps(retailer_name: str) -> Dict[str, Any]:
 
 
 def lookup_parent_company(query: str) -> Dict[str, Any]:
-    """Identify the corporate parent, ownership structure, subterfuge context, and ethical swap for any brand or product."""
+    """Look up a brand or product by name. Parent-company and ownership fields are withheld until each claim has a cited source."""
     from api.app.services.parent_lookup_service import parent_service
 
     match = parent_service.lookup(query)
     if not match:
-        return {"error": f"No parent company record found for query: '{query}'"}
+        return {"error": f"No record found for query: '{query}'"}
 
+    # Built field by field so that no withdrawn field can pass through.
     return {
         "query": query,
         "matched_name": match["name"],
         "item_type": match["item_type"],
         "category": match["category"],
-        "parent_company": match["parent_company"],
-        "ultimate_parent": match["ultimate_parent"],
-        "ownership_type": match["ownership_type"],
-        "ticker_or_jurisdiction": match["ticker_or_jurisdiction"],
-        "is_surprising_or_subterfuge": match["is_surprising_or_subterfuge"],
-        "subterfuge_details": match["subterfuge_details"],
-        "top_10_percent_enrichment_pct": f"{match['top_10_percent_enrichment_pct']}%",
-        "ethical_swap_recommendation": match["ethical_swap_recommendation"],
+        "parent_company": None,
+        "ultimate_parent": None,
+        "ownership_type": None,
+        "ticker_or_jurisdiction": None,
+        "ownership_status": WITHHELD_TEXT,
+        "ethical_swap_recommendation": WITHHELD_TEXT,
     }
 
 
 def get_brand_parent_feed(query: Optional[str] = None, limit: int = 20) -> Dict[str, Any]:
-    """Search or browse the brand and product parent company data feed."""
+    """Search or browse the brand and product feed. Ownership fields are withheld until cited."""
     from api.app.services.parent_lookup_service import parent_service
 
     res = parent_service.get_feed(q=query, limit=limit)
@@ -336,11 +341,13 @@ def get_brand_parent_feed(query: Optional[str] = None, limit: int = 20) -> Dict[
         "items": [
             {
                 "name": item["name"],
-                "parent_company": item["parent_company"],
-                "ultimate_parent": item["ultimate_parent"],
-                "ownership_type": item["ownership_type"],
-                "is_surprising": item["is_surprising_or_subterfuge"],
-                "ethical_swap": item["ethical_swap_recommendation"],
+                "item_type": item["item_type"],
+                "category": item["category"],
+                "parent_company": None,
+                "ultimate_parent": None,
+                "ownership_type": None,
+                "ownership_status": WITHHELD_TEXT,
+                "ethical_swap": WITHHELD_TEXT,
             }
             for item in res["results"]
         ],

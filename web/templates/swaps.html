@@ -7,7 +7,7 @@
   <div class="hero-inner">
     <div class="hero-tag" style="background: #dcfce7; color: #15803d; border-color: #86efac;">🔄 Actionable Swaps Guide</div>
     <h1>Retailer & Household Spending Swaps</h1>
-    <p>Break the default habit of shopping at mega-retailers. Compare conventional chains against vetted alternatives tiered by your priorities: drop-in convenience or gold-standard ethical impact.</p>
+    <p>Break the default habit of shopping at mega-retailers. Compare conventional chains against alternatives tiered by your priorities: drop-in convenience or gold-standard ethical impact. Ratings are Shoptegrity opinion.</p>
   </div>
 </section>
 
@@ -37,7 +37,7 @@
           <span style="font-size: 0.8rem; font-weight: 750; color: #0369a1;">Similar Price &amp; Format</span>
         </div>
         <p style="font-size: 0.84rem; color: #334155; margin: 0; line-height: 1.45;">
-          <strong>The pragmatic drop-in:</strong> An okay-scoring option (Grade B / B+) that matches conventional price points and shopping convenience. Low friction; cuts out the worst abuses (anti-union crackdowns, predatory fees, PE rollups).
+          <strong>The pragmatic drop-in:</strong> an option aimed at a price and shopping experience close to the conventional store. Tier ratings are Shoptegrity opinion (Grade B / B+).
         </p>
       </div>
 
@@ -47,392 +47,54 @@
           <span style="font-size: 0.8rem; font-weight: 750; color: #15803d;">High Ethical Standard</span>
         </div>
         <p style="font-size: 0.84rem; color: #334155; margin: 0; line-height: 1.45;">
-          <strong>The gold standard:</strong> A high-scoring ethical brand, worker/member cooperative, or purpose trust (Grade A / A+). The format or experience may differ and upfront cost might be higher, but keeps maximum wealth in the community.
+          <strong>The gold standard:</strong> a higher-rated option, such as a worker or member cooperative or a purpose trust (Shoptegrity opinion, Grade A / A+). The format or experience may differ, and upfront cost may be higher.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- High-Impact Retailer Swaps Section -->
+  <!-- Major retailers: name and status only. Figures and ratings are withheld until each has a cited source. -->
+  {% set retailers = [
+    {'name': 'Walmart', 'slug': 'walmart'},
+    {'name': 'Target', 'slug': 'target'},
+    {'name': 'Costco Wholesale', 'slug': 'costco-wholesale'},
+    {'name': 'Amazon / Whole Foods', 'slug': 'amazon-whole-foods'},
+    {'name': 'The Kroger Co.', 'slug': 'the-kroger-co'},
+    {'name': 'Dollar General', 'slug': 'dollar-general'},
+    {'name': 'The Home Depot', 'slug': 'the-home-depot'}
+  ] %}
   <section style="margin-bottom: 4rem;">
     <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.5rem;">
-      <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy);">Major Retailers Rated &amp; Dual Options</h2>
-      <span style="font-size: 0.9rem; font-weight: 700; color: var(--primary);">7 Mega-Retailers Evaluated</span>
+      <h2 style="font-size: 1.85rem; font-weight: 800; color: var(--navy);">Major Retailers</h2>
+      <span style="font-size: 0.9rem; font-weight: 700; color: var(--muted);">Ratings and figures: Withheld: no cited source yet</span>
     </div>
-    <p style="color: var(--muted); margin-bottom: 1.75rem;">See exactly how much revenue gets diverted to stock buybacks vs frontline wages, and where to swap your shopping today.</p>
+    <p style="color: var(--muted); margin-bottom: 1.75rem;">Dividend and buyback figures, wage shares, regulatory counts, packaging figures and ratings for these retailers are withheld until each has a cited source. The dual swap options that were listed under each retailer have been removed for the same reason. The category guides below keep their Best and Better options.</p>
 
     <div class="retailer-grid">
-      <!-- 1. Walmart -->
-      <div class="retailer-card failing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Mega Supermarket Chain</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">Walmart</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">Walmart Inc. (Public: WMT)</div>
-          </div>
-          <span class="grade-badge grade-F">Grade F (22/100)</span>
+      {% for r in retailers %}
+      <div class="retailer-card" id="retailer-{{ r.slug }}">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+          <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">{{ r.name }}</h3>
+          <span style="background: #f1f5f9; color: #475569; font-size: 0.78rem; font-weight: 700; padding: 0.25rem 0.55rem; border-radius: 0.375rem;">Rating: Withheld: no cited source yet</span>
         </div>
 
-        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #991b1b;">
-          <div>📉 <strong>$15.6 Billion/year</strong> extracted into buybacks &amp; dividends</div>
-          <div>👷 <strong>Only 11.2%</strong> of revenue reaches worker compensation</div>
-          <div>⚠️ <strong>312 OSHA Violations</strong> | Aggressive anti-union surveillance</div>
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: var(--slate);">
+          Shareholder payouts, wages, regulatory counts and packaging figures: <strong>Withheld: no cited source yet</strong>
         </div>
 
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">Matches or Beats Prices</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">WinCo Foods / Aldi</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> Standard supermarket aisles and checkout. WinCo is 100% Employee-Owned (ESOP) with matching or lower prices and retirement pensions worth $500k+. Aldi maintains living wages and efficient, low-waste operations.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B+ (84/100) &bull; Price Parity</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Highest Community Impact</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Local Food Co-ops &amp; Farm CSAs</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Seasonal farm box pickup or bulk-bin neighborhood shopping. Cost might be higher on specialty items, but 100% of profit remains local and over 40% of shelf items come direct from regional growers.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A+ (96/100) &bull; Zero Wall St</span>
-              <a href="/food" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Food Ladder &rarr;</a>
-            </div>
-          </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+          <a href="/brands?q={{ r.name|urlencode }}" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.3rem 0.6rem;">Search the brand database &rarr;</a>
         </div>
       </div>
-
-      <!-- 2. Target -->
-      <div class="retailer-card failing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Big-Box Department Chain</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">Target</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">Target Corporation (Public: TGT)</div>
-          </div>
-          <span class="grade-badge grade-D">Grade D (44/100)</span>
-        </div>
-
-        <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #9a3412;">
-          <div>📉 <strong>$3.8 Billion/year</strong> to shareholder dividends &amp; buybacks</div>
-          <div>👷 <strong>Involuntary Part-Time:</strong> Hours capped to avoid healthcare coverage</div>
-          <div>🗑️ <strong>Fast-Fashion Turnover:</strong> Disposable decor &amp; seasonal plastic waste</div>
-        </div>
-
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">Similar Household Essentials</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">Public Goods / Grove Collaborative</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> Clean paper products, personal care, and refillable cleaners delivered to your doorstep. Certified B Corps with accessible pricing and without Target's exploitative scheduling models.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B+ (82/100) &bull; Accessible Refills</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Circular &amp; Zero-Waste</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Zero-Waste Refill Shops &amp; B-Corps</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Bring your own glass/metal containers to neighborhood bulk dispensaries. Upfront jar cost is higher, but eliminates 100% of single-use plastic packaging and fast-fashion throwaways.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A (94/100) &bull; 100% Circular</span>
-              <a href="/local" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Local Shops &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3. Costco Wholesale -->
-      <div class="retailer-card passing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Warehouse Club</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">Costco Wholesale</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">Costco Wholesale Corp (Public: COST)</div>
-          </div>
-          <span class="grade-badge grade-B">Grade B- (62/100)</span>
-        </div>
-
-        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #166534;">
-          <div>👷 <strong>Best-in-class Mega Wages:</strong> ~$26/hr average with 90%+ health coverage</div>
-          <div>📉 <strong>$4.5 Billion</strong> extracted to public capital markets annually</div>
-          <div>📦 <strong>Packaging Deficit:</strong> Heavy single-use plastic shrink wraps on bulk units</div>
-        </div>
-
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">No $65/Yr Fee Barrier</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">WinCo Bulk Sections / Regional Wholesale</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> Buy family-size staples, flour, rice, and snacks in quantity. 100% employee-owned or regional wholesale with zero membership fees and equal unit savings.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B+ (80/100) &bull; Bulk Savings</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Truck Drop Buying Clubs</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Azure Standard &amp; Co-op Bulk Aisles</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Community truck drop points for 25-50lb bags of organic grains, oats, and non-GMO staples. Slashes plastic shrink wrap completely with zero Wall Street profit extraction.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A (95/100) &bull; Plastic-Free Bulk</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4. Amazon / Whole Foods -->
-      <div class="retailer-card failing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Online &amp; Grocery Monolith</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">Amazon / Whole Foods</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">Amazon.com Inc. (Public: AMZN)</div>
-          </div>
-          <span class="grade-badge grade-F">Grade F (19/100)</span>
-        </div>
-
-        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #991b1b;">
-          <div>⚠️ <strong>480 OSHA Citations:</strong> Warehouse injury rates twice retail average</div>
-          <div>📢 <strong>142 NLRB Complaints:</strong> Unlawful anti-union retaliation and surveillance</div>
-          <div>🗑️ <strong>700 Million lbs</strong> of plastic packaging waste per year</div>
-        </div>
-
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">Fast Doorstep Delivery</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">Direct Merchant Sites / Chewy / eBay</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> 1-click ordering, fast shipping, and price matching. Breaks Amazon's search monopoly and predatory 50% third-party seller fee take rates.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B (72/100) &bull; Direct Checkout</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Main Street Circulation</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Bookshop.org / DoneGood / CSAs</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Dedicated purpose platforms; shipping takes 2-4 days rather than 1 day. Bookshop routes 80%+ of profit to local independent bookstores; DoneGood indexes living-wage artisans.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A+ (98/100) &bull; 80%+ Local</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5. The Kroger Co. -->
-      <div class="retailer-card failing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Supermarket Conglomerate</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">The Kroger Co.</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">The Kroger Co. (Public: KR)</div>
-          </div>
-          <span class="grade-badge grade-F">Grade F (28/100)</span>
-        </div>
-
-        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #991b1b;">
-          <div>📉 <strong>$2.1 Billion</strong> in stock buybacks and dividends</div>
-          <div>⚠️ <strong>Workforce Audit:</strong> 14% of Kroger workers surveyed experienced homelessness</div>
-          <div>🍎 <strong>Heavy Monopsony:</strong> Squeezes farmgate prices for growers</div>
-        </div>
-
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">Union Supermarkets</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">Aldi &amp; Unionized Regional Grocers</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> Identical full-service grocery aisles and price points. Unionized grocery stores (UFCW contracts) enforce healthcare and wage floors, preventing extreme worker poverty.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B (76/100) &bull; Living Wage</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Shopper-Owned Co-op</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Regional Cooperative Supermarkets</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Democratic member governance, 40%+ local produce vs 5% at Kroger, and annual patronage dividend checks returned to shoppers from store profits.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A (95/100) &bull; Patronage Dividend</span>
-              <a href="/food" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Food Ladder &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6. Dollar General -->
-      <div class="retailer-card failing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Deep-Discount Dollar Chain</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">Dollar General</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">Dollar General Corp. (Public: DG)</div>
-          </div>
-          <span class="grade-badge grade-F">Grade F (14/100)</span>
-        </div>
-
-        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #991b1b;">
-          <div>⚠️ <strong>OSHA 'Severe Violator':</strong> $21M+ fines for blocked exits &amp; solo hazards</div>
-          <div>📉 <strong>22.4% Capital Extraction:</strong> Relentless share repurchases</div>
-          <div>🗑️ <strong>Highest Plastic Ratio:</strong> Small single-serve packages maximize waste</div>
-        </div>
-
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">Equal Deep Discounts</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">Aldi / Regional Independent Discounters</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> Deep-discount pricing on canned goods, milk, and household cleaners. Eliminates the extreme hazards of solo-clerk staffing and wage exploitation.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B (74/100) &bull; Safe Staffing</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Community Solidarity</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Community Mutual Aid &amp; Bulk Co-ops</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Cooperative buying clubs and community-governed food hubs that provide fresh food access in underserved neighborhoods without extractive corporate markups.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A (96/100) &bull; Zero Extraction</span>
-              <a href="/local" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Local Directory &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7. The Home Depot -->
-      <div class="retailer-card failing">
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-          <div>
-            <span style="font-size: 0.75rem; font-weight: 750; color: var(--muted); text-transform: uppercase;">Home Improvement Megastore</span>
-            <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--navy);">The Home Depot</h3>
-            <div style="font-size: 0.82rem; color: var(--slate);">The Home Depot Inc. (Public: HD)</div>
-          </div>
-          <span class="grade-badge grade-D">Grade D (38/100)</span>
-        </div>
-
-        <div style="background: #fff7ed; border: 1px solid #fed7aa; border-radius: 0.5rem; padding: 0.75rem; margin-bottom: 1rem; font-size: 0.84rem; color: #9a3412;">
-          <div>📉 <strong>$14.2 Billion</strong> extracted annually in dividends &amp; share buybacks</div>
-          <div>👷 <strong>13.0%</strong> Worker wage share; aggressive anti-union orientation</div>
-          <div>🗑️ <strong>Excess Plastic:</strong> Non-repairable consumer units &amp; clamshell packs</div>
-        </div>
-
-        <div class="swap-dual-container">
-          <!-- Better Swap -->
-          <div class="swap-card-better">
-            <div class="swap-tier-header">
-              <span class="swap-badge-better">⚡ Better Swap</span>
-              <span class="swap-meta-pill">Independent Hardware</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #0369a1; margin-bottom: 0.25rem;">True Value &amp; Independent Lumberyards</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>Similar Experience:</strong> Full fastener bins, paint matching, power tools, and drive-through lumber. Keeps revenue in regional merchants rather than corporate share buybacks.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #0369a1;">Grade B+ (80/100) &bull; Price Parity</span>
-              <a href="/brands" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Explore &rarr;</a>
-            </div>
-          </div>
-
-          <!-- Best Swap -->
-          <div class="swap-card-best">
-            <div class="swap-tier-header">
-              <span class="swap-badge-best">🏆 Best Swap</span>
-              <span class="swap-meta-pill">Co-op &amp; Tool Libraries</span>
-            </div>
-            <h4 style="font-size: 1.05rem; font-weight: 800; color: #15803d; margin-bottom: 0.25rem;">Ace Hardware (Co-op) &amp; Tool Libraries</h4>
-            <p style="font-size: 0.82rem; color: #334155; margin-bottom: 0.4rem; line-height: 1.4;">
-              <strong>May Differ:</strong> Borrow power tools for free from community tool libraries instead of buying. 5,000+ Ace Hardware stores are 100% retailer-owned cooperatives where store profits recirculate locally.
-            </p>
-            <div class="swap-meta-footer">
-              <span style="color: #15803d;">Grade A (94/100) &bull; 100% Hometown Co-op</span>
-              <a href="/local" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.2rem 0.5rem;">Local Services &rarr;</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </section>
 
-  <!-- High-Impact Household Budget Spend Categories -->
+  <!-- Household budget category guides: Best and Better options, action plan, limits -->
   <section style="margin-top: 3rem;">
     <div style="border-top: 2px solid var(--border); padding-top: 2.5rem; margin-bottom: 1.5rem;">
       <h2 style="font-size: 1.7rem; font-weight: 800; color: var(--navy);">Household Budget Category Guides</h2>
-      <p style="color: var(--muted);">Moving these top annual expenses keeps thousands of dollars in the ethical economy every year, with clear Best and Better options:</p>
+      <p style="color: var(--muted);">Each guide lists a Best and a Better option. Ratings are Shoptegrity opinion. Dollar figures are withheld until each has a cited source.</p>
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 2.5rem;">
@@ -444,9 +106,9 @@
             <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--navy); margin-top: 0.2rem;">{{ item.guide.title }}</h3>
           </div>
           <div style="text-align: right;">
-            <div style="font-size: 0.82rem; color: var(--muted);">Est. Annual Dollars Rerouted</div>
-            <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary);">{{ item.guide.estimated_annual_dollars_rerouted }}</div>
-            <div style="font-size: 0.82rem; color: #16a34a; font-weight: 600;">{{ item.guide.average_savings }}</div>
+            <div style="font-size: 0.82rem; color: var(--muted);">Annual dollars rerouted</div>
+            <div style="font-size: 1rem; font-weight: 800; color: var(--muted);">{{ item.guide.estimated_annual_dollars_rerouted }}</div>
+            <div style="font-size: 0.82rem; color: var(--muted); font-weight: 600;">Savings: {{ item.guide.average_savings }}</div>
           </div>
         </div>
 
@@ -499,10 +161,10 @@
           </ol>
         </div>
 
-        <!-- Curated Product Alternatives for Category if present -->
+        <!-- Brand & product options in this category, from the database (names only; details withheld) -->
         {% if item.recommended_alternatives %}
         <div style="margin-top: 1.25rem; margin-bottom: 1rem;">
-          <h4 style="font-size: 0.95rem; font-weight: 750; margin-bottom: 0.75rem; color: var(--navy);">Vetted Brand &amp; Product Swaps in this Category:</h4>
+          <h4 style="font-size: 0.95rem; font-weight: 750; margin-bottom: 0.75rem; color: var(--navy);">Brand &amp; Product Options in this Category:</h4>
           <div style="display: flex; flex-direction: column; gap: 0.75rem;">
             {% for alt in item.recommended_alternatives %}
             <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
@@ -514,29 +176,11 @@
                     <span class="swap-badge-best">🏆 Best</span>
                   {% endif %}
                   <strong style="font-size: 1.05rem; color: var(--navy);">{{ alt.brand_name }}</strong>
-                  <span class="flag-chip flag-coop" style="font-size: 0.75rem;">{{ alt.ownership_type.replace('_', ' ').title() }}</span>
-                  <span style="font-size: 0.78rem; color: var(--muted);">({{ alt.price_band }})</span>
                 </div>
-                <p style="font-size: 0.86rem; color: var(--slate); margin: 0.25rem 0;">{{ alt.rationale }}</p>
-                {% if alt.similarity_notes %}
-                  <div style="font-size: 0.8rem; color: #0284c7; margin-bottom: 0.25rem;">
-                    <strong>Experience Note:</strong> {{ alt.similarity_notes }}
-                  </div>
-                {% endif %}
-                <div style="font-size: 0.78rem; color: var(--muted);">
-                  <strong>Where to buy:</strong> {{ alt.where_to_buy }}
-                  {% if alt.savings_estimate %} &bull; <span style="color: var(--primary); font-weight: 600;">{{ alt.savings_estimate }}</span>{% endif %}
-                </div>
+                <div style="font-size: 0.78rem; color: var(--muted);">Details (rationale, price, where to buy, savings and score): Withheld: no cited source yet</div>
               </div>
               <div style="text-align: right;">
-                {% if alt.composite_score %}
-                  <div class="score-badge score-high" style="font-size: 0.95rem; padding: 0.25rem 0.6rem; display: inline-block;">
-                    Score: {{ alt.composite_score }}
-                  </div>
-                {% endif %}
-                <div style="margin-top: 0.4rem;">
-                  <a href="/brands/{{ alt.brand_slug }}" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.25rem 0.6rem;">Inspect Brand &rarr;</a>
-                </div>
+                <a href="/brands/{{ alt.brand_slug }}" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.25rem 0.6rem;">Inspect Brand &rarr;</a>
               </div>
             </div>
             {% endfor %}
@@ -545,7 +189,7 @@
         {% endif %}
 
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; font-size: 0.88rem; color: var(--muted);">
-          <div><strong>⚠️ Honest Limits:</strong> {{ item.guide.limits }}</div>
+          <div><strong>⚠️ Limits:</strong> {{ item.guide.limits }}</div>
           <a href="/brands" class="btn btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 0.8rem;">Browse Brand Alternatives &rarr;</a>
         </div>
       </div>

@@ -115,7 +115,7 @@ class Evidence(Base):
     event_date: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     retrieved_at: Mapped[str] = mapped_column(String(50))
     impact: Mapped[int] = mapped_column(Integer, default=0)  # -2 to +2
-    status: Mapped[str] = mapped_column(String(20), default="published")
+    status: Mapped[str] = mapped_column(String(20), default="pending")  # pending until reviewed; scoring reads only "published"
     reviewed_by: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
 
     entity: Mapped[Entity] = relationship("Entity", back_populates="evidence_items")
@@ -136,7 +136,7 @@ class Alternative(Base):
     savings_estimate: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     swap_tier: Mapped[str] = mapped_column(String(20), default="best")  # "best" or "better"
     similarity_notes: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
-    editor_approved: Mapped[bool] = mapped_column(Boolean, default=True)
+    editor_approved: Mapped[bool] = mapped_column(Boolean, default=False)  # unreviewed swaps are not served by the MCP listing
 
     from_brand: Mapped[Brand] = relationship("Brand", foreign_keys=[from_brand_id])
     to_brand: Mapped[Brand] = relationship("Brand", foreign_keys=[to_brand_id])

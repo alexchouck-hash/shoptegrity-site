@@ -43,6 +43,18 @@
     line-height: 1.4;
   }
 
+  .withheld {
+    display: inline-block;
+    font-weight: 700;
+    color: #92400e;
+    background: #fffbeb;
+    border: 1px dashed #d97706;
+    border-radius: 0.35rem;
+    padding: 0.05rem 0.45rem;
+    font-size: 0.85em;
+    line-height: 1.5;
+  }
+
   .tier-card {
     background: #ffffff;
     border: 1px solid var(--border);
@@ -105,7 +117,7 @@
     cursor: pointer;
   }
 
-  /* Progress bars for cash flow */
+  /* Progress bars for the illustrative split */
   .flow-bar-container {
     height: 18px;
     border-radius: 9px;
@@ -149,20 +161,20 @@
 <section class="hero" style="background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);">
   <div class="hero-inner">
     <div class="hero-tag" style="background: #d1fae5; color: #065f46; border-color: #a7f3d0;">
-      🏡 Housing & Shelter Evidence Guide
+      🏡 Housing & Shelter Guide
     </div>
     <h1>Who Actually Owns Where You Live?</h1>
     <p>
-      An evidence-backed investigation into American housing: Do most people rent houses? Who profits from your monthly rent check? How Wall Street private equity took over starter neighborhoods, and concrete steps to rent responsibly or build real homeownership.
+      A guide to American housing: how common renting and owning are, how ownership models differ, how a monthly rent payment can be divided, and practical steps for renting or buying. Figures without a cited source are shown as Withheld: no cited source yet. Remaining numbers are labelled as examples, assumptions, or opinions.
     </p>
 
     <!-- Quick Navigation Jump Buttons -->
     <div style="display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.5rem;">
-      <a href="#demographics" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">📊 The Hard Demographics</a>
-      <a href="#ownership-ladder" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🪜 6-Tier Ownership Ladder</a>
-      <a href="#rent-split" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">💸 $100 Rent Cash Flow</a>
-      <a href="#landlord-registry" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🏢 Mega-Landlords (DOJ/SEC)</a>
-      <a href="#auditor" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🕵️ Landlord Auditor</a>
+      <a href="#demographics" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">📊 Housing Statistics</a>
+      <a href="#ownership-ladder" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🪜 Ownership Tiers</a>
+      <a href="#rent-split" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">💸 Rent Dollar Illustration</a>
+      <a href="#landlord-registry" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🏢 Landlord Registry</a>
+      <a href="#auditor" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🕵️ Landlord Questionnaire</a>
       <a href="#swaps" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🔄 Housing Swaps</a>
       <a href="#pathways-to-own" class="btn btn-secondary" style="font-size: 0.85rem; font-weight: 650; background: #ffffff;">🔑 Pathways to Owning</a>
       <a href="#calculator" class="btn btn-primary" style="font-size: 0.85rem; font-weight: 700;">🧮 Rent vs Own Simulator</a>
@@ -176,82 +188,72 @@
   <section id="demographics" style="margin-bottom: 3.5rem;">
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
       <span style="font-size: 1.5rem;">📊</span>
-      <h2 style="font-size: 1.6rem; color: var(--navy);">Do Most Folks Rent Houses? (The Numbers)</h2>
+      <h2 style="font-size: 1.6rem; color: var(--navy);">Who Rents and Who Owns?</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.25rem;">
-      The short answer is <strong>no—nationwide, a majority of Americans own their home</strong>. However, the distribution is split sharply by age, geography, and building type.
+      National tenure figures: <span class="withheld">Withheld: no cited source yet</span>
     </p>
 
     <div class="housing-stat-grid">
       <div class="housing-stat-card">
-        <div class="housing-stat-num" style="color: var(--primary);">65.6%</div>
+        <div class="housing-stat-num" style="color: var(--primary);">&mdash;</div>
         <div class="housing-stat-label">National Homeownership</div>
-        <div class="housing-stat-desc">Around 85.5 million US households own their primary residence (US Census Bureau).</div>
+        <div class="housing-stat-desc"><span class="withheld">Withheld: no cited source yet</span></div>
       </div>
 
       <div class="housing-stat-card">
-        <div class="housing-stat-num" style="color: var(--blue);">34.4%</div>
+        <div class="housing-stat-num" style="color: var(--blue);">&mdash;</div>
         <div class="housing-stat-label">National Renter Share</div>
-        <div class="housing-stat-desc">Approximately 44.8 million households rent their living space across the United States.</div>
+        <div class="housing-stat-desc"><span class="withheld">Withheld: no cited source yet</span></div>
       </div>
 
       <div class="housing-stat-card">
-        <div class="housing-stat-num" style="color: var(--warning);">15.2M</div>
+        <div class="housing-stat-num" style="color: var(--warning);">&mdash;</div>
         <div class="housing-stat-label">Single-Family Rentals</div>
-        <div class="housing-stat-desc">About 1 in 3 rental units in America is a standalone single-family house or townhome.</div>
+        <div class="housing-stat-desc"><span class="withheld">Withheld: no cited source yet</span></div>
       </div>
 
       <div class="housing-stat-card">
-        <div class="housing-stat-num" style="color: var(--danger);">62.1%</div>
+        <div class="housing-stat-num" style="color: var(--danger);">&mdash;</div>
         <div class="housing-stat-label">Under-35 Renters</div>
-        <div class="housing-stat-desc">A strong majority of young adults and entry-level workers rent rather than own.</div>
+        <div class="housing-stat-desc"><span class="withheld">Withheld: no cited source yet</span></div>
       </div>
     </div>
 
     <!-- Comparative Table -->
     <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; margin-top: 1.5rem;">
-      <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.75rem;">Where Do Renters vs. Owners Actually Live?</h3>
+      <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.75rem;">Owned and Rented Shares by Housing Type</h3>
       <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; text-align: left;">
           <thead>
             <tr style="border-bottom: 2px solid var(--border); background: #f8fafc;">
               <th style="padding: 0.75rem;">Housing Structure Type</th>
-              <th style="padding: 0.75rem;">% That Are Owned</th>
-              <th style="padding: 0.75rem;">% That Are Rented</th>
-              <th style="padding: 0.75rem;">Key Takeaway</th>
+              <th style="padding: 0.75rem;">Owned and Rented Shares</th>
             </tr>
           </thead>
           <tbody>
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 0.75rem; font-weight: 700;">Single-Family Detached Houses</td>
-              <td style="padding: 0.75rem; color: #166534; font-weight: 700;">82.4%</td>
-              <td style="padding: 0.75rem; color: #9a3412;">17.6%</td>
-              <td style="padding: 0.75rem; color: var(--muted);">Most standalone houses are owner-occupied, but institutional SFR purchases grew 300% post-2010.</td>
+              <td style="padding: 0.75rem;"><span class="withheld">Withheld: no cited source yet</span></td>
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
-              <td style="padding: 0.75rem; font-weight: 700;">Attached Townhomes (2–4 Units)</td>
-              <td style="padding: 0.75rem; color: #166534;">57.1%</td>
-              <td style="padding: 0.75rem; color: #9a3412;">42.9%</td>
-              <td style="padding: 0.75rem; color: var(--muted);">Prime territory for "house hacking" and independent local duplex landlords.</td>
+              <td style="padding: 0.75rem; font-weight: 700;">Small Multi-Unit Buildings (2–4 Units)</td>
+              <td style="padding: 0.75rem;"><span class="withheld">Withheld: no cited source yet</span></td>
             </tr>
             <tr style="border-bottom: 1px solid var(--border);">
               <td style="padding: 0.75rem; font-weight: 700;">Apartment Buildings (5 to 49 Units)</td>
-              <td style="padding: 0.75rem; color: #166534;">14.2%</td>
-              <td style="padding: 0.75rem; color: #9a3412; font-weight: 700;">85.8%</td>
-              <td style="padding: 0.75rem; color: var(--muted);">Historically local LLCs and families, increasingly acquired by regional equity groups.</td>
+              <td style="padding: 0.75rem;"><span class="withheld">Withheld: no cited source yet</span></td>
             </tr>
             <tr>
               <td style="padding: 0.75rem; font-weight: 700;">Large Complexes (50+ Units)</td>
-              <td style="padding: 0.75rem; color: #166534;">9.5% (Condos)</td>
-              <td style="padding: 0.75rem; color: #9a3412; font-weight: 700;">90.5%</td>
-              <td style="padding: 0.75rem; color: var(--muted);">Overwhelmingly owned by Institutional REITs, Private Equity firms, and Wall Street capital.</td>
+              <td style="padding: 0.75rem;"><span class="withheld">Withheld: no cited source yet</span></td>
             </tr>
           </tbody>
         </table>
       </div>
 
       <div style="margin-top: 1rem; padding: 0.75rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 0.5rem; font-size: 0.85rem; color: #92400e;">
-        <strong>The Wealth Multiplier:</strong> According to the Federal Reserve Survey of Consumer Finances, the median net worth of US homeowners is <strong>$396,200</strong> compared to just <strong>$10,400</strong> for renters—a 38-fold gap driven primarily by real estate equity and fixed-rate mortgage amortization.
+        <strong>Wealth by Tenure:</strong> Median net worth of owner and renter households: <span class="withheld">Withheld: no cited source yet</span>
       </div>
     </div>
   </section>
@@ -263,23 +265,23 @@
       <h2 style="font-size: 1.6rem; color: var(--navy);">The 6-Tier Housing Ownership Hierarchy</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.5rem;">
-      Do "elites" own your home? It depends on the ownership tier. About <strong>70%–75% of single-family rentals</strong> are owned by small individual landlords, but <strong>large apartment complexes and Sunbelt starter homes</strong> are increasingly consolidated by private equity platforms, institutional REITs, and algorithmic price cartels.
+      The tiers below describe six ownership models and give each one a <strong>Shoptegrity opinion</strong> grade. The grades are opinions, not measurements. Share of the rental market held by each model: <span class="withheld">Withheld: no cited source yet</span>
     </p>
 
     <!-- Tier 1 -->
     <div class="tier-card tier-1">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
         <div>
-          <span style="font-size: 0.8rem; font-weight: 800; color: #047857; text-transform: uppercase;">Tier 1: Highest Integrity</span>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #047857; text-transform: uppercase;">Tier 1: Community-Governed</span>
           <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Community Land Trusts (CLTs) & Housing Cooperatives</h3>
         </div>
-        <span class="badge-score score-good">Score: 98/100 · Grade A+</span>
+        <span class="badge-score score-good">Shoptegrity opinion · Score: 98/100 · Grade A</span>
       </div>
       <p style="font-size: 0.92rem; color: var(--slate); margin: 0.6rem 0;">
-        <strong>Who benefits:</strong> The residents and the local community. The land is held permanently in trust to remove speculative inflation, while residents own the structure or hold co-op shares.
+        <strong>Who it is:</strong> Land is held in trust for community benefit. Homes are sold at restricted prices or governed cooperatively, and resale and rent rules are set in the governing documents.
       </p>
       <div style="background: #f0fdf4; border-radius: 0.5rem; padding: 0.65rem 0.9rem; font-size: 0.85rem; color: #166534;">
-        <strong>Real-World Examples:</strong> Champlain Housing Trust (Burlington, VT), Limited Equity Housing Cooperatives (NYC, SF, Chicago), Grounded Solutions Network members.
+        <strong>Real-World Examples:</strong> <span class="withheld">Withheld: no cited source yet</span>
       </div>
     </div>
 
@@ -290,10 +292,10 @@
           <span style="font-size: 0.8rem; font-weight: 800; color: #059669; text-transform: uppercase;">Tier 2: Direct Equity</span>
           <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Resident / Family Owner-Occupants (Primary Homeowners)</h3>
         </div>
-        <span class="badge-score score-good">Score: 92/100 · Grade A</span>
+        <span class="badge-score score-good">Shoptegrity opinion · Score: 92/100 · Grade A</span>
       </div>
       <p style="font-size: 0.92rem; color: var(--slate); margin: 0.6rem 0;">
-        <strong>Who benefits:</strong> Working families. 100% of mortgage principal paydown converts directly into generational household net worth. No landlord extraction, no surprise lease non-renewals.
+        <strong>Who it is:</strong> The household lives in the home and owns it. Mortgage principal payments build equity over time; the amount depends on loan terms and local prices.
       </p>
     </div>
 
@@ -301,16 +303,16 @@
     <div class="tier-card tier-3">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
         <div>
-          <span style="font-size: 0.8rem; font-weight: 800; color: #0284c7; text-transform: uppercase;">Tier 3: Local Independence</span>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #0284c7; text-transform: uppercase;">Tier 3: Local Owner</span>
           <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Independent "Mom-and-Pop" Landlords (1 to 4 Units)</h3>
         </div>
-        <span class="badge-score score-good">Score: 78/100 · Grade B+</span>
+        <span class="badge-score score-good">Shoptegrity opinion · Score: 78/100 · Grade B</span>
       </div>
       <p style="font-size: 0.92rem; color: var(--slate); margin: 0.6rem 0;">
-        <strong>Who benefits:</strong> Individual local owners, retirees, and neighborhood investors. Own ~70%–75% of single-family rentals. You deal directly with a human who lives in or near your town.
+        <strong>Who it is:</strong> Individual owners who rent out 1 to 4 units. You may deal directly with the owner, and lease terms can sometimes be negotiated. Share of rentals in this model: <span class="withheld">Withheld: no cited source yet</span>
       </p>
       <div style="background: #f0f9ff; border-radius: 0.5rem; padding: 0.65rem 0.9rem; font-size: 0.85rem; color: #0369a1;">
-        <strong>Pros & Cons:</strong> Significantly lower eviction rates and fewer hidden garbage fees than Wall Street firms; but maintenance response depends entirely on individual landlord ethics and cash reserves.
+        <strong>Pros & Cons:</strong> Direct contact and negotiable terms are possible. Maintenance speed depends on the owner's time and cash reserves. Comparative eviction and fee data: <span class="withheld">Withheld: no cited source yet</span>
       </div>
     </div>
 
@@ -321,10 +323,10 @@
           <span style="font-size: 0.8rem; font-weight: 800; color: #d97706; text-transform: uppercase;">Tier 4: Regional Commercial</span>
           <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Regional Property Management & Mid-Tier Syndications</h3>
         </div>
-        <span class="badge-score score-mid">Score: 58/100 · Grade C</span>
+        <span class="badge-score score-mid">Shoptegrity opinion · Score: 58/100 · Grade C</span>
       </div>
       <p style="font-size: 0.92rem; color: var(--slate); margin: 0.6rem 0;">
-        <strong>Who benefits:</strong> Professional property management companies and regional investor groups (10 to 200 units). Standardized leasing, online portals, strict late fees, market-rate annual rent increases.
+        <strong>Who it is:</strong> Professional management companies and regional investor groups managing about 10 to 200 units. Standardized leases and online portals are typical.
       </p>
     </div>
 
@@ -332,16 +334,16 @@
     <div class="tier-card tier-5">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
         <div>
-          <span style="font-size: 0.8rem; font-weight: 800; color: #ea580c; text-transform: uppercase;">Tier 5: Disguised Rollup</span>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #ea580c; text-transform: uppercase;">Tier 5: Institutional Rollup</span>
           <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Institutional Single-Family Rental (SFR) Rollup Platforms</h3>
         </div>
-        <span class="badge-score score-bad">Score: 28/100 · Grade D-</span>
+        <span class="badge-score score-bad">Shoptegrity opinion · Score: 28/100 · Grade F</span>
       </div>
       <p style="font-size: 0.92rem; color: var(--slate); margin: 0.6rem 0;">
-        <strong>Who benefits:</strong> Wall Street asset managers who bulk-purchase starter family homes. Heavily concentrated in Atlanta, Charlotte, Phoenix, Tampa, and Dallas.
+        <strong>Who it is:</strong> Institutional investors that buy starter family homes, sometimes in bulk. Where these platforms operate: <span class="withheld">Withheld: no cited source yet</span>
       </p>
       <div style="background: #fff7ed; border-radius: 0.5rem; padding: 0.65rem 0.9rem; font-size: 0.85rem; color: #c2410c;">
-        <strong>Key Operators:</strong> Invitation Homes (spun off from Blackstone), Progress Residential (Pretium Partners), American Homes 4 Rent, Tricon Residential. Documented higher fee burdens, automated maintenance delays, and aggressive automated eviction filings.
+        <strong>Named operators and their records:</strong> <span class="withheld">Withheld: no cited source yet</span>
       </div>
     </div>
 
@@ -349,48 +351,45 @@
     <div class="tier-card tier-6">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
         <div>
-          <span style="font-size: 0.8rem; font-weight: 800; color: #dc2626; text-transform: uppercase;">Tier 6: Maximum Extraction</span>
-          <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Mega Private Equity Firms, Public REITs & Algorithmic Rent Cartels</h3>
+          <span style="font-size: 0.8rem; font-weight: 800; color: #dc2626; text-transform: uppercase;">Tier 6: Large Investor Owner</span>
+          <h3 style="font-size: 1.25rem; color: var(--navy); margin-top: 0.2rem;">Large Private Equity Firms & Public Apartment REITs</h3>
         </div>
-        <span class="badge-score score-bad">Score: 16/100 · Grade F</span>
+        <span class="badge-score score-bad">Shoptegrity opinion · Score: 16/100 · Grade F</span>
       </div>
       <p style="font-size: 0.92rem; color: var(--slate); margin: 0.6rem 0;">
-        <strong>Who benefits:</strong> The top 1% and institutional capital managers (Blackstone, Starwood, Equity Residential, AvalonBay). Utilizes algorithmic revenue management software (e.g. RealPage YieldStar) to restrict rental supply and artificially maximize market rents across entire zip codes.
+        <strong>Who it is:</strong> Large private equity funds and publicly traded apartment REITs. Named companies, pricing practices, and legal or regulatory matters: <span class="withheld">Withheld: no cited source yet</span>
       </p>
-      <div style="background: #fef2f2; border-radius: 0.5rem; padding: 0.65rem 0.9rem; font-size: 0.85rem; color: #991b1b;">
-        <strong>Antitrust Alert:</strong> The US Department of Justice (DOJ) and numerous state Attorneys General have filed antitrust lawsuits against RealPage and major corporate landlords for illegal algorithmic rent price-fixing.
-      </div>
     </div>
   </section>
 
-  <!-- Section 3: $100 Rent Cash Flow Split (Signature Shoptegrity Feature) -->
+  <!-- Section 3: Illustrative $100 Rent Split -->
   <section id="rent-split" style="margin-bottom: 3.5rem;">
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
       <span style="font-size: 1.5rem;">💸</span>
-      <h2 style="font-size: 1.6rem; color: var(--navy);">The $100 Rent Dollar Cash Flow Split</h2>
+      <h2 style="font-size: 1.6rem; color: var(--navy);">The $100 Rent Dollar Illustration</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.25rem;">
-      <strong>Follow the Cash:</strong> When $100 leaves your checking account for rent, where does it land? See how different ownership structures either recirculate dollars within your hometown or siphon them directly to Wall Street:
+      <strong>Illustrative calculator.</strong> The shares below are example inputs, not measurements of any landlord, company, or ownership type. How rent is actually divided in any ownership model: <span class="withheld">Withheld: no cited source yet</span> Change the rent amount to see the dollar figures move.
     </p>
 
     <div class="interactive-box">
-      <!-- Tier Selector Tabs -->
+      <!-- Example Model Selector -->
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
         <button id="btnSplitClt" class="btn btn-secondary" onclick="setSplitTier('tier_1_clt')" style="font-size: 0.85rem; font-weight: 750; background: var(--primary-light); color: var(--primary-dark); border-color: #a7f3d0;">
-          🟢 Tier 1: Community Land Trust / Co-op (100% Local)
+          🟢 Tier 1: Community Land Trust / Co-op (example)
         </button>
         <button id="btnSplitMom" class="btn btn-secondary" onclick="setSplitTier('tier_3_mom_pop')" style="font-size: 0.85rem; font-weight: 750; background: #ffffff;">
-          🔵 Tier 3: Local Mom-and-Pop (82% Local)
+          🔵 Tier 3: Local Owner (example)
         </button>
         <button id="btnSplitPe" class="btn btn-secondary" onclick="setSplitTier('tier_6_institutional')" style="font-size: 0.85rem; font-weight: 750; background: #ffffff;">
-          🔴 Tier 6: Wall Street Private Equity / REIT (26% Local)
+          🔴 Tier 6: Large Investor Owner (example)
         </button>
       </div>
 
       <!-- Rent Input Field -->
       <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-        <label style="font-size: 0.9rem; font-weight: 700; color: var(--navy);">
-          Calculate with your monthly rent:
+        <label for="userRentInput" style="font-size: 0.9rem; font-weight: 700; color: var(--navy);">
+          Monthly rent to illustrate:
         </label>
         <div style="display: flex; align-items: center; gap: 0.35rem;">
           <span style="font-weight: 800; font-size: 1.1rem; color: var(--slate);">$</span>
@@ -401,9 +400,9 @@
 
       <!-- Visual Flow Bar -->
       <div style="margin-bottom: 0.75rem;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 800;">
-          <span id="splitRetentionLabel" style="color: #166534;">Local Community Retention: 100%</span>
-          <span id="splitLeakageLabel" style="color: #dc2626;">Wall Street Extraction: 0%</span>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.85rem; font-weight: 800;">
+          <span id="splitRetentionLabel" style="color: #166534;">Illustrative local share: 100%</span>
+          <span id="splitLeakageLabel" style="color: #dc2626;">Illustrative outside share: 0%</span>
         </div>
         <div class="flow-bar-container">
           <div id="splitBarLocal" class="flow-bar-segment" style="width: 100%; background: #059669;"></div>
@@ -417,9 +416,9 @@
           <thead>
             <tr style="border-bottom: 2px solid var(--border); background: #f8fafc; text-align: left;">
               <th style="padding: 0.65rem;">Expense Bucket</th>
-              <th style="padding: 0.65rem;">Share of $100</th>
-              <th style="padding: 0.65rem;">Your Monthly $ Amount</th>
-              <th style="padding: 0.65rem;">Terminal Destination</th>
+              <th style="padding: 0.65rem;">Example Share of $100</th>
+              <th style="padding: 0.65rem;">Dollar Amount at Your Rent</th>
+              <th style="padding: 0.65rem;">Example Destination</th>
             </tr>
           </thead>
           <tbody id="splitTableBody">
@@ -428,112 +427,38 @@
         </table>
       </div>
 
-      <div id="splitTakeawayBox" style="margin-top: 1.25rem; padding: 0.85rem; border-radius: 0.5rem; font-size: 0.85rem; line-height: 1.4; background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0;">
-        <!-- Dynamic explanation -->
+      <div id="splitTakeawayBox" style="margin-top: 1.25rem; padding: 0.85rem; border-radius: 0.5rem; font-size: 0.85rem; line-height: 1.4; background: #f8fafc; color: #334155; border: 1px solid var(--border);">
+        Illustration only. Not a measurement. Withheld: no cited source yet.
       </div>
     </div>
   </section>
 
-  <!-- Section 4: Institutional Mega-Landlord Registry -->
+  <!-- Section 4: Landlord Registry -->
   <section id="landlord-registry" style="margin-bottom: 3.5rem;">
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
       <span style="font-size: 1.5rem;">🏢</span>
-      <h2 style="font-size: 1.6rem; color: var(--navy);">Institutional Mega-Landlord Registry (DOJ & SEC Receipts)</h2>
+      <h2 style="font-size: 1.6rem; color: var(--navy);">Institutional Landlord Registry</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.25rem;">
-      Shoptegrity standard: <em>Receipts over claims</em>. These corporate platforms own or manage hundreds of thousands of residential units. Here are their verified filings, regulatory citations, and business practices:
+      No landlord records are published on this page yet. Company names, ownership, unit counts, pay figures, pricing practices, and legal or regulatory matters: <span class="withheld">Withheld: no cited source yet</span>
     </p>
 
-    <!-- Invitation Homes -->
-    <div class="landlord-card" style="border-left: 6px solid #dc2626;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h3 style="font-size: 1.2rem; color: var(--navy);">Invitation Homes (NYSE: INVH · CIK: 0001687229)</h3>
-          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem;">
-            Public REIT · Spun off from Blackstone · ~85,000 Single-Family Rental Homes
-          </div>
-        </div>
-        <span class="badge-score score-bad">Score: 26/100 · Grade F</span>
-      </div>
-      <div style="margin: 0.75rem 0; font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-        <strong>Core Markets:</strong> Atlanta, Phoenix, Dallas, Tampa, Charlotte, Southern California.<br>
-        <strong>CEO Pay Ratio:</strong> 165:1 (SEC Item 402(u)).<br>
-        <strong>Algorithmic Pricing:</strong> Documented user of RealPage / YieldStar revenue management.
-      </div>
-      <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.65rem 0.85rem; font-size: 0.82rem; color: #991b1b;">
-        <strong>Regulatory Receipts:</strong> Settled federal inquiry with the FTC and CFPB regarding deceptive utility fee markups and withheld security deposits; subpoenaed by the US House Financial Services Committee for disproportionate eviction filings during moratoriums.
-      </div>
-    </div>
-
-    <!-- Progress Residential -->
-    <div class="landlord-card" style="border-left: 6px solid #dc2626;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h3 style="font-size: 1.2rem; color: var(--navy);">Progress Residential (Pretium Partners)</h3>
-          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem;">
-            Private Equity Fund Platform · ~85,000 Single-Family Homes
-          </div>
-        </div>
-        <span class="badge-score score-bad">Score: 22/100 · Grade F</span>
-      </div>
-      <div style="margin: 0.75rem 0; font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-        <strong>Core Markets:</strong> Atlanta, Phoenix, Charlotte, Nashville, Las Vegas, Orlando.<br>
-        <strong>Corporate Camouflage:</strong> Leases executed through dozens of obscure shell LLCs (e.g. "Progress Residential Borrower LLC") while tenants are funneled through automated overseas app ticket systems.
-      </div>
-      <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.65rem 0.85rem; font-size: 0.82rem; color: #991b1b;">
-        <strong>Regulatory Receipts:</strong> Congressional investigation revealed Progress filed evictions at nearly double the rate of independent landlords across Florida and Georgia, and frequently locked tenants out over automated portal ledger errors.
-      </div>
-    </div>
-
-    <!-- Blackstone / Tricon -->
-    <div class="landlord-card" style="border-left: 6px solid #dc2626;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h3 style="font-size: 1.2rem; color: var(--navy);">Blackstone Inc. / Tricon Residential (NYSE: BX)</h3>
-          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem;">
-            World's Largest Real Estate Asset Manager · $3.5B Tricon Acquisition in 2024
-          </div>
-        </div>
-        <span class="badge-score score-bad">Score: 18/100 · Grade F</span>
-      </div>
-      <div style="margin: 0.75rem 0; font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-        <strong>Portfolio:</strong> ~37,000 single-family rental homes + over 300,000 multi-family units globally.<br>
-        <strong>CEO Pay Ratio:</strong> 320:1.<br>
-        <strong>Global Footprint:</strong> Financializes housing across North America and Europe, buying residential assets using sovereign wealth and leveraged buyout debt.
-      </div>
-      <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.65rem 0.85rem; font-size: 0.82rem; color: #991b1b;">
-        <strong>Regulatory Receipts:</strong> Formally cited by the United Nations Special Rapporteur on the Right to Adequate Housing for predatorily financializing residential shelter and displacing low-income residents.
-      </div>
-    </div>
-
-    <!-- Greystar -->
-    <div class="landlord-card" style="border-left: 6px solid #dc2626;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
-        <div>
-          <h3 style="font-size: 1.2rem; color: var(--navy);">Greystar Real Estate Partners</h3>
-          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem;">
-            Global Property Management Conglomerate · Over 800,000 Multi-Family Units
-          </div>
-        </div>
-        <span class="badge-score score-bad">Score: 19/100 · Grade F</span>
-      </div>
-      <div style="margin: 0.75rem 0; font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-        <strong>Operating Model:</strong> Operates "luxury" and mid-tier apartment towers in 50+ major US metros under localized boutique names while centrally sharing tenant pricing data with algorithmic cartels.
-      </div>
-      <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: 0.5rem; padding: 0.65rem 0.85rem; font-size: 0.82rem; color: #991b1b;">
-        <strong>Regulatory Receipts:</strong> Named by the US Department of Justice (DOJ) in federal antitrust lawsuit <em>DOJ v. RealPage (2024)</em> as a central participant in illegal algorithmic rent-fixing conspiracies that suppressed competitive lease discounts.
+    <div class="landlord-card" style="border-left: 6px solid #cbd5e1;">
+      <div style="font-size: 0.95rem; font-weight: 750; color: var(--navy);">Registry records</div>
+      <div style="font-size: 0.88rem; color: var(--slate); margin-top: 0.35rem;">
+        <span class="withheld">Withheld: no cited source yet</span>
       </div>
     </div>
   </section>
 
-  <!-- Section 5: Landlord Integrity Auditor (Interactive Tool) -->
+  <!-- Section 5: Landlord Questionnaire (Interactive Tool) -->
   <section id="auditor" style="margin-bottom: 3.5rem;">
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
       <span style="font-size: 1.5rem;">🕵️</span>
-      <h2 style="font-size: 1.6rem; color: var(--navy);">Interactive Landlord Integrity Auditor</h2>
+      <h2 style="font-size: 1.6rem; color: var(--navy);">Interactive Landlord Questionnaire</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.25rem;">
-      Not sure who actually controls your home? Answer 4 quick questions to diagnose your landlord's extraction tier, algorithmic pricing risk, and your legal protection posture:
+      Answer 4 quick questions about your own landlord. The result is a <strong>Shoptegrity opinion</strong> score computed only from your answers. It does not identify or evaluate any named company and is not a finding about your landlord.
     </p>
 
     <div class="interactive-box">
@@ -541,77 +466,80 @@
         <!-- Form Inputs -->
         <div>
           <div style="margin-bottom: 1.1rem;">
-            <label style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
-              1. Who owns or manages the property?
+            <label for="auditOwner" style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
+              1. What kind of owner is your landlord?
             </label>
             <select id="auditOwner" onchange="runLandlordAudit()" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.88rem;">
               <option value="clt">Community Land Trust / Housing Co-op</option>
-              <option value="individual" selected>Local Individual / "Mom-and-Pop" Landlord</option>
-              <option value="regional">Regional Property Management Company</option>
-              <option value="sfr_rollup">Wall Street Single-Family Platform (Progress, Invitation, AMH)</option>
-              <option value="megareit">Public REIT or Mega-Firm (Greystar, Blackstone, Equity Residential)</option>
+              <option value="individual" selected>Local individual / "Mom-and-Pop" owner</option>
+              <option value="regional">Regional property management company</option>
+              <option value="sfr_rollup">Institutional single-family rental platform</option>
+              <option value="megareit">Large private equity fund or public apartment REIT</option>
             </select>
           </div>
 
           <div style="margin-bottom: 1.1rem;">
-            <label style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
+            <label for="auditPricing" style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
               2. How is your rent price set and renewed?
             </label>
             <select id="auditPricing" onchange="runLandlordAudit()" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.88rem;">
-              <option value="fixed">Income-restricted / Democratic Co-op vote</option>
-              <option value="human" selected>Personal human conversation with owner</option>
-              <option value="portal">Automated lease portal with non-negotiable rate</option>
-              <option value="algo">Algorithmic daily pricing (RealPage / YieldStar daily quote)</option>
+              <option value="fixed">Income-restricted, or set by a co-op board vote</option>
+              <option value="human" selected>Personal conversation with the owner</option>
+              <option value="portal">Automated lease portal with a set rate</option>
+              <option value="algo">Software-set pricing that changes frequently</option>
             </select>
           </div>
 
           <div style="margin-bottom: 1.1rem;">
-            <label style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
+            <label for="auditMaint" style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
               3. How are repairs and maintenance handled?
             </label>
             <select id="auditMaint" onchange="runLandlordAudit()" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.88rem;">
-              <option value="local_direct" selected>Landlord or trusted local contractor comes personally</option>
-              <option value="dedicated_staff">On-site building maintenance staff</option>
-              <option value="ticket_portal">Offshore call center / app ticket with frequent delays</option>
+              <option value="local_direct" selected>Owner or a local contractor comes in person</option>
+              <option value="dedicated_staff">On-site maintenance staff</option>
+              <option value="ticket_portal">Remote call center or app ticket system</option>
             </select>
           </div>
 
           <div style="margin-bottom: 1.1rem;">
-            <label style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
+            <label for="auditFees" style="display: block; font-size: 0.85rem; font-weight: 750; color: var(--navy); margin-bottom: 0.35rem;">
               4. What extra fees are attached to your lease?
             </label>
             <select id="auditFees" onchange="runLandlordAudit()" style="width: 100%; padding: 0.5rem; border-radius: 0.375rem; border: 1px solid var(--border); font-size: 0.88rem;">
-              <option value="transparent" selected>Zero surprise fees (Rent + utilities only)</option>
-              <option value="moderate">Small parking or pet rent ($25–$50/mo)</option>
-              <option value="heavy">Mandatory "Resident Benefit Package", trash valet, payment portal fees ($100+/mo)</option>
+              <option value="transparent" selected>No extra fees beyond rent and utilities</option>
+              <option value="moderate">Small parking or pet fees</option>
+              <option value="heavy">Mandatory package, valet, or portal fees</option>
             </select>
           </div>
         </div>
 
-        <!-- Audit Scorecard Output -->
+        <!-- Result Output -->
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="font-size: 0.8rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em;">
-              Landlord Audit Results
+              Questionnaire Result
+            </div>
+            <div style="font-size: 0.8rem; font-weight: 750; color: #92400e; margin-top: 0.25rem;">
+              Shoptegrity opinion (computed from your answers only)
             </div>
             <div style="display: flex; align-items: baseline; gap: 0.75rem; margin: 0.5rem 0;">
               <span id="auditScoreVal" style="font-size: 2.8rem; font-weight: 800; color: #0284c7;">78</span>
-              <span id="auditGradeVal" style="font-size: 1.4rem; font-weight: 800; color: #0284c7;">Grade B+</span>
+              <span id="auditGradeVal" style="font-size: 1.4rem; font-weight: 800; color: #0284c7;">Grade B</span>
             </div>
             <div id="auditTierDesc" style="font-size: 0.88rem; font-weight: 700; color: var(--slate); margin-bottom: 0.5rem;">
               Tier 3: Independent Local Landlord
             </div>
             <div id="auditRiskAlert" style="font-size: 0.85rem; line-height: 1.4; color: var(--muted);">
-              Direct relationship with minimal corporate extraction. Maintain written records of repair requests and rent receipts.
+              If your landlord is an individual owner, is the relationship direct? Keep written records of repair requests and rent receipts.
             </div>
           </div>
 
           <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--border);">
             <div style="font-size: 0.78rem; font-weight: 800; color: var(--navy); text-transform: uppercase; margin-bottom: 0.35rem;">
-              Actionable Defense Step:
+              Possible next step:
             </div>
             <div id="auditActionStep" style="font-size: 0.85rem; color: #047857; font-weight: 650; line-height: 1.4;">
-              Ask owner to sign up for rent-reporting to build your credit score towards homeownership.
+              Ask whether your owner will report on-time rent to the credit bureaus, if that would help your credit goals.
             </div>
           </div>
         </div>
@@ -619,14 +547,14 @@
     </div>
   </section>
 
-  <!-- Section 6: Actionable Housing Swaps -->
+  <!-- Section 6: Housing Swaps -->
   <section id="swaps" style="margin-bottom: 3.5rem;">
     <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
       <span style="font-size: 1.5rem;">🔄</span>
       <h2 style="font-size: 1.6rem; color: var(--navy);">Actionable Housing & Mortgage Swaps</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.25rem;">
-      Just like swapping grocery brands or banks, you can deliberately re-route shelter dollars to build wealth for yourself and your community:
+      You can choose where housing dollars go. Savings and price figures for each swap: <span class="withheld">Withheld: no cited source yet</span> Each card lists what to check instead.
     </p>
 
     <div class="swap-grid">
@@ -636,14 +564,14 @@
           <span style="font-size: 0.75rem; font-weight: 800; color: #047857; text-transform: uppercase; letter-spacing: 0.03em;">Renting Swap</span>
           <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Corporate Complex → Local Duplex / Co-op</h3>
           <div style="font-size: 0.85rem; color: #991b1b; margin-bottom: 0.4rem;">
-            <strong>Stop:</strong> Paying $150/mo in junk fees to Wall Street management platforms.
+            <strong>Stop:</strong> Paying mandatory amenity, trash, or portal fees on top of rent.
           </div>
           <div style="font-size: 0.85rem; color: #166534; margin-bottom: 0.75rem;">
-            <strong>Swap to:</strong> Independent local duplex/fourplex landlord or housing co-op.
+            <strong>Swap to:</strong> Independent local landlord with 1 to 4 units, a duplex, or a housing co-op.
           </div>
         </div>
         <div style="background: #f8fafc; border-radius: 0.5rem; padding: 0.65rem; font-size: 0.82rem; border-top: 1px solid var(--border);">
-          <strong>Financial Impact:</strong> Saves $1,800–$3,600/yr in eliminated trash, parcel, and portal fees.
+          <strong>Financial Impact:</strong> Add up every mandatory fee in your lease and compare the total with the alternative. Savings amounts: <span class="withheld">Withheld: no cited source yet</span>
         </div>
       </div>
 
@@ -651,16 +579,16 @@
       <div class="swap-card">
         <div>
           <span style="font-size: 0.75rem; font-weight: 800; color: #0284c7; text-transform: uppercase; letter-spacing: 0.03em;">Mortgage Swap</span>
-          <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Wall Street Bank → Community Credit Union</h3>
+          <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Large National Bank → Community Credit Union</h3>
           <div style="font-size: 0.85rem; color: #991b1b; margin-bottom: 0.4rem;">
-            <strong>Stop:</strong> Wells Fargo / Chase mortgages bundled into speculative CDOs.
+            <strong>Stop:</strong> Taking the first mortgage offer without comparing fees and rates.
           </div>
           <div style="font-size: 0.85rem; color: #166534; margin-bottom: 0.75rem;">
-            <strong>Swap to:</strong> Member-owned local credit union with portfolio servicing.
+            <strong>Swap to:</strong> Member-owned local credit union. Ask whether it keeps and services the loans it makes.
           </div>
         </div>
         <div style="background: #f8fafc; border-radius: 0.5rem; padding: 0.65rem; font-size: 0.82rem; border-top: 1px solid var(--border);">
-          <strong>Financial Impact:</strong> Saves $3,000–$8,000 in closing costs; interest stays in local lending pool.
+          <strong>Financial Impact:</strong> Compare the Loan Estimate fees and rate from each lender. Closing-cost amounts: <span class="withheld">Withheld: no cited source yet</span>
         </div>
       </div>
 
@@ -668,16 +596,16 @@
       <div class="swap-card">
         <div>
           <span style="font-size: 0.75rem; font-weight: 800; color: #9333ea; text-transform: uppercase; letter-spacing: 0.03em;">Purchasing Swap</span>
-          <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Inflated Market Home → Community Land Trust</h3>
+          <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Competitive Market Home → Community Land Trust</h3>
           <div style="font-size: 0.85rem; color: #991b1b; margin-bottom: 0.4rem;">
-            <strong>Stop:</strong> Bidding against institutional cash buyers for inflated starter homes.
+            <strong>Stop:</strong> Bidding against cash buyers in a competitive market.
           </div>
           <div style="font-size: 0.85rem; color: #166534; margin-bottom: 0.75rem;">
-            <strong>Swap to:</strong> Community Land Trust purchase (buy structure, lease trust land).
+            <strong>Swap to:</strong> Community land trust purchase: you buy the home and lease the land from the trust.
           </div>
         </div>
         <div style="background: #f8fafc; border-radius: 0.5rem; padding: 0.65rem; font-size: 0.82rem; border-top: 1px solid var(--border);">
-          <strong>Financial Impact:</strong> 25%–40% below market price with guaranteed permanent affordability.
+          <strong>Financial Impact:</strong> Purchase price and resale rules come from the trust's ground lease. Price discounts: <span class="withheld">Withheld: no cited source yet</span> Read the resale terms first.
         </div>
       </div>
 
@@ -685,16 +613,16 @@
       <div class="swap-card">
         <div>
           <span style="font-size: 0.75rem; font-weight: 800; color: #d97706; text-transform: uppercase; letter-spacing: 0.03em;">Wealth Building Swap</span>
-          <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Standalone House → FHA "House Hacking"</h3>
+          <h3 style="font-size: 1.1rem; color: var(--navy); margin: 0.35rem 0;">Standalone House → Multi-Unit "House Hacking"</h3>
           <div style="font-size: 0.85rem; color: #991b1b; margin-bottom: 0.4rem;">
-            <strong>Stop:</strong> Paying 100% of mortgage from your own paycheck every month.
+            <strong>Stop:</strong> Paying the full mortgage from your own income with no rental income.
           </div>
           <div style="font-size: 0.85rem; color: #166534; margin-bottom: 0.75rem;">
-            <strong>Swap to:</strong> Buy a duplex/triplex with 3.5% down FHA; rent remaining units.
+            <strong>Swap to:</strong> Buy a 2 to 4 unit property, live in one unit, and rent the others, if loan rules allow it.
           </div>
         </div>
         <div style="background: #f8fafc; border-radius: 0.5rem; padding: 0.65rem; font-size: 0.82rem; border-top: 1px solid var(--border);">
-          <strong>Financial Impact:</strong> Eliminates 60%–100% of your living cost; tenant rent builds your equity.
+          <strong>Financial Impact:</strong> Rent from other units can offset part of the housing cost. Amounts depend on local rents and loan rules: <span class="withheld">Withheld: no cited source yet</span>
         </div>
       </div>
     </div>
@@ -707,7 +635,7 @@
       <h2 style="font-size: 1.6rem; color: var(--navy);">The Responsible Renting Playbook</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.5rem;">
-      Renting provides mobility and shields you from major capital repair shocks. Here is how to rent with financial discipline and tenant empowerment:
+      Renting gives you mobility and avoids the costs of major repairs that owners pay for. Here is how to rent with financial discipline and tenant rights in mind:
     </p>
 
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
@@ -715,7 +643,7 @@
         <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💳</div>
         <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 0.4rem;">1. Report Your Rent to Credit Bureaus</h3>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          Opt into rent reporting services (Experian Boost, Piñata, RentReporters, or Bilt) to turn 12–24 months of on-time rent into a 40–80 point credit score boost toward homeownership.
+          Some rent-reporting services report on-time rent payments to the credit bureaus. Effect on credit scores: <span class="withheld">Withheld: no cited source yet</span> Ask your landlord or a service provider how reporting works before you sign up.
         </p>
       </div>
 
@@ -723,15 +651,15 @@
         <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚖️</div>
         <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 0.4rem;">2. Audit Your Lease for Junk Clauses</h3>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          Watch for mandatory administrative fees ($50/mo "resident benefit packages", trash valet markups, auto-renew penalties). Check your state's security deposit statute—many states mandate deposits be held in interest-bearing escrow accounts and returned within 14–30 days.
+          Watch for mandatory administrative fees, trash or valet charges, and automatic renewal penalties. Your state's security deposit rules set how deposits are held and when they must be returned. Check them on your state's official website or through the resources listed below.
         </p>
       </div>
 
       <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem;">
         <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</div>
-        <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 0.4rem;">3. Carry Comprehensive Renter's Insurance</h3>
+        <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 0.4rem;">3. Carry Renter's Insurance</h3>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          At $12–$18/month, renter's insurance protects your belongings from theft or fire, and more importantly, provides $100k–$300k in personal liability coverage if an accidental leak or mishap damages the building.
+          Renter's insurance can cover your belongings and provide personal liability coverage if you accidentally damage the building. Premiums and coverage limits: <span class="withheld">Withheld: no cited source yet</span> Compare quotes and the liability limit in each policy.
         </p>
       </div>
 
@@ -739,7 +667,7 @@
         <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏘️</div>
         <h3 style="font-size: 1.1rem; color: var(--navy); margin-bottom: 0.4rem;">4. Prioritize Independent & Co-op Landlords</h3>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          When looking for a rental, search local bulletin boards, neighborhood signs, and local credit unions rather than mega-portals dominated by private equity conglomerates. Keeping rent dollars local prevents neighborhood capital flight.
+          When searching for a rental, you can check local listings, neighborhood notices, and community organizations. Ask any owner or manager who owns the building and how repairs are handled.
         </p>
       </div>
     </div>
@@ -752,34 +680,34 @@
       <h2 style="font-size: 1.6rem; color: var(--navy);">Pathways to Owning (Bridging the Wealth Gap)</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.5rem;">
-      The biggest hurdle to homeownership is the myth that you need 20% cash down. In reality, the median first-time buyer puts down just <strong>6% to 8%</strong>, and verified programs exist to enter with 0% to 3.5%:
+      Not every loan program requires a large down payment. Program terms change, so check current rules on the agency websites linked below. Median down payment of first-time buyers: <span class="withheld">Withheld: no cited source yet</span>
     </p>
 
     <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem;">
-      <h3 style="font-size: 1.2rem; color: var(--navy); margin-bottom: 1rem;">Low & Zero Down Payment Loan Options</h3>
+      <h3 style="font-size: 1.2rem; color: var(--navy); margin-bottom: 1rem;">Loan Programs to Check</h3>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem;">
           <div style="font-weight: 800; color: #047857; font-size: 1.1rem;">FHA Mortgage</div>
-          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">3.5% Down Payment</div>
-          <div style="font-size: 0.85rem; color: var(--muted);">Available with credit scores down to 580. Allows family gift funds for the entire down payment.</div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">Down payment: <span class="withheld">Withheld: no cited source yet</span></div>
+          <div style="font-size: 0.85rem; color: var(--muted);">Check current credit score and down payment rules at <a href="https://www.hud.gov" target="_blank" rel="noopener">hud.gov ↗</a>.</div>
         </div>
 
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem;">
-          <div style="font-weight: 800; color: #0284c7; font-size: 1.1rem;">Fannie / Freddie 97%</div>
-          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">3.0% Down Payment</div>
-          <div style="font-size: 0.85rem; color: var(--muted);">HomeReady and HomePossible programs for first-time buyers with cancellable PMI once you reach 20% equity.</div>
+          <div style="font-weight: 800; color: #0284c7; font-size: 1.1rem;">Fannie Mae / Freddie Mac Programs</div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">Down payment: <span class="withheld">Withheld: no cited source yet</span></div>
+          <div style="font-size: 0.85rem; color: var(--muted);">Mortgage insurance rules: <span class="withheld">Withheld: no cited source yet</span> Ask a lender for current terms.</div>
         </div>
 
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem;">
           <div style="font-weight: 800; color: #9333ea; font-size: 1.1rem;">VA Home Loan</div>
-          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">0% Down Payment</div>
-          <div style="font-size: 0.85rem; color: var(--muted);">For active military, veterans, and qualifying spouses. Zero mortgage insurance (PMI) required.</div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">Down payment: <span class="withheld">Withheld: no cited source yet</span></div>
+          <div style="font-size: 0.85rem; color: var(--muted);">Check eligibility and current terms at <a href="https://www.va.gov" target="_blank" rel="noopener">va.gov ↗</a>.</div>
         </div>
 
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem;">
           <div style="font-weight: 800; color: #d97706; font-size: 1.1rem;">USDA Rural Development</div>
-          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">0% Down Payment</div>
-          <div style="font-size: 0.85rem; color: var(--muted);">Applies to designated suburban and rural towns for low-to-moderate-income households.</div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--slate); margin: 0.2rem 0;">Down payment: <span class="withheld">Withheld: no cited source yet</span></div>
+          <div style="font-size: 0.85rem; color: var(--muted);">Check current eligibility rules at <a href="https://www.usda.gov" target="_blank" rel="noopener">usda.gov ↗</a>.</div>
         </div>
       </div>
     </div>
@@ -789,21 +717,21 @@
       <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem;">
         <h4 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem;">🏠 House Hacking (2–4 Unit Multi-Family)</h4>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          Using an FHA loan with just 3.5% down, you can purchase a duplex, triplex, or fourplex. You live in one unit and rent the remaining units out. 75% of the projected rental income can often be counted toward qualifying for the mortgage!
+          A 2 to 4 unit property can be bought with one unit lived in, if the loan program allows it. Whether lenders count projected rent toward qualifying: <span class="withheld">Withheld: no cited source yet</span> Check rules at <a href="https://www.hud.gov" target="_blank" rel="noopener">hud.gov ↗</a> and with a lender.
         </p>
       </div>
 
       <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem;">
-        <h4 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem;">🏛️ State & Municipal DPA Grants</h4>
+        <h4 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem;">🏛️ State & Municipal Down Payment Assistance</h4>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          Every state has a Housing Finance Agency (HFA). Most offer $5,000 to $25,000 in forgivable second mortgages or direct grants for first-time buyers who meet median income criteria.
+          State and local housing finance agencies may run down payment or closing-cost assistance programs. Amounts and eligibility: <span class="withheld">Withheld: no cited source yet</span> Check your state housing finance agency's website.
         </p>
       </div>
 
       <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem;">
         <h4 style="font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem;">🌳 Community Land Trusts (CLTs)</h4>
         <p style="font-size: 0.88rem; color: var(--slate); line-height: 1.45;">
-          Over 300 Community Land Trusts across the US sell homes 25%–40% below market value. The homeowner buys the house and leases the land underneath for a nominal fee, preserving affordability forever.
+          A community land trust holds the land and leases it to the homeowner, who owns the house. Number of trusts and pricing: <span class="withheld">Withheld: no cited source yet</span>
         </p>
       </div>
     </div>
@@ -816,7 +744,7 @@
       <h2 style="font-size: 1.6rem; color: var(--navy);">Interactive Rent vs. Own Equity Simulator</h2>
     </div>
     <p style="color: var(--slate); margin-bottom: 1.25rem;">
-      See the true financial comparison between renting and buying over a 5 to 10 year window, including equity buildup, property tax, maintenance costs, and rent inflation:
+      An illustrative calculator for a 3 to 15 year window. Set the sliders to your own assumptions. Outputs are estimates from those inputs. They are not measurements, forecasts, or financial advice. The starting values are example inputs.
     </p>
 
     <div class="interactive-box">
@@ -868,32 +796,30 @@
         <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="font-size: 0.85rem; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.75rem;">
-              Financial Projection Summary
+              Illustrative Summary (from your inputs)
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.9rem;">
               <span style="color: var(--slate);">Est. Total Rent Paid:</span>
-              <span id="totalRentPaid" style="font-weight: 700; color: #dc2626;">$169,450</span>
+              <span id="totalRentPaid" style="font-weight: 700; color: var(--navy);">&mdash;</span>
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.9rem;">
               <span style="color: var(--slate);">Equity Accumulated (Buy):</span>
-              <span id="equityAccumulated" style="font-weight: 700; color: #166534;">$74,800</span>
+              <span id="equityAccumulated" style="font-weight: 700; color: var(--navy);">&mdash;</span>
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.9rem;">
               <span style="color: var(--slate);">Est. Monthly Ownership Cost:</span>
-              <span id="monthlyOwnCost" style="font-weight: 700; color: var(--navy);">$2,410/mo</span>
+              <span id="monthlyOwnCost" style="font-weight: 700; color: var(--navy);">&mdash;</span>
             </div>
           </div>
 
           <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border);">
-            <div style="font-size: 0.8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; margin-bottom: 0.35rem;">Net Wealth Difference:</div>
-            <div id="netAdvantage" style="font-size: 1.35rem; font-weight: 800; color: #166534;">
-              Homeownership Advantage: +$42,100
-            </div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; margin-bottom: 0.35rem;">Equity built from principal paydown, before interest, costs and foregone returns:</div>
+            <div id="netAdvantage" style="font-size: 1.35rem; font-weight: 800; color: var(--navy);">&mdash;</div>
             <p id="netSummaryNote" style="font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.35;">
-              Factoring in 2.5% annual property appreciation, 3% rent growth, 1% annual maintenance allowance, property tax, and mortgage amortization.
+              Assumptions in this estimate: 2.5% annual appreciation, 3% annual rent growth, property tax of 1.1% of price per year, insurance of 0.5% per year, maintenance of 1% per year, and a 30-year fixed loan. Example inputs, not measurements or advice.
             </p>
           </div>
         </div>
@@ -901,28 +827,28 @@
     </div>
   </section>
 
-  <!-- Section 10: Verified Resources Directory -->
+  <!-- Section 10: Resources Directory -->
   <section style="margin-bottom: 2.5rem;">
-    <h3 style="font-size: 1.25rem; color: var(--navy); margin-bottom: 1rem;">Verified Housing & Ownership Resources</h3>
+    <h3 style="font-size: 1.25rem; color: var(--navy); margin-bottom: 1rem;">Housing & Ownership Resources</h3>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
       <a href="https://groundedsolutions.org" target="_blank" rel="noopener" style="text-decoration: none; display: block; background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; transition: border-color 0.15s ease;">
         <div style="font-weight: 750; color: var(--primary);">Grounded Solutions Network ↗</div>
-        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">National network of Community Land Trusts and shared-equity housing programs.</div>
+        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Network of community land trust and shared-equity housing organizations.</div>
       </a>
 
-      <a href="https://www.hud.gov/topics/rental_assistance/tenant_rights" target="_blank" rel="noopener" style="text-decoration: none; display: block; background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; transition: border-color 0.15s ease;">
-        <div style="font-weight: 750; color: var(--blue);">HUD Tenant Rights by State ↗</div>
-        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Official federal guide to state-specific landlord-tenant laws and deposit rights.</div>
+      <a href="https://www.hud.gov" target="_blank" rel="noopener" style="text-decoration: none; display: block; background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; transition: border-color 0.15s ease;">
+        <div style="font-weight: 750; color: var(--blue);">U.S. Department of Housing and Urban Development ↗</div>
+        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Federal housing agency. Check current state tenant and deposit rules on its site.</div>
       </a>
 
-      <a href="https://www.consumerfinance.gov/owning-a-home/" target="_blank" rel="noopener" style="text-decoration: none; display: block; background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; transition: border-color 0.15s ease;">
-        <div style="font-weight: 750; color: var(--navy);">CFPB "Owning a Home" Tools ↗</div>
-        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Loan estimate breakdown, interest rate tracker, and closing cost checklists.</div>
+      <a href="https://www.consumerfinance.gov" target="_blank" rel="noopener" style="text-decoration: none; display: block; background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; transition: border-color 0.15s ease;">
+        <div style="font-weight: 750; color: var(--navy);">Consumer Financial Protection Bureau ↗</div>
+        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Federal consumer guidance on buying a home and choosing a mortgage.</div>
       </a>
 
       <a href="https://nlihc.org" target="_blank" rel="noopener" style="text-decoration: none; display: block; background: #ffffff; border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; transition: border-color 0.15s ease;">
         <div style="font-weight: 750; color: var(--slate);">National Low Income Housing Coalition ↗</div>
-        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Research on housing affordability, tenant protections, and corporate landlord monitoring.</div>
+        <div style="font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem;">Housing advocacy and research organization.</div>
       </a>
     </div>
   </section>
@@ -930,60 +856,73 @@
 </main>
 
 <script>
-// Raw cash flow data for the $100 split
+// ---------------------------------------------------------------------------
+// Helpers. Each element lookup is checked so a missing element never throws.
+// ---------------------------------------------------------------------------
+function byId(id) { return document.getElementById(id); }
+function setText(id, text) { const el = byId(id); if (el) el.textContent = text; }
+
+// ---------------------------------------------------------------------------
+// Illustrative $100 rent split. The shares are example inputs, not measurements.
+// "outside: true" marks an example share that leaves the local community.
+// ---------------------------------------------------------------------------
+const RENT_SPLIT_TAKEAWAY = "Illustration only. The shares are example inputs, not measurements of any landlord, company, or ownership type. Withheld: no cited source yet for how rent is divided in any ownership model.";
+
 const RENT_SPLIT_DATA = {
   "tier_1_clt": {
-    name: "Community Land Trust / Housing Co-op",
-    localPct: 100,
-    wallStPct: 0,
-    takeaway: "Under a Community Land Trust or Housing Co-op, 100% of your rent stays within the property and the local community. There are no remote shareholders, no private equity debt service, and zero speculative extraction.",
+    name: "Community Land Trust / Housing Co-op (example)",
+    takeaway: RENT_SPLIT_TAKEAWAY,
     buckets: [
-      { name: "Direct Maintenance & Local Trades", pct: 48, dest: "Local tradespeople & contractors" },
-      { name: "Capital Replacement Reserve Fund", pct: 28, dest: "Building replacement escrow fund" },
-      { name: "Municipal Property Taxes & Schools", pct: 16, dest: "Local city infrastructure & schools" },
-      { name: "Cooperative Administration & Governance", pct: 8, dest: "Democratic member governance" },
-      { name: "Wall Street / Shareholder Extraction", pct: 0, dest: "Zero remote extraction ($0)" }
+      { name: "Direct maintenance & local trades", pct: 48, dest: "Local tradespeople & contractors", outside: false },
+      { name: "Capital replacement reserve", pct: 28, dest: "Reserve fund for future replacements", outside: false },
+      { name: "Municipal property taxes & schools", pct: 16, dest: "Local government and schools", outside: false },
+      { name: "Cooperative administration & governance", pct: 8, dest: "Member governance", outside: false },
+      { name: "Outside shareholder distributions", pct: 0, dest: "None assumed in this example", outside: true }
     ]
   },
   "tier_3_mom_pop": {
-    name: "Independent Local 'Mom-and-Pop' Landlord (1-4 Units)",
-    localPct: 82,
-    wallStPct: 18,
-    takeaway: "An independent local owner recirculates approximately 82% of rental income locally through maintenance, property taxes, and family living expenses in the same town.",
+    name: "Independent Local Owner, 1-4 Units (example)",
+    takeaway: RENT_SPLIT_TAKEAWAY,
     buckets: [
-      { name: "Mortgage Principal & Interest", pct: 45, dest: "Bank / mortgage servicer" },
-      { name: "Property Maintenance & Repairs", pct: 22, dest: "Local handymen, plumbers, HVAC" },
-      { name: "Property Taxes & Public Services", pct: 18, dest: "Local school district & county" },
-      { name: "Owner Household Income / Retirement", pct: 15, dest: "Local neighborhood household income" },
-      { name: "Corporate Wall Street Extraction", pct: 0, dest: "Zero corporate siphon" }
+      { name: "Mortgage principal", pct: 27, dest: "Local lender", outside: false },
+      { name: "Mortgage interest", pct: 18, dest: "Out-of-area lender (example assumption)", outside: true },
+      { name: "Property maintenance & repairs", pct: 22, dest: "Local handymen, plumbers, HVAC", outside: false },
+      { name: "Property taxes & public services", pct: 18, dest: "Local school district & county", outside: false },
+      { name: "Owner household income / retirement", pct: 15, dest: "Owner's household", outside: false }
     ]
   },
   "tier_6_institutional": {
-    name: "Wall Street Private Equity / Mega-REIT",
-    localPct: 26,
-    wallStPct: 74,
-    takeaway: "Over 70% of your rent leaves the local community. Rent dollars service Wall Street buyout bonds, executive stock buybacks, and centralized software cartels, while local maintenance is frequently deferred.",
+    name: "Large Investor Owner (example)",
+    takeaway: RENT_SPLIT_TAKEAWAY,
     buckets: [
-      { name: "Shareholder Dividends & Stock Buybacks", pct: 32, dest: "Wall Street hedge funds & investors" },
-      { name: "Leveraged Buyout Debt Service", pct: 24, dest: "Global investment banks & bondholders" },
-      { name: "Algorithmic Pricing & Corporate HQ", pct: 18, dest: "RealPage/Yardi subscriptions & HQ overhead" },
-      { name: "Local Property Taxes", pct: 14, dest: "Local municipality" },
-      { name: "Actual Local Maintenance & Repairs", pct: 12, dest: "Outsourced contractor network" }
+      { name: "Shareholder distributions & buybacks", pct: 32, dest: "Investors and shareholders", outside: true },
+      { name: "Acquisition loan debt service", pct: 24, dest: "Lenders and bondholders", outside: true },
+      { name: "Software fees & corporate overhead", pct: 18, dest: "Software vendors and corporate offices", outside: true },
+      { name: "Local property taxes", pct: 14, dest: "Local municipality", outside: false },
+      { name: "Local maintenance & repairs", pct: 12, dest: "Contracted local network", outside: false }
     ]
   }
 };
 
 let currentSplitTier = "tier_1_clt";
 
+function splitTotals(tier) {
+  let outside = 0;
+  tier.buckets.forEach(b => { if (b.outside) outside += b.pct; });
+  return { wallStPct: outside, localPct: 100 - outside };
+}
+
 function setSplitTier(tierKey) {
+  if (!RENT_SPLIT_DATA[tierKey]) return;
   currentSplitTier = tierKey;
   // Update button highlights
   const buttons = {
-    "tier_1_clt": document.getElementById("btnSplitClt"),
-    "tier_3_mom_pop": document.getElementById("btnSplitMom"),
-    "tier_6_institutional": document.getElementById("btnSplitPe")
+    "tier_1_clt": byId("btnSplitClt"),
+    "tier_3_mom_pop": byId("btnSplitMom"),
+    "tier_6_institutional": byId("btnSplitPe")
   };
   for (const [k, btn] of Object.entries(buttons)) {
+    if (!btn) continue;
     if (k === tierKey) {
       btn.style.background = (k === 'tier_6_institutional') ? "#fee2e2" : (k === 'tier_3_mom_pop') ? "#e0f2fe" : "var(--primary-light)";
       btn.style.color = (k === 'tier_6_institutional') ? "#991b1b" : (k === 'tier_3_mom_pop') ? "#0369a1" : "var(--primary-dark)";
@@ -997,135 +936,146 @@ function setSplitTier(tierKey) {
 
 function renderSplitData() {
   const tier = RENT_SPLIT_DATA[currentSplitTier];
-  const rent = parseFloat(document.getElementById("userRentInput").value) || 1800;
+  if (!tier) return;
+  const rentEl = byId("userRentInput");
+  const parsed = rentEl ? parseFloat(rentEl.value) : NaN;
+  const rent = (isFinite(parsed) && parsed > 0) ? parsed : 1800;
+  const totals = splitTotals(tier);
 
   // Update flow bar
-  document.getElementById("splitRetentionLabel").textContent = `Local Community Retention: ${tier.localPct}%`;
-  document.getElementById("splitLeakageLabel").textContent = `Wall Street Extraction: ${tier.wallStPct}%`;
-  document.getElementById("splitBarLocal").style.width = `${tier.localPct}%`;
-  document.getElementById("splitBarWallSt").style.width = `${tier.wallStPct}%`;
+  setText("splitRetentionLabel", `Illustrative local share: ${totals.localPct}%`);
+  setText("splitLeakageLabel", `Illustrative outside share: ${totals.wallStPct}%`);
+  const localBar = byId("splitBarLocal");
+  const outsideBar = byId("splitBarWallSt");
+  if (localBar) localBar.style.width = `${totals.localPct}%`;
+  if (outsideBar) outsideBar.style.width = `${totals.wallStPct}%`;
 
   // Update table
-  const tbody = document.getElementById("splitTableBody");
-  tbody.innerHTML = "";
-  tier.buckets.forEach(b => {
-    const dollarVal = Math.round(rent * (b.pct / 100));
-    const tr = document.createElement("tr");
-    tr.style.borderBottom = "1px solid var(--border)";
-    const isExtraction = b.name.includes("Wall Street") || b.name.includes("Shareholder") || b.name.includes("Algorithmic");
-    const dollarColor = isExtraction ? "#dc2626" : (b.name.includes("Maintenance") ? "#047857" : "var(--navy)");
-
-    tr.innerHTML = `
-      <td style="padding: 0.65rem; font-weight: 650;">${b.name}</td>
-      <td style="padding: 0.65rem; font-weight: 700;">${b.pct.toFixed(1)}¢</td>
-      <td style="padding: 0.65rem; font-weight: 750; color: ${dollarColor};">$${dollarVal.toLocaleString()}/mo</td>
-      <td style="padding: 0.65rem; color: var(--muted); font-size: 0.82rem;">${b.dest}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-
-  const takeawayEl = document.getElementById("splitTakeawayBox");
-  takeawayEl.textContent = tier.takeaway;
-  if (tier.wallStPct > 50) {
-    takeawayEl.style.background = "#fef2f2";
-    takeawayEl.style.color = "#991b1b";
-    takeawayEl.style.borderColor = "#fecaca";
-  } else {
-    takeawayEl.style.background = "#ecfdf5";
-    takeawayEl.style.color = "#065f46";
-    takeawayEl.style.borderColor = "#a7f3d0";
+  const tbody = byId("splitTableBody");
+  if (tbody) {
+    tbody.innerHTML = "";
+    tier.buckets.forEach(b => {
+      const dollarVal = Math.round(rent * (b.pct / 100));
+      const tr = document.createElement("tr");
+      tr.style.borderBottom = "1px solid var(--border)";
+      const dollarColor = b.outside ? "#dc2626" : "var(--navy)";
+      tr.innerHTML = `
+        <td style="padding: 0.65rem; font-weight: 650;">${b.name}</td>
+        <td style="padding: 0.65rem; font-weight: 700;">${b.pct.toFixed(1)}¢</td>
+        <td style="padding: 0.65rem; font-weight: 750; color: ${dollarColor};">$${dollarVal.toLocaleString()}/mo</td>
+        <td style="padding: 0.65rem; color: var(--muted); font-size: 0.82rem;">${b.dest}</td>
+      `;
+      tbody.appendChild(tr);
+    });
   }
+
+  setText("splitTakeawayBox", tier.takeaway);
 }
 
-// Interactive Landlord Integrity Auditor
+// ---------------------------------------------------------------------------
+// Landlord questionnaire. The score is a Shoptegrity opinion computed only from
+// the four answers. The base for each owner type is the ladder score for that
+// tier; answers can only lower it. Grade bands match the brand pages.
+// ---------------------------------------------------------------------------
+const OWNER_PROFILES = {
+  clt: {
+    base: 98,
+    tier: "Tier 1: Community Land Trust / Housing Co-op",
+    risk: "If your home is in a community land trust or co-op, your resale and rent rules come from its governing documents. Have you read them before signing?",
+    action: "Ask how repair reserves are funded and how members vote on rent or fee changes."
+  },
+  individual: {
+    base: 78,
+    tier: "Tier 3: Independent Local Landlord",
+    risk: "If your landlord is an individual owner, is the relationship direct? Keep written records of repair requests and rent receipts.",
+    action: "Ask whether your owner will report on-time rent to the credit bureaus, if that would help your credit goals."
+  },
+  regional: {
+    base: 58,
+    tier: "Tier 4: Regional Commercial Management",
+    risk: "If a management company runs your building, does your lease allow automatic renewals or late-fee increases?",
+    action: "Give written notice before your lease's renewal deadline. The deadline is in your lease."
+  },
+  sfr_rollup: {
+    base: 28,
+    tier: "Tier 5: Institutional Rollup Platform",
+    risk: "If your owner is an institutional single-family platform, do repair requests go through an app, and are fees added to rent? Keep dated records.",
+    action: "Send repair requests in writing and keep copies, in addition to any app ticket."
+  },
+  megareit: {
+    base: 16,
+    tier: "Tier 6: Large Investor Owner",
+    risk: "If your owner is a large private equity fund or public REIT, does your lease allow automatic rent changes or move-out charges? Keep dated records of rent and repairs.",
+    action: "Review your state's security deposit rules and keep copies of every notice you receive."
+  }
+};
+
+const ANSWER_PENALTIES = {
+  pricing: { fixed: 0, human: 0, portal: -5, algo: -15 },
+  maint: { local_direct: 0, dedicated_staff: -3, ticket_portal: -10 },
+  fees: { transparent: 0, moderate: -5, heavy: -15 }
+};
+
+const GRADE_COLORS = { A: "#059669", B: "#0284c7", C: "#d97706", D: "#ea580c", F: "#dc2626" };
+
+function gradeFor(score) {
+  if (score >= 90) return "A";
+  if (score >= 70) return "B";
+  if (score >= 50) return "C";
+  if (score >= 30) return "D";
+  return "F";
+}
+
 function runLandlordAudit() {
-  const owner = document.getElementById("auditOwner").value;
-  const pricing = document.getElementById("auditPricing").value;
-  const maint = document.getElementById("auditMaint").value;
-  const fees = document.getElementById("auditFees").value;
+  const ownerEl = byId("auditOwner");
+  const pricingEl = byId("auditPricing");
+  const maintEl = byId("auditMaint");
+  const feesEl = byId("auditFees");
+  if (!ownerEl || !pricingEl || !maintEl || !feesEl) return;
 
-  let score = 50;
-  // Ownership weights
-  if (owner === "clt") score += 35;
-  else if (owner === "individual") score += 25;
-  else if (owner === "regional") score += 5;
-  else if (owner === "sfr_rollup") score -= 25;
-  else if (owner === "megareit") score -= 35;
+  const profile = OWNER_PROFILES[ownerEl.value] || OWNER_PROFILES.individual;
+  const penalty =
+    (ANSWER_PENALTIES.pricing[pricingEl.value] || 0) +
+    (ANSWER_PENALTIES.maint[maintEl.value] || 0) +
+    (ANSWER_PENALTIES.fees[feesEl.value] || 0);
+  const score = Math.max(0, profile.base + penalty);
+  const grade = gradeFor(score);
+  const color = GRADE_COLORS[grade];
 
-  // Pricing weights
-  if (pricing === "fixed") score += 10;
-  else if (pricing === "human") score += 8;
-  else if (pricing === "portal") score -= 5;
-  else if (pricing === "algo") score -= 15;
-
-  // Maintenance weights
-  if (maint === "local_direct") score += 10;
-  else if (maint === "dedicated_staff") score += 5;
-  else if (maint === "ticket_portal") score -= 10;
-
-  // Fee weights
-  if (fees === "transparent") score += 10;
-  else if (fees === "moderate") score += 0;
-  else if (fees === "heavy") score -= 15;
-
-  // Clamp 5 to 98
-  score = Math.max(8, Math.min(98, score));
-
-  let grade = "F";
-  let gradeColor = "#dc2626";
-  let tierDesc = "Tier 6: Wall Street Extractive Landlord";
-  let riskAlert = "High risk of automated rent hikes, hidden move-out fees, and delayed maintenance. Avoid auto-pay for contested fees.";
-  let actionStep = "Document every maintenance ticket with photos, review your state security deposit deadline, and consider tenant union organizing.";
-
-  if (score >= 90) {
-    grade = "A+";
-    gradeColor = "#059669";
-    tierDesc = "Tier 1: Community Land Trust / Housing Co-op";
-    riskAlert = "Outstanding integrity model. Shelter revenue remains 100% within the community.";
-    actionStep = "Participate actively in your cooperative board meetings and stewardship committees.";
-  } else if (score >= 75) {
-    grade = "B+";
-    gradeColor = "#0284c7";
-    tierDesc = "Tier 3: Independent Local Landlord";
-    riskAlert = "Human-scale tenancy with low risk of algorithmic price cartels. Direct relationship with owner.";
-    actionStep = "Ask owner to enroll in rent reporting (Experian Boost/Bilt) so on-time rent builds your credit score.";
-  } else if (score >= 55) {
-    grade = "C";
-    gradeColor = "#d97706";
-    tierDesc = "Tier 4: Regional Commercial Management";
-    riskAlert = "Standard corporate property management. Watch for automatic renewal penalties and late fee markups.";
-    actionStep = "Give written notice 60 days before lease end to protect your security deposit from auto-renewal clauses.";
-  } else if (score >= 30) {
-    grade = "D-";
-    gradeColor = "#ea580c";
-    tierDesc = "Tier 5: Institutional Rollup Platform";
-    riskAlert = "Owned by private equity funds. Maintenance tickets funneled through automated portals.";
-    actionStep = "Submit repair requests via certified mail if app tickets go unheeded beyond 14 days to preserve habitability claims.";
-  }
-
-  document.getElementById("auditScoreVal").textContent = score;
-  document.getElementById("auditScoreVal").style.color = gradeColor;
-  document.getElementById("auditGradeVal").textContent = `Grade ${grade}`;
-  document.getElementById("auditGradeVal").style.color = gradeColor;
-  document.getElementById("auditTierDesc").textContent = tierDesc;
-  document.getElementById("auditRiskAlert").textContent = riskAlert;
-  document.getElementById("auditActionStep").textContent = actionStep;
+  setText("auditScoreVal", String(score));
+  setText("auditGradeVal", `Grade ${grade}`);
+  setText("auditTierDesc", profile.tier);
+  setText("auditRiskAlert", profile.risk);
+  setText("auditActionStep", profile.action);
+  ["auditScoreVal", "auditGradeVal"].forEach(id => {
+    const el = byId(id);
+    if (el) el.style.color = color;
+  });
 }
 
-// Rent vs. Own Calculator
+// ---------------------------------------------------------------------------
+// Rent vs. Own calculator. Outputs are estimates from the user's inputs.
+// ---------------------------------------------------------------------------
 function updateCalculator() {
-  const rent = parseFloat(document.getElementById("rentSlider").value);
-  const price = parseFloat(document.getElementById("priceSlider").value);
-  const downPct = parseFloat(document.getElementById("downSlider").value);
-  const rate = parseFloat(document.getElementById("rateSlider").value);
-  const years = parseInt(document.getElementById("yearsSlider").value);
+  const rentSlider = byId("rentSlider");
+  const priceSlider = byId("priceSlider");
+  const downSlider = byId("downSlider");
+  const rateSlider = byId("rateSlider");
+  const yearsSlider = byId("yearsSlider");
+  if (!rentSlider || !priceSlider || !downSlider || !rateSlider || !yearsSlider) return;
+
+  const rent = parseFloat(rentSlider.value);
+  const price = parseFloat(priceSlider.value);
+  const downPct = parseFloat(downSlider.value);
+  const rate = parseFloat(rateSlider.value);
+  const years = parseInt(yearsSlider.value, 10);
 
   const downDollar = price * (downPct / 100);
-  document.getElementById("rentLabel").textContent = `$${rent.toLocaleString()}/mo`;
-  document.getElementById("priceLabel").textContent = `$${price.toLocaleString()}`;
-  document.getElementById("downLabel").textContent = `${downPct.toFixed(1)}% ($${Math.round(downDollar).toLocaleString()})`;
-  document.getElementById("rateLabel").textContent = `${rate.toFixed(1)}%`;
-  document.getElementById("yearsLabel").textContent = `${years} Year${years > 1 ? 's' : ''}`;
+  setText("rentLabel", `$${rent.toLocaleString()}/mo`);
+  setText("priceLabel", `$${price.toLocaleString()}`);
+  setText("downLabel", `${downPct.toFixed(1)}% ($${Math.round(downDollar).toLocaleString()})`);
+  setText("rateLabel", `${rate.toFixed(1)}%`);
+  setText("yearsLabel", `${years} Year${years > 1 ? 's' : ''}`);
 
   let totalRent = 0;
   let curRent = rent;
@@ -1154,18 +1104,12 @@ function updateCalculator() {
   const appreciatedValue = price * Math.pow(1.025, years);
   const totalEquity = (appreciatedValue - remainingLoan);
 
-  document.getElementById("totalRentPaid").textContent = `$${Math.round(totalRent).toLocaleString()}`;
-  document.getElementById("equityAccumulated").textContent = `$${Math.round(totalEquity).toLocaleString()}`;
-  document.getElementById("monthlyOwnCost").textContent = `$${Math.round(totalMonthlyOwn).toLocaleString()}/mo`;
+  setText("totalRentPaid", `$${Math.round(totalRent).toLocaleString()}`);
+  setText("equityAccumulated", `$${Math.round(totalEquity).toLocaleString()}`);
+  setText("monthlyOwnCost", `$${Math.round(totalMonthlyOwn).toLocaleString()}/mo`);
 
-  const advantageEl = document.getElementById("netAdvantage");
-  if (totalEquity > totalRent * 0.35) {
-    advantageEl.textContent = `Homeowner Equity Built: +$${Math.round(totalEquity).toLocaleString()}`;
-    advantageEl.style.color = "#166534";
-  } else {
-    advantageEl.textContent = `Renting Short-Term Advantage: Preserved Flexibility`;
-    advantageEl.style.color = "#0284c7";
-  }
+  // Equity from principal paydown only: before interest, costs and foregone returns.
+  setText("netAdvantage", `$${Math.round(principalPaid).toLocaleString()}`);
 }
 
 document.addEventListener("DOMContentLoaded", function() {

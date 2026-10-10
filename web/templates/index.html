@@ -3,15 +3,28 @@
 {% block title %}Shoptegrity — Brand & Food Chain Integrity Platform{% endblock %}
 
 {% block content %}
+{% set causes = [
+  {"id": "keep-money-local", "label": "Keep everyday money local", "blurb": "Member-owned and locally rooted banks, shops, and services.", "pages": [["/swaps", "Swap Guides"], ["/flows", "Dollar Flow Map"]]},
+  {"id": "grower-share", "label": "Food that pays the people who grow it", "blurb": "How much of a food dollar reaches growers, and where the rest goes.", "pages": [["/food", "Food Chain"]]},
+  {"id": "buy-direct", "label": "Buy straight from makers and growers", "blurb": "Farm stands, CSAs, co-ops, and direct sellers.", "pages": [["/food", "Food Chain"], ["/sell-direct", "Sell Direct"]]},
+  {"id": "fair-trade-abroad", "label": "Producer co-ops overseas", "blurb": "Imported goods from cooperatives that pay growers directly.", "pages": [["/food", "Food Chain"]]},
+  {"id": "who-owns-brands", "label": "Who owns the brands on your shelf", "blurb": "Parent companies behind brand names, shown with sources.", "pages": [["/brands", "Brand Check"], ["/parents", "Who Owns What?"]]},
+  {"id": "local-rollups", "label": "Independent local service businesses", "blurb": "Check whether a local plumber, HVAC company, or vet is still independent.", "pages": [["/local", "Local Directory"]]},
+  {"id": "healthcare-ownership", "label": "Who owns your clinic or insurer", "blurb": "Ownership, pay, and denial records for insurers and clinics, where cited.", "pages": [["/healthcare", "Healthcare Compare"]]},
+  {"id": "housing-rent", "label": "Renters' rights and who owns your home", "blurb": "Landlord ownership, rent, and tenant guidance.", "pages": [["/housing", "Housing & Rentals"]]},
+  {"id": "fair-wages-safety", "label": "Fair pay and safe workplaces", "blurb": "Labor records and living-wage status, where sourced.", "pages": [["/brands", "Brand Check"], ["/healthcare", "Healthcare Compare"]]},
+  {"id": "land-and-animals", "label": "Soil, water, wildlife, and animal welfare", "blurb": "Regenerative farming and humane animal care.", "pages": [["/food", "Food Chain"], ["/brands", "Brand Check"]]}
+] %}
+
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">✨ Open Data & Mathematical Scoring Rubrics</div>
+    <div class="hero-tag">Sourced or withheld</div>
     <h1>Where Does Your Money Really End Up?</h1>
-    <p>Every purchase transfers capital: either to local growers, living-wage workers, and democratic cooperatives—or to extractive private equity and public share buybacks. We map the leak, cite the evidence, and give you the patch.</p>
-    
+    <p>Every purchase sends money somewhere. Shoptegrity shows where it may go, aims to publish only the facts it can cite, and marks what it cannot cite as withheld. Our view: buying from local, owner-operated businesses keeps more of each dollar in your community.</p>
+
     <div style="display: flex; justify-content: center;">
       <form action="/brands" method="GET" class="search-box" style="width: 100%;">
-        <input type="text" name="q" placeholder="Look up any brand, health plan or clinic (e.g. UnitedHealthcare, HealthPartners, Target, Wells Fargo, Annie's)..." required>
+        <input type="text" name="q" placeholder="Search a brand, insurer, or clinic..." required>
         <button type="submit" class="btn btn-primary">Check Brand</button>
       </form>
     </div>
@@ -19,85 +32,161 @@
 </section>
 
 <main class="container">
-  <div style="text-align: center; margin-bottom: 2rem;">
-    <h2 style="font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em;">Explore Our Core Integrity Platforms</h2>
-    <p style="color: var(--muted); max-width: 650px; margin: 0.5rem auto;">Investigate where your money really flows across food, healthcare, and retail brands.</p>
+  <!-- Cause picker -->
+  <section id="causes" class="cause-section" aria-labelledby="causes-heading">
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <h2 id="causes-heading" style="font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em;">Which causes should Shoptegrity support?</h2>
+      <p style="color: var(--muted); max-width: 650px; margin: 0.5rem auto;">Pick the causes you care about. Matching pages move to the top, and your list shows where to look first. Your picks are saved only in this browser. We never receive them.</p>
+    </div>
+
+    <form id="cause-form" class="cause-form" onsubmit="return false;">
+      <fieldset class="cause-fieldset">
+        <legend class="sr-only">Causes to support</legend>
+        <div class="cause-grid">
+          {% for c in causes %}
+          <label class="cause-option">
+            <input type="checkbox" name="causes" value="{{ c.id }}" data-cause="{{ c.id }}">
+            <span class="cause-text">
+              <strong>{{ c.label }}</strong>
+              <span class="cause-blurb">{{ c.blurb }}</span>
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+      </fieldset>
+    </form>
+
+    <div id="your-causes" class="your-causes" hidden>
+      <div class="your-causes-head">
+        <h3>Your causes</h3>
+        <button type="button" id="clear-causes" class="btn btn-outline">Clear my causes</button>
+      </div>
+      <p class="your-causes-note">Saved only in this browser. Clearing site data removes them.</p>
+      <ul class="your-causes-list">
+        {% for c in causes %}
+        <li class="your-cause-item" data-cause="{{ c.id }}" hidden>
+          <strong>{{ c.label }}</strong>
+          <span class="your-cause-links">
+            {% for href, name in c.pages %}<a href="{{ href }}">{{ name }}</a>{% if not loop.last %} · {% endif %}{% endfor %}
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <div style="text-align: center; margin: 3rem 0 2rem;">
+    <h2 style="font-size: 1.85rem; font-weight: 800; letter-spacing: -0.02em;">Explore the platforms</h2>
+    <p style="color: var(--muted); max-width: 650px; margin: 0.5rem auto;">Each page shows its sourced facts and marks the rest as withheld.</p>
   </div>
 
-  <div class="gateway-grid">
-    <!-- Platform 1: Healthcare & Medical Integrity -->
-    <div class="gateway-card" style="border-top: 4px solid var(--primary); display: flex; flex-direction: column;">
-      <div class="gateway-badge" style="background: #dcfce7; color: #166534; border-color: #bbf7d0;">🏥 Platform 1: Healthcare & Medicine</div>
+  <div class="gateway-grid" id="gateway-grid">
+    <!-- Healthcare -->
+    <div class="gateway-card" data-causes="healthcare-ownership fair-wages-safety" style="border-top: 4px solid var(--primary); display: flex; flex-direction: column;">
+      <div class="gateway-badge" style="background: #dcfce7; color: #166534; border-color: #bbf7d0;">🏥 Healthcare & Medicine</div>
       <h2>Healthcare Comparisons</h2>
-      <p>Compare health insurers, hospital chains, PE-owned clinic chains, and independent doctors. Shareholder payouts come straight from SEC filings.</p>
-      
+      <p>Compare health insurers, hospital systems, clinic chains, and independent practices. Ownership and financial figures appear only with a cited source.</p>
+
       <ul class="feature-list">
-        <li><strong>⚖️ Side-by-Side Comparison:</strong> Compare 2-4 insurers, hospitals, or clinics on claims denials, MLR, and markups.</li>
-        <li><strong>🕵️ PE Rollup Warnings:</strong> Expose private equity rollups operating under local doctor and dentist names.</li>
-        <li><strong>🩺 Direct Care Retention:</strong> Track percentage of premiums spent on frontline clinical staff vs administration.</li>
-        <li><strong>🔄 Actionable Swaps:</strong> Reroute spend to Direct Primary Care (DPC), FQHC community clinics, and mutual health plans.</li>
+        <li><strong>⚖️ Side-by-side comparison:</strong> compare 2–4 organizations on the measures we have sourced.</li>
+        <li><strong>🕵️ Ownership flags:</strong> a private-equity sponsor is shown only when it is cited.</li>
+        <li><strong>🔄 Alternatives by category:</strong> direct primary care, community health centers, and mutual plans.</li>
       </ul>
 
       <a href="/healthcare" class="btn btn-primary" style="margin-top: auto;">Compare Healthcare Organizations &rarr;</a>
     </div>
 
-    <!-- Platform 2: Food Chain Integrity -->
-    <div class="gateway-card food">
-      <div class="gateway-badge">Platform 2: Sourcing & Agriculture</div>
-      <h2>Food Chain Integrity</h2>
-      <p>Assure your food chain is healthy, ecologically sound, and genuinely enriches farmers, harvesters, and food workers rather than corporate middlemen.</p>
-      
+    <!-- Food -->
+    <div class="gateway-card food" data-causes="grower-share buy-direct fair-trade-abroad land-and-animals">
+      <div class="gateway-badge">Sourcing & Agriculture</div>
+      <h2>Food Chain</h2>
+      <p>See how the food dollar is split and who owns farmland. Shares and holdings appear with their sources, or marked withheld.</p>
+
       <ul class="feature-list">
-        <li><strong>🪜 Sourcing Ladder:</strong> Tiers 1–9 from home gardens and CSAs to multinational conglomerates.</li>
-        <li><strong>🌾 USDA Food Dollar Split:</strong> Trace the farm share (11.8¢) vs corporate marketing & packaging.</li>
-        <li><strong>🌱 Small Maker Registry:</strong> Direct-from-grower directory including U.S. tea, honey, and organic CSAs.</li>
-        <li><strong>📍 SNAP / WIC Equity:</strong> Verified access flags for community markets and food co-ops.</li>
+        <li><strong>🪜 Sourcing ladder:</strong> channels ordered by how much value reaches growers. This ordering is a Shoptegrity framework (opinion).</li>
+        <li><strong>🌾 Food dollar split:</strong> farm-share figures appear once cited.</li>
+        <li><strong>🌱 Maker registry:</strong> listed makers, with claims shown only when cited.</li>
+        <li><strong>📍 SNAP / WIC / EBT:</strong> acceptance is shown only when cited.</li>
       </ul>
 
-      <a href="/food" class="btn btn-primary" style="margin-top: auto;">Explore Food Chain Platform &rarr;</a>
+      <a href="/food" class="btn btn-primary" style="margin-top: auto;">Explore Food Chain &rarr;</a>
     </div>
 
-    <!-- Platform 3: Brand Integrity & Ethical Shopping -->
-    <div class="gateway-card brands">
-      <div class="gateway-badge">Platform 3: Corporate Accountability</div>
-      <h2>Brand Integrity & Ethical Swaps</h2>
-      <p>Score major consumer brands on ownership, CEO pay ratios, labor records, and environmental penalties—with vetted data sources of better brands and local options.</p>
-      
+    <!-- Brands -->
+    <div class="gateway-card brands" data-causes="who-owns-brands fair-wages-safety keep-money-local">
+      <div class="gateway-badge">Corporate Accountability</div>
+      <h2>Brand Check & Swaps</h2>
+      <p>Look up a brand to see its sourced records. Grades are our opinion and appear only when their inputs are cited.</p>
+
       <ul class="feature-list">
-        <li><strong>📊 6-Dimension Scorecards:</strong> Transparent scoring backed by filed SEC, OSHA, and EPA records.</li>
-        <li><strong>🔄 Actionable Swaps:</strong> Instant higher-integrity swaps that save money (Banking, Apparel, Groceries).</li>
-        <li><strong>🛡️ Disguised Rollup Alerts:</strong> Detects when private equity secretly buys a local trade and keeps the old name.</li>
-        <li><strong>💸 $100 Dollar Flow Maps:</strong> Side-by-side Sankey comparisons of where profits go.</li>
+        <li><strong>📊 Opinion scorecards:</strong> built on the published rubric and labelled as opinion.</li>
+        <li><strong>🔄 Swap guides:</strong> practical alternatives, with savings shown only when sourced.</li>
+        <li><strong>🏢 Parent companies:</strong> shown only with a cited source.</li>
+        <li><strong>💸 $100 flow maps:</strong> illustrative models, not measurements.</li>
       </ul>
 
       <a href="/brands" class="btn btn-blue" style="margin-top: auto;">Explore the Brands Database &rarr;</a>
     </div>
+
+    <!-- Housing -->
+    <div class="gateway-card" data-causes="housing-rent" style="border-top: 4px solid var(--purple); display: flex; flex-direction: column;">
+      <div class="gateway-badge" style="background: #f3e8ff; color: #6b21a8; border-color: #e9d5ff;">🏠 Housing & Rentals</div>
+      <h2>Housing & Rental Guide</h2>
+      <p>Practical guidance for renters and buyers, plus the landlord records we can cite.</p>
+
+      <ul class="feature-list">
+        <li><strong>📝 Lease and fee checklists:</strong> what to ask before you sign.</li>
+        <li><strong>🏘️ Landlord registry:</strong> entries appear only with cited records.</li>
+        <li><strong>🏦 Buyer programs:</strong> program terms are withheld until cited. Check current rules with the agency.</li>
+      </ul>
+
+      <a href="/housing" class="btn btn-primary" style="margin-top: auto;">Open the Housing Guide &rarr;</a>
+    </div>
+
+    <!-- Local -->
+    <div class="gateway-card" data-causes="local-rollups keep-money-local" style="border-top: 4px solid var(--blue); display: flex; flex-direction: column;">
+      <div class="gateway-badge" style="background: #dbeafe; color: #1e40af; border-color: #bfdbfe;">📍 Local Economy</div>
+      <h2>Local Directory</h2>
+      <p>Find independent local service businesses, and check whether a listing is still independent.</p>
+
+      <ul class="feature-list">
+        <li><strong>🪜 Ownership ladder:</strong> six tiers, defined on the page.</li>
+        <li><strong>🛡️ Rollup check:</strong> a flag appears only when the acquirer is cited.</li>
+        <li><strong>🔎 Name search:</strong> check a business against our directory.</li>
+      </ul>
+
+      <a href="/local" class="btn btn-primary" style="margin-top: auto;">Open the Local Directory &rarr;</a>
+    </div>
   </div>
 
-  <!-- Key Metrics & Method Banner -->
+  <!-- Method banner -->
   <div style="margin-top: 3.5rem; background: #ffffff; border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; text-align: center;">
       <div>
-        <div style="font-size: 2.5rem; font-weight: 900; color: var(--primary);">100%</div>
-        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Cited Evidence</div>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Every penalty, pay ratio, and parent company links to public filings.</p>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--primary);">Sourced or withheld</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Our rule for facts</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Our rule: factual claims need a cited source. Anything we cannot cite is marked withheld.</p>
       </div>
       <div>
-        <div style="font-size: 2.5rem; font-weight: 900; color: var(--blue);">$0</div>
-        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Brand Advertising</div>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">No brand can pay to alter, improve, or sponsor their integrity score.</p>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--blue);">Labelled opinion</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Grades and ratings</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Grades are Shoptegrity opinions under our published methodology.</p>
       </div>
       <div>
-        <div style="font-size: 2.5rem; font-weight: 900; color: var(--purple);">6</div>
-        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Core Dimensions</div>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Ownership, extraction, pay equity, labor, ecology, and locality.</p>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--purple);">Disclosed</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Commercial relationships</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Commercial relationships we know of are listed on our Disclosures page.</p>
       </div>
       <div>
-        <div style="font-size: 2.5rem; font-weight: 900; color: var(--slate);">Open API</div>
-        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">MCP Infrastructure</div>
-        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Streamable HTTP MCP tools for AI assistants and shopping agents.</p>
+        <div style="font-size: 2rem; font-weight: 900; color: var(--slate);">Open method</div>
+        <div style="font-weight: 700; color: var(--navy); margin-top: 0.25rem;">Corrections welcome</div>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Our rubric is public, and anyone can request a correction.</p>
       </div>
     </div>
   </div>
 </main>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/causes.js" defer></script>
 {% endblock %}
