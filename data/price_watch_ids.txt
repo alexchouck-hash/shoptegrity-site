@@ -148,3 +148,5 @@ gid://shopify/p/6DUPf49i9G18r19wcPSTky
 gid://shopify/p/49o5I9bEzTPZMIYWV39R0R
 gid://shopify/p/1Zf02DQ1VHl7ausA9zRBma
 gid://shopify/p/ofW3D8UFtCC3oD4lUfIml
+gid://shopify/p/59f7LJIDILokzBKOIbXwP9
+gid://shopify/p/25bhOxRDgHo76GXbC1ERyW
