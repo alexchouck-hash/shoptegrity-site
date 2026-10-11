@@ -1,0 +1,36 @@
+name: Price watch
+
+# Records one price per watched Shopify catalog product per day, so Black Friday
+# "sale" prices can be checked against real history (pipeline/price_watch.py).
+
+on:
+  schedule:
+    - cron: "17 13 * * *"   # daily, 13:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  record:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Record today's prices
+        run: |
+          pip install "httpx>=0.27.0"
+          python -m pipeline.price_watch
+
+      - name: Commit history
+        run: |
+          git config user.name "shoptegrity-price-watch"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/price_history.csv data/price_watch_ids.txt
+          # [CF-Pages-Skip] keeps the daily data commit from triggering a site rebuild
+          git diff --cached --quiet || git commit -m "Record prices $(date -u +%F) [CF-Pages-Skip]"
+          git push

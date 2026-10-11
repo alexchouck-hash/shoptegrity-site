@@ -353,3 +353,66 @@ def get_brand_parent_feed(query: Optional[str] = None, limit: int = 20) -> Dict[
         ],
     }
 
+
+
+# --- Holiday buying tools (Shopify Global Catalog + recorded price history) ---
+# Results are never ordered by commission. Catalog results keep Shopify's order;
+# a Shoptegrity standing is attached only when the seller is a brand we have scored.
+
+def _seller_standing(seller_name: Optional[str]) -> Dict[str, Any]:
+    if not seller_name:
+        return {"in_shoptegrity": False}
+    db = SessionLocal()
+    try:
+        brand = db.query(Brand).filter(Brand.name.ilike(seller_name)).first()
+        if not brand:
+            return {"in_shoptegrity": False, "note": "No Shoptegrity scorecard for this seller yet."}
+        score_res = score_entity(brand.entity)
+        return {
+            "in_shoptegrity": True,
+            "brand": brand.name,
+            "composite_score": score_res.composite_score,
+            "ownership_type": cited_ownership_type(brand.entity),
+        }
+    finally:
+        db.close()
+
+
+def check_seller(name: str) -> Dict[str, Any]:
+    """Shoptegrity's cited integrity signals for a seller or brand, or a plain statement that we have none."""
+    res = lookup_brand(name)
+    if "error" in res:
+        return {"seller": name, "in_shoptegrity": False,
+                "summary": f"Shoptegrity has no scorecard for '{name}' yet. That is not a negative finding."}
+    return res
+
+
+def responsible_alternatives(product: str, limit: int = 10) -> Dict[str, Any]:
+    """Search independent Shopify sellers for a product, with today's price and any Shoptegrity standing."""
+    from pipeline import shopify_catalog
+    from pipeline.price_watch import assess_price
+
+    try:
+        rows = shopify_catalog.search_catalog(product)[:limit]
+    except Exception as exc:
+        return {"error": f"Shopify catalog search failed: {exc}"}
+    results = []
+    for r in rows:
+        results.append({
+            **r,
+            "seller_standing": _seller_standing(r["seller_name"]),
+            "price_check": assess_price(r["product_id"], r["price"])["verdict"],
+        })
+    return {
+        "query": product,
+        "source": "Shopify Global Catalog (independent Shopify merchants)",
+        "ordering": "Shopify's relevance order. Not ranked by commission.",
+        "results": results,
+    }
+
+
+def check_deal(product_id: str, current_price: Optional[float] = None) -> Dict[str, Any]:
+    """Judge a price against Shoptegrity's recorded daily price history for a Shopify catalog product."""
+    from pipeline.price_watch import assess_price
+
+    return assess_price(product_id, current_price)

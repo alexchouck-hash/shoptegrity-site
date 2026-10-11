@@ -1,0 +1,17 @@
+# Holiday gift searches whose products are price-tracked daily (see pipeline/price_watch.py).
+# One search per line. Adding a line adds up to 10 products on the next run.
+organic cotton t-shirt
+merino wool socks
+fair trade coffee beans
+fair trade chocolate
+cast iron skillet
+wooden toys
+wool sweater
+leather wallet
+insulated water bottle
+organic cotton sheets
+soy candle
+recycled backpack
+board game
+organic kids pajamas
+wool slippers
