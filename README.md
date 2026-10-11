@@ -33,11 +33,11 @@ Shoptegrity is built as **one data platform powering two distinct partner web ex
 
 Designed to **assure your food chain is healthy, environmentally conscious, and enriches the appropriate people**:
 - **The Universal Food Sourcing Ladder (Tiers 1–9):**
-  Ranks channels from home gardens and CSAs up through regional co-ops and multinational ultra-processed foods, tracking producer dollar retention (from 100% down to under 8%).
+  Ranks channels from home gardens and CSAs up through regional co-ops and multinational ultra-processed foods. A producer's share of the dollar is shown only with a cited source.
 - **USDA ERS Food Dollar Split:**
-  Interactive visual ledger based on federal USDA Economic Research Service data showing where each cent of $1.00 lands (farm share 11.8¢ vs packaging, wholesale, and retail margin).
+  A visual ledger of where each cent of a food dollar goes (farm share, processing, packaging, transportation, wholesale, and retail). Each figure is withheld until it is cited to the USDA Economic Research Service Food Dollar Series.
 - **Small Maker & Grower Registry (including U.S. Tea Proof):**
-  Aggregates verified small producers, pasture-raised growers, and tea farms (e.g. Table Rock Tea, Camellia Forest) contrasting direct makers with national aggregators.
+  Lists small producers, pasture-raised growers, and U.S. tea farms, each linked to its own website.
 - **Equity Access:**
   Flags SNAP, WIC, and EBT acceptance across farmers markets and food co-ops.
 
@@ -54,7 +54,7 @@ Designed to **rank major consumer brands on integrity, provide actionable swaps,
   5. *Environmental Impact* (EPA ECHO enforcement, USDA Organic, regenerative)
   6. *Locality & Community Wealth* (Recirculation factor vs multinational leak)
 - **Parent Company Mapping:**
-  Shows the ultimate beneficiary of "indie" brands (e.g., Annie's is General Mills, Burt's Bees is Clorox).
+  Shows a brand's parent company only when a cited source (a filing or other public record, with its link) ties the brand to that parent.
 - **Better Brand Data Sources:**
   Curated direct links to B Corp directories, 100% Employee-Owned (NCEO) registries, and Worker Co-op databases.
 - **Step-by-Step Swap Guides (`/swaps`):**
@@ -69,8 +69,8 @@ Designed to **rank major consumer brands on integrity, provide actionable swaps,
 Answers one core question for service businesses: **who actually owns this, and does the money stay local?**
 - **The Ownership Ladder (Tiers 1–6):**
   From single-location owner-operators up to public corporations.
-- **Disguised Rollup Warning System:**
-  Surfaces when private equity platforms (e.g. Apex Service Partners) secretly acquire a local HVAC, plumbing, or veterinary business while keeping the legacy family name to deceive consumers.
+- **Rollup Warning System:**
+  Shows that a local HVAC, plumbing, or veterinary business is owned by a private equity platform only when a cited source documents the acquisition. An acquired business can keep its original name, so the listing names the owner of record.
 
 ---
 
@@ -100,7 +100,11 @@ Set these in the Pages project (Settings → Builds):
 
 The build exits non-zero, and nothing is published, if any page fails to render or any internal link points at a file that does not exist. To check locally, run `python build_static.py --out dist` from the repository root.
 
-The build writes `api/v1/*.json`, `data/verification_queue.csv`, and `dist/`. The first two are tracked files that the build regenerates.
+The build writes `api/v1/*.json`, `data/private/verification_queue.csv`, and `dist/`. The `api/v1/*.json` files are tracked and the build regenerates them.
+
+`data/private/verification_queue.csv` lists every withheld claim with its value, so it is gitignored and must never be committed: this repository is public, and a tracked copy would publish what the site withholds. Run the build, or `python -m pipeline.provenance`, to regenerate it locally.
+
+The build also fails if a file in `dist/static/img` is not referenced by any exported page, stylesheet, script or JSON file, unless `STATIC_IMG_ALLOWLIST` in `build_static.py` lists it with a reason. Every file in `dist` is public whether or not a page links it.
 
 ---
 

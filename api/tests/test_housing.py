@@ -156,7 +156,8 @@ def test_housing_api_overview():
     splits = data["rent_dollar_splits"]
     assert set(splits) == {"tier_1_clt", "tier_3_mom_pop", "tier_6_institutional"}
     for tier in splits.values():
-        assert tier["local_retention_pct"] + tier["wall_street_leakage_pct"] == 100
+        assert tier["local_retention_pct"] + tier["outside_share_pct"] == 100
+        assert "wall_street_leakage_pct" not in tier
         assert "score" not in tier and "grade" not in tier
 
     # Ownership ladder: six tiers, each labelled as an opinion, no retention rates

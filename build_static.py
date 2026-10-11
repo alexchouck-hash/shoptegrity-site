@@ -3,8 +3,9 @@
 Renders all Jinja2 pages and exports static JSON API endpoints so the
 Shoptegrity site can be served as plain files from the site root (shopteg.com).
 
-The export fails loudly: a page that does not render, or an internal link that
-points nowhere, exits non-zero so Cloudflare does not publish a broken site.
+The export fails loudly: a page that does not render, an internal link that
+points nowhere, or an image that nothing uses and nobody allow-listed exits
+non-zero so Cloudflare does not publish a broken or leaky site.
 """
 
 import os
@@ -21,7 +22,7 @@ from pipeline.seed_data import run_seed
 from pipeline.top2000_brands import export_top2000_json, seed_top2000_db
 from pipeline.healthcare_2000 import export_healthcare_json, seed_healthcare_db, generate_healthcare_2000
 from pipeline.top2000_brands import generate_top_2000_brands
-from pipeline.provenance import write_verification_queue
+from pipeline.provenance import QUEUE_PATH, ROOT, write_verification_queue
 from api.app.db.session import SessionLocal
 from api.app.models.core import Brand
 
@@ -68,6 +69,43 @@ def check_internal_links(out_path: Path) -> list:
     return broken
 
 
+# Images published at /static/img/ although no page, stylesheet, script or JSON export names them.
+# Every file in dist is public whether linked or not, so each entry needs a reason it is safe to serve.
+STATIC_IMG_ALLOWLIST = {
+    "favicon-32.png": "Shoptegrity's own site icon; makes no claim about any company",
+    "icon-192.png": "Shoptegrity's own app icon; makes no claim about any company",
+    "icon-512.png": "Shoptegrity's own app icon; makes no claim about any company",
+    "logo.png": "Shoptegrity's own logo, kept for press and link previews; makes no claim about any company",
+    "logo.svg": "Shoptegrity's own logo, kept for press and link previews; makes no claim about any company",
+}
+
+# Files whose text can reference an image.
+_REFERENCING_SUFFIXES = {".html", ".css", ".js", ".json", ".webmanifest", ".xml", ".txt"}
+
+
+def check_static_images(out_path: Path, allowlist=STATIC_IMG_ALLOWLIST) -> list:
+    """Returns static/img paths that no exported text file references and the allowlist does not cover."""
+    img_dir = out_path / "static" / "img"
+    if not img_dir.is_dir():
+        return []
+    texts = [
+        p.read_text(encoding="utf-8", errors="ignore")
+        for p in out_path.rglob("*")
+        if p.is_file() and p.suffix in _REFERENCING_SUFFIXES
+    ]
+    unreferenced = []
+    for img in sorted(img_dir.rglob("*")):
+        if not img.is_file():
+            continue
+        rel = img.relative_to(img_dir).as_posix()
+        if rel in allowlist:
+            continue
+        ref = f"static/img/{rel}"
+        if not any(ref in text for text in texts):
+            unreferenced.append(ref)
+    return unreferenced
+
+
 def export_site(output_dir: str = "dist", base_url: str = ""):
     failures = []
     print(f"Ensuring database is seeded...")
@@ -81,7 +119,7 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
         "brands": generate_top_2000_brands(),
         "healthcare": generate_healthcare_2000(),
     })
-    print(f"Verification queue: {queued} unsourced claims withheld (data/verification_queue.csv)")
+    print(f"Verification queue: {queued} unsourced claims withheld ({QUEUE_PATH.relative_to(ROOT).as_posix()}, gitignored)")
 
     out_path = Path(output_dir)
     if out_path.exists():
@@ -227,6 +265,10 @@ def export_site(output_dir: str = "dist", base_url: str = ""):
     broken = check_internal_links(out_path)
     for page, ref in broken:
         failures.append(f"broken link in {page}: {ref}")
+
+    # Refuse to publish an image nothing uses unless it is allow-listed with a reason
+    for ref in check_static_images(out_path):
+        failures.append(f"unreferenced image {ref}: link it from a page or add it to STATIC_IMG_ALLOWLIST")
 
     if failures:
         print(f"Export FAILED with {len(failures)} problem(s):")

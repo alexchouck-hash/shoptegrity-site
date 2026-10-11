@@ -402,11 +402,11 @@
       <div style="margin-bottom: 0.75rem;">
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.85rem; font-weight: 800;">
           <span id="splitRetentionLabel" style="color: #166534;">Illustrative local share: 100%</span>
-          <span id="splitLeakageLabel" style="color: #dc2626;">Illustrative outside share: 0%</span>
+          <span id="splitOutsideLabel" style="color: #dc2626;">Illustrative outside share: 0%</span>
         </div>
         <div class="flow-bar-container">
           <div id="splitBarLocal" class="flow-bar-segment" style="width: 100%; background: #059669;"></div>
-          <div id="splitBarWallSt" class="flow-bar-segment" style="width: 0%; background: #dc2626;"></div>
+          <div id="splitBarOutside" class="flow-bar-segment" style="width: 0%; background: #dc2626;"></div>
         </div>
       </div>
 
@@ -909,7 +909,7 @@ let currentSplitTier = "tier_1_clt";
 function splitTotals(tier) {
   let outside = 0;
   tier.buckets.forEach(b => { if (b.outside) outside += b.pct; });
-  return { wallStPct: outside, localPct: 100 - outside };
+  return { outsidePct: outside, localPct: 100 - outside };
 }
 
 function setSplitTier(tierKey) {
@@ -944,11 +944,11 @@ function renderSplitData() {
 
   // Update flow bar
   setText("splitRetentionLabel", `Illustrative local share: ${totals.localPct}%`);
-  setText("splitLeakageLabel", `Illustrative outside share: ${totals.wallStPct}%`);
+  setText("splitOutsideLabel", `Illustrative outside share: ${totals.outsidePct}%`);
   const localBar = byId("splitBarLocal");
-  const outsideBar = byId("splitBarWallSt");
+  const outsideBar = byId("splitBarOutside");
   if (localBar) localBar.style.width = `${totals.localPct}%`;
-  if (outsideBar) outsideBar.style.width = `${totals.wallStPct}%`;
+  if (outsideBar) outsideBar.style.width = `${totals.outsidePct}%`;
 
   // Update table
   const tbody = byId("splitTableBody");

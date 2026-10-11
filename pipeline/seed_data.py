@@ -29,9 +29,13 @@ def run_seed():
     init_db()
     db = SessionLocal()
 
-    # Recreate alternatives table to ensure schema matches latest model
-    Alternative.__table__.drop(db.bind, checkfirst=True)
-    Alternative.__table__.create(db.bind, checkfirst=True)
+    # Recreate tables whose schema changed so an existing database matches the models:
+    # alternatives (added columns) and spend_categories (spend figures became nullable).
+    # flow_profiles references spend_categories, so it is recreated with it. All three are reseeded below.
+    for table in (Alternative.__table__, FlowProfile.__table__, SpendCategory.__table__):
+        table.drop(db.bind, checkfirst=True)
+    for table in (SpendCategory.__table__, Alternative.__table__, FlowProfile.__table__):
+        table.create(db.bind, checkfirst=True)
 
     # Clear existing data
     db.query(Alternative).delete()
@@ -45,15 +49,15 @@ def run_seed():
     db.commit()
 
     print("Populating Spend Categories...")
+    # avg_annual_spend and saves_money stay None: no figure here is cited to a published
+    # table (e.g. a BLS Consumer Expenditure Survey release), so none is seeded.
     cats = [
         SpendCategory(
             id="cat-banking",
             name="Banking & Finance",
             slug="banking",
             tier=1,
-            avg_annual_spend=4200.0,
             swap_difficulty="easy",
-            saves_money=True,
             description="Checking, savings, mortgages, and loans. Moving from megabanks to credit unions changes where deposit and loan money goes.",
         ),
         SpendCategory(
@@ -61,9 +65,7 @@ def run_seed():
             name="Grocery & Food",
             slug="grocery",
             tier=1,
-            avg_annual_spend=8400.0,
             swap_difficulty="easy",
-            saves_money=True,
             description="Pantry, produce, dairy, and meat. Reroutes grocery dollars to farmer co-ops and local growers.",
         ),
         SpendCategory(
@@ -71,9 +73,7 @@ def run_seed():
             name="Clothing & Apparel",
             slug="clothing",
             tier=1,
-            avg_annual_spend=2200.0,
             swap_difficulty="moderate",
-            saves_money=True,
             description="Garments and footwear. Prioritizes durability, repair, thrift, and fair trade labor.",
         ),
         SpendCategory(
@@ -81,9 +81,7 @@ def run_seed():
             name="Insurance",
             slug="insurance",
             tier=1,
-            avg_annual_spend=3100.0,
             swap_difficulty="moderate",
-            saves_money=True,
             description="Auto and home insurance. Swapping to mutual and policyholder-owned insurers.",
         ),
         SpendCategory(
@@ -91,9 +89,7 @@ def run_seed():
             name="Hardware & Home Services",
             slug="hardware",
             tier=1,
-            avg_annual_spend=1500.0,
             swap_difficulty="easy",
-            saves_money=False,
             description="Tools, plumbing, HVAC, and repairs. Supporting local owner-operators and co-ops.",
         ),
     ]

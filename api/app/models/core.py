@@ -94,9 +94,11 @@ class SpendCategory(Base):
     name: Mapped[str] = mapped_column(String(100))
     slug: Mapped[str] = mapped_column(String(100), unique=True)
     tier: Mapped[int] = mapped_column(Integer, default=1)
-    avg_annual_spend: Mapped[float] = mapped_column(Float, default=0.0)
+    # Withheld (None) until cited to a published table such as the BLS Consumer Expenditure Survey.
+    avg_annual_spend: Mapped[Optional[float]] = mapped_column(Float, nullable=True, default=None)
     swap_difficulty: Mapped[str] = mapped_column(String(20), default="easy")
-    saves_money: Mapped[bool] = mapped_column(Boolean, default=False)
+    # Withheld (None) until a cited source shows the swap saves money.
+    saves_money: Mapped[Optional[bool]] = mapped_column(Boolean, nullable=True, default=None)
     description: Mapped[str] = mapped_column(Text, default="")
 
 
