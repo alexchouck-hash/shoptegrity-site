@@ -6,6 +6,7 @@ on every call to decide which catalog fields to return.
 """
 
 import os
+import time
 from typing import Any, Dict, List, Optional
 
 import httpx
@@ -25,7 +26,12 @@ def _call(tool: str, arguments: Dict[str, Any], timeout: float = 40.0) -> Dict[s
         "method": "tools/call",
         "params": {"name": tool, "arguments": {"meta": {"ucp-agent": {"profile": AGENT_PROFILE}}, **arguments}},
     }
-    res = httpx.post(CATALOG_URL, json=payload, headers={"Accept": "application/json"}, timeout=timeout)
+    # Back off on 429: the catalog rate-limits bursts of searches
+    for attempt in range(5):
+        res = httpx.post(CATALOG_URL, json=payload, headers={"Accept": "application/json"}, timeout=timeout)
+        if res.status_code != 429:
+            break
+        time.sleep(float(res.headers.get("retry-after") or 2 ** (attempt + 2)))
     res.raise_for_status()
     body = res.json()
     if "error" in body:
