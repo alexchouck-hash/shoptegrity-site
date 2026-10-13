@@ -1,7 +1,13 @@
 """
 Shoptegrity GIF Generator
-Generates animated social/marketing GIFs highlighting corporate transparency,
-disguised ownership, and ethical swaps.
+Generates animated social/marketing GIFs about ownership lookups and swaps.
+
+Sourced or withheld: every company in these GIFs is fictional and labelled as an
+example, and every figure is a labelled illustrative input, not a measurement.
+Do not put a real company name, or a figure without a cited source, into a frame.
+
+Output goes to build/gifs/ (gitignored). The site does not serve these files, and
+build_static.py fails if an image in static/img is neither referenced nor allow-listed.
 """
 
 import os
@@ -28,6 +34,9 @@ WARNING = (217, 119, 6)      # #d97706
 WARNING_BG = (255, 251, 235)
 
 WHITE = (255, 255, 255)
+
+# Not under web/static: anything there is copied into the public site.
+DEFAULT_OUTPUT_DIR = "build/gifs"
 
 def get_font(size, bold=False):
     font_file = r"C:\Windows\Fonts\segoeuib.ttf" if bold else r"C:\Windows\Fonts\segoeui.ttf"
@@ -79,7 +88,7 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
     # Header
     draw_top_pill(draw, "SHOPTEGRITY BRAND SCANNER", W // 2, 14, EMERALD, EMERALD, f_badge)
     draw.text((W // 2, 48), "Who are you actually paying?", fill=WHITE, font=f_title, anchor="mt")
-    draw.text((W // 2, 78), "Exposing conglomerate ownership behind 'natural' brands", fill=MUTED, font=f_sub, anchor="mt")
+    draw.text((W // 2, 78), "Fictional example. Real lookups show a parent only with a cited source.", fill=MUTED, font=f_sub, anchor="mt")
 
     card_y1 = 108
     card_y2 = 372
@@ -96,7 +105,7 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
 
     is_revealed = frame_idx >= 22
 
-    # Card 1: Burt's Bees
+    # Card 1: fictional 'natural' brand
     card1_border = DANGER if is_revealed else BORDER
     draw_rounded_rect(draw, (card1_x1, card1_y1, card1_x2, card1_y2), 12, fill=WHITE, outline=card1_border, width=2)
 
@@ -105,11 +114,11 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 14, card1_x1 + 140, card1_y1 + 34), 6, fill=EMERALD_BG)
         draw.text((card1_x1 + 24, card1_y1 + 17), "ECO & NATURAL", fill=EMERALD, font=f_badge)
         
-        draw.text((card1_x1 + 16, card1_y1 + 44), "Burt's Bees", fill=TEXT_DARK, font=f_card_title)
+        draw.text((card1_x1 + 16, card1_y1 + 44), "Example Naturals", fill=TEXT_DARK, font=f_card_title)
         draw.text((card1_x1 + 16, card1_y1 + 68), "Lip Balm & Personal Care", fill=MUTED, font=f_card_sub)
 
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 100, card1_x2 - 16, card1_y1 + 170), 8, fill=WARNING_BG, outline=WARNING, width=1)
-        draw.text((card1_x1 + 26, card1_y1 + 114), "100% Natural Origin", fill=(180, 83, 9), font=f_card_stat_bold)
+        draw.text((card1_x1 + 26, card1_y1 + 114), "\"Natural\" label claims", fill=(180, 83, 9), font=f_card_stat_bold)
         draw.text((card1_x1 + 26, card1_y1 + 138), "Eco-friendly apothecary branding", fill=MUTED, font=f_card_stat)
 
         draw.text((card1_x1 + 16, card1_y1 + 195), "Store Shelf Perception:", fill=MUTED, font=f_card_stat)
@@ -118,26 +127,26 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
     else:
         # Corporate reveal state
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 14, card1_x1 + 210, card1_y1 + 34), 6, fill=DANGER_BG)
-        draw.text((card1_x1 + 24, card1_y1 + 17), "ALERT: 100% SUBSIDIARY OF", fill=DANGER, font=f_badge)
+        draw.text((card1_x1 + 24, card1_y1 + 17), "EXAMPLE: OWNED BY", fill=DANGER, font=f_badge)
 
-        draw.text((card1_x1 + 16, card1_y1 + 44), "CLOROX CO.", fill=DANGER, font=f_card_title)
-        draw.text((card1_x1 + 16, card1_y1 + 68), "NYSE: CLX | Acquired for $925M", fill=MUTED, font=f_card_sub)
+        draw.text((card1_x1 + 16, card1_y1 + 44), "Example Holdings Corp.", fill=DANGER, font=f_card_title)
+        draw.text((card1_x1 + 16, card1_y1 + 68), "Fictional parent company", fill=MUTED, font=f_card_sub)
 
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 96, card1_x2 - 16, card1_y1 + 152), 8, fill=DANGER_BG)
-        draw.text((card1_x1 + 26, card1_y1 + 104), "Integrity Score", fill=DANGER, font=f_card_stat)
-        draw.text((card1_x2 - 26, card1_y1 + 124), "28 / 100", fill=DANGER, font=f_score, anchor="rm")
+        draw.text((card1_x1 + 26, card1_y1 + 104), "Ownership link", fill=DANGER, font=f_card_stat)
+        draw.text((card1_x2 - 26, card1_y1 + 124), "Cited", fill=DANGER, font=f_score, anchor="rm")
 
-        draw.text((card1_x1 + 16, card1_y1 + 168), "- CEO-to-Worker Pay:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 168), "295 to 1", fill=DANGER, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 168), "- Pay ratio:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 168), "SEC proxy filing", fill=DANGER, font=f_card_stat_bold)
 
-        draw.text((card1_x1 + 16, card1_y1 + 192), "- Capital Extraction:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 192), "$1.2B Buybacks", fill=DANGER, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 192), "- Shareholder payouts:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 192), "SEC 10-K", fill=DANGER, font=f_card_stat_bold)
 
-        draw.text((card1_x1 + 16, card1_y1 + 216), "- Community Wealth:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 216), "Severe Wealth Leak", fill=DANGER, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 216), "- Labor record:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 216), "OSHA / NLRB data", fill=DANGER, font=f_card_stat_bold)
 
-        draw.text((card1_x1 + 16, card1_y1 + 240), "- Evidence Sources:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 240), "SEC 10-K & ECHO", fill=MUTED, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 240), "- No source:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 240), "Shown as withheld", fill=MUTED, font=f_card_stat_bold)
 
     # Scanner Beam
     if 16 <= frame_idx <= 30:
@@ -155,7 +164,7 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
         draw.text((mid_x, mid_y - 1), "->", fill=WHITE, font=f_badge, anchor="mm")
         draw.text((mid_x, mid_y - 28), "SWAP TO", fill=EMERALD, font=f_badge, anchor="mm")
 
-    # Card 2: Dr. Bronner's
+    # Card 2: fictional alternative
     if frame_idx >= 36:
         slide_in = min(1.0, (frame_idx - 36) / 12)
         offset_y = int((1.0 - ease_out_cubic(slide_in)) * 30)
@@ -164,33 +173,33 @@ def render_frame_scanner(frame_idx, total_frames, W, H):
 
         draw_rounded_rect(draw, (card2_x1, c2_y1, card2_x2, c2_y2), 12, fill=WHITE, outline=EMERALD, width=2)
         draw_rounded_rect(draw, (card2_x1 + 16, c2_y1 + 14, card2_x1 + 170, c2_y1 + 34), 6, fill=EMERALD_BG)
-        draw.text((card2_x1 + 24, c2_y1 + 17), "[VERIFIED MISSION]", fill=EMERALD, font=f_badge)
+        draw.text((card2_x1 + 24, c2_y1 + 17), "[EXAMPLE SWAP]", fill=EMERALD, font=f_badge)
 
-        draw.text((card2_x1 + 16, c2_y1 + 44), "Dr. Bronner's", fill=TEXT_DARK, font=f_card_title)
-        draw.text((card2_x1 + 16, c2_y1 + 68), "Family-Owned / Certified B-Corp", fill=MUTED, font=f_card_sub)
+        draw.text((card2_x1 + 16, c2_y1 + 44), "Example Co-op Soap", fill=TEXT_DARK, font=f_card_title)
+        draw.text((card2_x1 + 16, c2_y1 + 68), "Fictional member-owned maker", fill=MUTED, font=f_card_sub)
 
         draw_rounded_rect(draw, (card2_x1 + 16, c2_y1 + 96, card2_x2 - 16, c2_y1 + 152), 8, fill=EMERALD_BG)
-        draw.text((card2_x1 + 26, c2_y1 + 104), "Integrity Score", fill=EMERALD_DARK, font=f_card_stat)
-        draw.text((card2_x2 - 26, c2_y1 + 124), "96 / 100", fill=EMERALD, font=f_score, anchor="rm")
+        draw.text((card2_x1 + 26, c2_y1 + 104), "Ownership link", fill=EMERALD_DARK, font=f_card_stat)
+        draw.text((card2_x2 - 26, c2_y1 + 124), "Cited", fill=EMERALD, font=f_score, anchor="rm")
 
-        draw.text((card2_x1 + 16, c2_y1 + 168), "- Executive Pay Cap:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 168), "5 to 1 Cap", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 168), "- Ownership:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 168), "Member-owned", fill=EMERALD_DARK, font=f_card_stat_bold)
 
-        draw.text((card2_x1 + 16, c2_y1 + 192), "- Stock Buybacks:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 192), "$0 (Zero Wall St)", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 192), "- Outside investors:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 192), "None (example)", fill=EMERALD_DARK, font=f_card_stat_bold)
 
-        draw.text((card2_x1 + 16, c2_y1 + 216), "- Profits to Mission:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 216), "1/3 to Staff/Charity", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 216), "- Every claim:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 216), "Linked to a source", fill=EMERALD_DARK, font=f_card_stat_bold)
 
-        draw.text((card2_x1 + 16, c2_y1 + 240), "- Supply Chain:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 240), "Regenerative Organic", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 240), "- Unsourced claims:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 240), "Withheld", fill=EMERALD_DARK, font=f_card_stat_bold)
 
     # Footer
     footer_y = H - 28
     draw.line([(0, footer_y - 12), (W, footer_y - 12)], fill=NAVY_LIGHT, width=1)
     pulse = (math.sin(frame_idx / 4) + 1) / 2 if frame_idx > 50 else 0
     cta_color = (int(5 + pulse * 35), int(150 + pulse * 50), int(105 + pulse * 40))
-    draw.text((W // 2, footer_y), "Search 500+ brands & ethical swaps at Shopteg.com ->", fill=cta_color, font=f_footer, anchor="mm")
+    draw.text((W // 2, footer_y), "Look up brands & swaps at Shopteg.com ->", fill=cta_color, font=f_footer, anchor="mm")
 
     return img
 
@@ -212,9 +221,9 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
     f_footer = get_font(14, bold=True)
 
     # Header
-    draw_top_pill(draw, "DISGUISED ROLLUP DETECTOR", W // 2, 14, WARNING, WARNING, f_badge)
+    draw_top_pill(draw, "ROLLUP CHECK", W // 2, 14, WARNING, WARNING, f_badge)
     draw.text((W // 2, 48), "Did Private Equity buy your local plumber?", fill=WHITE, font=f_title, anchor="mt")
-    draw.text((W // 2, 78), "Wall Street platforms keep the trusted family name while hiking rates 40%", fill=MUTED, font=f_sub, anchor="mt")
+    draw.text((W // 2, 78), "Fictional example. An acquired business can keep its family name.", fill=MUTED, font=f_sub, anchor="mt")
 
     card_y1 = 108
     card_y2 = 372
@@ -239,7 +248,7 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 14, card1_x1 + 155, card1_y1 + 34), 6, fill=WARNING_BG)
         draw.text((card1_x1 + 24, card1_y1 + 17), "HERITAGE BRANDING", fill=WARNING, font=f_badge)
 
-        draw.text((card1_x1 + 16, card1_y1 + 44), "Miller & Sons HVAC", fill=TEXT_DARK, font=f_card_title)
+        draw.text((card1_x1 + 16, card1_y1 + 44), "Example Family HVAC", fill=TEXT_DARK, font=f_card_title)
         draw.text((card1_x1 + 16, card1_y1 + 68), "\"Serving our valley since 1982\"", fill=MUTED, font=f_card_sub)
 
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 100, card1_x2 - 16, card1_y1 + 170), 8, fill=(241, 245, 249), outline=BORDER, width=1)
@@ -251,26 +260,26 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
         draw.text((card1_x1 + 16, card1_y1 + 240), "Owner lives in your neighborhood", fill=MUTED, font=f_card_stat)
     else:
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 14, card1_x1 + 200, card1_y1 + 34), 6, fill=DANGER_BG)
-        draw.text((card1_x1 + 24, card1_y1 + 17), "ALERT: DISGUISED PE ROLLUP", fill=DANGER, font=f_badge)
+        draw.text((card1_x1 + 24, card1_y1 + 17), "EXAMPLE: PE-OWNED", fill=DANGER, font=f_badge)
 
-        draw.text((card1_x1 + 16, card1_y1 + 44), "Apex Services Platform", fill=DANGER, font=f_card_title)
-        draw.text((card1_x1 + 16, card1_y1 + 68), "Secret Parent: $4.2B Buyout Fund", fill=MUTED, font=f_card_sub)
+        draw.text((card1_x1 + 16, card1_y1 + 44), "Example Services Platform", fill=DANGER, font=f_card_title)
+        draw.text((card1_x1 + 16, card1_y1 + 68), "Fictional buyout fund parent", fill=MUTED, font=f_card_sub)
 
         draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 96, card1_x2 - 16, card1_y1 + 152), 8, fill=DANGER_BG)
         draw.text((card1_x1 + 26, card1_y1 + 104), "Ownership Tier", fill=DANGER, font=f_card_stat)
         draw.text((card1_x2 - 26, card1_y1 + 124), "Tier 5 (PE Rollup)", fill=DANGER, font=f_score, anchor="rm")
 
-        draw.text((card1_x1 + 16, card1_y1 + 168), "- Service Markup:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 168), "+38% Post-Acquisition", fill=DANGER, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 168), "- Owner of record:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 168), "State business filings", fill=DANGER, font=f_card_stat_bold)
 
-        draw.text((card1_x1 + 16, card1_y1 + 192), "- Technician Model:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 192), "Sales Commission Quotas", fill=DANGER, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 192), "- Acquisition:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 192), "Cited filing or report", fill=DANGER, font=f_card_stat_bold)
 
-        draw.text((card1_x1 + 16, card1_y1 + 216), "- Community Retention:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 216), "Under 15% Stays Local", fill=DANGER, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 216), "- Prices:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 216), "Compare quotes", fill=DANGER, font=f_card_stat_bold)
 
-        draw.text((card1_x1 + 16, card1_y1 + 240), "- Evidence Source:", fill=MUTED, font=f_card_stat)
-        draw.text((card1_x1 + 175, card1_y1 + 240), "Secretary of State Filings", fill=MUTED, font=f_card_stat_bold)
+        draw.text((card1_x1 + 16, card1_y1 + 240), "- No source:", fill=MUTED, font=f_card_stat)
+        draw.text((card1_x1 + 175, card1_y1 + 240), "Shown as withheld", fill=MUTED, font=f_card_stat_bold)
 
     # Scanner Beam
     if 16 <= frame_idx <= 30:
@@ -288,7 +297,7 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
         draw.text((mid_x, mid_y - 1), "->", fill=WHITE, font=f_badge, anchor="mm")
         draw.text((mid_x, mid_y - 28), "CHOOSE", fill=EMERALD, font=f_badge, anchor="mm")
 
-    # Card 2: True Independent Co-op
+    # Card 2: fictional independent co-op
     if frame_idx >= 36:
         slide_in = min(1.0, (frame_idx - 36) / 12)
         offset_y = int((1.0 - ease_out_cubic(slide_in)) * 30)
@@ -297,26 +306,26 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
 
         draw_rounded_rect(draw, (card2_x1, c2_y1, card2_x2, c2_y2), 12, fill=WHITE, outline=EMERALD, width=2)
         draw_rounded_rect(draw, (card2_x1 + 16, c2_y1 + 14, card2_x1 + 195, c2_y1 + 34), 6, fill=EMERALD_BG)
-        draw.text((card2_x1 + 24, c2_y1 + 17), "[VERIFIED INDEPENDENT]", fill=EMERALD, font=f_badge)
+        draw.text((card2_x1 + 24, c2_y1 + 17), "[EXAMPLE INDEPENDENT]", fill=EMERALD, font=f_badge)
 
-        draw.text((card2_x1 + 16, c2_y1 + 44), "Cascade Techs Co-op", fill=TEXT_DARK, font=f_card_title)
-        draw.text((card2_x1 + 16, c2_y1 + 68), "100% Worker-Owned & Licensed", fill=MUTED, font=f_card_sub)
+        draw.text((card2_x1 + 16, c2_y1 + 44), "Example Techs Co-op", fill=TEXT_DARK, font=f_card_title)
+        draw.text((card2_x1 + 16, c2_y1 + 68), "Fictional worker-owned co-op", fill=MUTED, font=f_card_sub)
 
         draw_rounded_rect(draw, (card2_x1 + 16, c2_y1 + 96, card2_x2 - 16, c2_y1 + 152), 8, fill=EMERALD_BG)
         draw.text((card2_x1 + 26, c2_y1 + 104), "Ownership Tier", fill=EMERALD_DARK, font=f_card_stat)
         draw.text((card2_x2 - 26, c2_y1 + 124), "Tier 1 (Direct)", fill=EMERALD, font=f_score, anchor="rm")
 
-        draw.text((card2_x1 + 16, c2_y1 + 168), "- Pricing Transparency:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 168), "Zero Sales Quotas", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 168), "- Ownership:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 168), "Worker-owned", fill=EMERALD_DARK, font=f_card_stat_bold)
 
-        draw.text((card2_x1 + 16, c2_y1 + 192), "- Local Recirculation:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 192), "68% Stays in County", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 192), "- Owners:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 192), "Live in the area", fill=EMERALD_DARK, font=f_card_stat_bold)
 
-        draw.text((card2_x1 + 16, c2_y1 + 216), "- Service Quality:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 216), "Master Tech Onsite", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 216), "- License:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 216), "Check state board", fill=EMERALD_DARK, font=f_card_stat_bold)
 
-        draw.text((card2_x1 + 16, c2_y1 + 240), "- Customer Protection:", fill=MUTED, font=f_card_stat)
-        draw.text((card2_x1 + 175, c2_y1 + 240), "No Private Equity Cut", fill=EMERALD_DARK, font=f_card_stat_bold)
+        draw.text((card2_x1 + 16, c2_y1 + 240), "- Every claim:", fill=MUTED, font=f_card_stat)
+        draw.text((card2_x1 + 175, c2_y1 + 240), "Linked to a source", fill=EMERALD_DARK, font=f_card_stat_bold)
 
     # Footer
     footer_y = H - 28
@@ -329,7 +338,7 @@ def render_frame_pe_rollup(frame_idx, total_frames, W, H):
 
 def render_frame_dollar_flow(frame_idx, total_frames, W, H):
     """
-    Renders a frame for 'The $100 Wealth Flow' (Megacorp Leak vs Co-op Recirculation)
+    Renders a frame for 'The $100 Wealth Flow' (illustrative inputs, not a measurement)
     """
     img = Image.new("RGB", (W, H), color=NAVY)
     draw = ImageDraw.Draw(img)
@@ -346,7 +355,7 @@ def render_frame_dollar_flow(frame_idx, total_frames, W, H):
     # Header
     draw_top_pill(draw, "THE $100 DOLLAR VOTE", W // 2, 14, EMERALD, EMERALD, f_badge)
     draw.text((W // 2, 48), "Where does your $100 actually travel?", fill=WHITE, font=f_title, anchor="mt")
-    draw.text((W // 2, 78), "Every purchase either builds local resilience or fuels Wall Street extraction", fill=MUTED, font=f_sub, anchor="mt")
+    draw.text((W // 2, 78), "Illustrative example inputs. Not a measurement of any company.", fill=MUTED, font=f_sub, anchor="mt")
 
     card_y1 = 104
     card_y2 = 388
@@ -368,8 +377,8 @@ def render_frame_dollar_flow(frame_idx, total_frames, W, H):
     # Card 1: Megacorp
     draw_rounded_rect(draw, (card1_x1, card1_y1, card1_x2, card1_y2), 12, fill=WHITE, outline=DANGER, width=2)
     draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 14, card1_x1 + 155, card1_y1 + 34), 6, fill=DANGER_BG)
-    draw.text((card1_x1 + 24, card1_y1 + 17), "MEGACORP RETAIL", fill=DANGER, font=f_badge)
-    draw.text((card1_x1 + 16, card1_y1 + 44), "$100 at Megastore / Amazon", fill=TEXT_DARK, font=f_card_title)
+    draw.text((card1_x1 + 24, card1_y1 + 17), "NATIONAL CHAIN", fill=DANGER, font=f_badge)
+    draw.text((card1_x1 + 16, card1_y1 + 44), "$100 at a chain (example)", fill=TEXT_DARK, font=f_card_title)
     
     leak_amt = int(eased_p * 82)
     draw_rounded_rect(draw, (card1_x1 + 16, card1_y1 + 74, card1_x2 - 16, card1_y1 + 130), 8, fill=DANGER_BG)
@@ -380,13 +389,13 @@ def render_frame_dollar_flow(frame_idx, total_frames, W, H):
     draw.rectangle([card1_x1 + 16, bar_y, card1_x2 - 16, bar_y + 12], fill=BORDER)
     draw.rectangle([card1_x1 + 16, bar_y, card1_x1 + 16 + int((card_w - 32) * (leak_amt / 100)), bar_y + 12], fill=DANGER)
 
-    draw.text((card1_x1 + 16, card1_y1 + 170), "- Wall Street Buybacks:", fill=MUTED, font=f_card_stat)
+    draw.text((card1_x1 + 16, card1_y1 + 170), "- Shareholder payouts:", fill=MUTED, font=f_card_stat)
     draw.text((card1_x1 + 195, card1_y1 + 170), "$42", fill=DANGER, font=f_card_stat_bold)
 
-    draw.text((card1_x1 + 16, card1_y1 + 194), "- Offshore Tax Havens:", fill=MUTED, font=f_card_stat)
+    draw.text((card1_x1 + 16, card1_y1 + 194), "- Corporate overhead:", fill=MUTED, font=f_card_stat)
     draw.text((card1_x1 + 195, card1_y1 + 194), "$21", fill=DANGER, font=f_card_stat_bold)
 
-    draw.text((card1_x1 + 16, card1_y1 + 218), "- Executive Bonuses:", fill=MUTED, font=f_card_stat)
+    draw.text((card1_x1 + 16, card1_y1 + 218), "- Executive pay:", fill=MUTED, font=f_card_stat)
     draw.text((card1_x1 + 195, card1_y1 + 218), "$19", fill=DANGER, font=f_card_stat_bold)
 
     draw.text((card1_x1 + 16, card1_y1 + 242), "- Stays in Community:", fill=MUTED, font=f_card_stat)
@@ -396,7 +405,7 @@ def render_frame_dollar_flow(frame_idx, total_frames, W, H):
     draw_rounded_rect(draw, (card2_x1, card2_y1, card2_x2, card2_y2), 12, fill=WHITE, outline=EMERALD, width=2)
     draw_rounded_rect(draw, (card2_x1 + 16, card2_y1 + 14, card2_x1 + 180, card2_y1 + 34), 6, fill=EMERALD_BG)
     draw.text((card2_x1 + 24, card2_y1 + 17), "LOCAL COOPERATIVE", fill=EMERALD, font=f_badge)
-    draw.text((card2_x1 + 16, card2_y1 + 44), "$100 at Co-op / Direct Maker", fill=TEXT_DARK, font=f_card_title)
+    draw.text((card2_x1 + 16, card2_y1 + 44), "$100 at a co-op (example)", fill=TEXT_DARK, font=f_card_title)
 
     retain_amt = int(eased_p * 68)
     draw_rounded_rect(draw, (card2_x1 + 16, card2_y1 + 74, card2_x2 - 16, card2_y1 + 130), 8, fill=EMERALD_BG)
@@ -450,8 +459,7 @@ def generate_gif(concept="scanner", output_path=None, total_frames=80, fps=18):
         frames.append(frame)
 
     if not output_path:
-        os.makedirs("web/static/img", exist_ok=True)
-        output_path = f"web/static/img/shoptegrity_{concept}.gif"
+        output_path = os.path.join(DEFAULT_OUTPUT_DIR, f"shoptegrity_{concept}.gif")
 
     parent_dir = os.path.dirname(output_path)
     if parent_dir:

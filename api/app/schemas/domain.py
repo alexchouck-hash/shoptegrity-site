@@ -145,9 +145,9 @@ class SpendCategoryRead(BaseModel):
     name: str
     slug: str
     tier: int
-    avg_annual_spend: float
+    avg_annual_spend: Optional[float] = None  # withheld until cited
     swap_difficulty: str
-    saves_money: bool
+    saves_money: Optional[bool] = None  # withheld until cited
     description: str
 
 

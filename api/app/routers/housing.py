@@ -41,7 +41,11 @@ DEMOGRAPHIC_DATA: Dict[str, Any] = {
 
 
 def _split_tier(model: str, tier: int, description: str, breakdown: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """Builds one illustrative split. Local and outside shares are summed from the breakdown."""
+    """Builds one illustrative split. Local and outside shares are summed from the breakdown.
+
+    outside_share_pct is the example share flagged as leaving the local area. Key names stay
+    descriptive: a machine key is published too, so it carries no characterization of anyone.
+    """
     total = round(sum(row["cents"] for row in breakdown), 1)
     if total != 100.0:
         raise ValueError(f"Illustrative split for {model!r} sums to {total}, not 100")
@@ -51,7 +55,7 @@ def _split_tier(model: str, tier: int, description: str, breakdown: List[Dict[st
         "tier": tier,
         "label": ILLUSTRATIVE_LABEL,
         "local_retention_pct": round(100.0 - outside, 1),
-        "wall_street_leakage_pct": outside,
+        "outside_share_pct": outside,
         "description": description,
         "breakdown": breakdown,
     }

@@ -21,8 +21,9 @@ Every record that leaves the generators passes through `gate_brand` or
        }
 
    Unsourced claims are set to None and listed in `withheld_claims` (field and
-   reason only). Their values go to data/verification_queue.csv, where a
-   claim_sources entry can restore them.
+   reason only). Their values go to data/private/verification_queue.csv, where a
+   claim_sources entry can restore them. That file is gitignored: the repository
+   is public, so a tracked copy would publish every claim the site withholds.
 
 3. SEC receipts (pipeline/sec_financials.py) back the parent identity, the
    ownership type, the filing link, and the shareholder payout and CEO pay shares
@@ -52,7 +53,8 @@ from pipeline import osha_enforcement
 from rubric.engine import compute_scores, load_rubric
 
 ROOT = Path(__file__).resolve().parent.parent
-QUEUE_PATH = ROOT / "data" / "verification_queue.csv"
+# Gitignored (see .gitignore): it holds the withheld values verbatim.
+QUEUE_PATH = ROOT / "data" / "private" / "verification_queue.csv"
 
 SYNTHETIC_PROVENANCE = "industry_benchmark_model"
 RECEIPT_PROVENANCE = "verified_sec_filing"

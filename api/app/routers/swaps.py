@@ -16,8 +16,8 @@ WITHHELD = "Withheld: no cited source yet"
 
 @router.get("", response_model=List[SpendCategoryRead])
 def list_swap_categories(db: Session = Depends(get_db)):
-    """Returns household spending categories ranked by ease of swap and financial impact."""
-    categories = db.query(SpendCategory).order_by(SpendCategory.tier, SpendCategory.avg_annual_spend.desc()).all()
+    """Returns household spending categories by tier. Spend figures are withheld until cited."""
+    categories = db.query(SpendCategory).order_by(SpendCategory.tier, SpendCategory.name).all()
     return categories
 
 
